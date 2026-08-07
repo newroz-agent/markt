@@ -1,0 +1,14 @@
+arb-dir: lib/l10n
+template-arb-file: app_de.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+preferred-supported-locales:
+  - de
+  - en
+  - ar
+  - tr
+nullable-getter: false
+required-resource-attributes: true
+format: true
+use-escaping: true
+use-named-parameters: true

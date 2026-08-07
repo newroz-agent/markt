@@ -1,0 +1,107 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
+import 'package:zerin_marketplace/core/theme/theme.dart';
+import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
+import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart';
+import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
+import 'package:zerin_marketplace/features/shell/presentation/marketplace_shell.dart';
+import 'package:zerin_marketplace/l10n/l10n.dart';
+
+part 'app_router.g.dart';
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+
+final appRouterProvider = Provider<GoRouter>((ref) {
+  final preferences = ref.read(sharedPreferencesProvider);
+  final hasCompletedOnboarding =
+      preferences.getBool(SettingsStorageKeys.onboardingComplete) ?? false;
+
+  return GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    routes: $appRoutes,
+    initialLocation: hasCompletedOnboarding ? '/' : '/onboarding',
+    debugLogDiagnostics: kDebugMode,
+    redirect: (context, state) {
+      final isComplete =
+          preferences.getBool(SettingsStorageKeys.onboardingComplete) ?? false;
+      final isOnboarding = state.matchedLocation == '/onboarding';
+
+      if (!isComplete && !isOnboarding) return '/onboarding';
+      if (isComplete && isOnboarding) return '/';
+      return null;
+    },
+    errorBuilder: (context, state) => Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                Icons.route_outlined,
+                size: AppSizes.iconState,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                context.l10n.stateErrorTitle,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AppSpacing.xs),
+              Text(context.l10n.stateErrorMessage, textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+});
+
+@TypedGoRoute<MarketplaceRoute>(path: '/')
+class MarketplaceRoute extends GoRouteData {
+  const MarketplaceRoute({this.tab = 0});
+
+  final int tab;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      MarketplaceShell(initialIndex: tab);
+}
+
+@TypedGoRoute<OnboardingRoute>(path: '/onboarding')
+class OnboardingRoute extends GoRouteData {
+  const OnboardingRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const OnboardingScreen();
+}
+
+@TypedGoRoute<AuthRoute>(path: '/auth')
+class AuthRoute extends GoRouteData {
+  const AuthRoute({this.register = false, this.redirectTo});
+
+  final bool register;
+  final String? redirectTo;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      AuthScreen(initialRegister: register, redirectLocation: redirectTo);
+}
+
+@TypedGoRoute<LegalRoute>(path: '/legal/:document')
+class LegalRoute extends GoRouteData {
+  const LegalRoute({required this.document});
+
+  final String document;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      LegalScreen(document: document);
+}
