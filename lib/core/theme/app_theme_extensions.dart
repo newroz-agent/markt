@@ -22,30 +22,40 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     required this.surfaceMuted,
     required this.surfaceRaised,
     required this.divider,
+    required this.accent,
+    required this.onAccent,
+    required this.accentGradientStart,
+    required this.accentGradientEnd,
+    required this.accentDisabled,
   });
 
   factory AppSemanticColors.light() => const AppSemanticColors(
     success: AppColors.success700,
-    onSuccess: AppColors.neutral0,
+    onSuccess: AppColors.berf0,
     successContainer: AppColors.success50,
-    onSuccessContainer: AppColors.success700,
+    onSuccessContainer: AppColors.success900,
     warning: AppColors.warning700,
-    onWarning: AppColors.neutral0,
+    onWarning: AppColors.berf0,
     warningContainer: AppColors.warning50,
-    onWarningContainer: AppColors.warning700,
+    onWarningContainer: AppColors.warning900,
     info: AppColors.info700,
-    onInfo: AppColors.neutral0,
+    onInfo: AppColors.berf0,
     infoContainer: AppColors.info50,
-    onInfoContainer: AppColors.info700,
-    canvas: AppColors.neutral50,
-    surfaceMuted: AppColors.neutral100,
-    surfaceRaised: AppColors.neutral0,
-    divider: AppColors.neutral200,
+    onInfoContainer: AppColors.info900,
+    canvas: AppColors.berf100,
+    surfaceMuted: AppColors.berf200,
+    surfaceRaised: AppColors.berf0,
+    divider: AppColors.berf300,
+    accent: AppColors.gold400,
+    onAccent: AppColors.ink,
+    accentGradientStart: AppColors.gold300,
+    accentGradientEnd: AppColors.gold500,
+    accentDisabled: AppColors.berf300,
   );
 
   factory AppSemanticColors.dark() => const AppSemanticColors(
-    success: AppColors.success200,
-    onSuccess: AppColors.success900,
+    success: AppColors.success500,
+    onSuccess: AppColors.petrol950,
     successContainer: AppColors.success800,
     onSuccessContainer: AppColors.success100,
     warning: AppColors.warning200,
@@ -56,10 +66,15 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     onInfo: AppColors.info900,
     infoContainer: AppColors.info800,
     onInfoContainer: AppColors.info100,
-    canvas: AppColors.neutral950,
-    surfaceMuted: AppColors.neutral900,
-    surfaceRaised: AppColors.neutral800,
-    divider: AppColors.neutral700,
+    canvas: AppColors.petrol950,
+    surfaceMuted: AppColors.petrol900,
+    surfaceRaised: AppColors.petrol800,
+    divider: AppColors.petrol700,
+    accent: AppColors.gold400,
+    onAccent: AppColors.ink,
+    accentGradientStart: AppColors.gold300,
+    accentGradientEnd: AppColors.gold500,
+    accentDisabled: AppColors.petrol700,
   );
 
   final Color success;
@@ -79,6 +94,23 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
   final Color surfaceRaised;
   final Color divider;
 
+  /// `zer`. Reserved for a single call to action per screen; see [AppColors].
+  final Color accent;
+  final Color onAccent;
+  final Color accentGradientStart;
+  final Color accentGradientEnd;
+
+  /// Surface for a disabled accent button — the gradient is dropped entirely
+  /// rather than faded, so gold never reads as "available but greyed out".
+  final Color accentDisabled;
+
+  /// The accent sweep, for the one gold element a screen is allowed.
+  LinearGradient get accentGradient => LinearGradient(
+    colors: <Color>[accentGradientStart, accentGradientEnd],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
   @override
   AppSemanticColors copyWith({
     Color? success,
@@ -97,6 +129,11 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     Color? surfaceMuted,
     Color? surfaceRaised,
     Color? divider,
+    Color? accent,
+    Color? onAccent,
+    Color? accentGradientStart,
+    Color? accentGradientEnd,
+    Color? accentDisabled,
   }) {
     return AppSemanticColors(
       success: success ?? this.success,
@@ -115,6 +152,11 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       surfaceMuted: surfaceMuted ?? this.surfaceMuted,
       surfaceRaised: surfaceRaised ?? this.surfaceRaised,
       divider: divider ?? this.divider,
+      accent: accent ?? this.accent,
+      onAccent: onAccent ?? this.onAccent,
+      accentGradientStart: accentGradientStart ?? this.accentGradientStart,
+      accentGradientEnd: accentGradientEnd ?? this.accentGradientEnd,
+      accentDisabled: accentDisabled ?? this.accentDisabled,
     );
   }
 
@@ -154,8 +196,73 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       surfaceMuted: Color.lerp(surfaceMuted, other.surfaceMuted, t)!,
       surfaceRaised: Color.lerp(surfaceRaised, other.surfaceRaised, t)!,
       divider: Color.lerp(divider, other.divider, t)!,
+      accent: Color.lerp(accent, other.accent, t)!,
+      onAccent: Color.lerp(onAccent, other.onAccent, t)!,
+      accentGradientStart: Color.lerp(
+        accentGradientStart,
+        other.accentGradientStart,
+        t,
+      )!,
+      accentGradientEnd: Color.lerp(
+        accentGradientEnd,
+        other.accentGradientEnd,
+        t,
+      )!,
+      accentDisabled: Color.lerp(accentDisabled, other.accentDisabled, t)!,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is AppSemanticColors &&
+        other.success == success &&
+        other.onSuccess == onSuccess &&
+        other.successContainer == successContainer &&
+        other.onSuccessContainer == onSuccessContainer &&
+        other.warning == warning &&
+        other.onWarning == onWarning &&
+        other.warningContainer == warningContainer &&
+        other.onWarningContainer == onWarningContainer &&
+        other.info == info &&
+        other.onInfo == onInfo &&
+        other.infoContainer == infoContainer &&
+        other.onInfoContainer == onInfoContainer &&
+        other.canvas == canvas &&
+        other.surfaceMuted == surfaceMuted &&
+        other.surfaceRaised == surfaceRaised &&
+        other.divider == divider &&
+        other.accent == accent &&
+        other.onAccent == onAccent &&
+        other.accentGradientStart == accentGradientStart &&
+        other.accentGradientEnd == accentGradientEnd &&
+        other.accentDisabled == accentDisabled;
+  }
+
+  @override
+  int get hashCode => Object.hashAll(<Object>[
+    success,
+    onSuccess,
+    successContainer,
+    onSuccessContainer,
+    warning,
+    onWarning,
+    warningContainer,
+    onWarningContainer,
+    info,
+    onInfo,
+    infoContainer,
+    onInfoContainer,
+    canvas,
+    surfaceMuted,
+    surfaceRaised,
+    divider,
+    accent,
+    onAccent,
+    accentGradientStart,
+    accentGradientEnd,
+    accentDisabled,
+  ]);
 }
 
 extension AppThemeContext on BuildContext {
