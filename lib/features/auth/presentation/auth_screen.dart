@@ -61,6 +61,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     if (error is! AppException) return l10n.authUnknownError;
     return switch (error.code) {
       AppFailureCode.backendNotConfigured => l10n.authBackendNotConfigured,
+      // Reaching the auth screen without a session is the normal case, so the
+      // only way this surfaces here is a sign-in that produced no session.
+      AppFailureCode.notAuthenticated => l10n.authUnknownError,
       AppFailureCode.invalidCredentials => l10n.authInvalidCredentials,
       AppFailureCode.emailNotConfirmed => l10n.authEmailNotConfirmed,
       AppFailureCode.emailAlreadyRegistered => l10n.authEmailAlreadyRegistered,
