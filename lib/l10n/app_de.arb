@@ -327,5 +327,21 @@
   "legalWithdrawal": "Widerrufsbelehrung",
   "@legalWithdrawal": {"description": "Label for withdrawal-right information."},
   "legalComingSoonBody": "Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.",
-  "@legalComingSoonBody": {"description": "Temporary notice used before final legal documents are published."}
+  "@legalComingSoonBody": {"description": "Temporary notice used before final legal documents are published."},
+  "legalUnknownDocumentBody": "Dieses rechtliche Dokument existiert nicht.",
+  "@legalUnknownDocumentBody": {"description": "Shown when a legal document slug does not match a known document."},
+  "legalLoadErrorTitle": "Dokument nicht geladen",
+  "@legalLoadErrorTitle": {"description": "Title of the error state when a legal document fails to load."},
+  "legalLoadErrorBody": "Der Text konnte nicht abgerufen werden. Prüfe deine Internetverbindung.",
+  "@legalLoadErrorBody": {"description": "Body of the error state when a legal document fails to load."},
+  "legalVersionLine": "Fassung {version} · gültig ab {date}",
+  "@legalVersionLine": {
+    "description": "Version and effective date shown above the body of a legal document.",
+    "placeholders": {
+      "version": {"type": "String", "example": "1.2"},
+      "date": {"type": "String", "example": "1. August 2026"}
+    }
+  },
+  "legalLinkFailed": "Der Link konnte nicht geöffnet werden.",
+  "@legalLinkFailed": {"description": "Snackbar shown when a link inside a legal document cannot be opened."}
 }

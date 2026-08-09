@@ -158,5 +158,10 @@
   "legalTerms": "الشروط والأحكام",
   "legalPrivacy": "سياسة الخصوصية",
   "legalWithdrawal": "تعليمات حق الانسحاب",
-  "legalComingSoonBody": "ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق."
+  "legalComingSoonBody": "ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق.",
+  "legalUnknownDocumentBody": "هذا المستند القانوني غير موجود.",
+  "legalLoadErrorTitle": "لم يتم تحميل المستند",
+  "legalLoadErrorBody": "تعذّر جلب النص. تحقّق من اتصالك بالإنترنت.",
+  "legalVersionLine": "الإصدار {version} · سارٍ من {date}",
+  "legalLinkFailed": "تعذّر فتح الرابط."
 }

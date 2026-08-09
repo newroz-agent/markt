@@ -50,6 +50,13 @@ abstract final class AppSizes {
   static const double bottomSheetMaxWidth = 640;
   static const double dragHandleWidth = 32;
   static const double dragHandleHeight = 4;
+
+  /// Width of the heading placeholder in a text-document skeleton, as a
+  /// fraction of the available width.
+  static const double skeletonHeadingWidthFactor = 0.6;
+
+  /// Placeholder lines drawn while a long text document loads.
+  static const int skeletonTextLines = 12;
 }
 
 /// Line-width tokens for borders and progress indicators.

@@ -495,4 +495,22 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get legalComingSoonBody =>
       'Eksiksiz yasal belgeler yayın öncesinde sunulacaktır.';
+
+  @override
+  String get legalUnknownDocumentBody => 'Bu yasal belge mevcut değil.';
+
+  @override
+  String get legalLoadErrorTitle => 'Belge yüklenmedi';
+
+  @override
+  String get legalLoadErrorBody =>
+      'Metin alınamadı. İnternet bağlantını kontrol et.';
+
+  @override
+  String legalVersionLine({required String version, required String date}) {
+    return 'Sürüm $version · $date tarihinden itibaren geçerli';
+  }
+
+  @override
+  String get legalLinkFailed => 'Bağlantı açılamadı.';
 }

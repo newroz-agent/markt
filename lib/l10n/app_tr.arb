@@ -158,5 +158,10 @@
   "legalTerms": "Hüküm ve Koşullar",
   "legalPrivacy": "Gizlilik Politikası",
   "legalWithdrawal": "Cayma hakkı bilgilendirmesi",
-  "legalComingSoonBody": "Eksiksiz yasal belgeler yayın öncesinde sunulacaktır."
+  "legalComingSoonBody": "Eksiksiz yasal belgeler yayın öncesinde sunulacaktır.",
+  "legalUnknownDocumentBody": "Bu yasal belge mevcut değil.",
+  "legalLoadErrorTitle": "Belge yüklenmedi",
+  "legalLoadErrorBody": "Metin alınamadı. İnternet bağlantını kontrol et.",
+  "legalVersionLine": "Sürüm {version} · {date} tarihinden itibaren geçerli",
+  "legalLinkFailed": "Bağlantı açılamadı."
 }

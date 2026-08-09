@@ -158,5 +158,10 @@
   "legalTerms": "Terms and Conditions",
   "legalPrivacy": "Privacy Policy",
   "legalWithdrawal": "Right of withdrawal",
-  "legalComingSoonBody": "The complete legal documents will be provided before release."
+  "legalComingSoonBody": "The complete legal documents will be provided before release.",
+  "legalUnknownDocumentBody": "This legal document does not exist.",
+  "legalLoadErrorTitle": "Document not loaded",
+  "legalLoadErrorBody": "The text could not be retrieved. Check your internet connection.",
+  "legalVersionLine": "Version {version} · effective {date}",
+  "legalLinkFailed": "The link could not be opened."
 }

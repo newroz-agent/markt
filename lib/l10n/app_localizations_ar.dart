@@ -501,4 +501,21 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get legalComingSoonBody =>
       'ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق.';
+
+  @override
+  String get legalUnknownDocumentBody => 'هذا المستند القانوني غير موجود.';
+
+  @override
+  String get legalLoadErrorTitle => 'لم يتم تحميل المستند';
+
+  @override
+  String get legalLoadErrorBody => 'تعذّر جلب النص. تحقّق من اتصالك بالإنترنت.';
+
+  @override
+  String legalVersionLine({required String version, required String date}) {
+    return 'الإصدار $version · سارٍ من $date';
+  }
+
+  @override
+  String get legalLinkFailed => 'تعذّر فتح الرابط.';
 }

@@ -502,4 +502,23 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get legalComingSoonBody =>
       'Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.';
+
+  @override
+  String get legalUnknownDocumentBody =>
+      'Dieses rechtliche Dokument existiert nicht.';
+
+  @override
+  String get legalLoadErrorTitle => 'Dokument nicht geladen';
+
+  @override
+  String get legalLoadErrorBody =>
+      'Der Text konnte nicht abgerufen werden. Prüfe deine Internetverbindung.';
+
+  @override
+  String legalVersionLine({required String version, required String date}) {
+    return 'Fassung $version · gültig ab $date';
+  }
+
+  @override
+  String get legalLinkFailed => 'Der Link konnte nicht geöffnet werden.';
 }

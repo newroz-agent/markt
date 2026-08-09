@@ -496,4 +496,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get legalComingSoonBody =>
       'The complete legal documents will be provided before release.';
+
+  @override
+  String get legalUnknownDocumentBody => 'This legal document does not exist.';
+
+  @override
+  String get legalLoadErrorTitle => 'Document not loaded';
+
+  @override
+  String get legalLoadErrorBody =>
+      'The text could not be retrieved. Check your internet connection.';
+
+  @override
+  String legalVersionLine({required String version, required String date}) {
+    return 'Version $version · effective $date';
+  }
+
+  @override
+  String get legalLinkFailed => 'The link could not be opened.';
 }

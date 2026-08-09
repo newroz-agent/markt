@@ -971,6 +971,36 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.'**
   String get legalComingSoonBody;
+
+  /// Shown when a legal document slug does not match a known document.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieses rechtliche Dokument existiert nicht.'**
+  String get legalUnknownDocumentBody;
+
+  /// Title of the error state when a legal document fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Dokument nicht geladen'**
+  String get legalLoadErrorTitle;
+
+  /// Body of the error state when a legal document fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Text konnte nicht abgerufen werden. Prüfe deine Internetverbindung.'**
+  String get legalLoadErrorBody;
+
+  /// Version and effective date shown above the body of a legal document.
+  ///
+  /// In de, this message translates to:
+  /// **'Fassung {version} · gültig ab {date}'**
+  String legalVersionLine({required String version, required String date});
+
+  /// Snackbar shown when a link inside a legal document cannot be opened.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Link konnte nicht geöffnet werden.'**
+  String get legalLinkFailed;
 }
 
 class _AppLocalizationsDelegate
