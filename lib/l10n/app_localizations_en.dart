@@ -514,4 +514,146 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legalLinkFailed => 'The link could not be opened.';
+
+  @override
+  String get accountPrivacy => 'Privacy & data';
+
+  @override
+  String get privacyTitle => 'Privacy & data';
+
+  @override
+  String get privacySignedOutTitle => 'Sign in';
+
+  @override
+  String get privacySignedOutBody =>
+      'Your privacy settings belong to your account.';
+
+  @override
+  String get privacyAnalyticsTitle => 'Allow analytics';
+
+  @override
+  String get privacyAnalyticsBody =>
+      'Helps us find bugs and improve the app. You can withdraw this at any time.';
+
+  @override
+  String privacyAnalyticsGrantedAt({required String date}) {
+    return 'Granted on $date';
+  }
+
+  @override
+  String get privacyDataSectionTitle => 'Your data';
+
+  @override
+  String get privacyExportTitle => 'Export data';
+
+  @override
+  String get privacyExportBody =>
+      'We prepare a copy of your data for download.';
+
+  @override
+  String get privacyExportRequest => 'Request export';
+
+  @override
+  String get privacyExportPending =>
+      'Your export is being prepared. We will notify you once it is ready.';
+
+  @override
+  String get privacyExportReady => 'Your export is ready.';
+
+  @override
+  String get privacyExportExpired =>
+      'This export has expired. Request a new one.';
+
+  @override
+  String get privacyExportDownload => 'Download';
+
+  @override
+  String get privacyExportRequested => 'Export requested.';
+
+  @override
+  String get privacyDeleteTitle => 'Delete account';
+
+  @override
+  String get privacyDeleteBody =>
+      'Deletes your account and personal data. Orders are retained for tax reasons.';
+
+  @override
+  String get privacyDeleteConfirmTitle => 'Delete your account?';
+
+  @override
+  String privacyDeleteConfirmBody({required String word}) {
+    return 'Type $word to confirm. You can still cancel the deletion as long as it has not been processed.';
+  }
+
+  @override
+  String get privacyDeleteConfirmLabel => 'Confirmation';
+
+  @override
+  String get privacyDeletePending =>
+      'Your deletion is requested. You can still cancel it.';
+
+  @override
+  String get privacyDeleteProcessing =>
+      'Your deletion is being processed and can no longer be cancelled.';
+
+  @override
+  String get privacyDeleteRequested => 'Deletion requested.';
+
+  @override
+  String get privacyDeleteCancel => 'Cancel deletion';
+
+  @override
+  String get privacyDeleteCancelled => 'Deletion cancelled.';
+
+  @override
+  String get privacyDeleteCancelFailed =>
+      'The deletion is already being processed and can no longer be cancelled.';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsBody => 'Choose what we may notify you about.';
+
+  @override
+  String get notificationsOrders => 'Orders';
+
+  @override
+  String get notificationsOrdersBody => 'Payment, shipping and delivery.';
+
+  @override
+  String get notificationsChat => 'Messages';
+
+  @override
+  String get notificationsChatBody => 'New messages from buyers and sellers.';
+
+  @override
+  String get notificationsOffers => 'Offers';
+
+  @override
+  String get notificationsOffersBody =>
+      'Promotions and recommendations. Off by default.';
+
+  @override
+  String get notificationsPriceDrops => 'Price alerts';
+
+  @override
+  String get notificationsPriceDropsBody => 'When a favourite gets cheaper.';
+
+  @override
+  String get notificationsSystem => 'System';
+
+  @override
+  String get notificationsSystemBody =>
+      'Security and important account notices.';
+
+  @override
+  String get notificationsSaveFailed => 'The setting could not be saved.';
+
+  @override
+  String get notificationsSignedOutTitle => 'Sign in';
+
+  @override
+  String get notificationsSignedOutBody =>
+      'Your notifications belong to your account.';
 }

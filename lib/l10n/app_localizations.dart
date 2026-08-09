@@ -1001,6 +1001,258 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Der Link konnte nicht geöffnet werden.'**
   String get legalLinkFailed;
+
+  /// Account menu item leading to the privacy and data screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Datenschutz & Daten'**
+  String get accountPrivacy;
+
+  /// Title of the privacy and data screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Datenschutz & Daten'**
+  String get privacyTitle;
+
+  /// Empty state title shown when privacy settings are opened without a session.
+  ///
+  /// In de, this message translates to:
+  /// **'Melde dich an'**
+  String get privacySignedOutTitle;
+
+  /// Empty state body shown when privacy settings are opened without a session.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Datenschutzeinstellungen gehören zu deinem Konto.'**
+  String get privacySignedOutBody;
+
+  /// Label of the analytics consent switch.
+  ///
+  /// In de, this message translates to:
+  /// **'Analyse erlauben'**
+  String get privacyAnalyticsTitle;
+
+  /// Explanation of what the analytics consent covers.
+  ///
+  /// In de, this message translates to:
+  /// **'Hilft uns, Fehler zu finden und die App zu verbessern. Du kannst das jederzeit widerrufen.'**
+  String get privacyAnalyticsBody;
+
+  /// Shows when the user granted analytics consent.
+  ///
+  /// In de, this message translates to:
+  /// **'Erteilt am {date}'**
+  String privacyAnalyticsGrantedAt({required String date});
+
+  /// Section heading for data export and account deletion.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Daten'**
+  String get privacyDataSectionTitle;
+
+  /// Label of the DSGVO data-export action.
+  ///
+  /// In de, this message translates to:
+  /// **'Daten exportieren'**
+  String get privacyExportTitle;
+
+  /// Explanation of the data-export action.
+  ///
+  /// In de, this message translates to:
+  /// **'Wir stellen dir eine Kopie deiner Daten zum Download bereit.'**
+  String get privacyExportBody;
+
+  /// Button that requests a data export.
+  ///
+  /// In de, this message translates to:
+  /// **'Export anfordern'**
+  String get privacyExportRequest;
+
+  /// Status shown while a data export is being generated.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Export wird vorbereitet. Wir benachrichtigen dich, sobald er bereit ist.'**
+  String get privacyExportPending;
+
+  /// Status shown when a data export can be downloaded.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Export ist bereit.'**
+  String get privacyExportReady;
+
+  /// Status shown when a finished export is past its retention window.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieser Export ist abgelaufen. Fordere einen neuen an.'**
+  String get privacyExportExpired;
+
+  /// Button that downloads a finished data export.
+  ///
+  /// In de, this message translates to:
+  /// **'Herunterladen'**
+  String get privacyExportDownload;
+
+  /// Snackbar confirming a data export was queued.
+  ///
+  /// In de, this message translates to:
+  /// **'Export angefordert.'**
+  String get privacyExportRequested;
+
+  /// Label of the account deletion action.
+  ///
+  /// In de, this message translates to:
+  /// **'Konto löschen'**
+  String get privacyDeleteTitle;
+
+  /// Explains what account deletion does and what is legally retained.
+  ///
+  /// In de, this message translates to:
+  /// **'Löscht dein Konto und deine persönlichen Daten. Bestellungen bleiben aus steuerrechtlichen Gründen gespeichert.'**
+  String get privacyDeleteBody;
+
+  /// Title of the account deletion confirmation dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Konto wirklich löschen?'**
+  String get privacyDeleteConfirmTitle;
+
+  /// Instruction in the deletion dialog telling the user which word to type.
+  ///
+  /// In de, this message translates to:
+  /// **'Tippe {word}, um zu bestätigen. Du kannst die Löschung anschließend noch abbrechen, solange sie nicht bearbeitet wird.'**
+  String privacyDeleteConfirmBody({required String word});
+
+  /// Label of the text field in the deletion confirmation dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Bestätigung'**
+  String get privacyDeleteConfirmLabel;
+
+  /// Status shown while an account deletion request is pending.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Löschung ist angefordert. Du kannst sie noch abbrechen.'**
+  String get privacyDeletePending;
+
+  /// Status shown once an account deletion is being processed.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Löschung wird bearbeitet und kann nicht mehr abgebrochen werden.'**
+  String get privacyDeleteProcessing;
+
+  /// Snackbar confirming an account deletion was requested.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschung angefordert.'**
+  String get privacyDeleteRequested;
+
+  /// Button that cancels a pending account deletion.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschung abbrechen'**
+  String get privacyDeleteCancel;
+
+  /// Snackbar confirming a pending deletion was cancelled.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschung abgebrochen.'**
+  String get privacyDeleteCancelled;
+
+  /// Snackbar shown when cancelling a deletion came too late.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Löschung wird bereits bearbeitet und kann nicht mehr abgebrochen werden.'**
+  String get privacyDeleteCancelFailed;
+
+  /// Title of the notification preferences screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Benachrichtigungen'**
+  String get notificationsTitle;
+
+  /// Introduction on the notification preferences screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle, worüber wir dich informieren dürfen.'**
+  String get notificationsBody;
+
+  /// Notification channel for order status changes.
+  ///
+  /// In de, this message translates to:
+  /// **'Bestellungen'**
+  String get notificationsOrders;
+
+  /// Explains the orders notification channel.
+  ///
+  /// In de, this message translates to:
+  /// **'Zahlung, Versand und Zustellung.'**
+  String get notificationsOrdersBody;
+
+  /// Notification channel for chat messages.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachrichten'**
+  String get notificationsChat;
+
+  /// Explains the chat notification channel.
+  ///
+  /// In de, this message translates to:
+  /// **'Neue Nachrichten von Käufern und Verkäufern.'**
+  String get notificationsChatBody;
+
+  /// Notification channel for marketing offers.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote'**
+  String get notificationsOffers;
+
+  /// Explains the offers notification channel.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktionen und Empfehlungen. Standardmäßig aus.'**
+  String get notificationsOffersBody;
+
+  /// Notification channel for price drops on favorites.
+  ///
+  /// In de, this message translates to:
+  /// **'Preisalarm'**
+  String get notificationsPriceDrops;
+
+  /// Explains the price-drop notification channel.
+  ///
+  /// In de, this message translates to:
+  /// **'Wenn ein Favorit günstiger wird.'**
+  String get notificationsPriceDropsBody;
+
+  /// Notification channel for security and account messages.
+  ///
+  /// In de, this message translates to:
+  /// **'System'**
+  String get notificationsSystem;
+
+  /// Explains the system notification channel.
+  ///
+  /// In de, this message translates to:
+  /// **'Sicherheit und wichtige Kontohinweise.'**
+  String get notificationsSystemBody;
+
+  /// Snackbar shown when a notification preference could not be saved.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Einstellung konnte nicht gespeichert werden.'**
+  String get notificationsSaveFailed;
+
+  /// Empty state title shown when notification settings are opened without a session.
+  ///
+  /// In de, this message translates to:
+  /// **'Melde dich an'**
+  String get notificationsSignedOutTitle;
+
+  /// Empty state body shown when notification settings are opened without a session.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Benachrichtigungen gehören zu deinem Konto.'**
+  String get notificationsSignedOutBody;
 }
 
 class _AppLocalizationsDelegate

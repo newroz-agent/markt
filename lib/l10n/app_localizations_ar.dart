@@ -518,4 +518,139 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get legalLinkFailed => 'تعذّر فتح الرابط.';
+
+  @override
+  String get accountPrivacy => 'الخصوصية والبيانات';
+
+  @override
+  String get privacyTitle => 'الخصوصية والبيانات';
+
+  @override
+  String get privacySignedOutTitle => 'سجّل الدخول';
+
+  @override
+  String get privacySignedOutBody => 'إعدادات الخصوصية مرتبطة بحسابك.';
+
+  @override
+  String get privacyAnalyticsTitle => 'السماح بالتحليلات';
+
+  @override
+  String get privacyAnalyticsBody =>
+      'يساعدنا في العثور على الأخطاء وتحسين التطبيق. يمكنك سحب الموافقة في أي وقت.';
+
+  @override
+  String privacyAnalyticsGrantedAt({required String date}) {
+    return 'مُنحت في $date';
+  }
+
+  @override
+  String get privacyDataSectionTitle => 'بياناتك';
+
+  @override
+  String get privacyExportTitle => 'تصدير البيانات';
+
+  @override
+  String get privacyExportBody => 'نُجهّز لك نسخة من بياناتك للتنزيل.';
+
+  @override
+  String get privacyExportRequest => 'طلب التصدير';
+
+  @override
+  String get privacyExportPending => 'جارٍ تجهيز التصدير. سنُبلغك عند جهوزه.';
+
+  @override
+  String get privacyExportReady => 'التصدير جاهز.';
+
+  @override
+  String get privacyExportExpired =>
+      'انتهت صلاحية هذا التصدير. اطلب واحدًا جديدًا.';
+
+  @override
+  String get privacyExportDownload => 'تنزيل';
+
+  @override
+  String get privacyExportRequested => 'تم طلب التصدير.';
+
+  @override
+  String get privacyDeleteTitle => 'حذف الحساب';
+
+  @override
+  String get privacyDeleteBody =>
+      'يحذف حسابك وبياناتك الشخصية. تُحفظ الطلبات لأسباب ضريبية.';
+
+  @override
+  String get privacyDeleteConfirmTitle => 'هل تريد حذف حسابك؟';
+
+  @override
+  String privacyDeleteConfirmBody({required String word}) {
+    return 'اكتب $word للتأكيد. يمكنك إلغاء الحذف ما لم تبدأ معالجته.';
+  }
+
+  @override
+  String get privacyDeleteConfirmLabel => 'تأكيد';
+
+  @override
+  String get privacyDeletePending => 'تم طلب الحذف. لا يزال يمكنك إلغاؤه.';
+
+  @override
+  String get privacyDeleteProcessing =>
+      'تجري معالجة الحذف ولم يعد بالإمكان إلغاؤه.';
+
+  @override
+  String get privacyDeleteRequested => 'تم طلب الحذف.';
+
+  @override
+  String get privacyDeleteCancel => 'إلغاء الحذف';
+
+  @override
+  String get privacyDeleteCancelled => 'تم إلغاء الحذف.';
+
+  @override
+  String get privacyDeleteCancelFailed =>
+      'بدأت معالجة الحذف ولم يعد بالإمكان إلغاؤه.';
+
+  @override
+  String get notificationsTitle => 'الإشعارات';
+
+  @override
+  String get notificationsBody => 'اختر ما يمكننا إشعارك بشأنه.';
+
+  @override
+  String get notificationsOrders => 'الطلبات';
+
+  @override
+  String get notificationsOrdersBody => 'الدفع والشحن والتسليم.';
+
+  @override
+  String get notificationsChat => 'الرسائل';
+
+  @override
+  String get notificationsChatBody => 'رسائل جديدة من المشترين والبائعين.';
+
+  @override
+  String get notificationsOffers => 'العروض';
+
+  @override
+  String get notificationsOffersBody => 'الحملات والتوصيات. مُعطّلة افتراضيًا.';
+
+  @override
+  String get notificationsPriceDrops => 'تنبيهات السعر';
+
+  @override
+  String get notificationsPriceDropsBody => 'عندما ينخفض سعر منتج في المفضّلة.';
+
+  @override
+  String get notificationsSystem => 'النظام';
+
+  @override
+  String get notificationsSystemBody => 'الأمان وإشعارات الحساب المهمة.';
+
+  @override
+  String get notificationsSaveFailed => 'تعذّر حفظ الإعداد.';
+
+  @override
+  String get notificationsSignedOutTitle => 'سجّل الدخول';
+
+  @override
+  String get notificationsSignedOutBody => 'إشعاراتك مرتبطة بحسابك.';
 }

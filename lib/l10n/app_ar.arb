@@ -205,5 +205,7 @@
   "notificationsPriceDropsBody": "عندما ينخفض سعر منتج في المفضّلة.",
   "notificationsSystem": "النظام",
   "notificationsSystemBody": "الأمان وإشعارات الحساب المهمة.",
-  "notificationsSaveFailed": "تعذّر حفظ الإعداد."
+  "notificationsSaveFailed": "تعذّر حفظ الإعداد.",
+  "notificationsSignedOutTitle": "سجّل الدخول",
+  "notificationsSignedOutBody": "إشعاراتك مرتبطة بحسابك."
 }

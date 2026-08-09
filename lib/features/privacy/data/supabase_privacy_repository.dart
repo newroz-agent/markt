@@ -90,7 +90,7 @@ class SupabasePrivacyRepository implements PrivacyRepository {
       () => _client.from('user_consents').insert(<String, dynamic>{
         'consent_type': consentType,
         'granted': granted,
-        if (documentVersion != null) 'document_version': documentVersion,
+        'document_version': ?documentVersion,
       }),
     );
   }

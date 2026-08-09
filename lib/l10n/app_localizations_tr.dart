@@ -513,4 +513,146 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get legalLinkFailed => 'Bağlantı açılamadı.';
+
+  @override
+  String get accountPrivacy => 'Gizlilik ve veriler';
+
+  @override
+  String get privacyTitle => 'Gizlilik ve veriler';
+
+  @override
+  String get privacySignedOutTitle => 'Giriş yap';
+
+  @override
+  String get privacySignedOutBody => 'Gizlilik ayarların hesabına bağlıdır.';
+
+  @override
+  String get privacyAnalyticsTitle => 'Analize izin ver';
+
+  @override
+  String get privacyAnalyticsBody =>
+      'Hataları bulmamıza ve uygulamayı iyileştirmemize yardımcı olur. Bunu istediğin zaman geri alabilirsin.';
+
+  @override
+  String privacyAnalyticsGrantedAt({required String date}) {
+    return '$date tarihinde verildi';
+  }
+
+  @override
+  String get privacyDataSectionTitle => 'Verilerin';
+
+  @override
+  String get privacyExportTitle => 'Verileri dışa aktar';
+
+  @override
+  String get privacyExportBody =>
+      'Verilerinin bir kopyasını indirmen için hazırlarız.';
+
+  @override
+  String get privacyExportRequest => 'Dışa aktarma iste';
+
+  @override
+  String get privacyExportPending =>
+      'Dışa aktarman hazırlanıyor. Hazır olduğunda seni bilgilendireceğiz.';
+
+  @override
+  String get privacyExportReady => 'Dışa aktarman hazır.';
+
+  @override
+  String get privacyExportExpired =>
+      'Bu dışa aktarmanın süresi doldu. Yenisini iste.';
+
+  @override
+  String get privacyExportDownload => 'İndir';
+
+  @override
+  String get privacyExportRequested => 'Dışa aktarma istendi.';
+
+  @override
+  String get privacyDeleteTitle => 'Hesabı sil';
+
+  @override
+  String get privacyDeleteBody =>
+      'Hesabını ve kişisel verilerini siler. Siparişler vergi nedeniyle saklanır.';
+
+  @override
+  String get privacyDeleteConfirmTitle => 'Hesabın silinsin mi?';
+
+  @override
+  String privacyDeleteConfirmBody({required String word}) {
+    return 'Onaylamak için $word yaz. İşleme alınmadığı sürece silmeyi hâlâ iptal edebilirsin.';
+  }
+
+  @override
+  String get privacyDeleteConfirmLabel => 'Onay';
+
+  @override
+  String get privacyDeletePending =>
+      'Silme isteğin alındı. Hâlâ iptal edebilirsin.';
+
+  @override
+  String get privacyDeleteProcessing =>
+      'Silme işleniyor ve artık iptal edilemez.';
+
+  @override
+  String get privacyDeleteRequested => 'Silme istendi.';
+
+  @override
+  String get privacyDeleteCancel => 'Silmeyi iptal et';
+
+  @override
+  String get privacyDeleteCancelled => 'Silme iptal edildi.';
+
+  @override
+  String get privacyDeleteCancelFailed =>
+      'Silme zaten işleniyor ve artık iptal edilemez.';
+
+  @override
+  String get notificationsTitle => 'Bildirimler';
+
+  @override
+  String get notificationsBody => 'Seni nelerden haberdar edebileceğimizi seç.';
+
+  @override
+  String get notificationsOrders => 'Siparişler';
+
+  @override
+  String get notificationsOrdersBody => 'Ödeme, kargo ve teslimat.';
+
+  @override
+  String get notificationsChat => 'Mesajlar';
+
+  @override
+  String get notificationsChatBody =>
+      'Alıcılardan ve satıcılardan yeni mesajlar.';
+
+  @override
+  String get notificationsOffers => 'Teklifler';
+
+  @override
+  String get notificationsOffersBody =>
+      'Kampanyalar ve öneriler. Varsayılan olarak kapalı.';
+
+  @override
+  String get notificationsPriceDrops => 'Fiyat alarmı';
+
+  @override
+  String get notificationsPriceDropsBody =>
+      'Favorilerinden biri ucuzladığında.';
+
+  @override
+  String get notificationsSystem => 'Sistem';
+
+  @override
+  String get notificationsSystemBody =>
+      'Güvenlik ve önemli hesap bildirimleri.';
+
+  @override
+  String get notificationsSaveFailed => 'Ayar kaydedilemedi.';
+
+  @override
+  String get notificationsSignedOutTitle => 'Giriş yap';
+
+  @override
+  String get notificationsSignedOutBody => 'Bildirimlerin hesabına bağlıdır.';
 }

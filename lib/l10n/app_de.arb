@@ -431,5 +431,9 @@
   "notificationsSystemBody": "Sicherheit und wichtige Kontohinweise.",
   "@notificationsSystemBody": {"description": "Explains the system notification channel."},
   "notificationsSaveFailed": "Die Einstellung konnte nicht gespeichert werden.",
-  "@notificationsSaveFailed": {"description": "Snackbar shown when a notification preference could not be saved."}
+  "@notificationsSaveFailed": {"description": "Snackbar shown when a notification preference could not be saved."},
+  "notificationsSignedOutTitle": "Melde dich an",
+  "@notificationsSignedOutTitle": {"description": "Empty state title shown when notification settings are opened without a session."},
+  "notificationsSignedOutBody": "Deine Benachrichtigungen gehören zu deinem Konto.",
+  "@notificationsSignedOutBody": {"description": "Empty state body shown when notification settings are opened without a session."}
 }

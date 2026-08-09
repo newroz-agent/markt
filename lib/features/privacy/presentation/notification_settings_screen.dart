@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
+import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/privacy/domain/notification_preferences.dart';
 import 'package:zerin_marketplace/features/privacy/domain/privacy_overview.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/controllers/privacy_controller.dart';
@@ -16,12 +17,20 @@ class NotificationSettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final isSignedIn = ref.watch(authStateProvider).valueOrNull != null;
     final async = ref.watch(privacyControllerProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.notificationsTitle)),
       body: SafeArea(
         child: switch (async) {
+          // Guarded like the privacy screen: without a session every write is
+          // rejected, so editable switches would promise a save that fails.
+          _ when !isSignedIn => AppEmptyState(
+            title: l10n.notificationsSignedOutTitle,
+            message: l10n.notificationsSignedOutBody,
+            icon: Icons.lock_outline_rounded,
+          ),
           AsyncError<PrivacyOverview>() => AppErrorState(
             title: l10n.stateErrorTitle,
             message: l10n.stateErrorMessage,

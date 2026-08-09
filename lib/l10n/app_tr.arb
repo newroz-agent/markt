@@ -205,5 +205,7 @@
   "notificationsPriceDropsBody": "Favorilerinden biri ucuzladığında.",
   "notificationsSystem": "Sistem",
   "notificationsSystemBody": "Güvenlik ve önemli hesap bildirimleri.",
-  "notificationsSaveFailed": "Ayar kaydedilemedi."
+  "notificationsSaveFailed": "Ayar kaydedilemedi.",
+  "notificationsSignedOutTitle": "Giriş yap",
+  "notificationsSignedOutBody": "Bildirimlerin hesabına bağlıdır."
 }

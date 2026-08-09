@@ -205,5 +205,7 @@
   "notificationsPriceDropsBody": "When a favourite gets cheaper.",
   "notificationsSystem": "System",
   "notificationsSystemBody": "Security and important account notices.",
-  "notificationsSaveFailed": "The setting could not be saved."
+  "notificationsSaveFailed": "The setting could not be saved.",
+  "notificationsSignedOutTitle": "Sign in",
+  "notificationsSignedOutBody": "Your notifications belong to your account."
 }

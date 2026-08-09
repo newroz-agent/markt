@@ -72,7 +72,15 @@ class AccountScreen extends ConsumerWidget {
                       leading: const Icon(Icons.notifications_outlined),
                       title: Text(l10n.accountNotifications),
                       trailing: const Icon(Icons.chevron_right_rounded),
-                      onTap: () => _showPreviewMessage(context),
+                      onTap: () =>
+                          const NotificationSettingsRoute().push<void>(context),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.privacy_tip_outlined),
+                      title: Text(l10n.accountPrivacy),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () => const PrivacyRoute().push<void>(context),
                     ),
                   ],
                 ),
@@ -117,7 +125,9 @@ class AccountScreen extends ConsumerWidget {
                 AppButton.destructive(
                   label: l10n.accountDelete,
                   leading: const Icon(Icons.delete_outline_rounded),
-                  onPressed: () => _showPreviewMessage(context),
+                  // Deletion lives on the privacy screen, next to the export
+                  // and the cancel affordance the DSGVO flow depends on.
+                  onPressed: () => const PrivacyRoute().push<void>(context),
                   expand: true,
                 ),
               ],
@@ -136,14 +146,6 @@ class AccountScreen extends ConsumerWidget {
     AppThemePreference.light => l10n.themeLight,
     AppThemePreference.dark => l10n.themeDark,
   };
-
-  static void _showPreviewMessage(BuildContext context) {
-    AppSnackBar.show(
-      context,
-      message: context.l10n.foundationPreviewBody,
-      variant: AppSnackBarVariant.info,
-    );
-  }
 
   static Future<void> _showLanguageSheet(
     BuildContext context,

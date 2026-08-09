@@ -11,6 +11,8 @@ List<RouteBase> get $appRoutes => [
   $onboardingRoute,
   $authRoute,
   $legalRoute,
+  $privacyRoute,
+  $notificationSettingsRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -126,6 +128,49 @@ extension $LegalRouteExtension on LegalRoute {
 
   String get location =>
       GoRouteData.$location('/legal/${Uri.encodeComponent(document)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $privacyRoute => GoRouteData.$route(
+  path: '/privacy',
+
+  factory: $PrivacyRouteExtension._fromState,
+);
+
+extension $PrivacyRouteExtension on PrivacyRoute {
+  static PrivacyRoute _fromState(GoRouterState state) => const PrivacyRoute();
+
+  String get location => GoRouteData.$location('/privacy');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $notificationSettingsRoute => GoRouteData.$route(
+  path: '/notifications',
+
+  factory: $NotificationSettingsRouteExtension._fromState,
+);
+
+extension $NotificationSettingsRouteExtension on NotificationSettingsRoute {
+  static NotificationSettingsRoute _fromState(GoRouterState state) =>
+      const NotificationSettingsRoute();
+
+  String get location => GoRouteData.$location('/notifications');
 
   void go(BuildContext context) => context.go(location);
 

@@ -7,6 +7,8 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
 import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart';
 import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:zerin_marketplace/features/privacy/presentation/notification_settings_screen.dart';
+import 'package:zerin_marketplace/features/privacy/presentation/privacy_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 import 'package:zerin_marketplace/features/shell/presentation/marketplace_shell.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -104,4 +106,22 @@ class LegalRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       LegalScreen(document: document);
+}
+
+@TypedGoRoute<PrivacyRoute>(path: '/privacy')
+class PrivacyRoute extends GoRouteData {
+  const PrivacyRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const PrivacyScreen();
+}
+
+@TypedGoRoute<NotificationSettingsRoute>(path: '/notifications')
+class NotificationSettingsRoute extends GoRouteData {
+  const NotificationSettingsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const NotificationSettingsScreen();
 }

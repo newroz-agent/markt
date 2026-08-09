@@ -521,4 +521,148 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get legalLinkFailed => 'Der Link konnte nicht geöffnet werden.';
+
+  @override
+  String get accountPrivacy => 'Datenschutz & Daten';
+
+  @override
+  String get privacyTitle => 'Datenschutz & Daten';
+
+  @override
+  String get privacySignedOutTitle => 'Melde dich an';
+
+  @override
+  String get privacySignedOutBody =>
+      'Deine Datenschutzeinstellungen gehören zu deinem Konto.';
+
+  @override
+  String get privacyAnalyticsTitle => 'Analyse erlauben';
+
+  @override
+  String get privacyAnalyticsBody =>
+      'Hilft uns, Fehler zu finden und die App zu verbessern. Du kannst das jederzeit widerrufen.';
+
+  @override
+  String privacyAnalyticsGrantedAt({required String date}) {
+    return 'Erteilt am $date';
+  }
+
+  @override
+  String get privacyDataSectionTitle => 'Deine Daten';
+
+  @override
+  String get privacyExportTitle => 'Daten exportieren';
+
+  @override
+  String get privacyExportBody =>
+      'Wir stellen dir eine Kopie deiner Daten zum Download bereit.';
+
+  @override
+  String get privacyExportRequest => 'Export anfordern';
+
+  @override
+  String get privacyExportPending =>
+      'Dein Export wird vorbereitet. Wir benachrichtigen dich, sobald er bereit ist.';
+
+  @override
+  String get privacyExportReady => 'Dein Export ist bereit.';
+
+  @override
+  String get privacyExportExpired =>
+      'Dieser Export ist abgelaufen. Fordere einen neuen an.';
+
+  @override
+  String get privacyExportDownload => 'Herunterladen';
+
+  @override
+  String get privacyExportRequested => 'Export angefordert.';
+
+  @override
+  String get privacyDeleteTitle => 'Konto löschen';
+
+  @override
+  String get privacyDeleteBody =>
+      'Löscht dein Konto und deine persönlichen Daten. Bestellungen bleiben aus steuerrechtlichen Gründen gespeichert.';
+
+  @override
+  String get privacyDeleteConfirmTitle => 'Konto wirklich löschen?';
+
+  @override
+  String privacyDeleteConfirmBody({required String word}) {
+    return 'Tippe $word, um zu bestätigen. Du kannst die Löschung anschließend noch abbrechen, solange sie nicht bearbeitet wird.';
+  }
+
+  @override
+  String get privacyDeleteConfirmLabel => 'Bestätigung';
+
+  @override
+  String get privacyDeletePending =>
+      'Deine Löschung ist angefordert. Du kannst sie noch abbrechen.';
+
+  @override
+  String get privacyDeleteProcessing =>
+      'Deine Löschung wird bearbeitet und kann nicht mehr abgebrochen werden.';
+
+  @override
+  String get privacyDeleteRequested => 'Löschung angefordert.';
+
+  @override
+  String get privacyDeleteCancel => 'Löschung abbrechen';
+
+  @override
+  String get privacyDeleteCancelled => 'Löschung abgebrochen.';
+
+  @override
+  String get privacyDeleteCancelFailed =>
+      'Die Löschung wird bereits bearbeitet und kann nicht mehr abgebrochen werden.';
+
+  @override
+  String get notificationsTitle => 'Benachrichtigungen';
+
+  @override
+  String get notificationsBody => 'Wähle, worüber wir dich informieren dürfen.';
+
+  @override
+  String get notificationsOrders => 'Bestellungen';
+
+  @override
+  String get notificationsOrdersBody => 'Zahlung, Versand und Zustellung.';
+
+  @override
+  String get notificationsChat => 'Nachrichten';
+
+  @override
+  String get notificationsChatBody =>
+      'Neue Nachrichten von Käufern und Verkäufern.';
+
+  @override
+  String get notificationsOffers => 'Angebote';
+
+  @override
+  String get notificationsOffersBody =>
+      'Aktionen und Empfehlungen. Standardmäßig aus.';
+
+  @override
+  String get notificationsPriceDrops => 'Preisalarm';
+
+  @override
+  String get notificationsPriceDropsBody => 'Wenn ein Favorit günstiger wird.';
+
+  @override
+  String get notificationsSystem => 'System';
+
+  @override
+  String get notificationsSystemBody =>
+      'Sicherheit und wichtige Kontohinweise.';
+
+  @override
+  String get notificationsSaveFailed =>
+      'Die Einstellung konnte nicht gespeichert werden.';
+
+  @override
+  String get notificationsSignedOutTitle => 'Melde dich an';
+
+  @override
+  String get notificationsSignedOutBody =>
+      'Deine Benachrichtigungen gehören zu deinem Konto.';
 }
