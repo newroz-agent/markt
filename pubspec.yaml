@@ -52,6 +52,10 @@ dependencies:
   google_sign_in: ^7.2.0
   intl: ^0.20.2
   connectivity_plus: ^7.3.1
+  flutter_stripe: ^11.5.0
+  url_launcher: ^6.3.2
+  share_plus: ^13.3.0
+  collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
