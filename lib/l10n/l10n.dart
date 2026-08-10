@@ -10,6 +10,7 @@ abstract final class AppLocale {
   static const english = Locale('en');
   static const arabic = Locale('ar');
   static const turkish = Locale('tr');
+  static const kurdish = Locale('ku');
 
   /// German is the product language and fallback locale for unsupported devices.
   static const defaultLocale = german;
@@ -49,6 +50,7 @@ extension AppLocaleDisplayName on Locale {
       'en' => l10n.languageEnglish,
       'ar' => l10n.languageArabic,
       'tr' => l10n.languageTurkish,
+      'ku' => l10n.languageKurdish,
       _ => languageCode,
     };
   }

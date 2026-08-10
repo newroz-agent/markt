@@ -420,6 +420,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get languageTurkish => 'التركية';
 
   @override
+  String get languageKurdish => 'Kurdî';
+
+  @override
   String get themeSystem => 'إعداد النظام';
 
   @override

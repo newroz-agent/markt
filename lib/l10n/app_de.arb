@@ -278,6 +278,8 @@
   "@languageArabic": {"description": "Display name for the Arabic language."},
   "languageTurkish": "Türkisch",
   "@languageTurkish": {"description": "Display name for the Turkish language."},
+  "languageKurdish": "Kurdî",
+  "@languageKurdish": {"description": "Display name for the Kurdish (Kurmanji) language. Shown as the endonym in every locale so Kurdish speakers recognize it whatever the UI language is."},
   "themeSystem": "Systemeinstellung",
   "@themeSystem": {"description": "Theme option that follows the operating system."},
   "themeLight": "Hell",

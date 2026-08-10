@@ -425,6 +425,9 @@ class AppLocalizationsKu extends AppLocalizations {
   String get languageTurkish => 'Tirkî';
 
   @override
+  String get languageKurdish => 'Kurdî (Kurmancî)';
+
+  @override
   String get themeSystem => 'Mîhenga pergalê';
 
   @override

@@ -866,6 +866,12 @@ abstract class AppLocalizations {
   /// **'Türkisch'**
   String get languageTurkish;
 
+  /// Display name for the Kurdish (Kurmanji) language. Shown as the endonym in every locale so Kurdish speakers recognize it whatever the UI language is.
+  ///
+  /// In de, this message translates to:
+  /// **'Kurdî'**
+  String get languageKurdish;
+
   /// Theme option that follows the operating system.
   ///
   /// In de, this message translates to:

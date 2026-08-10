@@ -427,6 +427,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get languageTurkish => 'Türkisch';
 
   @override
+  String get languageKurdish => 'Kurdî';
+
+  @override
   String get themeSystem => 'Systemeinstellung';
 
   @override
