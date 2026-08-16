@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,10 +16,6 @@ Future<void> bootstrap() async {
     await Supabase.initialize(
       url: AppEnvironment.supabaseUrl,
       publishableKey: AppEnvironment.supabaseAnonKey,
-      authOptions: const FlutterAuthClientOptions(
-        authFlowType: AuthFlowType.pkce,
-      ),
-      debug: kDebugMode,
     );
     supabaseClient = Supabase.instance.client;
   }

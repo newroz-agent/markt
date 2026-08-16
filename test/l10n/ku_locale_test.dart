@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoLocalizations;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zerin_marketplace/l10n/ku_localizations.dart';
@@ -42,11 +43,60 @@ void main() {
     // This group runs first on purpose. A `ku` launch must stand on its own —
     // when another locale renders first it primes `intl`'s date symbols as a
     // side effect, which masked a missing `initializeDateFormatting` here.
-    testWidgets('formatFullDate does not throw', (tester) async {
+    testWidgets('formats dates with Kurmanji month and weekday names', (
+      tester,
+    ) async {
       await _pumpAt(tester, AppLocale.kurdish);
 
       expect(tester.takeException(), isNull);
-      expect(find.text('Saturday, March 14, 2026'), findsOneWidget);
+      final formattedDate = tester.widget<Text>(find.byType(Text)).data!;
+      expect(formattedDate, contains('Adar'));
+      expect(formattedDate, contains('Şemî'));
+
+      for (final englishName in <String>[
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ]) {
+        expect(formattedDate, isNot(contains(englishName)));
+      }
+    });
+
+    testWidgets('uses Kurmanji for common framework labels', (tester) async {
+      await _pumpAt(tester, AppLocale.kurdish);
+
+      final context = tester.element(find.byType(_FormatsADate));
+      final material = MaterialLocalizations.of(context);
+      final cupertino = CupertinoLocalizations.of(context);
+
+      expect(material.okButtonLabel, 'Temam');
+      expect(material.cancelButtonLabel, 'Betal bike');
+      expect(material.closeButtonLabel, 'Bigire');
+      expect(material.backButtonTooltip, 'Vegere');
+      expect(material.searchFieldLabel, 'Bigere');
+      expect(material.copyButtonLabel, 'Kopî bike');
+      expect(material.pasteButtonLabel, 'Pêve bike');
+      expect(cupertino.cancelButtonLabel, 'Betal bike');
+      expect(cupertino.backButtonLabel, 'Vegere');
+      expect(cupertino.searchTextFieldPlaceholderLabel, 'Bigere');
+      expect(cupertino.copyButtonLabel, 'Kopî bike');
+      expect(cupertino.pasteButtonLabel, 'Pêve bike');
     });
 
     testWidgets('resolves our own Kurdish strings, not English', (
@@ -99,7 +149,8 @@ void main() {
         expect(
           AppLocale.kurdish.localizedDisplayName(l10n),
           startsWith('Kurdî'),
-          reason: 'Kurdish should read as its own endonym under ${locale.languageCode}',
+          reason:
+              'Kurdish should read as its own endonym under ${locale.languageCode}',
         );
       }
     });
