@@ -1,19 +1,28 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
+import 'package:zerin_marketplace/features/categories/domain/marketplace_category.dart';
+import 'package:zerin_marketplace/features/categories/presentation/controllers/category_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
-class HomeFoundationScreen extends StatelessWidget {
+class HomeFoundationScreen extends ConsumerWidget {
   const HomeFoundationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final categories = ref.watch(rootCategoriesProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appName)),
       body: RefreshIndicator(
-        onRefresh: () => Future<void>.delayed(AppDurations.standard),
+        onRefresh: () async {
+          ref.invalidate(activeCategoriesProvider);
+          await ref.read(rootCategoriesProvider.future);
+        },
         child: Align(
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
@@ -26,80 +35,37 @@ class HomeFoundationScreen extends StatelessWidget {
                 AppSpacing.md,
                 AppSpacing.xs,
                 AppSpacing.md,
-                AppSpacing.xxl,
+                AppSizes.bottomBarHeight + AppSpacing.xxl,
               ),
               children: <Widget>[
-                AppTextField(
-                  hint: l10n.homeSearchHint,
-                  prefix: const Icon(Icons.search_rounded),
-                  readOnly: true,
-                  onTap: () => AppSnackBar.show(
-                    context,
-                    message: l10n.foundationPreviewBody,
-                    variant: AppSnackBarVariant.info,
-                  ),
+                Text(
+                  l10n.homeGreeting,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: AppSpacing.lg),
-                Card(
-                  child: Padding(
-                    padding: AppSpacing.card,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          width: AppSizes.brandIcon,
-                          height: AppSizes.brandIcon,
-                          decoration: BoxDecoration(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.secondaryContainer,
-                            borderRadius: AppRadius.medium,
-                          ),
-                          child: Icon(
-                            Icons.auto_awesome_rounded,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.onSecondaryContainer,
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.md),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                l10n.foundationPreviewTitle,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              const SizedBox(height: AppSpacing.xs),
-                              Text(
-                                l10n.foundationPreviewBody,
-                                style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onSurfaceVariant,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                const SizedBox(height: AppSpacing.xl),
+                Text(
+                  l10n.homeCategoriesTitle,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: AppSpacing.md),
+                switch (categories) {
+                  AsyncData<List<MarketplaceCategory>>(:final value)
+                      when value.isEmpty =>
+                    AppEmptyState(
+                      title: l10n.categoriesEmptyTitle,
+                      message: l10n.categoriesEmptyBody,
+                      icon: Icons.category_outlined,
                     ),
+                  AsyncData<List<MarketplaceCategory>>(:final value) =>
+                    _CategoryGrid(categories: value),
+                  AsyncError<List<MarketplaceCategory>>() => AppErrorState(
+                    title: l10n.stateErrorTitle,
+                    message: l10n.stateErrorMessage,
+                    retryLabel: l10n.actionRetry,
+                    onRetry: () => ref.invalidate(activeCategoriesProvider),
                   ),
-                ),
-                const SizedBox(height: AppSpacing.xl),
-                _SectionHeader(title: l10n.homeCategoriesTitle),
-                const SizedBox(height: AppSpacing.sm),
-                const _CategorySkeletonRow(),
-                const SizedBox(height: AppSpacing.xl),
-                _SectionHeader(title: l10n.homeDealsTitle),
-                const SizedBox(height: AppSpacing.sm),
-                const _ProductSkeletonRow(),
-                const SizedBox(height: AppSpacing.xl),
-                _SectionHeader(title: l10n.homeNewArrivalsTitle),
-                const SizedBox(height: AppSpacing.sm),
-                const _ProductSkeletonRow(),
+                  _ => const _CategoryGridSkeleton(),
+                },
               ],
             ),
           ),
@@ -109,57 +75,148 @@ class HomeFoundationScreen extends StatelessWidget {
   }
 }
 
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.title});
+class _CategoryGrid extends StatelessWidget {
+  const _CategoryGrid({required this.categories});
 
-  final String title;
+  final List<MarketplaceCategory> categories;
 
   @override
-  Widget build(BuildContext context) =>
-      Text(title, style: Theme.of(context).textTheme.titleLarge);
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columnCount = constraints.maxWidth >= 600 ? 6 : 4;
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: categories.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columnCount,
+            crossAxisSpacing: AppSpacing.sm,
+            mainAxisSpacing: AppSpacing.md,
+            childAspectRatio: 0.68,
+          ),
+          itemBuilder: (context, index) => _CategoryShortcut(
+            category: categories[index],
+            languageCode: context.appLocale.languageCode,
+          ),
+        );
+      },
+    );
+  }
 }
 
-class _CategorySkeletonRow extends StatelessWidget {
-  const _CategorySkeletonRow();
+class _CategoryShortcut extends StatelessWidget {
+  const _CategoryShortcut({required this.category, required this.languageCode});
+
+  final MarketplaceCategory category;
+  final String languageCode;
 
   @override
-  Widget build(BuildContext context) => Row(
-    children: <Widget>[
-      for (var index = 0; index < 3; index++) ...<Widget>[
-        const Expanded(
-          child: AppSkeletonBox(height: AppSizes.categoryImageHeight),
+  Widget build(BuildContext context) {
+    final name = category.nameForLanguage(languageCode);
+    return Semantics(
+      container: true,
+      label: name,
+      child: Column(
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: AppRatios.square,
+            child: ClipRRect(
+              borderRadius: AppRadius.medium,
+              child: category.imageUrl.isEmpty
+                  ? _CategoryFallback(icon: _iconForCategory(category.iconKey))
+                  : CachedNetworkImage(
+                      imageUrl: category.imageUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (_, _) =>
+                          const AppSkeletonBox(borderRadius: BorderRadius.zero),
+                      errorWidget: (_, _, _) => _CategoryFallback(
+                        icon: _iconForCategory(category.iconKey),
+                      ),
+                    ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CategoryFallback extends StatelessWidget {
+  const _CategoryFallback({required this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.primaryContainer,
+      child: Center(
+        child: Icon(
+          icon,
+          size: AppSizes.iconState,
+          color: scheme.onPrimaryContainer,
         ),
-        if (index < 2) const SizedBox(width: AppSpacing.sm),
-      ],
-    ],
-  );
+      ),
+    );
+  }
 }
 
-class _ProductSkeletonRow extends StatelessWidget {
-  const _ProductSkeletonRow();
+class _CategoryGridSkeleton extends StatelessWidget {
+  const _CategoryGridSkeleton();
 
   @override
-  Widget build(BuildContext context) => Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      for (var index = 0; index < 2; index++) ...<Widget>[
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              AppSkeletonBox(height: AppSizes.productImageHeight),
-              SizedBox(height: AppSpacing.sm),
-              AppSkeletonBox(height: AppSizes.iconMedium),
-              SizedBox(height: AppSpacing.xs),
-              FractionallySizedBox(
-                widthFactor: 0.6,
-                child: AppSkeletonBox(height: AppSizes.iconSmall),
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columnCount = constraints.maxWidth >= 600 ? 6 : 4;
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: columnCount * 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columnCount,
+            crossAxisSpacing: AppSpacing.sm,
+            mainAxisSpacing: AppSpacing.md,
+            childAspectRatio: 0.68,
+          ),
+          itemBuilder: (_, _) => const Column(
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: AppRatios.square,
+                child: AppSkeletonBox(),
               ),
+              SizedBox(height: AppSpacing.xs),
+              AppSkeletonBox(height: AppSizes.iconSmall),
             ],
           ),
-        ),
-        if (index < 1) const SizedBox(width: AppSpacing.md),
-      ],
-    ],
-  );
+        );
+      },
+    );
+  }
 }
+
+IconData _iconForCategory(String key) => switch (key) {
+  'devices' => Icons.devices_rounded,
+  'checkroom' => Icons.checkroom_rounded,
+  'styler' => Icons.man_rounded,
+  'spa' => Icons.spa_rounded,
+  'countertops' => Icons.kitchen_rounded,
+  'chair' => Icons.chair_rounded,
+  'directions_car' => Icons.directions_car_rounded,
+  'watch' => Icons.watch_rounded,
+  'sports_soccer' => Icons.sports_soccer_rounded,
+  'child_friendly' => Icons.child_friendly_rounded,
+  'construction' => Icons.construction_rounded,
+  'restaurant' => Icons.restaurant_rounded,
+  _ => Icons.category_rounded,
+};
