@@ -3,22 +3,69 @@
 
 begin;
 
-create type public.seller_document_kind as enum (
-  'identity',
-  'business_registration',
-  'vat_certificate',
-  'bank_account',
-  'other'
-);
-create type public.seller_document_status as enum ('pending', 'approved', 'rejected');
-create type public.payout_status as enum (
-  'pending',
-  'in_transit',
-  'paid',
-  'failed',
-  'cancelled'
-);
-create type public.ledger_entry_kind as enum ('sale', 'refund', 'fee', 'adjustment');
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'seller_document_kind'
+  ) then
+    create type public.seller_document_kind as enum (
+      'identity',
+      'business_registration',
+      'vat_certificate',
+      'bank_account',
+      'other'
+    );
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'seller_document_status'
+  ) then
+    create type public.seller_document_status as enum ('pending', 'approved', 'rejected');
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'payout_status'
+  ) then
+    create type public.payout_status as enum (
+      'pending',
+      'in_transit',
+      'paid',
+      'failed',
+      'cancelled'
+    );
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'ledger_entry_kind'
+  ) then
+    create type public.ledger_entry_kind as enum ('sale', 'refund', 'fee', 'adjustment');
+  end if;
+end;
+$$;
 
 alter table public.chats
   add column buyer_last_read_at timestamptz,
@@ -107,7 +154,7 @@ create index seller_balance_transactions_available_idx
   on public.seller_balance_transactions (seller_id, available_at)
   where available_at is not null;
 
-create function public.prepare_seller_write()
+create or replace function public.prepare_seller_write()
 returns trigger
 language plpgsql
 security definer
@@ -168,7 +215,7 @@ update public.sellers
 set status = 'approved', approved_at = coalesce(approved_at, now()), rejection_reason = null
 where kind = 'private' and status <> 'approved';
 
-drop policy sellers_insert_own_application on public.sellers;
+drop policy if exists sellers_insert_own_application on public.sellers;
 create policy sellers_insert_own_application
   on public.sellers for insert to authenticated
   with check (
@@ -182,7 +229,7 @@ create policy sellers_insert_own_application
     )
   );
 
-create function public.record_seller_status_history()
+create or replace function public.record_seller_status_history()
 returns trigger
 language plpgsql
 security definer
@@ -212,11 +259,12 @@ begin
 end;
 $$;
 
+drop trigger if exists record_seller_status_history on public.sellers;
 create trigger record_seller_status_history
   after insert or update of status on public.sellers
   for each row execute function public.record_seller_status_history();
 
-create function public.prepare_private_product_tax()
+create or replace function public.prepare_private_product_tax()
 returns trigger
 language plpgsql
 security definer
@@ -242,6 +290,7 @@ begin
 end;
 $$;
 
+drop trigger if exists prepare_private_product_tax on public.products;
 create trigger prepare_private_product_tax
   before insert or update of seller_id, vat_rate on public.products
   for each row execute function public.prepare_private_product_tax();
@@ -253,7 +302,7 @@ where seller.id = product.seller_id
   and seller.kind = 'private'
   and product.vat_rate <> 0;
 
-create function public.protect_seller_document_write()
+create or replace function public.protect_seller_document_write()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -285,17 +334,20 @@ begin
 end;
 $$;
 
+drop trigger if exists protect_seller_document_write on public.seller_documents;
 create trigger protect_seller_document_write
   before insert or update on public.seller_documents
   for each row execute function public.protect_seller_document_write();
+drop trigger if exists set_updated_at on public.seller_documents;
 create trigger set_updated_at
   before update on public.seller_documents
   for each row execute function public.set_updated_at();
+drop trigger if exists set_updated_at on public.seller_payouts;
 create trigger set_updated_at
   before update on public.seller_payouts
   for each row execute function public.set_updated_at();
 
-create function public.validate_message_context()
+create or replace function public.validate_message_context()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -330,11 +382,12 @@ begin
 end;
 $$;
 
+drop trigger if exists validate_message_context on public.messages;
 create trigger validate_message_context
   before insert on public.messages
   for each row execute function public.validate_message_context();
 
-create function public.get_or_create_chat(
+create or replace function public.get_or_create_chat(
   p_seller_id uuid,
   p_product_id uuid default null,
   p_buyer_id uuid default null
@@ -424,7 +477,7 @@ begin
 end;
 $$;
 
-create function public.mark_chat_read(p_chat_id uuid)
+create or replace function public.mark_chat_read(p_chat_id uuid)
 returns integer
 language plpgsql
 security definer
@@ -469,7 +522,7 @@ begin
 end;
 $$;
 
-create function public.get_unread_chat_count()
+create or replace function public.get_unread_chat_count()
 returns integer
 language sql
 stable
@@ -485,7 +538,7 @@ as $$
     and (chat.buyer_id = auth.uid() or seller.user_id = auth.uid());
 $$;
 
-create function public.get_seller_dashboard_metrics(
+create or replace function public.get_seller_dashboard_metrics(
   p_seller_id uuid,
   p_from timestamptz default (now() - interval '30 days'),
   p_to timestamptz default now()
@@ -546,7 +599,7 @@ begin
 end;
 $$;
 
-create function public.owns_seller_path(target_seller_id text)
+create or replace function public.owns_seller_path(target_seller_id text)
 returns boolean
 language sql
 stable
@@ -561,7 +614,7 @@ as $$
   );
 $$;
 
-create function public.can_manage_seller_document_path(target_storage_path text)
+create or replace function public.can_manage_seller_document_path(target_storage_path text)
 returns boolean
 language sql
 stable
@@ -578,7 +631,7 @@ as $$
     );
 $$;
 
-create function public.record_seller_ledger_entry()
+create or replace function public.record_seller_ledger_entry()
 returns trigger
 language plpgsql
 security definer
@@ -642,6 +695,7 @@ begin
 end;
 $$;
 
+drop trigger if exists record_seller_ledger_entry on public.orders;
 create trigger record_seller_ledger_entry
   after insert or update of payment_status, status on public.orders
   for each row execute function public.record_seller_ledger_entry();
@@ -651,20 +705,25 @@ alter table public.seller_documents enable row level security;
 alter table public.seller_payouts enable row level security;
 alter table public.seller_balance_transactions enable row level security;
 
+drop policy if exists seller_status_history_select_own on public.seller_status_history;
 create policy seller_status_history_select_own
   on public.seller_status_history for select to authenticated
   using (public.owns_seller(seller_id) or public.is_admin());
+drop policy if exists seller_status_history_manage_admin on public.seller_status_history;
 create policy seller_status_history_manage_admin
   on public.seller_status_history for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists seller_documents_select_own on public.seller_documents;
 create policy seller_documents_select_own
   on public.seller_documents for select to authenticated
   using (public.owns_seller(seller_id) or public.is_admin());
+drop policy if exists seller_documents_insert_own on public.seller_documents;
 create policy seller_documents_insert_own
   on public.seller_documents for insert to authenticated
   with check (public.owns_seller(seller_id) or public.is_admin());
+drop policy if exists seller_documents_delete_pending_own on public.seller_documents;
 create policy seller_documents_delete_pending_own
   on public.seller_documents for delete to authenticated
   using (
@@ -674,22 +733,27 @@ create policy seller_documents_delete_pending_own
       and status = 'pending'
     )
   );
+drop policy if exists seller_documents_manage_admin on public.seller_documents;
 create policy seller_documents_manage_admin
   on public.seller_documents for update to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists seller_payouts_select_own on public.seller_payouts;
 create policy seller_payouts_select_own
   on public.seller_payouts for select to authenticated
   using (public.owns_seller(seller_id) or public.is_admin());
+drop policy if exists seller_payouts_manage_admin on public.seller_payouts;
 create policy seller_payouts_manage_admin
   on public.seller_payouts for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists seller_balance_transactions_select_own on public.seller_balance_transactions;
 create policy seller_balance_transactions_select_own
   on public.seller_balance_transactions for select to authenticated
   using (public.owns_seller(seller_id) or public.is_admin());
+drop policy if exists seller_balance_transactions_manage_admin on public.seller_balance_transactions;
 create policy seller_balance_transactions_manage_admin
   on public.seller_balance_transactions for all to authenticated
   using (public.is_admin())
@@ -740,6 +804,7 @@ on conflict (id) do update set
   file_size_limit = excluded.file_size_limit,
   allowed_mime_types = excluded.allowed_mime_types;
 
+drop policy if exists seller_documents_storage_select on storage.objects;
 create policy seller_documents_storage_select
   on storage.objects for select to authenticated
   using (
@@ -749,6 +814,7 @@ create policy seller_documents_storage_select
       or public.is_admin()
     )
   );
+drop policy if exists seller_documents_storage_insert on storage.objects;
 create policy seller_documents_storage_insert
   on storage.objects for insert to authenticated
   with check (
@@ -759,6 +825,7 @@ create policy seller_documents_storage_insert
       or public.is_admin()
     )
   );
+drop policy if exists seller_documents_storage_update on storage.objects;
 create policy seller_documents_storage_update
   on storage.objects for update to authenticated
   using (
@@ -775,6 +842,7 @@ create policy seller_documents_storage_update
       or public.is_admin()
     )
   );
+drop policy if exists seller_documents_storage_delete on storage.objects;
 create policy seller_documents_storage_delete
   on storage.objects for delete to authenticated
   using (

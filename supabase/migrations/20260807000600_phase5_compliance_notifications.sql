@@ -3,29 +3,88 @@
 
 begin;
 
-create type public.push_platform as enum ('ios', 'android', 'web');
-create type public.notification_delivery_status as enum (
-  'pending',
-  'processing',
-  'sent',
-  'failed',
-  'dead'
-);
-create type public.legal_document_kind as enum (
-  'imprint',
-  'terms',
-  'privacy',
-  'withdrawal'
-);
-create type public.data_subject_request_kind as enum ('export', 'deletion');
-create type public.data_subject_request_status as enum (
-  'requested',
-  'verifying',
-  'processing',
-  'completed',
-  'rejected',
-  'cancelled'
-);
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'push_platform'
+  ) then
+    create type public.push_platform as enum ('ios', 'android', 'web');
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'notification_delivery_status'
+  ) then
+    create type public.notification_delivery_status as enum (
+      'pending',
+      'processing',
+      'sent',
+      'failed',
+      'dead'
+    );
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'legal_document_kind'
+  ) then
+    create type public.legal_document_kind as enum (
+      'imprint',
+      'terms',
+      'privacy',
+      'withdrawal'
+    );
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'data_subject_request_kind'
+  ) then
+    create type public.data_subject_request_kind as enum ('export', 'deletion');
+  end if;
+end;
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_type as enum_type
+    join pg_namespace as namespace on namespace.oid = enum_type.typnamespace
+    where namespace.nspname = 'public' and enum_type.typname = 'data_subject_request_status'
+  ) then
+    create type public.data_subject_request_status as enum (
+      'requested',
+      'verifying',
+      'processing',
+      'completed',
+      'rejected',
+      'cancelled'
+    );
+  end if;
+end;
+$$;
 
 alter table public.favorites
   add column price_snapshot_cents bigint
@@ -169,20 +228,24 @@ create unique index data_subject_one_open_request_idx
 create index data_subject_requests_user_created_idx
   on public.data_subject_requests (user_id, created_at desc);
 
+drop trigger if exists set_updated_at on public.device_tokens;
 create trigger set_updated_at
   before update on public.device_tokens
   for each row execute function public.set_updated_at();
+drop trigger if exists set_updated_at on public.notification_outbox;
 create trigger set_updated_at
   before update on public.notification_outbox
   for each row execute function public.set_updated_at();
+drop trigger if exists set_updated_at on public.legal_documents;
 create trigger set_updated_at
   before update on public.legal_documents
   for each row execute function public.set_updated_at();
+drop trigger if exists set_updated_at on public.data_subject_requests;
 create trigger set_updated_at
   before update on public.data_subject_requests
   for each row execute function public.set_updated_at();
 
-create function public.notification_preference_enabled(
+create or replace function public.notification_preference_enabled(
   target_user_id uuid,
   target_kind public.notification_kind
 )
@@ -220,7 +283,7 @@ as $$
   ), true);
 $$;
 
-create function public.create_user_notification(
+create or replace function public.create_user_notification(
   p_user_id uuid,
   p_kind public.notification_kind,
   p_title_key text,
@@ -265,7 +328,7 @@ begin
 end;
 $$;
 
-create function public.queue_notification_delivery()
+create or replace function public.queue_notification_delivery()
 returns trigger
 language plpgsql
 security definer
@@ -282,11 +345,12 @@ begin
 end;
 $$;
 
+drop trigger if exists queue_notification_delivery on public.notifications;
 create trigger queue_notification_delivery
   after insert on public.notifications
   for each row execute function public.queue_notification_delivery();
 
-create function public.notify_chat_message()
+create or replace function public.notify_chat_message()
 returns trigger
 language plpgsql
 security definer
@@ -326,11 +390,12 @@ begin
 end;
 $$;
 
+drop trigger if exists notify_chat_message on public.messages;
 create trigger notify_chat_message
   after insert on public.messages
   for each row execute function public.notify_chat_message();
 
-create function public.notify_order_change()
+create or replace function public.notify_order_change()
 returns trigger
 language plpgsql
 security definer
@@ -393,11 +458,12 @@ begin
 end;
 $$;
 
+drop trigger if exists notify_order_change on public.orders;
 create trigger notify_order_change
   after insert or update of status, payment_status on public.orders
   for each row execute function public.notify_order_change();
 
-create function public.protect_favorite_write()
+create or replace function public.protect_favorite_write()
 returns trigger
 language plpgsql
 security definer
@@ -422,11 +488,12 @@ begin
 end;
 $$;
 
+drop trigger if exists protect_favorite_write on public.favorites;
 create trigger protect_favorite_write
   before insert or update of user_id, product_id on public.favorites
   for each row execute function public.protect_favorite_write();
 
-create function public.record_product_price_change()
+create or replace function public.record_product_price_change()
 returns trigger
 language plpgsql
 security definer
@@ -503,6 +570,7 @@ begin
 end;
 $$;
 
+drop trigger if exists record_product_price_change on public.products;
 create trigger record_product_price_change
   after insert or update of price_cents, compare_at_price_cents, status
   on public.products
@@ -528,7 +596,7 @@ where not exists (
   where history.product_id = product.id
 );
 
-create function public.prepare_profile_privacy_preferences()
+create or replace function public.prepare_profile_privacy_preferences()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -562,12 +630,13 @@ begin
 end;
 $$;
 
+drop trigger if exists prepare_profile_privacy_preferences on public.profiles;
 create trigger prepare_profile_privacy_preferences
   before insert or update of analytics_consent, analytics_consent_at, notification_preferences
   on public.profiles
   for each row execute function public.prepare_profile_privacy_preferences();
 
-create function public.protect_device_token_write()
+create or replace function public.protect_device_token_write()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -587,11 +656,12 @@ begin
 end;
 $$;
 
+drop trigger if exists protect_device_token_write on public.device_tokens;
 create trigger protect_device_token_write
   before insert or update on public.device_tokens
   for each row execute function public.protect_device_token_write();
 
-create function public.claim_notification_outbox(p_limit integer default 50)
+create or replace function public.claim_notification_outbox(p_limit integer default 50)
 returns table (
   outbox_id uuid,
   user_id uuid,
@@ -655,7 +725,7 @@ as $$
     claimed.attempts;
 $$;
 
-create function public.complete_notification_delivery(
+create or replace function public.complete_notification_delivery(
   p_outbox_id uuid,
   p_success boolean,
   p_error text default null
@@ -713,7 +783,7 @@ begin
 end;
 $$;
 
-create function public.requeue_stale_notification_outbox(
+create or replace function public.requeue_stale_notification_outbox(
   p_age interval default interval '10 minutes'
 )
 returns integer
@@ -735,7 +805,7 @@ as $$
   select count(*)::integer from stale;
 $$;
 
-create function public.track_analytics_event(
+create or replace function public.track_analytics_event(
   p_event_name text,
   p_properties jsonb default '{}'::jsonb,
   p_session_id text default null,
@@ -792,7 +862,7 @@ begin
 end;
 $$;
 
-create function public.request_data_export()
+create or replace function public.request_data_export()
 returns uuid
 language plpgsql
 security definer
@@ -825,7 +895,7 @@ begin
 end;
 $$;
 
-create function public.request_account_deletion(
+create or replace function public.request_account_deletion(
   p_confirmation text,
   p_reason text default null
 )
@@ -865,7 +935,7 @@ begin
 end;
 $$;
 
-create function public.cancel_account_deletion()
+create or replace function public.cancel_account_deletion()
 returns boolean
 language plpgsql
 security definer
@@ -881,7 +951,7 @@ begin
 end;
 $$;
 
-create function public.protect_user_consent_write()
+create or replace function public.protect_user_consent_write()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -898,11 +968,12 @@ begin
 end;
 $$;
 
+drop trigger if exists protect_user_consent_write on public.user_consents;
 create trigger protect_user_consent_write
   before insert or update on public.user_consents
   for each row execute function public.protect_user_consent_write();
 
-create function public.validate_review_photo_paths()
+create or replace function public.validate_review_photo_paths()
 returns trigger
 language plpgsql
 set search_path = ''
@@ -920,6 +991,7 @@ begin
 end;
 $$;
 
+drop trigger if exists validate_review_photo_paths on public.reviews;
 create trigger validate_review_photo_paths
   before insert or update of photo_paths, reviewer_id on public.reviews
   for each row execute function public.validate_review_photo_paths();
@@ -932,6 +1004,7 @@ alter table public.legal_documents enable row level security;
 alter table public.user_consents enable row level security;
 alter table public.data_subject_requests enable row level security;
 
+drop policy if exists product_price_history_select_visible on public.product_price_history;
 create policy product_price_history_select_visible
   on public.product_price_history for select to authenticated
   using (
@@ -939,55 +1012,69 @@ create policy product_price_history_select_visible
     or public.is_admin()
   );
 
+drop policy if exists device_tokens_select_own on public.device_tokens;
 create policy device_tokens_select_own
   on public.device_tokens for select to authenticated
   using (user_id = auth.uid() or public.is_admin());
+drop policy if exists device_tokens_insert_own on public.device_tokens;
 create policy device_tokens_insert_own
   on public.device_tokens for insert to authenticated
   with check (user_id = auth.uid() or public.is_admin());
+drop policy if exists device_tokens_update_own on public.device_tokens;
 create policy device_tokens_update_own
   on public.device_tokens for update to authenticated
   using (user_id = auth.uid() or public.is_admin())
   with check (user_id = auth.uid() or public.is_admin());
+drop policy if exists device_tokens_delete_own on public.device_tokens;
 create policy device_tokens_delete_own
   on public.device_tokens for delete to authenticated
   using (user_id = auth.uid() or public.is_admin());
 
+drop policy if exists notification_outbox_manage_admin on public.notification_outbox;
 create policy notification_outbox_manage_admin
   on public.notification_outbox for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists analytics_events_select_own on public.analytics_events;
 create policy analytics_events_select_own
   on public.analytics_events for select to authenticated
   using (user_id = auth.uid() or public.is_admin());
+drop policy if exists analytics_events_manage_admin on public.analytics_events;
 create policy analytics_events_manage_admin
   on public.analytics_events for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists legal_documents_select_published on public.legal_documents;
 create policy legal_documents_select_published
   on public.legal_documents for select to anon, authenticated
   using ((is_active and published_at is not null and published_at <= now()) or public.is_admin());
+drop policy if exists legal_documents_manage_admin on public.legal_documents;
 create policy legal_documents_manage_admin
   on public.legal_documents for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists user_consents_select_own on public.user_consents;
 create policy user_consents_select_own
   on public.user_consents for select to authenticated
   using (user_id = auth.uid() or public.is_admin());
+drop policy if exists user_consents_insert_own on public.user_consents;
 create policy user_consents_insert_own
   on public.user_consents for insert to authenticated
   with check (user_id = auth.uid() or public.is_admin());
+drop policy if exists user_consents_manage_admin on public.user_consents;
 create policy user_consents_manage_admin
   on public.user_consents for all to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists data_subject_requests_select_own on public.data_subject_requests;
 create policy data_subject_requests_select_own
   on public.data_subject_requests for select to authenticated
   using (user_id = auth.uid() or public.is_admin());
+drop policy if exists data_subject_requests_manage_admin on public.data_subject_requests;
 create policy data_subject_requests_manage_admin
   on public.data_subject_requests for all to authenticated
   using (public.is_admin())
@@ -1066,7 +1153,7 @@ on conflict (id) do update set
   file_size_limit = excluded.file_size_limit,
   allowed_mime_types = excluded.allowed_mime_types;
 
-create function public.can_access_review_media_path(target_storage_path text)
+create or replace function public.can_access_review_media_path(target_storage_path text)
 returns boolean
 language sql
 stable
@@ -1084,7 +1171,7 @@ as $$
     or public.is_admin();
 $$;
 
-create function public.owns_export_path(target_storage_path text)
+create or replace function public.owns_export_path(target_storage_path text)
 returns boolean
 language sql
 stable
@@ -1095,7 +1182,7 @@ as $$
     or public.is_admin();
 $$;
 
-create function public.can_manage_review_media_path(target_storage_path text)
+create or replace function public.can_manage_review_media_path(target_storage_path text)
 returns boolean
 language sql
 stable
@@ -1112,12 +1199,14 @@ as $$
     );
 $$;
 
+drop policy if exists review_media_storage_select on storage.objects;
 create policy review_media_storage_select
   on storage.objects for select to anon, authenticated
   using (
     bucket_id = 'review-media'
     and public.can_access_review_media_path(name)
   );
+drop policy if exists review_media_storage_insert on storage.objects;
 create policy review_media_storage_insert
   on storage.objects for insert to authenticated
   with check (
@@ -1125,6 +1214,7 @@ create policy review_media_storage_insert
     and array_length(storage.foldername(name), 1) >= 2
     and split_part(name, '/', 1) = auth.uid()::text
   );
+drop policy if exists review_media_storage_update on storage.objects;
 create policy review_media_storage_update
   on storage.objects for update to authenticated
   using (
@@ -1135,6 +1225,7 @@ create policy review_media_storage_update
     bucket_id = 'review-media'
     and public.can_manage_review_media_path(name)
   );
+drop policy if exists review_media_storage_delete on storage.objects;
 create policy review_media_storage_delete
   on storage.objects for delete to authenticated
   using (
@@ -1142,12 +1233,14 @@ create policy review_media_storage_delete
     and public.can_manage_review_media_path(name)
   );
 
+drop policy if exists data_exports_storage_select on storage.objects;
 create policy data_exports_storage_select
   on storage.objects for select to authenticated
   using (
     bucket_id = 'data-exports'
     and public.owns_export_path(name)
   );
+drop policy if exists data_exports_storage_manage_admin on storage.objects;
 create policy data_exports_storage_manage_admin
   on storage.objects for all to authenticated
   using (bucket_id = 'data-exports' and public.is_admin())
