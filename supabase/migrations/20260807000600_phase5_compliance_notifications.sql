@@ -87,7 +87,7 @@ end;
 $$;
 
 alter table public.favorites
-  add column price_snapshot_cents bigint
+  add column if not exists price_snapshot_cents bigint
     check (price_snapshot_cents is null or price_snapshot_cents >= 0);
 
 update public.favorites as favorite
@@ -96,7 +96,7 @@ from public.products as product
 where product.id = favorite.product_id
   and favorite.price_snapshot_cents is null;
 
-create table public.product_price_history (
+create table if not exists public.product_price_history (
   id uuid primary key default gen_random_uuid(),
   product_id uuid not null references public.products (id) on delete cascade,
   old_price_cents bigint,
@@ -108,10 +108,10 @@ create table public.product_price_history (
     check (old_price_cents is null or old_price_cents >= 0)
 );
 
-create index product_price_history_product_changed_idx
+create index if not exists product_price_history_product_changed_idx
   on public.product_price_history (product_id, changed_at desc);
 
-create table public.device_tokens (
+create table if not exists public.device_tokens (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,
   token text not null unique check (char_length(token) between 20 and 4096),
@@ -125,10 +125,10 @@ create table public.device_tokens (
   unique (user_id, platform, token)
 );
 
-create index device_tokens_user_enabled_idx
+create index if not exists device_tokens_user_enabled_idx
   on public.device_tokens (user_id, enabled, last_seen_at desc);
 
-create table public.notification_outbox (
+create table if not exists public.notification_outbox (
   id uuid primary key default gen_random_uuid(),
   notification_id uuid not null unique references public.notifications (id) on delete cascade,
   user_id uuid not null references auth.users (id) on delete cascade,
@@ -142,13 +142,13 @@ create table public.notification_outbox (
   updated_at timestamptz not null default now()
 );
 
-create index notification_outbox_claim_idx
+create index if not exists notification_outbox_claim_idx
   on public.notification_outbox (available_at, created_at)
   where status = 'pending';
-create index notification_outbox_user_idx
+create index if not exists notification_outbox_user_idx
   on public.notification_outbox (user_id, created_at desc);
 
-create table public.analytics_events (
+create table if not exists public.analytics_events (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,
   event_name text not null check (event_name ~ '^[a-z][a-z0-9_.-]{1,79}$'),
@@ -160,12 +160,12 @@ create table public.analytics_events (
     check (jsonb_typeof(properties) = 'object')
 );
 
-create index analytics_events_user_occurred_idx
+create index if not exists analytics_events_user_occurred_idx
   on public.analytics_events (user_id, occurred_at desc);
-create index analytics_events_name_occurred_idx
+create index if not exists analytics_events_name_occurred_idx
   on public.analytics_events (event_name, occurred_at desc);
 
-create table public.legal_documents (
+create table if not exists public.legal_documents (
   id uuid primary key default gen_random_uuid(),
   kind public.legal_document_kind not null,
   locale public.app_language not null,
@@ -181,14 +181,14 @@ create table public.legal_documents (
   unique (kind, locale, version)
 );
 
-create unique index legal_documents_one_active_locale_idx
+create unique index if not exists legal_documents_one_active_locale_idx
   on public.legal_documents (kind, locale)
   where is_active;
-create index legal_documents_publication_idx
+create index if not exists legal_documents_publication_idx
   on public.legal_documents (kind, locale, effective_at desc)
   where is_active;
 
-create table public.user_consents (
+create table if not exists public.user_consents (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,
   consent_type text not null check (consent_type ~ '^[a-z][a-z0-9_.-]{1,79}$'),
@@ -200,10 +200,10 @@ create table public.user_consents (
   created_at timestamptz not null default now()
 );
 
-create index user_consents_user_created_idx
+create index if not exists user_consents_user_created_idx
   on public.user_consents (user_id, consent_type, created_at desc);
 
-create table public.data_subject_requests (
+create table if not exists public.data_subject_requests (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,
   kind public.data_subject_request_kind not null,
@@ -222,10 +222,10 @@ create table public.data_subject_requests (
   )
 );
 
-create unique index data_subject_one_open_request_idx
+create unique index if not exists data_subject_one_open_request_idx
   on public.data_subject_requests (user_id, kind)
   where status in ('requested', 'verifying', 'processing');
-create index data_subject_requests_user_created_idx
+create index if not exists data_subject_requests_user_created_idx
   on public.data_subject_requests (user_id, created_at desc);
 
 drop trigger if exists set_updated_at on public.device_tokens;

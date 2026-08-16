@@ -17,11 +17,22 @@
 begin;
 
 alter table public.legal_documents
-  drop constraint legal_documents_version_check;
+  drop constraint if exists legal_documents_version_check;
 
-alter table public.legal_documents
-  add constraint legal_documents_version_check
-  check (version ~ '^[0-9]+\.[0-9]+(?:\.[0-9]+)?$');
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'legal_documents_version_check'
+      and conrelid = 'public.legal_documents'::regclass
+  ) then
+    alter table public.legal_documents
+      add constraint legal_documents_version_check
+      check (version ~ '^[0-9]+\.[0-9]+(?:\.[0-9]+)?$');
+  end if;
+end;
+$$;
 
 create or replace function public.save_recent_search(p_query text)
 returns void
