@@ -29,11 +29,19 @@ class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
   @override
   void initState() {
     super.initState();
-    _currentIndex =
-        widget.initialIndex >= 0 && widget.initialIndex <= _lastIndex
-        ? widget.initialIndex
-        : 0;
+    _currentIndex = _normalizedIndex(widget.initialIndex);
   }
+
+  @override
+  void didUpdateWidget(covariant MarketplaceShell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialIndex != widget.initialIndex) {
+      _currentIndex = _normalizedIndex(widget.initialIndex);
+    }
+  }
+
+  int _normalizedIndex(int index) =>
+      index >= 0 && index <= _lastIndex ? index : 0;
 
   void _select(int index) {
     if (index == _sellIndex || index == _cartIndex) {

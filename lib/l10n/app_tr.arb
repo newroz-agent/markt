@@ -95,8 +95,10 @@
   "homeGreetingNamed": "Merhaba, {name}!",
   "homeSearchHint": "Ne arıyorsun?",
   "homeCategoriesTitle": "Kategoriler",
-  "homeDealsTitle": "Fırsatlar ve indirimler",
+  "homeAllCategoriesLabel": "Tümü",
+  "homeDealsTitle": "Fırsatlar",
   "homeNewArrivalsTitle": "Yeni gelenler",
+  "homePopularStoresTitle": "Popüler mağazalar",
   "homePopularNearbyTitle": "Yakınında popüler",
   "homeRecentlyViewedTitle": "Son görüntülenenler",
 

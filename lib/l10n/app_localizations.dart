@@ -638,10 +638,16 @@ abstract class AppLocalizations {
   /// **'Kategorien'**
   String get homeCategoriesTitle;
 
+  /// Compact action that opens the complete category list.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get homeAllCategoriesLabel;
+
   /// Heading for discounted products on the home screen.
   ///
   /// In de, this message translates to:
-  /// **'Angebote & Rabatte'**
+  /// **'Angebote'**
   String get homeDealsTitle;
 
   /// Heading for newly listed products on the home screen.
@@ -649,6 +655,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Neu eingetroffen'**
   String get homeNewArrivalsTitle;
+
+  /// Heading for popular stores on the home screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Beliebte Geschäfte'**
+  String get homePopularStoresTitle;
 
   /// Heading for locally popular products on the home screen.
   ///

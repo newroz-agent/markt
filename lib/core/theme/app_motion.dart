@@ -2,11 +2,16 @@ import 'package:flutter/animation.dart';
 
 /// Duration tokens. Keep routine feedback inside the 200-300ms range.
 abstract final class AppDurations {
+  static const Duration staggerStep = Duration(milliseconds: 55);
   static const Duration quick = Duration(milliseconds: 160);
   static const Duration standard = Duration(milliseconds: 240);
   static const Duration emphasized = Duration(milliseconds: 300);
   static const Duration skeleton = Duration(milliseconds: 1400);
+  static const Duration carouselResume = Duration(seconds: 2);
   static const Duration snackBar = Duration(seconds: 4);
+  static const Duration carouselAutoPlay = Duration(seconds: 5);
+
+  static Duration staggered(int index) => staggerStep * index;
 }
 
 /// Curves and interaction motion values.

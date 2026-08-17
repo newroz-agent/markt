@@ -95,8 +95,10 @@
   "homeGreetingNamed": "Hello, {name}!",
   "homeSearchHint": "What are you looking for?",
   "homeCategoriesTitle": "Categories",
-  "homeDealsTitle": "Deals & discounts",
+  "homeAllCategoriesLabel": "All",
+  "homeDealsTitle": "Offers",
   "homeNewArrivalsTitle": "New arrivals",
+  "homePopularStoresTitle": "Popular stores",
   "homePopularNearbyTitle": "Popular near you",
   "homeRecentlyViewedTitle": "Recently viewed",
 

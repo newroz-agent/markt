@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [
   $legalRoute,
   $privacyRoute,
   $notificationSettingsRoute,
+  $productDetailRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -171,6 +172,29 @@ extension $NotificationSettingsRouteExtension on NotificationSettingsRoute {
       const NotificationSettingsRoute();
 
   String get location => GoRouteData.$location('/notifications');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $productDetailRoute => GoRouteData.$route(
+  path: '/products/:productId',
+
+  factory: $ProductDetailRouteExtension._fromState,
+);
+
+extension $ProductDetailRouteExtension on ProductDetailRoute {
+  static ProductDetailRoute _fromState(GoRouterState state) =>
+      ProductDetailRoute(productId: state.pathParameters['productId']!);
+
+  String get location =>
+      GoRouteData.$location('/products/${Uri.encodeComponent(productId)}');
 
   void go(BuildContext context) => context.go(location);
 

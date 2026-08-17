@@ -95,8 +95,10 @@
   "homeGreetingNamed": "مرحبًا، {name}!",
   "homeSearchHint": "عمّ تبحث؟",
   "homeCategoriesTitle": "الفئات",
-  "homeDealsTitle": "العروض والخصومات",
+  "homeAllCategoriesLabel": "الكل",
+  "homeDealsTitle": "العروض",
   "homeNewArrivalsTitle": "وصل حديثًا",
+  "homePopularStoresTitle": "متاجر رائجة",
   "homePopularNearbyTitle": "رائج بالقرب منك",
   "homeRecentlyViewedTitle": "شوهد مؤخرًا",
 

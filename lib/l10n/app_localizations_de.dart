@@ -299,10 +299,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeCategoriesTitle => 'Kategorien';
 
   @override
-  String get homeDealsTitle => 'Angebote & Rabatte';
+  String get homeAllCategoriesLabel => 'Alle';
+
+  @override
+  String get homeDealsTitle => 'Angebote';
 
   @override
   String get homeNewArrivalsTitle => 'Neu eingetroffen';
+
+  @override
+  String get homePopularStoresTitle => 'Beliebte Geschäfte';
 
   @override
   String get homePopularNearbyTitle => 'Beliebt in deiner Nähe';

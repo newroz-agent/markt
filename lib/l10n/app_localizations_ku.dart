@@ -299,10 +299,16 @@ class AppLocalizationsKu extends AppLocalizations {
   String get homeCategoriesTitle => 'Kategorî';
 
   @override
-  String get homeDealsTitle => 'Firsend û daxistin';
+  String get homeAllCategoriesLabel => 'Hemû';
+
+  @override
+  String get homeDealsTitle => 'Firsend';
 
   @override
   String get homeNewArrivalsTitle => 'Yên nû hatine';
+
+  @override
+  String get homePopularStoresTitle => 'Firoşgehên populer';
 
   @override
   String get homePopularNearbyTitle => 'Li nêzîkî te populer';

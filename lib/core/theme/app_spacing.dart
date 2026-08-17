@@ -46,10 +46,25 @@ abstract final class AppSizes {
   static const double avatarMedium = 44;
   static const double productImageHeight = 188;
   static const double categoryImageHeight = 112;
+  static const double categoryCardHeight = 184;
   static const double dialogMaxWidth = 480;
   static const double bottomSheetMaxWidth = 640;
   static const double dragHandleWidth = 32;
   static const double dragHandleHeight = 4;
+  static const double compactBreakpoint = 600;
+  static const double homeCarouselDot = 6;
+  static const double homeCarouselDotSelected = 20;
+  static const double homeCategoryRailHeight = 116;
+  static const double homeCategoryTileWidth = 104;
+  static const double homeProductRailHeight = 328;
+  static const double homeProductCardWidth = 188;
+  static const double homeProductImageHeight = 176;
+  static const double homeStoreRailHeight = 184;
+  static const double homeStoreCardWidth = 244;
+  static const double homeStoreBannerHeight = 96;
+  static const double homeStoreAvatar = 52;
+  static const double productDetailPriceSkeletonWidth = 164;
+  static const double productDetailBodySkeletonHeight = 96;
 
   /// Width of the heading placeholder in a text-document skeleton, as a
   /// fraction of the available width.
@@ -64,12 +79,15 @@ abstract final class AppStrokes {
   static const double thin = 1;
   static const double focused = 1.5;
   static const double progress = 2;
+  static const double heavy = 3;
 }
 
 /// Common opacity values for state and elevation treatments.
 abstract final class AppOpacity {
+  static const double transparent = 0;
   static const double faint = 0.06;
   static const double subtle = 0.08;
+  static const double overlay = 0.2;
   static const double shadowHigh = 0.1;
   static const double disabledSurface = 0.1;
   static const double destructiveDisabledSurface = 0.12;
@@ -78,8 +96,11 @@ abstract final class AppOpacity {
   static const double muted = 0.6;
   static const double barrier = 0.56;
   static const double raised = 0.92;
+  static const double strong = 0.95;
+  static const double opaque = 1;
 }
 
 abstract final class AppRatios {
   static const double square = 1;
+  static const double widescreen = 16 / 9;
 }

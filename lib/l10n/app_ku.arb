@@ -95,8 +95,10 @@
   "homeGreetingNamed": "Silav, {name}!",
   "homeSearchHint": "Tu li çi digerî?",
   "homeCategoriesTitle": "Kategorî",
-  "homeDealsTitle": "Firsend û daxistin",
+  "homeAllCategoriesLabel": "Hemû",
+  "homeDealsTitle": "Firsend",
   "homeNewArrivalsTitle": "Yên nû hatine",
+  "homePopularStoresTitle": "Firoşgehên populer",
   "homePopularNearbyTitle": "Li nêzîkî te populer",
   "homeRecentlyViewedTitle": "Dawî hatine dîtin",
 

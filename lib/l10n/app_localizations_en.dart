@@ -295,10 +295,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCategoriesTitle => 'Categories';
 
   @override
-  String get homeDealsTitle => 'Deals & discounts';
+  String get homeAllCategoriesLabel => 'All';
+
+  @override
+  String get homeDealsTitle => 'Offers';
 
   @override
   String get homeNewArrivalsTitle => 'New arrivals';
+
+  @override
+  String get homePopularStoresTitle => 'Popular stores';
 
   @override
   String get homePopularNearbyTitle => 'Popular near you';

@@ -9,6 +9,7 @@ import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart'
 import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/notification_settings_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/privacy_screen.dart';
+import 'package:zerin_marketplace/features/products/presentation/product_detail_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 import 'package:zerin_marketplace/features/shell/presentation/marketplace_shell.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -124,4 +125,15 @@ class NotificationSettingsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const NotificationSettingsScreen();
+}
+
+@TypedGoRoute<ProductDetailRoute>(path: '/products/:productId')
+class ProductDetailRoute extends GoRouteData {
+  const ProductDetailRoute({required this.productId});
+
+  final String productId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ProductDetailScreen(productId: productId);
 }

@@ -6,6 +6,8 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/categories/domain/category_repository.dart';
 import 'package:zerin_marketplace/features/categories/domain/marketplace_category.dart';
 import 'package:zerin_marketplace/features/categories/presentation/controllers/category_controller.dart';
+import 'package:zerin_marketplace/features/home/domain/home_feed.dart';
+import 'package:zerin_marketplace/features/home/presentation/controllers/home_controller.dart';
 import 'package:zerin_marketplace/features/home/presentation/home_foundation_screen.dart';
 import 'package:zerin_marketplace/l10n/app_localizations.dart';
 
@@ -107,6 +109,14 @@ void main() {
                 sortOrder: 20,
               ),
             ],
+          ),
+          homeFeedProvider.overrideWith(
+            (ref) async => const HomeFeed(
+              campaigns: <AdCampaign>[],
+              newArrivals: <HomeProduct>[],
+              deals: <HomeProduct>[],
+              popularStores: <MarketplaceStore>[],
+            ),
           ),
         ],
         child: MaterialApp(

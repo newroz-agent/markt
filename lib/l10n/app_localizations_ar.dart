@@ -292,10 +292,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeCategoriesTitle => 'الفئات';
 
   @override
-  String get homeDealsTitle => 'العروض والخصومات';
+  String get homeAllCategoriesLabel => 'الكل';
+
+  @override
+  String get homeDealsTitle => 'العروض';
 
   @override
   String get homeNewArrivalsTitle => 'وصل حديثًا';
+
+  @override
+  String get homePopularStoresTitle => 'متاجر رائجة';
 
   @override
   String get homePopularNearbyTitle => 'رائج بالقرب منك';

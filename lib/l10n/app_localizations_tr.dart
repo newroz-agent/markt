@@ -293,10 +293,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeCategoriesTitle => 'Kategoriler';
 
   @override
-  String get homeDealsTitle => 'Fırsatlar ve indirimler';
+  String get homeAllCategoriesLabel => 'Tümü';
+
+  @override
+  String get homeDealsTitle => 'Fırsatlar';
 
   @override
   String get homeNewArrivalsTitle => 'Yeni gelenler';
+
+  @override
+  String get homePopularStoresTitle => 'Popüler mağazalar';
 
   @override
   String get homePopularNearbyTitle => 'Yakınında popüler';
