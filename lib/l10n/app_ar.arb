@@ -210,5 +210,14 @@
   "notificationsSystemBody": "الأمان وإشعارات الحساب المهمة.",
   "notificationsSaveFailed": "تعذّر حفظ الإعداد.",
   "notificationsSignedOutTitle": "سجّل الدخول",
-  "notificationsSignedOutBody": "إشعاراتك مرتبطة بحسابك."
+  "notificationsSignedOutBody": "إشعاراتك مرتبطة بحسابك.",
+  "categoryProductsAll": "الكل",
+  "categoryProductsEmptyTitle": "لا توجد إعلانات",
+  "categoryProductsEmptyBody": "لا توجد إعلانات مطابقة في هذا القسم بعد.",
+  "filterConditionLabel": "الحالة",
+  "filterConditionAll": "الكل",
+  "filterSortLabel": "الترتيب",
+  "filterSortNewest": "الأحدث",
+  "filterSortPriceAsc": "السعر: من الأقل",
+  "filterSortPriceDesc": "السعر: من الأعلى"
 }

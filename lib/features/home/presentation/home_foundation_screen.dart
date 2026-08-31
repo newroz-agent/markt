@@ -35,8 +35,10 @@ class _HomeFoundationScreenState extends ConsumerState<HomeFoundationScreen> {
 
   void _openCategories() => const MarketplaceRoute(tab: 1).go(context);
 
-  void _openProduct(HomeProduct product) =>
-      ProductDetailRoute(productId: product.id).push<void>(context);
+  void _openProduct(HomeProduct product, String heroTag) => ProductDetailRoute(
+    productId: product.id,
+    heroTag: heroTag,
+  ).push<void>(context);
 
   void _toggleFavorite(HomeProduct product) {
     setState(() {
@@ -309,7 +311,7 @@ class _FeedSections extends StatelessWidget {
 
   final HomeFeed feed;
   final Set<String> favoriteProductIds;
-  final ValueChanged<HomeProduct> onProductPressed;
+  final void Function(HomeProduct product, String heroTag) onProductPressed;
   final ValueChanged<HomeProduct> onFavoriteToggle;
 
   @override
@@ -324,6 +326,7 @@ class _FeedSections extends StatelessWidget {
           HomeProductRail(
             products: feed.newArrivals,
             favoriteIds: favoriteProductIds,
+            heroPrefix: 'home-new',
             onProductPressed: onProductPressed,
             onFavoriteToggle: onFavoriteToggle,
           ),
@@ -335,6 +338,7 @@ class _FeedSections extends StatelessWidget {
           HomeProductRail(
             products: feed.deals,
             favoriteIds: favoriteProductIds,
+            heroPrefix: 'home-deals',
             onProductPressed: onProductPressed,
             onFavoriteToggle: onFavoriteToggle,
           ),

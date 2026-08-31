@@ -210,5 +210,14 @@
   "notificationsSystemBody": "Ewlehî û agahdariyên girîng ên hesabê.",
   "notificationsSaveFailed": "Mîheng nehat tomarkirin.",
   "notificationsSignedOutTitle": "Têkeve",
-  "notificationsSignedOutBody": "Agahdariyên te bi hesabê te ve girêdayî ne."
+  "notificationsSignedOutBody": "Agahdariyên te bi hesabê te ve girêdayî ne.",
+  "categoryProductsAll": "Hemû",
+  "categoryProductsEmptyTitle": "Ilan tune",
+  "categoryProductsEmptyBody": "Di vê beşê de hîn ılanên têkildar tune ne.",
+  "filterConditionLabel": "Rewş",
+  "filterConditionAll": "Hemû",
+  "filterSortLabel": "Rêzkirin",
+  "filterSortNewest": "Herî nû",
+  "filterSortPriceAsc": "Biha: ji herî kêm",
+  "filterSortPriceDesc": "Biha: ji herî zêde"
 }

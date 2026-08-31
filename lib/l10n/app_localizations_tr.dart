@@ -664,4 +664,32 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get notificationsSignedOutBody => 'Bildirimlerin hesabına bağlıdır.';
+
+  @override
+  String get categoryProductsAll => 'Tümü';
+
+  @override
+  String get categoryProductsEmptyTitle => 'İlan yok';
+
+  @override
+  String get categoryProductsEmptyBody =>
+      'Bu kategoride henüz eşleşen ilan yok.';
+
+  @override
+  String get filterConditionLabel => 'Durum';
+
+  @override
+  String get filterConditionAll => 'Tümü';
+
+  @override
+  String get filterSortLabel => 'Sıralama';
+
+  @override
+  String get filterSortNewest => 'En yeni';
+
+  @override
+  String get filterSortPriceAsc => 'Fiyat: artan';
+
+  @override
+  String get filterSortPriceDesc => 'Fiyat: azalan';
 }

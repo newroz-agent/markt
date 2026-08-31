@@ -213,6 +213,7 @@ class HomeProductRail extends StatelessWidget {
   const HomeProductRail({
     required this.products,
     required this.favoriteIds,
+    required this.heroPrefix,
     required this.onProductPressed,
     required this.onFavoriteToggle,
     super.key,
@@ -220,7 +221,10 @@ class HomeProductRail extends StatelessWidget {
 
   final List<HomeProduct> products;
   final Set<String> favoriteIds;
-  final ValueChanged<HomeProduct> onProductPressed;
+
+  /// Disambiguates hero tags when the same product renders in multiple rails.
+  final String heroPrefix;
+  final void Function(HomeProduct product, String heroTag) onProductPressed;
   final ValueChanged<HomeProduct> onFavoriteToggle;
 
   @override
@@ -234,12 +238,14 @@ class HomeProductRail extends StatelessWidget {
         separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
         itemBuilder: (context, index) {
           final product = products[index];
+          final heroTag = '$heroPrefix-${product.id}';
           return _DelayedReveal(
             delay: AppDurations.staggered(index),
             child: _HomeProductCard(
               product: product,
               isFavorite: favoriteIds.contains(product.id),
-              onTap: () => onProductPressed(product),
+              heroTag: heroTag,
+              onTap: () => onProductPressed(product, heroTag),
               onFavoriteToggle: () => onFavoriteToggle(product),
             ),
           );
@@ -253,12 +259,14 @@ class _HomeProductCard extends StatelessWidget {
   const _HomeProductCard({
     required this.product,
     required this.isFavorite,
+    required this.heroTag,
     required this.onTap,
     required this.onFavoriteToggle,
   });
 
   final HomeProduct product;
   final bool isFavorite;
+  final String heroTag;
   final VoidCallback onTap;
   final VoidCallback onFavoriteToggle;
 
@@ -296,7 +304,7 @@ class _HomeProductCard extends StatelessWidget {
                   fit: StackFit.expand,
                   children: <Widget>[
                     Hero(
-                      tag: 'product-${product.id}',
+                      tag: heroTag,
                       child: imageUrl == null
                           ? const _ProductFallback()
                           : CachedNetworkImage(

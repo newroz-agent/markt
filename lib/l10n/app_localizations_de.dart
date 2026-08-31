@@ -674,4 +674,32 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get notificationsSignedOutBody =>
       'Deine Benachrichtigungen gehören zu deinem Konto.';
+
+  @override
+  String get categoryProductsAll => 'Alle';
+
+  @override
+  String get categoryProductsEmptyTitle => 'Keine Angebote';
+
+  @override
+  String get categoryProductsEmptyBody =>
+      'Es gibt noch keine passenden Angebote in dieser Kategorie.';
+
+  @override
+  String get filterConditionLabel => 'Zustand';
+
+  @override
+  String get filterConditionAll => 'Alle';
+
+  @override
+  String get filterSortLabel => 'Sortierung';
+
+  @override
+  String get filterSortNewest => 'Neueste';
+
+  @override
+  String get filterSortPriceAsc => 'Preis: aufsteigend';
+
+  @override
+  String get filterSortPriceDesc => 'Preis: absteigend';
 }

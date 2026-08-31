@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
   $privacyRoute,
   $notificationSettingsRoute,
   $productDetailRoute,
+  $categoryProductsRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -191,10 +192,38 @@ RouteBase get $productDetailRoute => GoRouteData.$route(
 
 extension $ProductDetailRouteExtension on ProductDetailRoute {
   static ProductDetailRoute _fromState(GoRouterState state) =>
-      ProductDetailRoute(productId: state.pathParameters['productId']!);
+      ProductDetailRoute(
+        productId: state.pathParameters['productId']!,
+        heroTag: state.uri.queryParameters['hero-tag'],
+      );
+
+  String get location => GoRouteData.$location(
+    '/products/${Uri.encodeComponent(productId)}',
+    queryParams: {if (heroTag != null) 'hero-tag': heroTag},
+  );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $categoryProductsRoute => GoRouteData.$route(
+  path: '/categories/:categoryId',
+
+  factory: $CategoryProductsRouteExtension._fromState,
+);
+
+extension $CategoryProductsRouteExtension on CategoryProductsRoute {
+  static CategoryProductsRoute _fromState(GoRouterState state) =>
+      CategoryProductsRoute(categoryId: state.pathParameters['categoryId']!);
 
   String get location =>
-      GoRouteData.$location('/products/${Uri.encodeComponent(productId)}');
+      GoRouteData.$location('/categories/${Uri.encodeComponent(categoryId)}');
 
   void go(BuildContext context) => context.go(location);
 

@@ -665,4 +665,32 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationsSignedOutBody =>
       'Your notifications belong to your account.';
+
+  @override
+  String get categoryProductsAll => 'All';
+
+  @override
+  String get categoryProductsEmptyTitle => 'No listings';
+
+  @override
+  String get categoryProductsEmptyBody =>
+      'There are no matching listings in this category yet.';
+
+  @override
+  String get filterConditionLabel => 'Condition';
+
+  @override
+  String get filterConditionAll => 'All';
+
+  @override
+  String get filterSortLabel => 'Sort order';
+
+  @override
+  String get filterSortNewest => 'Newest';
+
+  @override
+  String get filterSortPriceAsc => 'Price: low to high';
+
+  @override
+  String get filterSortPriceDesc => 'Price: high to low';
 }

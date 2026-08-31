@@ -671,4 +671,32 @@ class AppLocalizationsKu extends AppLocalizations {
   @override
   String get notificationsSignedOutBody =>
       'Agahdariyên te bi hesabê te ve girêdayî ne.';
+
+  @override
+  String get categoryProductsAll => 'Hemû';
+
+  @override
+  String get categoryProductsEmptyTitle => 'Ilan tune';
+
+  @override
+  String get categoryProductsEmptyBody =>
+      'Di vê beşê de hîn ılanên têkildar tune ne.';
+
+  @override
+  String get filterConditionLabel => 'Rewş';
+
+  @override
+  String get filterConditionAll => 'Hemû';
+
+  @override
+  String get filterSortLabel => 'Rêzkirin';
+
+  @override
+  String get filterSortNewest => 'Herî nû';
+
+  @override
+  String get filterSortPriceAsc => 'Biha: ji herî kêm';
+
+  @override
+  String get filterSortPriceDesc => 'Biha: ji herî zêde';
 }

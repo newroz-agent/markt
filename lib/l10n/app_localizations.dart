@@ -1273,6 +1273,60 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Deine Benachrichtigungen gehören zu deinem Konto.'**
   String get notificationsSignedOutBody;
+
+  /// Chip that selects all subcategories of a category.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get categoryProductsAll;
+
+  /// Title shown when a category has no visible products.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine Angebote'**
+  String get categoryProductsEmptyTitle;
+
+  /// Message shown when a category has no visible products.
+  ///
+  /// In de, this message translates to:
+  /// **'Es gibt noch keine passenden Angebote in dieser Kategorie.'**
+  String get categoryProductsEmptyBody;
+
+  /// Label for the condition filter.
+  ///
+  /// In de, this message translates to:
+  /// **'Zustand'**
+  String get filterConditionLabel;
+
+  /// Chip that disables the condition filter.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get filterConditionAll;
+
+  /// Semantic label for the sort menu.
+  ///
+  /// In de, this message translates to:
+  /// **'Sortierung'**
+  String get filterSortLabel;
+
+  /// Sort option: newest listings first.
+  ///
+  /// In de, this message translates to:
+  /// **'Neueste'**
+  String get filterSortNewest;
+
+  /// Sort option: cheapest listings first.
+  ///
+  /// In de, this message translates to:
+  /// **'Preis: aufsteigend'**
+  String get filterSortPriceAsc;
+
+  /// Sort option: most expensive listings first.
+  ///
+  /// In de, this message translates to:
+  /// **'Preis: absteigend'**
+  String get filterSortPriceDesc;
 }
 
 class _AppLocalizationsDelegate

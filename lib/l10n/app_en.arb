@@ -210,5 +210,14 @@
   "notificationsSystemBody": "Security and important account notices.",
   "notificationsSaveFailed": "The setting could not be saved.",
   "notificationsSignedOutTitle": "Sign in",
-  "notificationsSignedOutBody": "Your notifications belong to your account."
+  "notificationsSignedOutBody": "Your notifications belong to your account.",
+  "categoryProductsAll": "All",
+  "categoryProductsEmptyTitle": "No listings",
+  "categoryProductsEmptyBody": "There are no matching listings in this category yet.",
+  "filterConditionLabel": "Condition",
+  "filterConditionAll": "All",
+  "filterSortLabel": "Sort order",
+  "filterSortNewest": "Newest",
+  "filterSortPriceAsc": "Price: low to high",
+  "filterSortPriceDesc": "Price: high to low"
 }

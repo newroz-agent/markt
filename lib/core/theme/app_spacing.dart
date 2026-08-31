@@ -47,6 +47,8 @@ abstract final class AppSizes {
   static const double productImageHeight = 188;
   static const double categoryImageHeight = 112;
   static const double categoryCardHeight = 184;
+  static const double chipHeight = 44;
+  static const double categoryProductCardHeight = 296;
   static const double dialogMaxWidth = 480;
   static const double bottomSheetMaxWidth = 640;
   static const double dragHandleWidth = 32;

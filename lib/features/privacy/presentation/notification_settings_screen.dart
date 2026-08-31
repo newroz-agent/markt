@@ -169,9 +169,11 @@ class _NotificationSkeleton extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.md),
       children: <Widget>[
-        for (var index = 0;
-            index < NotificationChannel.values.length;
-            index++) ...<Widget>[
+        for (
+          var index = 0;
+          index < NotificationChannel.values.length;
+          index++
+        ) ...<Widget>[
           const AppSkeletonBox(height: AppSizes.controlLarge),
           const SizedBox(height: AppSpacing.sm),
         ],

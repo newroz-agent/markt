@@ -29,15 +29,19 @@ class SupabasePrivacyRepository implements PrivacyRepository {
     return _guard(() async {
       final profile = await _client
           .from('profiles')
-          .select('notification_preferences, analytics_consent, '
-              'analytics_consent_at')
+          .select(
+            'notification_preferences, analytics_consent, '
+            'analytics_consent_at',
+          )
           .eq('id', userId)
           .maybeSingle();
 
       final requests = await _client
           .from('data_subject_requests')
-          .select('id, kind, status, requested_at, export_storage_path, '
-              'export_expires_at, completed_at')
+          .select(
+            'id, kind, status, requested_at, export_storage_path, '
+            'export_expires_at, completed_at',
+          )
           .eq('user_id', userId)
           .order('created_at', ascending: false)
           .limit(_requestLimit);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:zerin_marketplace/app/router/app_router.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/categories/domain/marketplace_category.dart';
@@ -98,6 +99,9 @@ class _CategoryGrid extends StatelessWidget {
               ),
               imageUrl: category.imageUrl,
               icon: Icons.category_rounded,
+              onTap: () => CategoryProductsRoute(
+                categoryId: category.id,
+              ).push<void>(context),
             );
           },
         );

@@ -61,13 +61,13 @@ class LegalScreen extends ConsumerWidget {
     );
   }
 
-  (String, IconData) _titleAndIcon(AppLocalizations l10n, LegalDocumentKind? kind) {
+  (String, IconData) _titleAndIcon(
+    AppLocalizations l10n,
+    LegalDocumentKind? kind,
+  ) {
     return switch (kind) {
       LegalDocumentKind.imprint => (l10n.legalImprint, Icons.business_outlined),
-      LegalDocumentKind.terms => (
-        l10n.legalTerms,
-        Icons.description_outlined,
-      ),
+      LegalDocumentKind.terms => (l10n.legalTerms, Icons.description_outlined),
       LegalDocumentKind.privacy => (l10n.legalPrivacy, Icons.shield_outlined),
       LegalDocumentKind.withdrawal => (
         l10n.legalWithdrawal,
@@ -98,10 +98,7 @@ class _LegalContent extends StatelessWidget {
         Text(document.title, style: theme.textTheme.headlineSmall),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          l10n.legalVersionLine(
-            version: document.version,
-            date: effective,
-          ),
+          l10n.legalVersionLine(version: document.version, date: effective),
           style: theme.textTheme.bodySmall?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
           ),

@@ -662,4 +662,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notificationsSignedOutBody => 'إشعاراتك مرتبطة بحسابك.';
+
+  @override
+  String get categoryProductsAll => 'الكل';
+
+  @override
+  String get categoryProductsEmptyTitle => 'لا توجد إعلانات';
+
+  @override
+  String get categoryProductsEmptyBody =>
+      'لا توجد إعلانات مطابقة في هذا القسم بعد.';
+
+  @override
+  String get filterConditionLabel => 'الحالة';
+
+  @override
+  String get filterConditionAll => 'الكل';
+
+  @override
+  String get filterSortLabel => 'الترتيب';
+
+  @override
+  String get filterSortNewest => 'الأحدث';
+
+  @override
+  String get filterSortPriceAsc => 'السعر: من الأقل';
+
+  @override
+  String get filterSortPriceDesc => 'السعر: من الأعلى';
 }

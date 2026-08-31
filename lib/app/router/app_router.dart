@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
+import 'package:zerin_marketplace/features/categories/presentation/category_products_screen.dart';
 import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart';
 import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/notification_settings_screen.dart';
@@ -129,11 +130,23 @@ class NotificationSettingsRoute extends GoRouteData {
 
 @TypedGoRoute<ProductDetailRoute>(path: '/products/:productId')
 class ProductDetailRoute extends GoRouteData {
-  const ProductDetailRoute({required this.productId});
+  const ProductDetailRoute({required this.productId, this.heroTag});
 
   final String productId;
+  final String? heroTag;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ProductDetailScreen(productId: productId);
+      ProductDetailScreen(productId: productId, heroTag: heroTag);
+}
+
+@TypedGoRoute<CategoryProductsRoute>(path: '/categories/:categoryId')
+class CategoryProductsRoute extends GoRouteData {
+  const CategoryProductsRoute({required this.categoryId});
+
+  final String categoryId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      CategoryProductsScreen(categoryId: categoryId);
 }

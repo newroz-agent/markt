@@ -10,9 +10,10 @@ import 'package:zerin_marketplace/features/home/presentation/home_formatters.dar
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
-  const ProductDetailScreen({required this.productId, super.key});
+  const ProductDetailScreen({required this.productId, this.heroTag, super.key});
 
   final String productId;
+  final String? heroTag;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,6 +23,7 @@ class ProductDetailScreen extends ConsumerWidget {
       body: switch (product) {
         AsyncData<HomeProduct?>(value: final value?) => _ProductDetail(
           product: value,
+          heroTag: heroTag ?? 'product-${value.id}',
         ),
         AsyncData<HomeProduct?>() => AppEmptyState(
           title: context.l10n.stateErrorTitle,
@@ -42,9 +44,10 @@ class ProductDetailScreen extends ConsumerWidget {
 }
 
 class _ProductDetail extends StatelessWidget {
-  const _ProductDetail({required this.product});
+  const _ProductDetail({required this.product, required this.heroTag});
 
   final HomeProduct product;
+  final String heroTag;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class _ProductDetail extends StatelessWidget {
             AspectRatio(
               aspectRatio: AppRatios.square,
               child: Hero(
-                tag: 'product-${product.id}',
+                tag: heroTag,
                 child: imageUrl == null
                     ? const _ProductImageFallback()
                     : CachedNetworkImage(

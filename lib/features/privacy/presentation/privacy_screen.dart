@@ -76,11 +76,7 @@ class _PrivacyContent extends ConsumerWidget {
                 subtitle: Text(
                   settings.analyticsConsent && consentAt != null
                       ? '${l10n.privacyAnalyticsBody}\n'
-                            '${l10n.privacyAnalyticsGrantedAt(
-                              date: MaterialLocalizations.of(
-                                context,
-                              ).formatFullDate(consentAt),
-                            )}'
+                            '${l10n.privacyAnalyticsGrantedAt(date: MaterialLocalizations.of(context).formatFullDate(consentAt))}'
                       : l10n.privacyAnalyticsBody,
                 ),
                 isThreeLine: settings.analyticsConsent && consentAt != null,
@@ -94,13 +90,13 @@ class _PrivacyContent extends ConsumerWidget {
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: AppSpacing.sm),
-            _ExportCard(request: overview.latestRequest(
-              DataSubjectRequestKind.export,
-            )),
+            _ExportCard(
+              request: overview.latestRequest(DataSubjectRequestKind.export),
+            ),
             const SizedBox(height: AppSpacing.md),
-            _DeletionCard(request: overview.openRequest(
-              DataSubjectRequestKind.deletion,
-            )),
+            _DeletionCard(
+              request: overview.openRequest(DataSubjectRequestKind.deletion),
+            ),
           ],
         ),
       ),

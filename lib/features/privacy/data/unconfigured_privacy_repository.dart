@@ -11,9 +11,7 @@ import 'package:zerin_marketplace/features/privacy/domain/privacy_repository.dar
 class UnconfiguredPrivacyRepository implements PrivacyRepository {
   const UnconfiguredPrivacyRepository();
 
-  static const _unavailable = AppException(
-    AppFailureCode.backendNotConfigured,
-  );
+  static const _unavailable = AppException(AppFailureCode.backendNotConfigured);
 
   @override
   Future<PrivacyOverview> fetchOverview() async => const PrivacyOverview();

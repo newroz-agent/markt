@@ -210,5 +210,14 @@
   "notificationsSystemBody": "Güvenlik ve önemli hesap bildirimleri.",
   "notificationsSaveFailed": "Ayar kaydedilemedi.",
   "notificationsSignedOutTitle": "Giriş yap",
-  "notificationsSignedOutBody": "Bildirimlerin hesabına bağlıdır."
+  "notificationsSignedOutBody": "Bildirimlerin hesabına bağlıdır.",
+  "categoryProductsAll": "Tümü",
+  "categoryProductsEmptyTitle": "İlan yok",
+  "categoryProductsEmptyBody": "Bu kategoride henüz eşleşen ilan yok.",
+  "filterConditionLabel": "Durum",
+  "filterConditionAll": "Tümü",
+  "filterSortLabel": "Sıralama",
+  "filterSortNewest": "En yeni",
+  "filterSortPriceAsc": "Fiyat: artan",
+  "filterSortPriceDesc": "Fiyat: azalan"
 }

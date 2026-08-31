@@ -2,7 +2,7 @@
 
 This is the single source of truth for implementation and acceptance status. Update it at the end of every phase.
 
-Last audited: 2026-08-17, against the current Phase A step 1 worktree after initial ledger commit `0cc510d`. Sources checked: typed router, routed screens, repositories, tests, all Supabase migrations, the linked remote Supabase project, and Flutter web browser acceptance with real data in German/dark and Arabic/light.
+Last audited: 2026-08-31, after local Supabase restart with the unified-listing migrations (`20260830000100`/`20260830000200`) and SQL-level live verification of the moderation flow. Scope lock: ONE unified listing model — business stores and private individuals share a single sell flow, every listing starts `pending_review`, contact is in-app chat only, location is city-only. Sources checked: typed router, routed screens, repositories, tests, all Supabase migrations, and psql role-simulation runs against local Supabase with real data.
 
 Status rule: `✅ done` means the complete line was exercised on a simulator or browser with real Supabase data. `🟡 partial` means a live-verified slice works but named scope is still missing. `❌ not started` also covers code or SQL that exists but has not passed that live acceptance bar.
 
@@ -14,7 +14,7 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 - ❌ Per-store online-payment and contact-to-order modes - required fields/constraints are absent.
 - ❌ Store phone/WhatsApp, map location, opening hours, and open/closed state - required schema is absent.
 - ❌ Follow stores - follow relationship/schema is absent.
-- 🟡 Localized two-level category catalog - 51 active categories and 11 roots were read from live Supabase and the root catalog rendered in German and Arabic; second-level drilldown is missing and Kurdish columns are absent.
+- 🟡 Localized two-level category catalog - 51 active categories and 11 roots were read from live Supabase and the root catalog rendered in German and Arabic; second-level drilldown now works end-to-end on the simulator (subcategory chips filter the grid via real queries) and Kurdish columns are absent.
 - ❌ Brand catalog - schema and admin RLS exist; no client/admin workflow or live verification.
 - 🟡 Product catalog, images, stock, condition, VAT, shipping, and status lifecycle - 30 active products with images, prices, VAT, condition, and shipping data were read and rendered live; CRUD and lifecycle transitions are not accepted.
 - ❌ Favorites and price snapshots - schema/triggers exist; no routed persistence flow or live verification.
@@ -31,7 +31,7 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 - ❌ Search, suggestions, filters, sorting, radius, recent views, and search history - SQL RPCs exist; no routed search/results experience.
 - ❌ Store application, verification documents, and status history - SQL exists; no partner onboarding/admin workflow.
 - ❌ Seller dashboard metrics, payouts, and balance ledger - SQL exists; no dashboard or Stripe payout reconciliation.
-- ❌ Private-seller compatibility - legacy private-seller auto-approval SQL remains even though the locked app scope is business stores only.
+- ✅ Unified listing model (stores + private individuals, manual approval) - `prepare_seller_write()` private auto-approve is removed, product lifecycle gains `pending_review`/`rejected`, non-admin inserts are forced to `pending_review`, status transitions are reserved for moderation, and admin approval publishes the listing and auto-approves a pending/rejected seller. Live-verified on local Supabase via psql role simulation (pending seller, blocked self-publish, anon invisibility, admin approve, anon visibility). Remote linked project not yet updated.
 - ❌ Reports and moderation state for stores/products/reviews/content - schema and guard functions exist; no moderation UI or live workflow.
 - ❌ Legal documents (`Impressum`, `AGB`, privacy, withdrawal) - published-document SQL and client reader exist; production rows are not live accepted.
 - ❌ Consent history, data export, account deletion, and deletion cancellation - SQL/RPCs and client screens exist; export worker/deletion processor and live acceptance are pending.
@@ -48,10 +48,10 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 - ❌ Onboarding - three-page screen and persistence exist, but copy still promotes selling/private flow and no live acceptance is recorded.
 - ❌ Email registration, sign-in, sign-out, and session restoration - Supabase repository/UI exist; not live verified.
 - ❌ Apple and Google sign-in - client calls exist; provider configuration/callback acceptance is unverified.
-- ✅ Home live catalog feed - campaigns, category rail, new arrivals, deals, popular stores, and product navigation were browser-verified with real Supabase data in German/dark and Arabic/light.
-- 🟡 Categories browse - the real-data root grid was browser-verified; selection, subcategories, category products, and search are missing.
+- ✅ Home live catalog feed - campaigns, category rail, new arrivals, deals, popular stores, and product navigation were verified with real Supabase data in German/dark and Arabic/light, and re-verified on the iOS simulator against local Supabase.
+- 🟡 Categories browse - the real-data root grid was simulator-verified; tapping a root category now routes to the new Category Products screen (subcategory chips, condition filter, sort menu, product grid) which was live-verified on the iOS simulator against local Supabase (three categories opened, subtree `category_id=in.(...)` queries returned 200 with real products). In-screen category search is still missing and Kurdish category columns are absent.
 - ❌ Search/results/filter/sort experience - not routed or implemented in Flutter.
-- 🟡 Product detail - live product image, VAT-inclusive price, condition, shipping, description, and store identity were browser-verified; gallery, favorites, reviews, sharing, stock, and fulfillment actions are missing.
+- 🟡 Product detail - live product image, VAT-inclusive price, condition, shipping, description, and store identity were simulator-verified; gallery, favorites, reviews, sharing, stock, and fulfillment actions are missing. A live-simulator duplicate-Hero assertion (same product in the Neu and Deals rails) was fixed by rail-scoped hero tags passed through the route; the fix is deployed on the simulator and no further hero exceptions were logged, but a final clean pass over both rails is pending.
 - ❌ Per-store Buy/Cart versus WhatsApp/Call actions - not implemented.
 - ❌ Cart - routed tab is an empty placeholder.
 - ❌ Checkout - static screen code exists but is not routed or connected to cart, Supabase, addresses, shipping, or payment.
@@ -105,7 +105,7 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 - 🟡 Locked Zerin brand tokens and bundled typography - Home and catalog surfaces were visually accepted in German/dark and Arabic/light; the complete routed app is not accepted.
 - ❌ Final app icon and launch assets - launcher configuration/placeholder assets exist; final generated icon set and launch review are incomplete.
 - 🟡 Environment setup and no-key graceful degradation - tracked docs/template and a configured web release build are accepted; the unconfigured build path is not browser-verified.
-- 🟡 Migration replay and deployed-schema parity - the linked remote project reports the current migration set including the Home catalog migration; local replay is unavailable because the local Supabase stack is down.
+- 🟡 Migration replay and deployed-schema parity - local replay now succeeds through `20260830000200` (unified listing); the linked remote project still lacks the two new migrations and must be updated before remote/browser acceptance.
 - 🟡 Automated quality gate - `flutter analyze` is clean and all 45 unit/widget tests pass for this worktree; no integration suite exists.
 - 🟡 Real-data simulator/browser acceptance suite - current Home, Categories, and Product Detail browser runs pass against linked Supabase data; the checks are manual and not a durable automated suite.
 - ❌ Production German legal content and operator/company data - delivery mechanism exists; final content/data is not established.
@@ -119,7 +119,7 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 ## Known gaps / tech debt
 
 - `banners` and `ad_campaigns` overlap; choose one canonical placement model, migrate data, and remove the duplicate read/admin paths.
-- `prepare_seller_write()` auto-approves private sellers, which conflicts with the locked business-store-only app and should be removed or quarantined as future compatibility.
+- `prepare_seller_write()` private auto-approve is removed by migration `20260830000200`; the unified listing scope (stores + private individuals, one flow, manual approval, chat-only contact, city-only location) replaces the earlier business-store-only lock. Flutter Sell UI still shows the old private/store split placeholder and is not yet aligned.
 - Stripe is represented in packages/columns/enums only; no publishable-key initialization, Connect onboarding, destination charge, commission configuration, Edge Function, or webhook is wired.
 - The shell still has the removed Sell tab/center FAB and no Stores tab; onboarding also retains seller/private-marketplace language.
 - Store fulfilment capability fields, contact details, opening hours, directions data, and store follows are missing from SQL.
@@ -128,4 +128,4 @@ Status rule: `✅ done` means the complete line was exercised on a simulator or 
 - Checkout/order/return screens are static fixtures outside the router and have no repositories.
 - Admin RLS policies are not an admin panel; there is no admin frontend, audit workflow, or operational worker layer.
 - The latest Home/demo-catalog migration adds remote image URL columns alongside storage paths; ownership, migration, and production asset policy need consolidation.
-- Local Supabase is not running and no iOS simulator runtime is installed; current live acceptance uses the linked remote Supabase project and Flutter web in headless Chrome.
+- Local Supabase runs again (Docker restarted, full migration replay including the unified-listing migrations succeeds); an iOS 26.1 simulator runtime with iPhone 17 Pro is installed. Live acceptance must move from Flutter web to the iOS simulator.
