@@ -693,4 +693,220 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get filterSortPriceDesc => 'Price: high to low';
+
+  @override
+  String get filterSellerKindLabel => 'Seller type';
+
+  @override
+  String get filterSellerKindAll => 'All';
+
+  @override
+  String get filterSellerKindPrivate => 'Private';
+
+  @override
+  String get filterSellerKindBusiness => 'Business';
+
+  @override
+  String get filterCityLabel => 'City';
+
+  @override
+  String get filterCityAll => 'Everywhere';
+
+  @override
+  String get filterCityTitle => 'Choose a city';
+
+  @override
+  String get categoryViewGrid => 'Grid';
+
+  @override
+  String get categoryViewList => 'List';
+
+  @override
+  String get categorySearchInCategory => 'Search in this category';
+
+  @override
+  String get categoryProductsLoadMore => 'Load more';
+
+  @override
+  String get categoryProductsNoMore => 'No more listings';
+
+  @override
+  String get productContactSeller => 'Contact seller';
+
+  @override
+  String get chatInboxTitle => 'Messages';
+
+  @override
+  String get chatInboxEmptyTitle => 'No messages yet';
+
+  @override
+  String get chatInboxEmptyBody =>
+      'Your conversations with buyers and sellers will appear here.';
+
+  @override
+  String get chatNoMessagesYet => 'No messages yet';
+
+  @override
+  String get chatTitle => 'Conversation';
+
+  @override
+  String get chatProductCard => 'Product';
+
+  @override
+  String get chatInputHint => 'Write a message …';
+
+  @override
+  String get chatSend => 'Send message';
+
+  @override
+  String get chatLoadEarlier => 'Load earlier messages';
+
+  @override
+  String get productActionsLabel => 'Product actions';
+
+  @override
+  String get productShare => 'Share';
+
+  @override
+  String productShareText({required String title, required String price}) {
+    return '$title – $price on DÛKAN';
+  }
+
+  @override
+  String get productReport => 'Report listing';
+
+  @override
+  String get productReportTitle => 'Why are you reporting this listing?';
+
+  @override
+  String get productReportDetailsHint =>
+      'Optional details (max 3000 characters)';
+
+  @override
+  String get productReportSubmit => 'Send report';
+
+  @override
+  String get productReportSubmitted => 'Thank you. We will review your report.';
+
+  @override
+  String get reportReasonSpam => 'Spam';
+
+  @override
+  String get reportReasonFraud => 'Fraud';
+
+  @override
+  String get reportReasonCounterfeit => 'Counterfeit';
+
+  @override
+  String get reportReasonProhibited => 'Prohibited item';
+
+  @override
+  String get reportReasonHarassment => 'Harassment';
+
+  @override
+  String get reportReasonInappropriate => 'Inappropriate content';
+
+  @override
+  String get reportReasonOther => 'Other';
+
+  @override
+  String get sellerVerified => 'Verified';
+
+  @override
+  String get sellerTypePrivate => 'Private';
+
+  @override
+  String get sellerTypeBusiness => 'Business';
+
+  @override
+  String get sellerProfileListingsTitle => 'Listings from this seller';
+
+  @override
+  String get sellerProfileAbout => 'About';
+
+  @override
+  String get sellerProfileNoBio =>
+      'This seller has not added a description yet.';
+
+  @override
+  String get sellerProfileEmptyListings => 'No listings available right now.';
+
+  @override
+  String get sellerProfileLoadFailed => 'Seller not found.';
+
+  @override
+  String get productSimilarTitle => 'Similar listings';
+
+  @override
+  String get productSimilarEmpty => 'No similar listings yet.';
+
+  @override
+  String get productSellerListingsTitle => 'More from this seller';
+
+  @override
+  String get productDetailsTitle => 'Product details';
+
+  @override
+  String get productDetailsCondition => 'Condition';
+
+  @override
+  String get productDetailsCategory => 'Category';
+
+  @override
+  String get productDetailsCity => 'City';
+
+  @override
+  String get productDetailsShipping => 'Shipping';
+
+  @override
+  String get productDetailsFreeShipping => 'Free shipping';
+
+  @override
+  String get productDetailsPaidShipping => 'Seller ships';
+
+  @override
+  String get productDetailsPickupOnly => 'Pickup only';
+
+  @override
+  String get productDescriptionMore => 'Show more';
+
+  @override
+  String get productDescriptionLess => 'Show less';
+
+  @override
+  String get favoriteAdded => 'Added to favorites';
+
+  @override
+  String get favoriteRemoved => 'Removed from favorites';
+
+  @override
+  String get viewSellerProfile => 'View seller profile';
+
+  @override
+  String get productUnavailableTitle => 'Listing unavailable';
+
+  @override
+  String get productUnavailableBody =>
+      'This listing cannot be displayed right now.';
+
+  @override
+  String get productImageUnavailable => 'Image unavailable';
+
+  @override
+  String productGalleryPosition({required int current, required int total}) {
+    return 'Image $current of $total';
+  }
+
+  @override
+  String get productDetailsBrand => 'Brand';
+
+  @override
+  String get productShippingArrangement =>
+      'Arrange shipping directly with the seller.';
+
+  @override
+  String get favoriteAddAction => 'Add to favorites';
+
+  @override
+  String get favoriteRemoveAction => 'Remove from favorites';
 }

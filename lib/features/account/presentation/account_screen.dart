@@ -5,6 +5,7 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/auth/domain/auth_user.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
 import 'package:zerin_marketplace/features/legal/domain/legal_document.dart';
 import 'package:zerin_marketplace/features/settings/domain/app_settings.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
@@ -17,6 +18,10 @@ class AccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final authState = ref.watch(authStateProvider);
+    final user = ref.watch(authRepositoryProvider).currentUser;
+    final unread = user == null
+        ? 0
+        : ref.watch(unreadChatCountProvider).asData?.value ?? 0;
     final settings =
         ref.watch(appSettingsControllerProvider).asData?.value ??
         const AppSettings();
@@ -45,6 +50,27 @@ class AccountScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
+              Card(
+                child: ListTile(
+                  leading: Badge(
+                    isLabelVisible: unread > 0,
+                    label: Text('$unread'),
+                    child: const Icon(Icons.forum_outlined),
+                  ),
+                  title: Text(l10n.chatInboxTitle),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () {
+                    if (ref.read(authRepositoryProvider).currentUser == null) {
+                      AuthRoute(
+                        redirectTo: const ChatInboxRoute().location,
+                      ).push<void>(context);
+                    } else {
+                      const ChatInboxRoute().push<void>(context);
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
               Card(
                 child: Column(
                   children: <Widget>[

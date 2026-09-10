@@ -41,6 +41,26 @@ class SupabaseCategoryProductsRepository implements CategoryProductsRepository {
           break;
       }
 
+      switch (query.sellerKind) {
+        case CategoryProductSellerKindFilter.private:
+          request = request.eq('seller.kind', 'private');
+        case CategoryProductSellerKindFilter.business:
+          request = request.eq('seller.kind', 'business');
+        case CategoryProductSellerKindFilter.all:
+          break;
+      }
+
+      // Germany-only marketplace: cities are German labels set on listings.
+      final city = query.city?.trim();
+      if (city != null && city.isNotEmpty) {
+        request = request.eq('city', city);
+      }
+
+      final search = query.query?.trim();
+      if (search != null && search.isNotEmpty) {
+        request = request.ilike('title', '%$search%');
+      }
+
       final PostgrestTransformBuilder<dynamic> sorted = switch (query.sort) {
         CategoryProductSort.newest => request.order(
           'published_at',
@@ -56,7 +76,7 @@ class SupabaseCategoryProductsRepository implements CategoryProductsRepository {
         ),
       };
 
-      final rows = await sorted.limit(query.limit);
+      final rows = await sorted.range(query.offset, query.offset + query.limit - 1);
       if (rows is! List) return const <HomeProduct>[];
       return rows
           .map(

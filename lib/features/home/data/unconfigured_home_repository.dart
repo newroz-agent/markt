@@ -15,4 +15,50 @@ class UnconfiguredHomeRepository implements HomeRepository {
       Future<HomeProduct?>.error(
         const AppException(AppFailureCode.backendNotConfigured),
       );
+
+  @override
+  Future<MarketplaceStore?> fetchSeller(String sellerId) =>
+      Future<MarketplaceStore?>.error(
+        const AppException(AppFailureCode.backendNotConfigured),
+      );
+
+  @override
+  Future<List<HomeProduct>> fetchSellerProducts(
+    String sellerId, {
+    int offset = 0,
+    int limit = 24,
+    String? excludeProductId,
+  }) => Future<List<HomeProduct>>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
+
+  @override
+  Future<List<HomeProduct>> fetchSimilarProducts({
+    required String productId,
+    required String categoryId,
+  }) => Future<List<HomeProduct>>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
+
+  @override
+  Future<bool> fetchFavoriteState(String productId) => Future<bool>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
+
+  @override
+  Future<void> setFavorite({
+    required String productId,
+    required bool favorite,
+  }) => Future<void>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
+
+  @override
+  Future<void> reportProduct({
+    required String productId,
+    required String reason,
+    String? details,
+  }) => Future<void>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
 }

@@ -2,7 +2,6 @@
   "@@locale": "ar",
   "appName": "Zêrîn",
   "appTagline": "سوقك. بتجربة استثنائية.",
-
   "navigationHome": "الرئيسية",
   "navigationCategories": "الفئات",
   "navigationSell": "بيع",
@@ -12,7 +11,6 @@
   "navigationOrders": "الطلبات",
   "navigationMessages": "الرسائل",
   "navigationSettings": "الإعدادات",
-
   "actionContinue": "متابعة",
   "actionSkip": "تخطّي",
   "actionGetStarted": "لنبدأ",
@@ -33,7 +31,6 @@
   "actionSignIn": "تسجيل الدخول",
   "actionSignUp": "إنشاء حساب",
   "actionSignOut": "تسجيل الخروج",
-
   "stateLoading": "جارٍ التحميل…",
   "stateErrorTitle": "حدث خطأ ما",
   "stateErrorMessage": "يرجى المحاولة مرة أخرى بعد قليل.",
@@ -42,14 +39,12 @@
   "stateEmptyTitle": "لا يوجد شيء هنا بعد",
   "authRequiredTitle": "تسجيل الدخول مطلوب",
   "authRequiredMessage": "سجّل الدخول لاستخدام هذه الميزة.",
-
   "onboardingWelcomeTitle": "كل ما تحبّه، في مكان واحد.",
   "onboardingWelcomeBody": "اكتشف منتجات مختارة من المتاجر والبائعين الأفراد في جميع أنحاء ألمانيا.",
   "onboardingDiscoverTitle": "اعثر على منتجات مميزة بالقرب منك",
   "onboardingDiscoverBody": "ابحث وصفِّ وقارن بين المنتجات الجديدة والمستعملة بأمان وشفافية.",
   "onboardingSellTitle": "بِع بسهولة وأمان",
   "onboardingSellBody": "اعرض منتجك خلال دقائق أو أنشئ متجرك الخاص.",
-
   "authWelcomeTitle": "مرحبًا بك في Zêrîn",
   "authWelcomeBody": "سجّل الدخول لحفظ المفضلة والتسوق والبيع.",
   "authSignInTitle": "تسجيل الدخول",
@@ -90,7 +85,6 @@
   "validationInvalidEmail": "أدخل بريدًا إلكترونيًا صالحًا.",
   "validationPasswordMinLength": "يجب ألا تقل كلمة المرور عن {minLength} أحرف.",
   "validationPasswordMismatch": "كلمتا المرور غير متطابقتين.",
-
   "homeGreeting": "مرحبًا!",
   "homeGreetingNamed": "مرحبًا، {name}!",
   "homeSearchHint": "عمّ تبحث؟",
@@ -101,18 +95,15 @@
   "homePopularStoresTitle": "متاجر رائجة",
   "homePopularNearbyTitle": "رائج بالقرب منك",
   "homeRecentlyViewedTitle": "شوهد مؤخرًا",
-
   "categoriesTitle": "الفئات",
   "categoriesSearchHint": "ابحث في الفئات",
   "categoriesEmptyTitle": "لم يتم العثور على فئات",
   "categoriesEmptyBody": "جرّب عبارة بحث أخرى.",
-
   "sellTitle": "بيع",
   "sellPrivateTitle": "البيع كفرد",
   "sellPrivateBody": "اعرض منتجك خلال دقائق قليلة.",
   "sellVendorTitle": "انضم كبائع",
   "sellVendorBody": "افتح متجرك وتواصل مع العملاء في جميع أنحاء ألمانيا.",
-
   "cartTitle": "سلة التسوق",
   "cartEmptyTitle": "سلة التسوق فارغة",
   "cartEmptyBody": "اكتشف المنتجات وأضف ما يعجبك.",
@@ -122,7 +113,6 @@
   "cartVatIncluded": "شامل ضريبة القيمة المضافة",
   "cartTotal": "الإجمالي",
   "cartCheckout": "متابعة الدفع",
-
   "accountTitle": "الملف الشخصي",
   "accountProfile": "البيانات الشخصية",
   "accountAddresses": "العناوين",
@@ -133,10 +123,8 @@
   "accountDelete": "حذف الحساب",
   "accountGuestTitle": "مرحبًا بك في Zêrîn",
   "accountGuestBody": "سجّل الدخول لإدارة طلباتك ومفضلاتك ومبيعاتك.",
-
   "foundationPreviewTitle": "سوقك يتبلور الآن",
   "foundationPreviewBody": "أصبح نظام التصميم والتنقل واللغات وتسجيل الدخول جاهزًا. وستأتي مزيد من ميزات السوق تباعًا.",
-
   "languageGerman": "الألمانية",
   "languageEnglish": "الإنجليزية",
   "languageArabic": "العربية",
@@ -145,7 +133,6 @@
   "themeSystem": "إعداد النظام",
   "themeLight": "فاتح",
   "themeDark": "داكن",
-
   "productConditionNew": "جديد",
   "productConditionUsed": "مستعمل",
   "productVatIncluded": "{price} شامل ضريبة القيمة المضافة",
@@ -156,7 +143,6 @@
   "resultsCount": "{count, plural, =0 {لا توجد نتائج} =1 {نتيجة واحدة} =2 {نتيجتان} few {{count} نتائج} many {{count} نتيجة} other {{count} نتيجة}}",
   "semanticsSelectedTab": "{label}، محدد",
   "semanticsCartItemCount": "{count, plural, =0 {سلة التسوق، لا توجد منتجات} =1 {سلة التسوق، منتج واحد} =2 {سلة التسوق، منتجان} few {سلة التسوق، {count} منتجات} many {سلة التسوق، {count} منتجًا} other {سلة التسوق، {count} منتج}}",
-
   "legalImprint": "بيانات الناشر (Impressum)",
   "legalTerms": "الشروط والأحكام",
   "legalPrivacy": "سياسة الخصوصية",
@@ -167,7 +153,6 @@
   "legalLoadErrorBody": "تعذّر جلب النص. تحقّق من اتصالك بالإنترنت.",
   "legalVersionLine": "الإصدار {version} · سارٍ من {date}",
   "legalLinkFailed": "تعذّر فتح الرابط.",
-
   "accountPrivacy": "الخصوصية والبيانات",
   "privacyTitle": "الخصوصية والبيانات",
   "privacySignedOutTitle": "سجّل الدخول",
@@ -195,7 +180,6 @@
   "privacyDeleteCancel": "إلغاء الحذف",
   "privacyDeleteCancelled": "تم إلغاء الحذف.",
   "privacyDeleteCancelFailed": "بدأت معالجة الحذف ولم يعد بالإمكان إلغاؤه.",
-
   "notificationsTitle": "الإشعارات",
   "notificationsBody": "اختر ما يمكننا إشعارك بشأنه.",
   "notificationsOrders": "الطلبات",
@@ -219,5 +203,235 @@
   "filterSortLabel": "الترتيب",
   "filterSortNewest": "الأحدث",
   "filterSortPriceAsc": "السعر: من الأقل",
-  "filterSortPriceDesc": "السعر: من الأعلى"
+  "filterSortPriceDesc": "السعر: من الأعلى",
+  "productContactSeller": "تواصل مع البائع",
+  "chatInboxTitle": "الرسائل",
+  "chatInboxEmptyTitle": "لا توجد رسائل بعد",
+  "chatInboxEmptyBody": "ستظهر محادثاتك مع المشترين والبائعين هنا.",
+  "chatNoMessagesYet": "لا توجد رسائل بعد",
+  "chatTitle": "المحادثة",
+  "chatProductCard": "المنتج",
+  "chatInputHint": "اكتب رسالة …",
+  "chatSend": "إرسال رسالة",
+  "chatLoadEarlier": "تحميل الرسائل السابقة",
+  "filterSellerKindLabel": "نوع البائع",
+  "@filterSellerKindLabel": {
+    "description": "Label for the seller type filter."
+  },
+  "filterSellerKindAll": "الكل",
+  "@filterSellerKindAll": {
+    "description": "Chip that disables the seller type filter."
+  },
+  "filterSellerKindPrivate": "خاص",
+  "@filterSellerKindPrivate": {
+    "description": "Chip for private sellers."
+  },
+  "filterSellerKindBusiness": "تجاري",
+  "@filterSellerKindBusiness": {
+    "description": "Chip for business sellers."
+  },
+  "filterCityLabel": "المدينة",
+  "@filterCityLabel": {
+    "description": "Label for the city filter entry point."
+  },
+  "filterCityAll": "في كل مكان",
+  "@filterCityAll": {
+    "description": "Option that disables the city filter."
+  },
+  "filterCityTitle": "اختر مدينة",
+  "@filterCityTitle": {
+    "description": "Title of the German city selection sheet."
+  },
+  "categoryViewGrid": "شبكة",
+  "@categoryViewGrid": {
+    "description": "Toggle to the grid results view."
+  },
+  "categoryViewList": "قائمة",
+  "@categoryViewList": {
+    "description": "Toggle to the list results view."
+  },
+  "categorySearchInCategory": "ابحث في هذه الفئة",
+  "@categorySearchInCategory": {
+    "description": "Hint for the in-category title search."
+  },
+  "categoryProductsLoadMore": "تحميل المزيد",
+  "@categoryProductsLoadMore": {
+    "description": "Button that loads the next page of listings."
+  },
+  "categoryProductsNoMore": "لا المزيد من الإعلانات",
+  "@categoryProductsNoMore": {
+    "description": "End of pagination caption."
+  },
+  "productActionsLabel": "إجراءات المنتج",
+  "productShare": "مشاركة",
+  "productShareText": "{title} – {price} على DÛKAN",
+  "productReport": "الإبلاغ عن الإعلان",
+  "productReportTitle": "لماذا تُبلّغ عن هذا الإعلان؟",
+  "productReportDetailsHint": "تفاصيل اختيارية (3000 حرف كحد أقصى)",
+  "productReportSubmit": "إرسال البلاغ",
+  "productReportSubmitted": "شكراً. سنراجع البلاغ.",
+  "reportReasonSpam": "رسائل غير مرغوبة",
+  "reportReasonFraud": "احتيال",
+  "reportReasonCounterfeit": "تقليد / مزيف",
+  "reportReasonProhibited": "سلعة محظورة",
+  "reportReasonHarassment": "مضايقة",
+  "reportReasonInappropriate": "محتوى غير لائق",
+  "reportReasonOther": "أخرى",
+  "sellerVerified": "موثّق",
+  "sellerTypePrivate": "خاص",
+  "sellerTypeBusiness": "تجاري",
+  "sellerProfileListingsTitle": "إعلانات هذا البائع",
+  "sellerProfileAbout": "نبذة",
+  "sellerProfileNoBio": "لم يضف هذا البائع وصفاً بعد.",
+  "sellerProfileEmptyListings": "لا توجد إعلانات متاحة حالياً.",
+  "sellerProfileLoadFailed": "لم يتم العثور على البائع.",
+  "productSimilarTitle": "إعلانات مشابهة",
+  "productSimilarEmpty": "لا توجد إعلانات مشابهة بعد.",
+  "productSellerListingsTitle": "المزيد من هذا البائع",
+  "productDetailsTitle": "تفاصيل المنتج",
+  "productDetailsCondition": "الحالة",
+  "productDetailsCategory": "الفئة",
+  "productDetailsCity": "المدينة",
+  "productDetailsShipping": "الشحن",
+  "productDetailsFreeShipping": "شحن مجاني",
+  "productDetailsPaidShipping": "البائع يشحن",
+  "productDetailsPickupOnly": "استلام فقط",
+  "productDescriptionMore": "عرض المزيد",
+  "productDescriptionLess": "عرض أقل",
+  "favoriteAdded": "أُضيف إلى المفضلة",
+  "favoriteRemoved": "أُزيل من المفضلة",
+  "viewSellerProfile": "عرض ملف البائع",
+  "@productActionsLabel": {
+    "description": "Menu of secondary product actions."
+  },
+  "@productShare": {
+    "description": "Share this listing."
+  },
+  "@productShareText": {
+    "description": "Text used when sharing a listing.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@productReport": {
+    "description": "Opens the report listing flow."
+  },
+  "@productReportTitle": {
+    "description": "Title of the report reason sheet."
+  },
+  "@productReportDetailsHint": {
+    "description": "Optional report details field hint."
+  },
+  "@productReportSubmit": {
+    "description": "Submits the report."
+  },
+  "@productReportSubmitted": {
+    "description": "Confirmation after a report is filed."
+  },
+  "@reportReasonSpam": {
+    "description": "Report reason: spam."
+  },
+  "@reportReasonFraud": {
+    "description": "Report reason: fraud."
+  },
+  "@reportReasonCounterfeit": {
+    "description": "Report reason: counterfeit."
+  },
+  "@reportReasonProhibited": {
+    "description": "Report reason: prohibited item."
+  },
+  "@reportReasonHarassment": {
+    "description": "Report reason: harassment."
+  },
+  "@reportReasonInappropriate": {
+    "description": "Report reason: inappropriate content."
+  },
+  "@reportReasonOther": {
+    "description": "Report reason: other."
+  },
+  "@sellerVerified": {
+    "description": "Badge shown for verified business sellers."
+  },
+  "@sellerTypePrivate": {
+    "description": "Badge for private sellers."
+  },
+  "@sellerTypeBusiness": {
+    "description": "Badge for business sellers."
+  },
+  "@sellerProfileListingsTitle": {
+    "description": "Seller profile listings section title."
+  },
+  "@sellerProfileAbout": {
+    "description": "Seller profile about section title."
+  },
+  "@sellerProfileNoBio": {
+    "description": "Shown when a seller has no description."
+  },
+  "@sellerProfileEmptyListings": {
+    "description": "Empty state for seller listings."
+  },
+  "@sellerProfileLoadFailed": {
+    "description": "Error state for an unavailable seller."
+  },
+  "@productSimilarTitle": {
+    "description": "Similar listings section title."
+  },
+  "@productSimilarEmpty": {
+    "description": "Empty state for similar listings."
+  },
+  "@productSellerListingsTitle": {
+    "description": "More-from-seller section title."
+  },
+  "@productDetailsTitle": {
+    "description": "Product details section title."
+  },
+  "@productDetailsCondition": {
+    "description": "Detail row: condition."
+  },
+  "@productDetailsCategory": {
+    "description": "Detail row: category."
+  },
+  "@productDetailsCity": {
+    "description": "Detail row: city."
+  },
+  "@productDetailsShipping": {
+    "description": "Detail row: shipping."
+  },
+  "@productDetailsFreeShipping": {
+    "description": "Shipping value: free shipping."
+  },
+  "@productDetailsPaidShipping": {
+    "description": "Shipping value: seller ships."
+  },
+  "@productDetailsPickupOnly": {
+    "description": "Shipping value: pickup only."
+  },
+  "@productDescriptionMore": {
+    "description": "Expand a long description."
+  },
+  "@productDescriptionLess": {
+    "description": "Collapse a long description."
+  },
+  "@favoriteAdded": {
+    "description": "Snack bar after adding a favorite."
+  },
+  "@favoriteRemoved": {
+    "description": "Snack bar after removing a favorite."
+  },
+  "@viewSellerProfile": {
+    "description": "Semantic label for the tappable seller card."
+  },
+  "productUnavailableTitle": "الإعلان غير متاح",
+  "productUnavailableBody": "لا يمكن عرض هذا الإعلان حالياً.",
+  "productImageUnavailable": "الصورة غير متاحة",
+  "productGalleryPosition": "الصورة {current} من {total}",
+  "productDetailsBrand": "العلامة التجارية",
+  "productShippingArrangement": "اتفق على الشحن مباشرةً مع البائع.",
+  "favoriteAddAction": "إضافة إلى المفضلة",
+  "favoriteRemoveAction": "إزالة من المفضلة"
 }

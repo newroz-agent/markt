@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:zerin_marketplace/l10n/app_localizations.dart';
+import 'package:zerin_marketplace/l10n/ku_localizations.dart';
 
 export 'package:zerin_marketplace/l10n/app_localizations.dart';
 
@@ -16,6 +17,13 @@ abstract final class AppLocale {
   static const defaultLocale = german;
 
   static const supportedLocales = AppLocalizations.supportedLocales;
+
+  /// Shared by production and widget harnesses. Custom Kurdish delegates must
+  /// precede Flutter's globals, which do not support `ku`.
+  static const localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    ...kuFallbackDelegates,
+    ...AppLocalizations.localizationsDelegates,
+  ];
 
   static const _rtlLanguageCodes = {'ar'};
 

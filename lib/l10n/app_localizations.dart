@@ -1327,6 +1327,420 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Preis: absteigend'**
   String get filterSortPriceDesc;
+
+  /// Label for the seller type filter.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäuferart'**
+  String get filterSellerKindLabel;
+
+  /// Chip that disables the seller type filter.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get filterSellerKindAll;
+
+  /// Chip for private sellers.
+  ///
+  /// In de, this message translates to:
+  /// **'Privat'**
+  String get filterSellerKindPrivate;
+
+  /// Chip for business sellers.
+  ///
+  /// In de, this message translates to:
+  /// **'Gewerblich'**
+  String get filterSellerKindBusiness;
+
+  /// Label for the city filter entry point.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt'**
+  String get filterCityLabel;
+
+  /// Option that disables the city filter.
+  ///
+  /// In de, this message translates to:
+  /// **'Überall'**
+  String get filterCityAll;
+
+  /// Title of the German city selection sheet.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt wählen'**
+  String get filterCityTitle;
+
+  /// Toggle to the grid results view.
+  ///
+  /// In de, this message translates to:
+  /// **'Raster'**
+  String get categoryViewGrid;
+
+  /// Toggle to the list results view.
+  ///
+  /// In de, this message translates to:
+  /// **'Liste'**
+  String get categoryViewList;
+
+  /// Hint for the in-category title search.
+  ///
+  /// In de, this message translates to:
+  /// **'In dieser Kategorie suchen'**
+  String get categorySearchInCategory;
+
+  /// Button that loads the next page of listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Mehr laden'**
+  String get categoryProductsLoadMore;
+
+  /// End of pagination caption.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine weiteren Anzeigen'**
+  String get categoryProductsNoMore;
+
+  /// Button that opens a conversation with the seller.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäufer kontaktieren'**
+  String get productContactSeller;
+
+  /// Title of the conversations inbox.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachrichten'**
+  String get chatInboxTitle;
+
+  /// Title shown when the conversations inbox is empty.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Nachrichten'**
+  String get chatInboxEmptyTitle;
+
+  /// Explanation shown when the conversations inbox is empty.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Unterhaltungen mit Käufern und Verkäufern erscheinen hier.'**
+  String get chatInboxEmptyBody;
+
+  /// Preview shown for a conversation without messages.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Nachrichten'**
+  String get chatNoMessagesYet;
+
+  /// Title of a conversation screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Unterhaltung'**
+  String get chatTitle;
+
+  /// Fallback label for a product card in a conversation.
+  ///
+  /// In de, this message translates to:
+  /// **'Produkt'**
+  String get chatProductCard;
+
+  /// Hint for the conversation message composer.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachricht schreiben …'**
+  String get chatInputHint;
+
+  /// Send message button tooltip.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachricht senden'**
+  String get chatSend;
+
+  /// Load older conversation history button.
+  ///
+  /// In de, this message translates to:
+  /// **'Frühere Nachrichten laden'**
+  String get chatLoadEarlier;
+
+  /// Menu of secondary product actions.
+  ///
+  /// In de, this message translates to:
+  /// **'Produktaktionen'**
+  String get productActionsLabel;
+
+  /// Share this listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Teilen'**
+  String get productShare;
+
+  /// Text used when sharing a listing.
+  ///
+  /// In de, this message translates to:
+  /// **'{title} – {price} auf DÛKAN'**
+  String productShareText({required String title, required String price});
+
+  /// Opens the report listing flow.
+  ///
+  /// In de, this message translates to:
+  /// **'Anzeige melden'**
+  String get productReport;
+
+  /// Title of the report reason sheet.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum meldest du diese Anzeige?'**
+  String get productReportTitle;
+
+  /// Optional report details field hint.
+  ///
+  /// In de, this message translates to:
+  /// **'Optionale Beschreibung (max. 3000 Zeichen)'**
+  String get productReportDetailsHint;
+
+  /// Submits the report.
+  ///
+  /// In de, this message translates to:
+  /// **'Meldung senden'**
+  String get productReportSubmit;
+
+  /// Confirmation after a report is filed.
+  ///
+  /// In de, this message translates to:
+  /// **'Danke. Wir prüfen die Meldung.'**
+  String get productReportSubmitted;
+
+  /// Report reason: spam.
+  ///
+  /// In de, this message translates to:
+  /// **'Spam'**
+  String get reportReasonSpam;
+
+  /// Report reason: fraud.
+  ///
+  /// In de, this message translates to:
+  /// **'Betrug'**
+  String get reportReasonFraud;
+
+  /// Report reason: counterfeit.
+  ///
+  /// In de, this message translates to:
+  /// **'Plagiat / Fälschung'**
+  String get reportReasonCounterfeit;
+
+  /// Report reason: prohibited item.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbotener Artikel'**
+  String get reportReasonProhibited;
+
+  /// Report reason: harassment.
+  ///
+  /// In de, this message translates to:
+  /// **'Belästigung'**
+  String get reportReasonHarassment;
+
+  /// Report reason: inappropriate content.
+  ///
+  /// In de, this message translates to:
+  /// **'Unangemessene Inhalte'**
+  String get reportReasonInappropriate;
+
+  /// Report reason: other.
+  ///
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
+  String get reportReasonOther;
+
+  /// Badge shown for verified business sellers.
+  ///
+  /// In de, this message translates to:
+  /// **'Verifiziert'**
+  String get sellerVerified;
+
+  /// Badge for private sellers.
+  ///
+  /// In de, this message translates to:
+  /// **'Privat'**
+  String get sellerTypePrivate;
+
+  /// Badge for business sellers.
+  ///
+  /// In de, this message translates to:
+  /// **'Gewerblich'**
+  String get sellerTypeBusiness;
+
+  /// Seller profile listings section title.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote dieses Verkäufers'**
+  String get sellerProfileListingsTitle;
+
+  /// Seller profile about section title.
+  ///
+  /// In de, this message translates to:
+  /// **'Über'**
+  String get sellerProfileAbout;
+
+  /// Shown when a seller has no description.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieser Verkäufer hat noch keine Beschreibung hinterlegt.'**
+  String get sellerProfileNoBio;
+
+  /// Empty state for seller listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktuell keine Angebote verfügbar.'**
+  String get sellerProfileEmptyListings;
+
+  /// Error state for an unavailable seller.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäufer nicht gefunden.'**
+  String get sellerProfileLoadFailed;
+
+  /// Similar listings section title.
+  ///
+  /// In de, this message translates to:
+  /// **'Ähnliche Angebote'**
+  String get productSimilarTitle;
+
+  /// Empty state for similar listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine ähnlichen Angebote.'**
+  String get productSimilarEmpty;
+
+  /// More-from-seller section title.
+  ///
+  /// In de, this message translates to:
+  /// **'Weitere Angebote dieses Verkäufers'**
+  String get productSellerListingsTitle;
+
+  /// Product details section title.
+  ///
+  /// In de, this message translates to:
+  /// **'Produktdetails'**
+  String get productDetailsTitle;
+
+  /// Detail row: condition.
+  ///
+  /// In de, this message translates to:
+  /// **'Zustand'**
+  String get productDetailsCondition;
+
+  /// Detail row: category.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie'**
+  String get productDetailsCategory;
+
+  /// Detail row: city.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt'**
+  String get productDetailsCity;
+
+  /// Detail row: shipping.
+  ///
+  /// In de, this message translates to:
+  /// **'Versand'**
+  String get productDetailsShipping;
+
+  /// Shipping value: free shipping.
+  ///
+  /// In de, this message translates to:
+  /// **'Kostenloser Versand'**
+  String get productDetailsFreeShipping;
+
+  /// Shipping value: seller ships.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäufer versendet'**
+  String get productDetailsPaidShipping;
+
+  /// Shipping value: pickup only.
+  ///
+  /// In de, this message translates to:
+  /// **'Nur Abholung'**
+  String get productDetailsPickupOnly;
+
+  /// Expand a long description.
+  ///
+  /// In de, this message translates to:
+  /// **'Mehr anzeigen'**
+  String get productDescriptionMore;
+
+  /// Collapse a long description.
+  ///
+  /// In de, this message translates to:
+  /// **'Weniger anzeigen'**
+  String get productDescriptionLess;
+
+  /// Snack bar after adding a favorite.
+  ///
+  /// In de, this message translates to:
+  /// **'Zu Favoriten hinzugefügt'**
+  String get favoriteAdded;
+
+  /// Snack bar after removing a favorite.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus Favoriten entfernt'**
+  String get favoriteRemoved;
+
+  /// Semantic label for the tappable seller card.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäuferprofil ansehen'**
+  String get viewSellerProfile;
+
+  /// Title when a listing is unavailable, without assuming it was sold or deleted.
+  ///
+  /// In de, this message translates to:
+  /// **'Anzeige nicht verfügbar'**
+  String get productUnavailableTitle;
+
+  /// Body when a listing is unavailable, without claiming a specific cause.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Anzeige kann derzeit nicht angezeigt werden.'**
+  String get productUnavailableBody;
+
+  /// Accessible fallback label for a missing or failed product image.
+  ///
+  /// In de, this message translates to:
+  /// **'Bild nicht verfügbar'**
+  String get productImageUnavailable;
+
+  /// Accessible gallery position. Current is the one-based image number; total is the number of images.
+  ///
+  /// In de, this message translates to:
+  /// **'Bild {current} von {total}'**
+  String productGalleryPosition({required int current, required int total});
+
+  /// Detail row label for the product brand.
+  ///
+  /// In de, this message translates to:
+  /// **'Marke'**
+  String get productDetailsBrand;
+
+  /// Shipping fallback when terms are unknown: arrange privately and directly with the seller. Does not promise shipping availability or imply pickup, fees, or platform-managed delivery.
+  ///
+  /// In de, this message translates to:
+  /// **'Versand direkt mit dem Verkäufer vereinbaren.'**
+  String get productShippingArrangement;
+
+  /// Action label to add this listing to favorites, not a success confirmation.
+  ///
+  /// In de, this message translates to:
+  /// **'Zu Favoriten hinzufügen'**
+  String get favoriteAddAction;
+
+  /// Action label to remove this listing from favorites, not a success confirmation.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus Favoriten entfernen'**
+  String get favoriteRemoveAction;
 }
 
 class _AppLocalizationsDelegate

@@ -2,7 +2,6 @@
   "@@locale": "tr",
   "appName": "Zêrîn",
   "appTagline": "Pazar yerin. Olağanüstü iyi.",
-
   "navigationHome": "Ana sayfa",
   "navigationCategories": "Kategoriler",
   "navigationSell": "Sat",
@@ -12,7 +11,6 @@
   "navigationOrders": "Siparişler",
   "navigationMessages": "Mesajlar",
   "navigationSettings": "Ayarlar",
-
   "actionContinue": "Devam et",
   "actionSkip": "Atla",
   "actionGetStarted": "Başla",
@@ -33,7 +31,6 @@
   "actionSignIn": "Giriş yap",
   "actionSignUp": "Hesap oluştur",
   "actionSignOut": "Çıkış yap",
-
   "stateLoading": "Yükleniyor…",
   "stateErrorTitle": "Bir şeyler ters gitti",
   "stateErrorMessage": "Lütfen birazdan tekrar dene.",
@@ -42,14 +39,12 @@
   "stateEmptyTitle": "Burada henüz bir şey yok",
   "authRequiredTitle": "Giriş yapman gerekiyor",
   "authRequiredMessage": "Bu özelliği kullanmak için giriş yap.",
-
   "onboardingWelcomeTitle": "Sevdiğin her şey tek bir yerde.",
   "onboardingWelcomeBody": "Almanya genelindeki mağazalardan ve bireysel satıcılardan seçkin ürünleri keşfet.",
   "onboardingDiscoverTitle": "Yakınındaki özel ürünleri bul",
   "onboardingDiscoverBody": "Yeni ve ikinci el ürünleri güvenle ve şeffaf biçimde ara, filtrele ve karşılaştır.",
   "onboardingSellTitle": "Kolayca ve güvenle sat",
   "onboardingSellBody": "Ürününü dakikalar içinde listele veya kendi mağazanı kur.",
-
   "authWelcomeTitle": "Zêrîn’e hoş geldin",
   "authWelcomeBody": "Favorilerini kaydetmek, alışveriş yapmak ve satışa başlamak için giriş yap.",
   "authSignInTitle": "Giriş yap",
@@ -90,7 +85,6 @@
   "validationInvalidEmail": "Geçerli bir e-posta adresi gir.",
   "validationPasswordMinLength": "Şifre en az {minLength} karakter olmalıdır.",
   "validationPasswordMismatch": "Şifreler eşleşmiyor.",
-
   "homeGreeting": "Merhaba!",
   "homeGreetingNamed": "Merhaba, {name}!",
   "homeSearchHint": "Ne arıyorsun?",
@@ -101,18 +95,15 @@
   "homePopularStoresTitle": "Popüler mağazalar",
   "homePopularNearbyTitle": "Yakınında popüler",
   "homeRecentlyViewedTitle": "Son görüntülenenler",
-
   "categoriesTitle": "Kategoriler",
   "categoriesSearchHint": "Kategorilerde ara",
   "categoriesEmptyTitle": "Kategori bulunamadı",
   "categoriesEmptyBody": "Başka bir arama terimi dene.",
-
   "sellTitle": "Sat",
   "sellPrivateTitle": "Bireysel satış yap",
   "sellPrivateBody": "Ürününü yalnızca birkaç dakika içinde listele.",
   "sellVendorTitle": "Satıcı ol",
   "sellVendorBody": "Mağazanı aç ve Almanya genelindeki müşterilere ulaş.",
-
   "cartTitle": "Sepet",
   "cartEmptyTitle": "Sepetin boş",
   "cartEmptyBody": "Ürünleri keşfet ve favorilerini ekle.",
@@ -122,7 +113,6 @@
   "cartVatIncluded": "KDV dahil",
   "cartTotal": "Toplam",
   "cartCheckout": "Ödemeye geç",
-
   "accountTitle": "Profil",
   "accountProfile": "Kişisel bilgiler",
   "accountAddresses": "Adresler",
@@ -133,10 +123,8 @@
   "accountDelete": "Hesabı sil",
   "accountGuestTitle": "Zêrîn’e hoş geldin",
   "accountGuestBody": "Siparişlerini, favorilerini ve satışlarını yönetmek için giriş yap.",
-
   "foundationPreviewTitle": "Pazar yerin şekilleniyor",
   "foundationPreviewBody": "Tasarım sistemi, gezinme, diller ve giriş hazır. Diğer pazar yeri özellikleri sırada.",
-
   "languageGerman": "Almanca",
   "languageEnglish": "İngilizce",
   "languageArabic": "Arapça",
@@ -145,7 +133,6 @@
   "themeSystem": "Sistem ayarı",
   "themeLight": "Açık",
   "themeDark": "Koyu",
-
   "productConditionNew": "Yeni",
   "productConditionUsed": "İkinci el",
   "productVatIncluded": "{price}, KDV dahil",
@@ -156,7 +143,6 @@
   "resultsCount": "{count, plural, =0 {Sonuç yok} =1 {1 sonuç} other {{count} sonuç}}",
   "semanticsSelectedTab": "{label}, seçildi",
   "semanticsCartItemCount": "{count, plural, =0 {Sepet, ürün yok} =1 {Sepet, 1 ürün} other {Sepet, {count} ürün}}",
-
   "legalImprint": "Yasal bildirim (Impressum)",
   "legalTerms": "Hüküm ve Koşullar",
   "legalPrivacy": "Gizlilik Politikası",
@@ -167,7 +153,6 @@
   "legalLoadErrorBody": "Metin alınamadı. İnternet bağlantını kontrol et.",
   "legalVersionLine": "Sürüm {version} · {date} tarihinden itibaren geçerli",
   "legalLinkFailed": "Bağlantı açılamadı.",
-
   "accountPrivacy": "Gizlilik ve veriler",
   "privacyTitle": "Gizlilik ve veriler",
   "privacySignedOutTitle": "Giriş yap",
@@ -195,7 +180,6 @@
   "privacyDeleteCancel": "Silmeyi iptal et",
   "privacyDeleteCancelled": "Silme iptal edildi.",
   "privacyDeleteCancelFailed": "Silme zaten işleniyor ve artık iptal edilemez.",
-
   "notificationsTitle": "Bildirimler",
   "notificationsBody": "Seni nelerden haberdar edebileceğimizi seç.",
   "notificationsOrders": "Siparişler",
@@ -219,5 +203,235 @@
   "filterSortLabel": "Sıralama",
   "filterSortNewest": "En yeni",
   "filterSortPriceAsc": "Fiyat: artan",
-  "filterSortPriceDesc": "Fiyat: azalan"
+  "filterSortPriceDesc": "Fiyat: azalan",
+  "productContactSeller": "Satıcıyla iletişime geç",
+  "chatInboxTitle": "Mesajlar",
+  "chatInboxEmptyTitle": "Henüz mesaj yok",
+  "chatInboxEmptyBody": "Alıcı ve satıcılarla yaptığın görüşmeler burada görünür.",
+  "chatNoMessagesYet": "Henüz mesaj yok",
+  "chatTitle": "Sohbet",
+  "chatProductCard": "Ürün",
+  "chatInputHint": "Mesaj yaz …",
+  "chatSend": "Mesaj gönder",
+  "chatLoadEarlier": "Önceki mesajları yükle",
+  "filterSellerKindLabel": "Satıcı türü",
+  "@filterSellerKindLabel": {
+    "description": "Label for the seller type filter."
+  },
+  "filterSellerKindAll": "Tümü",
+  "@filterSellerKindAll": {
+    "description": "Chip that disables the seller type filter."
+  },
+  "filterSellerKindPrivate": "Özel",
+  "@filterSellerKindPrivate": {
+    "description": "Chip for private sellers."
+  },
+  "filterSellerKindBusiness": "Ticari",
+  "@filterSellerKindBusiness": {
+    "description": "Chip for business sellers."
+  },
+  "filterCityLabel": "Şehir",
+  "@filterCityLabel": {
+    "description": "Label for the city filter entry point."
+  },
+  "filterCityAll": "Her yer",
+  "@filterCityAll": {
+    "description": "Option that disables the city filter."
+  },
+  "filterCityTitle": "Şehir seç",
+  "@filterCityTitle": {
+    "description": "Title of the German city selection sheet."
+  },
+  "categoryViewGrid": "Izgara",
+  "@categoryViewGrid": {
+    "description": "Toggle to the grid results view."
+  },
+  "categoryViewList": "Liste",
+  "@categoryViewList": {
+    "description": "Toggle to the list results view."
+  },
+  "categorySearchInCategory": "Bu kategoride ara",
+  "@categorySearchInCategory": {
+    "description": "Hint for the in-category title search."
+  },
+  "categoryProductsLoadMore": "Daha fazla yükle",
+  "@categoryProductsLoadMore": {
+    "description": "Button that loads the next page of listings."
+  },
+  "categoryProductsNoMore": "Başka ilan yok",
+  "@categoryProductsNoMore": {
+    "description": "End of pagination caption."
+  },
+  "productActionsLabel": "Ürün işlemleri",
+  "productShare": "Paylaş",
+  "productShareText": "{title} – {price} DÛKAN''da",
+  "productReport": "İlanı bildir",
+  "productReportTitle": "Bu ilanı neden bildiriyorsunuz?",
+  "productReportDetailsHint": "İsteğe bağlı ayrıntı (en fazla 3000 karakter)",
+  "productReportSubmit": "Bildirimi gönder",
+  "productReportSubmitted": "Teşekkürler. Bildiriminizi inceleyeceğiz.",
+  "reportReasonSpam": "Spam",
+  "reportReasonFraud": "Dolandırıcılık",
+  "reportReasonCounterfeit": "Taklit / Sahte",
+  "reportReasonProhibited": "Yasak ürün",
+  "reportReasonHarassment": "Taciz",
+  "reportReasonInappropriate": "Uygunsuz içerik",
+  "reportReasonOther": "Diğer",
+  "sellerVerified": "Doğrulanmış",
+  "sellerTypePrivate": "Özel",
+  "sellerTypeBusiness": "Ticari",
+  "sellerProfileListingsTitle": "Bu satıcının ilanları",
+  "sellerProfileAbout": "Hakkında",
+  "sellerProfileNoBio": "Bu satıcı henüz bir açıklama eklemedi.",
+  "sellerProfileEmptyListings": "Şu anda ilan bulunmuyor.",
+  "sellerProfileLoadFailed": "Satıcı bulunamadı.",
+  "productSimilarTitle": "Benzer ilanlar",
+  "productSimilarEmpty": "Henüz benzer ilan yok.",
+  "productSellerListingsTitle": "Bu satıcıdan daha fazlası",
+  "productDetailsTitle": "Ürün ayrıntıları",
+  "productDetailsCondition": "Durum",
+  "productDetailsCategory": "Kategori",
+  "productDetailsCity": "Şehir",
+  "productDetailsShipping": "Kargo",
+  "productDetailsFreeShipping": "Ücretsiz kargo",
+  "productDetailsPaidShipping": "Satıcı kargolar",
+  "productDetailsPickupOnly": "Sadece teslim",
+  "productDescriptionMore": "Daha fazla göster",
+  "productDescriptionLess": "Daha az göster",
+  "favoriteAdded": "Favorilere eklendi",
+  "favoriteRemoved": "Favorilerden çıkarıldı",
+  "viewSellerProfile": "Satıcı profilini görüntüle",
+  "@productActionsLabel": {
+    "description": "Menu of secondary product actions."
+  },
+  "@productShare": {
+    "description": "Share this listing."
+  },
+  "@productShareText": {
+    "description": "Text used when sharing a listing.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@productReport": {
+    "description": "Opens the report listing flow."
+  },
+  "@productReportTitle": {
+    "description": "Title of the report reason sheet."
+  },
+  "@productReportDetailsHint": {
+    "description": "Optional report details field hint."
+  },
+  "@productReportSubmit": {
+    "description": "Submits the report."
+  },
+  "@productReportSubmitted": {
+    "description": "Confirmation after a report is filed."
+  },
+  "@reportReasonSpam": {
+    "description": "Report reason: spam."
+  },
+  "@reportReasonFraud": {
+    "description": "Report reason: fraud."
+  },
+  "@reportReasonCounterfeit": {
+    "description": "Report reason: counterfeit."
+  },
+  "@reportReasonProhibited": {
+    "description": "Report reason: prohibited item."
+  },
+  "@reportReasonHarassment": {
+    "description": "Report reason: harassment."
+  },
+  "@reportReasonInappropriate": {
+    "description": "Report reason: inappropriate content."
+  },
+  "@reportReasonOther": {
+    "description": "Report reason: other."
+  },
+  "@sellerVerified": {
+    "description": "Badge shown for verified business sellers."
+  },
+  "@sellerTypePrivate": {
+    "description": "Badge for private sellers."
+  },
+  "@sellerTypeBusiness": {
+    "description": "Badge for business sellers."
+  },
+  "@sellerProfileListingsTitle": {
+    "description": "Seller profile listings section title."
+  },
+  "@sellerProfileAbout": {
+    "description": "Seller profile about section title."
+  },
+  "@sellerProfileNoBio": {
+    "description": "Shown when a seller has no description."
+  },
+  "@sellerProfileEmptyListings": {
+    "description": "Empty state for seller listings."
+  },
+  "@sellerProfileLoadFailed": {
+    "description": "Error state for an unavailable seller."
+  },
+  "@productSimilarTitle": {
+    "description": "Similar listings section title."
+  },
+  "@productSimilarEmpty": {
+    "description": "Empty state for similar listings."
+  },
+  "@productSellerListingsTitle": {
+    "description": "More-from-seller section title."
+  },
+  "@productDetailsTitle": {
+    "description": "Product details section title."
+  },
+  "@productDetailsCondition": {
+    "description": "Detail row: condition."
+  },
+  "@productDetailsCategory": {
+    "description": "Detail row: category."
+  },
+  "@productDetailsCity": {
+    "description": "Detail row: city."
+  },
+  "@productDetailsShipping": {
+    "description": "Detail row: shipping."
+  },
+  "@productDetailsFreeShipping": {
+    "description": "Shipping value: free shipping."
+  },
+  "@productDetailsPaidShipping": {
+    "description": "Shipping value: seller ships."
+  },
+  "@productDetailsPickupOnly": {
+    "description": "Shipping value: pickup only."
+  },
+  "@productDescriptionMore": {
+    "description": "Expand a long description."
+  },
+  "@productDescriptionLess": {
+    "description": "Collapse a long description."
+  },
+  "@favoriteAdded": {
+    "description": "Snack bar after adding a favorite."
+  },
+  "@favoriteRemoved": {
+    "description": "Snack bar after removing a favorite."
+  },
+  "@viewSellerProfile": {
+    "description": "Semantic label for the tappable seller card."
+  },
+  "productUnavailableTitle": "İlan mevcut değil",
+  "productUnavailableBody": "Bu ilan şu anda görüntülenemiyor.",
+  "productImageUnavailable": "Görsel mevcut değil",
+  "productGalleryPosition": "Görsel {current} / {total}",
+  "productDetailsBrand": "Marka",
+  "productShippingArrangement": "Kargo koşullarını doğrudan satıcıyla kararlaştırın.",
+  "favoriteAddAction": "Favorilere ekle",
+  "favoriteRemoveAction": "Favorilerden çıkar"
 }

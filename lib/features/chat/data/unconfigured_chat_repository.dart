@@ -1,34 +1,37 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
+import 'package:zerin_marketplace/features/chat/domain/chat_repository.dart';
 
-class UnconfiguredChatRepository {
+class UnconfiguredChatRepository implements ChatRepository {
   const UnconfiguredChatRepository();
-
   Never _unconfigured() =>
       throw const AppException(AppFailureCode.backendNotConfigured);
-
-  Future<List<ChatConversation>> fetchConversations() => _unconfigured();
-
-  Future<List<ChatMessage>> fetchMessages(String chatId) => _unconfigured();
-
+  @override
+  Future<List<ChatConversation>> fetchConversations() async => _unconfigured();
+  @override
+  Future<ChatConversation> fetchConversation(String chatId) async =>
+      _unconfigured();
+  @override
+  Future<List<ChatMessage>> fetchMessages(
+    String chatId, {
+    ChatMessage? before,
+  }) async => _unconfigured();
+  @override
   Future<ChatConversation> openChatWithProduct({
     required String sellerId,
     required String productId,
-  }) =>
-      _unconfigured();
-
+  }) async => _unconfigured();
+  @override
   Future<ChatMessage> sendTextMessage({
     required String chatId,
     required String body,
-  }) =>
-      _unconfigured();
-
-  Stream<ChatMessage> subscribeMessages(String chatId) =>
-      Stream<ChatMessage>.error(const AppException(
-        AppFailureCode.backendNotConfigured,
-      ));
-
-  Future<int> markChatRead(String chatId) => _unconfigured();
+  }) async => _unconfigured();
+  @override
+  Stream<List<ChatMessage>> watchMessages(String chatId) =>
+      Stream.error(const AppException(AppFailureCode.backendNotConfigured));
+  @override
+  Stream<List<ChatConversation>> watchConversations() =>
+      Stream.error(const AppException(AppFailureCode.backendNotConfigured));
+  @override
+  Future<int> markChatRead(String chatId) async => _unconfigured();
 }

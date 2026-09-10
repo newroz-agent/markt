@@ -49,6 +49,9 @@ class MarketplaceStore {
     required this.ratingAverage,
     required this.ratingCount,
     required this.responseTimeMinutes,
+    this.sellerKind,
+    this.verified,
+    this.countryCode,
   });
 
   factory MarketplaceStore.fromJson(Map<String, dynamic> json) {
@@ -60,9 +63,12 @@ class MarketplaceStore {
       avatarUrl: json['avatar_url'] as String?,
       bannerUrl: json['banner_url'] as String?,
       city: json['city'] as String?,
+      countryCode: json['country_code'] as String?,
       ratingAverage: (json['rating_average'] as num?)?.toDouble() ?? 0,
       ratingCount: json['rating_count'] as int? ?? 0,
       responseTimeMinutes: json['response_time_minutes'] as int?,
+      sellerKind: json['kind'] as String?,
+      verified: json['verified'] as bool?,
     );
   }
 
@@ -73,9 +79,19 @@ class MarketplaceStore {
   final String? avatarUrl;
   final String? bannerUrl;
   final String? city;
+  final String? countryCode;
   final double ratingAverage;
   final int ratingCount;
   final int? responseTimeMinutes;
+
+  /// `public.seller_kind`: `private` or `business`. Null when not selected.
+  final String? sellerKind;
+
+  /// Approved business seller with approved identity AND business registration
+  /// documents; null when not fetched. Approval alone never implies a badge.
+  final bool? verified;
+
+  bool get isBusiness => sellerKind == 'business';
 }
 
 @immutable
@@ -99,19 +115,33 @@ class HomeProduct {
     required this.publishedAt,
     required this.store,
     required this.imageUrls,
+    this.categoryId,
+    this.brandName,
+    this.specifications = const <String, dynamic>{},
+    this.countryCode,
   });
 
   factory HomeProduct.fromJson(Map<String, dynamic> json) {
     final seller = _mapOrNull(json['seller'] ?? json['sellers']);
-    final imageRows = json['images'] is List<dynamic>
-        ? json['images'] as List<dynamic>
-        : const <dynamic>[];
+    final imageRows =
+        (json['images'] as List? ?? const [])
+            .whereType<Map<String, dynamic>>()
+            .toList()
+          ..sort((a, b) {
+            final order = ((a['sort_order'] as num?) ?? 0).compareTo(
+              (b['sort_order'] as num?) ?? 0,
+            );
+            return order != 0
+                ? order
+                : (a['image_url'] as String? ?? '').compareTo(
+                    b['image_url'] as String? ?? '',
+                  );
+          });
     final imageUrls = <String>[
       for (final image in imageRows)
-        if (image is Map<String, dynamic>)
-          if (image['image_url'] is String &&
-              (image['image_url'] as String).isNotEmpty)
-            image['image_url'] as String,
+        if (image['image_url'] is String &&
+            (image['image_url'] as String).isNotEmpty)
+          image['image_url'] as String,
     ];
 
     return HomeProduct(
@@ -130,9 +160,15 @@ class HomeProduct {
       ratingAverage: (json['rating_average'] as num?)?.toDouble() ?? 0,
       ratingCount: json['rating_count'] as int? ?? 0,
       city: json['city'] as String?,
+      countryCode: json['country_code'] as String?,
       publishedAt: DateTime.parse(json['published_at']! as String),
       store: seller == null ? null : MarketplaceStore.fromJson(seller),
       imageUrls: List<String>.unmodifiable(imageUrls),
+      categoryId: json['category_id'] as String?,
+      brandName: _mapOrNull(json['brand'])?['name'] as String?,
+      specifications: Map<String, dynamic>.unmodifiable(
+        _mapOrNull(json['specifications']) ?? const <String, dynamic>{},
+      ),
     );
   }
 
@@ -151,9 +187,13 @@ class HomeProduct {
   final double ratingAverage;
   final int ratingCount;
   final String? city;
+  final String? countryCode;
   final DateTime publishedAt;
   final MarketplaceStore? store;
   final List<String> imageUrls;
+  final String? categoryId;
+  final String? brandName;
+  final Map<String, dynamic> specifications;
 
   bool get isDiscounted =>
       compareAtPriceCents != null && compareAtPriceCents! > priceCents;

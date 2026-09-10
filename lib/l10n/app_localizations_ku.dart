@@ -699,4 +699,218 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get filterSortPriceDesc => 'Biha: ji herî zêde';
+
+  @override
+  String get filterSellerKindLabel => 'Cureya firotvan';
+
+  @override
+  String get filterSellerKindAll => 'Hemû';
+
+  @override
+  String get filterSellerKindPrivate => 'Taybet';
+
+  @override
+  String get filterSellerKindBusiness => 'Karsaz';
+
+  @override
+  String get filterCityLabel => 'Bajar';
+
+  @override
+  String get filterCityAll => 'Li her derê';
+
+  @override
+  String get filterCityTitle => 'Bajarê hilbijêre';
+
+  @override
+  String get categoryViewGrid => 'Tor';
+
+  @override
+  String get categoryViewList => 'Lîste';
+
+  @override
+  String get categorySearchInCategory => 'Di vê kategoriyê de bigere';
+
+  @override
+  String get categoryProductsLoadMore => 'Bêtir bar bike';
+
+  @override
+  String get categoryProductsNoMore => 'Ragihandina din nîne';
+
+  @override
+  String get productContactSeller => 'Bi firoşkar re bikeve têkiliyê';
+
+  @override
+  String get chatInboxTitle => 'Peyam';
+
+  @override
+  String get chatInboxEmptyTitle => 'Hîn peyam tune ne';
+
+  @override
+  String get chatInboxEmptyBody =>
+      'Axaftinên te bi kirrîyar û firoşkaran li vir xuya dibin.';
+
+  @override
+  String get chatNoMessagesYet => 'Hîn peyam tune ne';
+
+  @override
+  String get chatTitle => 'Axaftin';
+
+  @override
+  String get chatProductCard => 'Berhem';
+
+  @override
+  String get chatInputHint => 'Peyamekê binivîse …';
+
+  @override
+  String get chatSend => 'Peyamê bişîne';
+
+  @override
+  String get chatLoadEarlier => 'Peyamên berê bar bike';
+
+  @override
+  String get productActionsLabel => 'Çalakiyên berhemê';
+
+  @override
+  String get productShare => 'Parve bike';
+
+  @override
+  String productShareText({required String title, required String price}) {
+    return '$title – $price li DÛKAN';
+  }
+
+  @override
+  String get productReport => 'Li ser îlanê gilî bike';
+
+  @override
+  String get productReportTitle => 'Çima tu li ser vê îlanê gilî dikî?';
+
+  @override
+  String get productReportDetailsHint =>
+      'Hûrguliyên ne mecbûrî (herî zêde 3000 tîp)';
+
+  @override
+  String get productReportSubmit => 'Gilî bişîne';
+
+  @override
+  String get productReportSubmitted => 'Spas. Em ê giliya te binirxînin.';
+
+  @override
+  String get reportReasonSpam => 'Spam';
+
+  @override
+  String get reportReasonFraud => 'Xapandin';
+
+  @override
+  String get reportReasonCounterfeit => 'Berhema sexte';
+
+  @override
+  String get reportReasonProhibited => 'Berhemên qedexe';
+
+  @override
+  String get reportReasonHarassment => 'Tacîz';
+
+  @override
+  String get reportReasonInappropriate => 'Naveroka neguncaw';
+
+  @override
+  String get reportReasonOther => 'Yên din';
+
+  @override
+  String get sellerVerified => 'Piştrastkirî';
+
+  @override
+  String get sellerTypePrivate => 'Taybet';
+
+  @override
+  String get sellerTypeBusiness => 'Karsaz';
+
+  @override
+  String get sellerProfileListingsTitle => 'Îlanên vî firoşkarî';
+
+  @override
+  String get sellerProfileAbout => 'Derbarê firoşkar de';
+
+  @override
+  String get sellerProfileNoBio => 'Vî firoşkarî hîn danasînek zêde nekiriye.';
+
+  @override
+  String get sellerProfileEmptyListings => 'Niha tu îlan tune ne.';
+
+  @override
+  String get sellerProfileLoadFailed => 'Firoşkar nehat dîtin.';
+
+  @override
+  String get productSimilarTitle => 'Îlanên mîna vê';
+
+  @override
+  String get productSimilarEmpty => 'Hîn îlanên mîna vê tune ne.';
+
+  @override
+  String get productSellerListingsTitle => 'Îlanên din ên vî firoşkarî';
+
+  @override
+  String get productDetailsTitle => 'Hûrguliyên berhemê';
+
+  @override
+  String get productDetailsCondition => 'Rewş';
+
+  @override
+  String get productDetailsCategory => 'Kategorî';
+
+  @override
+  String get productDetailsCity => 'Bajar';
+
+  @override
+  String get productDetailsShipping => 'Şandin';
+
+  @override
+  String get productDetailsFreeShipping => 'Şandina belaş';
+
+  @override
+  String get productDetailsPaidShipping => 'Firoşkar dişîne';
+
+  @override
+  String get productDetailsPickupOnly => 'Tenê ji cem firoşkarî wergirtin';
+
+  @override
+  String get productDescriptionMore => 'Zêdetir nîşan bide';
+
+  @override
+  String get productDescriptionLess => 'Kêmtir nîşan bide';
+
+  @override
+  String get favoriteAdded => 'Li bijarteyan hat zêdekirin';
+
+  @override
+  String get favoriteRemoved => 'Ji bijarteyan hat derxistin';
+
+  @override
+  String get viewSellerProfile => 'Profîla firoşkar bibîne';
+
+  @override
+  String get productUnavailableTitle => 'Îlan ne berdest e';
+
+  @override
+  String get productUnavailableBody => 'Ev îlan niha nayê nîşandan.';
+
+  @override
+  String get productImageUnavailable => 'Wêne ne berdest e';
+
+  @override
+  String productGalleryPosition({required int current, required int total}) {
+    return 'Wêne $current ji $total';
+  }
+
+  @override
+  String get productDetailsBrand => 'Marke';
+
+  @override
+  String get productShippingArrangement =>
+      'Li ser şandinê rasterast bi firoşkar re li hev bike.';
+
+  @override
+  String get favoriteAddAction => 'Li bijarteyan zêde bike';
+
+  @override
+  String get favoriteRemoveAction => 'Ji bijarteyan derxe';
 }

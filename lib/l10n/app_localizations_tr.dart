@@ -692,4 +692,219 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get filterSortPriceDesc => 'Fiyat: azalan';
+
+  @override
+  String get filterSellerKindLabel => 'Satıcı türü';
+
+  @override
+  String get filterSellerKindAll => 'Tümü';
+
+  @override
+  String get filterSellerKindPrivate => 'Özel';
+
+  @override
+  String get filterSellerKindBusiness => 'Ticari';
+
+  @override
+  String get filterCityLabel => 'Şehir';
+
+  @override
+  String get filterCityAll => 'Her yer';
+
+  @override
+  String get filterCityTitle => 'Şehir seç';
+
+  @override
+  String get categoryViewGrid => 'Izgara';
+
+  @override
+  String get categoryViewList => 'Liste';
+
+  @override
+  String get categorySearchInCategory => 'Bu kategoride ara';
+
+  @override
+  String get categoryProductsLoadMore => 'Daha fazla yükle';
+
+  @override
+  String get categoryProductsNoMore => 'Başka ilan yok';
+
+  @override
+  String get productContactSeller => 'Satıcıyla iletişime geç';
+
+  @override
+  String get chatInboxTitle => 'Mesajlar';
+
+  @override
+  String get chatInboxEmptyTitle => 'Henüz mesaj yok';
+
+  @override
+  String get chatInboxEmptyBody =>
+      'Alıcı ve satıcılarla yaptığın görüşmeler burada görünür.';
+
+  @override
+  String get chatNoMessagesYet => 'Henüz mesaj yok';
+
+  @override
+  String get chatTitle => 'Sohbet';
+
+  @override
+  String get chatProductCard => 'Ürün';
+
+  @override
+  String get chatInputHint => 'Mesaj yaz …';
+
+  @override
+  String get chatSend => 'Mesaj gönder';
+
+  @override
+  String get chatLoadEarlier => 'Önceki mesajları yükle';
+
+  @override
+  String get productActionsLabel => 'Ürün işlemleri';
+
+  @override
+  String get productShare => 'Paylaş';
+
+  @override
+  String productShareText({required String title, required String price}) {
+    return '$title – $price DÛKAN\'da';
+  }
+
+  @override
+  String get productReport => 'İlanı bildir';
+
+  @override
+  String get productReportTitle => 'Bu ilanı neden bildiriyorsunuz?';
+
+  @override
+  String get productReportDetailsHint =>
+      'İsteğe bağlı ayrıntı (en fazla 3000 karakter)';
+
+  @override
+  String get productReportSubmit => 'Bildirimi gönder';
+
+  @override
+  String get productReportSubmitted =>
+      'Teşekkürler. Bildiriminizi inceleyeceğiz.';
+
+  @override
+  String get reportReasonSpam => 'Spam';
+
+  @override
+  String get reportReasonFraud => 'Dolandırıcılık';
+
+  @override
+  String get reportReasonCounterfeit => 'Taklit / Sahte';
+
+  @override
+  String get reportReasonProhibited => 'Yasak ürün';
+
+  @override
+  String get reportReasonHarassment => 'Taciz';
+
+  @override
+  String get reportReasonInappropriate => 'Uygunsuz içerik';
+
+  @override
+  String get reportReasonOther => 'Diğer';
+
+  @override
+  String get sellerVerified => 'Doğrulanmış';
+
+  @override
+  String get sellerTypePrivate => 'Özel';
+
+  @override
+  String get sellerTypeBusiness => 'Ticari';
+
+  @override
+  String get sellerProfileListingsTitle => 'Bu satıcının ilanları';
+
+  @override
+  String get sellerProfileAbout => 'Hakkında';
+
+  @override
+  String get sellerProfileNoBio => 'Bu satıcı henüz bir açıklama eklemedi.';
+
+  @override
+  String get sellerProfileEmptyListings => 'Şu anda ilan bulunmuyor.';
+
+  @override
+  String get sellerProfileLoadFailed => 'Satıcı bulunamadı.';
+
+  @override
+  String get productSimilarTitle => 'Benzer ilanlar';
+
+  @override
+  String get productSimilarEmpty => 'Henüz benzer ilan yok.';
+
+  @override
+  String get productSellerListingsTitle => 'Bu satıcıdan daha fazlası';
+
+  @override
+  String get productDetailsTitle => 'Ürün ayrıntıları';
+
+  @override
+  String get productDetailsCondition => 'Durum';
+
+  @override
+  String get productDetailsCategory => 'Kategori';
+
+  @override
+  String get productDetailsCity => 'Şehir';
+
+  @override
+  String get productDetailsShipping => 'Kargo';
+
+  @override
+  String get productDetailsFreeShipping => 'Ücretsiz kargo';
+
+  @override
+  String get productDetailsPaidShipping => 'Satıcı kargolar';
+
+  @override
+  String get productDetailsPickupOnly => 'Sadece teslim';
+
+  @override
+  String get productDescriptionMore => 'Daha fazla göster';
+
+  @override
+  String get productDescriptionLess => 'Daha az göster';
+
+  @override
+  String get favoriteAdded => 'Favorilere eklendi';
+
+  @override
+  String get favoriteRemoved => 'Favorilerden çıkarıldı';
+
+  @override
+  String get viewSellerProfile => 'Satıcı profilini görüntüle';
+
+  @override
+  String get productUnavailableTitle => 'İlan mevcut değil';
+
+  @override
+  String get productUnavailableBody => 'Bu ilan şu anda görüntülenemiyor.';
+
+  @override
+  String get productImageUnavailable => 'Görsel mevcut değil';
+
+  @override
+  String productGalleryPosition({required int current, required int total}) {
+    return 'Görsel $current / $total';
+  }
+
+  @override
+  String get productDetailsBrand => 'Marka';
+
+  @override
+  String get productShippingArrangement =>
+      'Kargo koşullarını doğrudan satıcıyla kararlaştırın.';
+
+  @override
+  String get favoriteAddAction => 'Favorilere ekle';
+
+  @override
+  String get favoriteRemoveAction => 'Favorilerden çıkar';
 }

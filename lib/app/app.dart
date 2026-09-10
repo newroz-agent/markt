@@ -4,7 +4,6 @@ import 'package:zerin_marketplace/app/router/app_router.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/settings/domain/app_settings.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
-import 'package:zerin_marketplace/l10n/ku_localizations.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
 class ZerinApp extends ConsumerWidget {
@@ -22,14 +21,7 @@ class ZerinApp extends ConsumerWidget {
       onGenerateTitle: (context) => context.l10n.appName,
       locale: AppLocale.normalize(Locale(settings.localeCode)),
       supportedLocales: AppLocale.supportedLocales,
-      // The Ku fallbacks must come first: `Localizations` keeps the first
-      // delegate per type that supports the locale, and Flutter ships no
-      // Kurdish translations, so the globals would leave `MaterialLocalizations`
-      // unresolved and `MaterialLocalizations.of` would throw.
-      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-        ...kuFallbackDelegates,
-        ...AppLocalizations.localizationsDelegates,
-      ],
+      localizationsDelegates: AppLocale.localizationsDelegates,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: switch (settings.themePreference) {

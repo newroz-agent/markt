@@ -5,12 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
+import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/categories/presentation/category_products_screen.dart';
+import 'package:zerin_marketplace/features/chat/presentation/chat_conversation_screen.dart';
+import 'package:zerin_marketplace/features/chat/presentation/chat_inbox_screen.dart';
 import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart';
 import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/notification_settings_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/privacy_screen.dart';
 import 'package:zerin_marketplace/features/products/presentation/product_detail_screen.dart';
+import 'package:zerin_marketplace/features/sellers/presentation/seller_profile_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 import 'package:zerin_marketplace/features/shell/presentation/marketplace_shell.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -18,14 +22,19 @@ import 'package:zerin_marketplace/l10n/l10n.dart';
 part 'app_router.g.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final chatRouteObserver = RouteObserver<ModalRoute<dynamic>>();
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final preferences = ref.read(sharedPreferencesProvider);
   final hasCompletedOnboarding =
       preferences.getBool(SettingsStorageKeys.onboardingComplete) ?? false;
 
-  return GoRouter(
+  final authRefresh = ValueNotifier<int>(0);
+  ref.listen(authStateProvider, (_, _) => authRefresh.value++);
+  final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
+    observers: <NavigatorObserver>[chatRouteObserver],
+    refreshListenable: authRefresh,
     routes: $appRoutes,
     initialLocation: hasCompletedOnboarding ? '/' : '/onboarding',
     debugLogDiagnostics: kDebugMode,
@@ -36,6 +45,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
       if (!isComplete && !isOnboarding) return '/onboarding';
       if (isComplete && isOnboarding) return '/';
+      final isChat =
+          state.matchedLocation == '/inbox' ||
+          state.matchedLocation.startsWith('/chat/');
+      if (isChat && ref.read(authRepositoryProvider).currentUser == null) {
+        return AuthRoute(redirectTo: state.uri.toString()).location;
+      }
       return null;
     },
     errorBuilder: (context, state) => Scaffold(
@@ -65,6 +80,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
     ),
   );
+  ref.onDispose(() {
+    router.dispose();
+    authRefresh.dispose();
+  });
+  return router;
 });
 
 @TypedGoRoute<MarketplaceRoute>(path: '/')
@@ -140,6 +160,17 @@ class ProductDetailRoute extends GoRouteData {
       ProductDetailScreen(productId: productId, heroTag: heroTag);
 }
 
+@TypedGoRoute<SellerProfileRoute>(path: '/sellers/:sellerId')
+class SellerProfileRoute extends GoRouteData {
+  const SellerProfileRoute({required this.sellerId});
+
+  final String sellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      SellerProfileScreen(sellerId: sellerId);
+}
+
 @TypedGoRoute<CategoryProductsRoute>(path: '/categories/:categoryId')
 class CategoryProductsRoute extends GoRouteData {
   const CategoryProductsRoute({required this.categoryId});
@@ -149,4 +180,24 @@ class CategoryProductsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       CategoryProductsScreen(categoryId: categoryId);
+}
+
+@TypedGoRoute<ChatInboxRoute>(path: '/inbox')
+class ChatInboxRoute extends GoRouteData {
+  const ChatInboxRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ChatInboxScreen();
+}
+
+@TypedGoRoute<ChatConversationRoute>(path: '/chat/:chatId')
+class ChatConversationRoute extends GoRouteData {
+  const ChatConversationRoute({required this.chatId});
+
+  final String chatId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ChatConversationScreen(chatId: chatId);
 }

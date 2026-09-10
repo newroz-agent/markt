@@ -2,7 +2,6 @@
   "@@locale": "en",
   "appName": "Zêrîn",
   "appTagline": "Your marketplace. Exceptionally good.",
-
   "navigationHome": "Home",
   "navigationCategories": "Categories",
   "navigationSell": "Sell",
@@ -12,7 +11,6 @@
   "navigationOrders": "Orders",
   "navigationMessages": "Messages",
   "navigationSettings": "Settings",
-
   "actionContinue": "Continue",
   "actionSkip": "Skip",
   "actionGetStarted": "Get started",
@@ -33,7 +31,6 @@
   "actionSignIn": "Sign in",
   "actionSignUp": "Create account",
   "actionSignOut": "Sign out",
-
   "stateLoading": "Loading…",
   "stateErrorTitle": "Something went wrong",
   "stateErrorMessage": "Please try again in a moment.",
@@ -42,14 +39,12 @@
   "stateEmptyTitle": "Nothing here yet",
   "authRequiredTitle": "Sign-in required",
   "authRequiredMessage": "Sign in to use this feature.",
-
   "onboardingWelcomeTitle": "Everything you love. In one place.",
   "onboardingWelcomeBody": "Discover curated products from shops and private sellers across Germany.",
   "onboardingDiscoverTitle": "Find something special nearby",
   "onboardingDiscoverBody": "Search, filter, and compare new and used items—safely and transparently.",
   "onboardingSellTitle": "Sell simply and safely",
   "onboardingSellBody": "List an item in minutes or build your own shop.",
-
   "authWelcomeTitle": "Welcome to Zêrîn",
   "authWelcomeBody": "Sign in to save favorites, shop, and sell.",
   "authSignInTitle": "Sign in",
@@ -90,7 +85,6 @@
   "validationInvalidEmail": "Enter a valid email address.",
   "validationPasswordMinLength": "The password must be at least {minLength} characters long.",
   "validationPasswordMismatch": "The passwords do not match.",
-
   "homeGreeting": "Hello!",
   "homeGreetingNamed": "Hello, {name}!",
   "homeSearchHint": "What are you looking for?",
@@ -101,18 +95,15 @@
   "homePopularStoresTitle": "Popular stores",
   "homePopularNearbyTitle": "Popular near you",
   "homeRecentlyViewedTitle": "Recently viewed",
-
   "categoriesTitle": "Categories",
   "categoriesSearchHint": "Search categories",
   "categoriesEmptyTitle": "No categories found",
   "categoriesEmptyBody": "Try a different search term.",
-
   "sellTitle": "Sell",
   "sellPrivateTitle": "Sell privately",
   "sellPrivateBody": "List your item in just a few minutes.",
   "sellVendorTitle": "Become a seller",
   "sellVendorBody": "Open your shop and reach customers across Germany.",
-
   "cartTitle": "Cart",
   "cartEmptyTitle": "Your cart is empty",
   "cartEmptyBody": "Discover products and add your favorites.",
@@ -122,7 +113,6 @@
   "cartVatIncluded": "VAT included",
   "cartTotal": "Total",
   "cartCheckout": "Go to checkout",
-
   "accountTitle": "Profile",
   "accountProfile": "Personal details",
   "accountAddresses": "Addresses",
@@ -133,10 +123,8 @@
   "accountDelete": "Delete account",
   "accountGuestTitle": "Welcome to Zêrîn",
   "accountGuestBody": "Sign in to manage orders, favorites, and your sales.",
-
   "foundationPreviewTitle": "Your marketplace is taking shape",
   "foundationPreviewBody": "The design system, navigation, languages, and authentication are ready. More marketplace features are coming next.",
-
   "languageGerman": "German",
   "languageEnglish": "English",
   "languageArabic": "Arabic",
@@ -145,7 +133,6 @@
   "themeSystem": "System setting",
   "themeLight": "Light",
   "themeDark": "Dark",
-
   "productConditionNew": "New",
   "productConditionUsed": "Used",
   "productVatIncluded": "{price} incl. VAT",
@@ -156,7 +143,6 @@
   "resultsCount": "{count, plural, =0 {No results} one {1 result} other {{count} results}}",
   "semanticsSelectedTab": "{label}, selected",
   "semanticsCartItemCount": "{count, plural, =0 {Cart, no items} one {Cart, 1 item} other {Cart, {count} items}}",
-
   "legalImprint": "Legal notice",
   "legalTerms": "Terms and Conditions",
   "legalPrivacy": "Privacy Policy",
@@ -167,7 +153,6 @@
   "legalLoadErrorBody": "The text could not be retrieved. Check your internet connection.",
   "legalVersionLine": "Version {version} · effective {date}",
   "legalLinkFailed": "The link could not be opened.",
-
   "accountPrivacy": "Privacy & data",
   "privacyTitle": "Privacy & data",
   "privacySignedOutTitle": "Sign in",
@@ -195,7 +180,6 @@
   "privacyDeleteCancel": "Cancel deletion",
   "privacyDeleteCancelled": "Deletion cancelled.",
   "privacyDeleteCancelFailed": "The deletion is already being processed and can no longer be cancelled.",
-
   "notificationsTitle": "Notifications",
   "notificationsBody": "Choose what we may notify you about.",
   "notificationsOrders": "Orders",
@@ -219,5 +203,235 @@
   "filterSortLabel": "Sort order",
   "filterSortNewest": "Newest",
   "filterSortPriceAsc": "Price: low to high",
-  "filterSortPriceDesc": "Price: high to low"
+  "filterSortPriceDesc": "Price: high to low",
+  "productContactSeller": "Contact seller",
+  "chatInboxTitle": "Messages",
+  "chatInboxEmptyTitle": "No messages yet",
+  "chatInboxEmptyBody": "Your conversations with buyers and sellers will appear here.",
+  "chatNoMessagesYet": "No messages yet",
+  "chatTitle": "Conversation",
+  "chatProductCard": "Product",
+  "chatInputHint": "Write a message …",
+  "chatSend": "Send message",
+  "chatLoadEarlier": "Load earlier messages",
+  "filterSellerKindLabel": "Seller type",
+  "@filterSellerKindLabel": {
+    "description": "Label for the seller type filter."
+  },
+  "filterSellerKindAll": "All",
+  "@filterSellerKindAll": {
+    "description": "Chip that disables the seller type filter."
+  },
+  "filterSellerKindPrivate": "Private",
+  "@filterSellerKindPrivate": {
+    "description": "Chip for private sellers."
+  },
+  "filterSellerKindBusiness": "Business",
+  "@filterSellerKindBusiness": {
+    "description": "Chip for business sellers."
+  },
+  "filterCityLabel": "City",
+  "@filterCityLabel": {
+    "description": "Label for the city filter entry point."
+  },
+  "filterCityAll": "Everywhere",
+  "@filterCityAll": {
+    "description": "Option that disables the city filter."
+  },
+  "filterCityTitle": "Choose a city",
+  "@filterCityTitle": {
+    "description": "Title of the German city selection sheet."
+  },
+  "categoryViewGrid": "Grid",
+  "@categoryViewGrid": {
+    "description": "Toggle to the grid results view."
+  },
+  "categoryViewList": "List",
+  "@categoryViewList": {
+    "description": "Toggle to the list results view."
+  },
+  "categorySearchInCategory": "Search in this category",
+  "@categorySearchInCategory": {
+    "description": "Hint for the in-category title search."
+  },
+  "categoryProductsLoadMore": "Load more",
+  "@categoryProductsLoadMore": {
+    "description": "Button that loads the next page of listings."
+  },
+  "categoryProductsNoMore": "No more listings",
+  "@categoryProductsNoMore": {
+    "description": "End of pagination caption."
+  },
+  "productActionsLabel": "Product actions",
+  "productShare": "Share",
+  "productShareText": "{title} – {price} on DÛKAN",
+  "productReport": "Report listing",
+  "productReportTitle": "Why are you reporting this listing?",
+  "productReportDetailsHint": "Optional details (max 3000 characters)",
+  "productReportSubmit": "Send report",
+  "productReportSubmitted": "Thank you. We will review your report.",
+  "reportReasonSpam": "Spam",
+  "reportReasonFraud": "Fraud",
+  "reportReasonCounterfeit": "Counterfeit",
+  "reportReasonProhibited": "Prohibited item",
+  "reportReasonHarassment": "Harassment",
+  "reportReasonInappropriate": "Inappropriate content",
+  "reportReasonOther": "Other",
+  "sellerVerified": "Verified",
+  "sellerTypePrivate": "Private",
+  "sellerTypeBusiness": "Business",
+  "sellerProfileListingsTitle": "Listings from this seller",
+  "sellerProfileAbout": "About",
+  "sellerProfileNoBio": "This seller has not added a description yet.",
+  "sellerProfileEmptyListings": "No listings available right now.",
+  "sellerProfileLoadFailed": "Seller not found.",
+  "productSimilarTitle": "Similar listings",
+  "productSimilarEmpty": "No similar listings yet.",
+  "productSellerListingsTitle": "More from this seller",
+  "productDetailsTitle": "Product details",
+  "productDetailsCondition": "Condition",
+  "productDetailsCategory": "Category",
+  "productDetailsCity": "City",
+  "productDetailsShipping": "Shipping",
+  "productDetailsFreeShipping": "Free shipping",
+  "productDetailsPaidShipping": "Seller ships",
+  "productDetailsPickupOnly": "Pickup only",
+  "productDescriptionMore": "Show more",
+  "productDescriptionLess": "Show less",
+  "favoriteAdded": "Added to favorites",
+  "favoriteRemoved": "Removed from favorites",
+  "viewSellerProfile": "View seller profile",
+  "@productActionsLabel": {
+    "description": "Menu of secondary product actions."
+  },
+  "@productShare": {
+    "description": "Share this listing."
+  },
+  "@productShareText": {
+    "description": "Text used when sharing a listing.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@productReport": {
+    "description": "Opens the report listing flow."
+  },
+  "@productReportTitle": {
+    "description": "Title of the report reason sheet."
+  },
+  "@productReportDetailsHint": {
+    "description": "Optional report details field hint."
+  },
+  "@productReportSubmit": {
+    "description": "Submits the report."
+  },
+  "@productReportSubmitted": {
+    "description": "Confirmation after a report is filed."
+  },
+  "@reportReasonSpam": {
+    "description": "Report reason: spam."
+  },
+  "@reportReasonFraud": {
+    "description": "Report reason: fraud."
+  },
+  "@reportReasonCounterfeit": {
+    "description": "Report reason: counterfeit."
+  },
+  "@reportReasonProhibited": {
+    "description": "Report reason: prohibited item."
+  },
+  "@reportReasonHarassment": {
+    "description": "Report reason: harassment."
+  },
+  "@reportReasonInappropriate": {
+    "description": "Report reason: inappropriate content."
+  },
+  "@reportReasonOther": {
+    "description": "Report reason: other."
+  },
+  "@sellerVerified": {
+    "description": "Badge shown for verified business sellers."
+  },
+  "@sellerTypePrivate": {
+    "description": "Badge for private sellers."
+  },
+  "@sellerTypeBusiness": {
+    "description": "Badge for business sellers."
+  },
+  "@sellerProfileListingsTitle": {
+    "description": "Seller profile listings section title."
+  },
+  "@sellerProfileAbout": {
+    "description": "Seller profile about section title."
+  },
+  "@sellerProfileNoBio": {
+    "description": "Shown when a seller has no description."
+  },
+  "@sellerProfileEmptyListings": {
+    "description": "Empty state for seller listings."
+  },
+  "@sellerProfileLoadFailed": {
+    "description": "Error state for an unavailable seller."
+  },
+  "@productSimilarTitle": {
+    "description": "Similar listings section title."
+  },
+  "@productSimilarEmpty": {
+    "description": "Empty state for similar listings."
+  },
+  "@productSellerListingsTitle": {
+    "description": "More-from-seller section title."
+  },
+  "@productDetailsTitle": {
+    "description": "Product details section title."
+  },
+  "@productDetailsCondition": {
+    "description": "Detail row: condition."
+  },
+  "@productDetailsCategory": {
+    "description": "Detail row: category."
+  },
+  "@productDetailsCity": {
+    "description": "Detail row: city."
+  },
+  "@productDetailsShipping": {
+    "description": "Detail row: shipping."
+  },
+  "@productDetailsFreeShipping": {
+    "description": "Shipping value: free shipping."
+  },
+  "@productDetailsPaidShipping": {
+    "description": "Shipping value: seller ships."
+  },
+  "@productDetailsPickupOnly": {
+    "description": "Shipping value: pickup only."
+  },
+  "@productDescriptionMore": {
+    "description": "Expand a long description."
+  },
+  "@productDescriptionLess": {
+    "description": "Collapse a long description."
+  },
+  "@favoriteAdded": {
+    "description": "Snack bar after adding a favorite."
+  },
+  "@favoriteRemoved": {
+    "description": "Snack bar after removing a favorite."
+  },
+  "@viewSellerProfile": {
+    "description": "Semantic label for the tappable seller card."
+  },
+  "productUnavailableTitle": "Listing unavailable",
+  "productUnavailableBody": "This listing cannot be displayed right now.",
+  "productImageUnavailable": "Image unavailable",
+  "productGalleryPosition": "Image {current} of {total}",
+  "productDetailsBrand": "Brand",
+  "productShippingArrangement": "Arrange shipping directly with the seller.",
+  "favoriteAddAction": "Add to favorites",
+  "favoriteRemoveAction": "Remove from favorites"
 }

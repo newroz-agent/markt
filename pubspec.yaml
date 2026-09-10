@@ -53,11 +53,16 @@ dependencies:
   connectivity_plus: ^7.3.1
   flutter_stripe: ^11.5.0
   url_launcher: ^6.3.2
-  share_plus: ^13.3.0
+  # v13 pulls in win32 6 syntax unsupported by the Riverpod 2 generator's analyzer.
+  share_plus: 12.0.2
   collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_driver:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -152,4 +157,3 @@ flutter_launcher_icons:
     image_path: assets/icon/app_icon.png
     background_color: '#17383E'
     theme_color: '#E3A93C'
-

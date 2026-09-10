@@ -10,6 +10,7 @@ class MarketplaceCategory {
     required this.nameEn,
     required this.nameAr,
     required this.nameTr,
+    this.nameKu,
     required this.iconKey,
     required this.imageUrl,
     required this.sortOrder,
@@ -24,6 +25,7 @@ class MarketplaceCategory {
       nameEn: json['name_en']! as String,
       nameAr: json['name_ar']! as String,
       nameTr: json['name_tr']! as String,
+      nameKu: json['name_ku'] as String?,
       iconKey: json['icon_key']! as String,
       imageUrl: json['image_url']! as String,
       sortOrder: json['sort_order']! as int,
@@ -37,6 +39,7 @@ class MarketplaceCategory {
   final String nameEn;
   final String nameAr;
   final String nameTr;
+  final String? nameKu;
   final String iconKey;
   final String imageUrl;
   final int sortOrder;
@@ -47,6 +50,8 @@ class MarketplaceCategory {
     'en' => nameEn,
     'ar' => nameAr,
     'tr' => nameTr,
+    // Kurdish is first-class; unreviewed rows fall back to German.
+    'ku' => nameKu ?? nameDe,
     _ => nameDe,
   };
 }

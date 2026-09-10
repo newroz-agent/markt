@@ -2,7 +2,6 @@
   "@@locale": "ku",
   "appName": "Zêrîn",
   "appTagline": "Bazara te. Bêhempa baş.",
-
   "navigationHome": "Destpêk",
   "navigationCategories": "Kategorî",
   "navigationSell": "Firotin",
@@ -12,7 +11,6 @@
   "navigationOrders": "Siparîş",
   "navigationMessages": "Peyam",
   "navigationSettings": "Mîheng",
-
   "actionContinue": "Bidomîne",
   "actionSkip": "Derbas bike",
   "actionGetStarted": "Dest pê bike",
@@ -33,7 +31,6 @@
   "actionSignIn": "Têkeve",
   "actionSignUp": "Hesab çêke",
   "actionSignOut": "Derkeve",
-
   "stateLoading": "Tê barkirin…",
   "stateErrorTitle": "Tiştek çewt çû",
   "stateErrorMessage": "Ji kerema xwe piştî demekê dîsa biceribîne.",
@@ -42,14 +39,12 @@
   "stateEmptyTitle": "Hîn tiştek li vir tune",
   "authRequiredTitle": "Têketin pêwîst e",
   "authRequiredMessage": "Ji bo bikaranîna vê taybetmendiyê têkeve.",
-
   "onboardingWelcomeTitle": "Her tiştê ku tu jê hez dikî. Li cihekî.",
   "onboardingWelcomeBody": "Berhemên hilbijartî yên ji dikan û firoşkarên taybet li seranserê Almanyayê keşf bike.",
   "onboardingDiscoverTitle": "Li nêzîkî xwe tiştekî taybet bibîne",
   "onboardingDiscoverBody": "Berhemên nû û bikaranî bigere, parzûn bike û berawird bike — bi ewlehî û zelalî.",
   "onboardingSellTitle": "Bi hêsanî û ewlehî bifiroşe",
   "onboardingSellBody": "Di çend deqîqeyan de berhemekê îlan bike an dikana xwe ava bike.",
-
   "authWelcomeTitle": "Bi xêr hatî Zêrîn",
   "authWelcomeBody": "Têkeve da ku bijarteyan tomar bikî, bikirî û bifiroşî.",
   "authSignInTitle": "Têkeve",
@@ -90,7 +85,6 @@
   "validationInvalidEmail": "Navnîşaneke e-nameyê ya derbasdar binivîse.",
   "validationPasswordMinLength": "Divê şîfre herî kêm {minLength} tîp be.",
   "validationPasswordMismatch": "Şîfre li hev nakin.",
-
   "homeGreeting": "Silav!",
   "homeGreetingNamed": "Silav, {name}!",
   "homeSearchHint": "Tu li çi digerî?",
@@ -101,18 +95,15 @@
   "homePopularStoresTitle": "Firoşgehên populer",
   "homePopularNearbyTitle": "Li nêzîkî te populer",
   "homeRecentlyViewedTitle": "Dawî hatine dîtin",
-
   "categoriesTitle": "Kategorî",
   "categoriesSearchHint": "Li kategoriyan bigere",
   "categoriesEmptyTitle": "Tu kategorî nehat dîtin",
   "categoriesEmptyBody": "Peyveke lêgerînê ya cuda biceribîne.",
-
   "sellTitle": "Firotin",
   "sellPrivateTitle": "Bi taybetî bifiroşe",
   "sellPrivateBody": "Di çend deqîqeyan de berhema xwe îlan bike.",
   "sellVendorTitle": "Bibe firoşkar",
   "sellVendorBody": "Dikana xwe veke û bigihîje kirrîyarên li seranserê Almanyayê.",
-
   "cartTitle": "Selik",
   "cartEmptyTitle": "Selika te vala ye",
   "cartEmptyBody": "Berheman keşf bike û bijarteyên xwe zêde bike.",
@@ -122,7 +113,6 @@
   "cartVatIncluded": "Bac tê de ye",
   "cartTotal": "Tevahî",
   "cartCheckout": "Kirînê temam bike",
-
   "accountTitle": "Profîl",
   "accountProfile": "Agahiyên kesane",
   "accountAddresses": "Navnîşan",
@@ -133,10 +123,8 @@
   "accountDelete": "Hesabê jê bibe",
   "accountGuestTitle": "Bi xêr hatî Zêrîn",
   "accountGuestBody": "Têkeve da ku siparîş, bijarte û firotinên xwe birêve bibî.",
-
   "foundationPreviewTitle": "Bazara te şekil digire",
   "foundationPreviewBody": "Pergala sêwiranê, gerîn, ziman û piştrastkirina nasnameyê amade ne. Taybetmendiyên din ên bazarê di rê de ne.",
-
   "languageGerman": "Almanî",
   "languageEnglish": "Îngilîzî",
   "languageArabic": "Erebî",
@@ -145,7 +133,6 @@
   "themeSystem": "Mîhenga pergalê",
   "themeLight": "Ronî",
   "themeDark": "Tarî",
-
   "productConditionNew": "Nû",
   "productConditionUsed": "Bikaranî",
   "productVatIncluded": "{price} bi bac",
@@ -156,7 +143,6 @@
   "resultsCount": "{count, plural, =0 {Tu encam tune} one {1 encam} other {{count} encam}}",
   "semanticsSelectedTab": "{label}, hilbijartî",
   "semanticsCartItemCount": "{count, plural, =0 {Selik, tu berhem tune} one {Selik, 1 berhem} other {Selik, {count} berhem}}",
-
   "legalImprint": "Agahiya qanûnî",
   "legalTerms": "Mercên Bikaranînê",
   "legalPrivacy": "Politîkaya Nihêniyê",
@@ -167,7 +153,6 @@
   "legalLoadErrorBody": "Nivîs nehat anîn. Girêdana înternetê kontrol bike.",
   "legalVersionLine": "Guhertoya {version} · ji {date} ve derbasdar",
   "legalLinkFailed": "Girêdan nehat vekirin.",
-
   "accountPrivacy": "Nihênî û dane",
   "privacyTitle": "Nihênî û dane",
   "privacySignedOutTitle": "Têkeve",
@@ -195,7 +180,6 @@
   "privacyDeleteCancel": "Jêbirinê betal bike",
   "privacyDeleteCancelled": "Jêbirin hat betalkirin.",
   "privacyDeleteCancelFailed": "Jêbirin jixwe tê pêvajokirin û êdî nayê betalkirin.",
-
   "notificationsTitle": "Agahdarî",
   "notificationsBody": "Hilbijêre ka em dikarin te li ser çi agahdar bikin.",
   "notificationsOrders": "Siparîş",
@@ -219,5 +203,235 @@
   "filterSortLabel": "Rêzkirin",
   "filterSortNewest": "Herî nû",
   "filterSortPriceAsc": "Biha: ji herî kêm",
-  "filterSortPriceDesc": "Biha: ji herî zêde"
+  "filterSortPriceDesc": "Biha: ji herî zêde",
+  "productContactSeller": "Bi firoşkar re bikeve têkiliyê",
+  "chatInboxTitle": "Peyam",
+  "chatInboxEmptyTitle": "Hîn peyam tune ne",
+  "chatInboxEmptyBody": "Axaftinên te bi kirrîyar û firoşkaran li vir xuya dibin.",
+  "chatNoMessagesYet": "Hîn peyam tune ne",
+  "chatTitle": "Axaftin",
+  "chatProductCard": "Berhem",
+  "chatInputHint": "Peyamekê binivîse …",
+  "chatSend": "Peyamê bişîne",
+  "chatLoadEarlier": "Peyamên berê bar bike",
+  "filterSellerKindLabel": "Cureya firotvan",
+  "@filterSellerKindLabel": {
+    "description": "Label for the seller type filter."
+  },
+  "filterSellerKindAll": "Hemû",
+  "@filterSellerKindAll": {
+    "description": "Chip that disables the seller type filter."
+  },
+  "filterSellerKindPrivate": "Taybet",
+  "@filterSellerKindPrivate": {
+    "description": "Chip for private sellers."
+  },
+  "filterSellerKindBusiness": "Karsaz",
+  "@filterSellerKindBusiness": {
+    "description": "Chip for business sellers."
+  },
+  "filterCityLabel": "Bajar",
+  "@filterCityLabel": {
+    "description": "Label for the city filter entry point."
+  },
+  "filterCityAll": "Li her derê",
+  "@filterCityAll": {
+    "description": "Option that disables the city filter."
+  },
+  "filterCityTitle": "Bajarê hilbijêre",
+  "@filterCityTitle": {
+    "description": "Title of the German city selection sheet."
+  },
+  "categoryViewGrid": "Tor",
+  "@categoryViewGrid": {
+    "description": "Toggle to the grid results view."
+  },
+  "categoryViewList": "Lîste",
+  "@categoryViewList": {
+    "description": "Toggle to the list results view."
+  },
+  "categorySearchInCategory": "Di vê kategoriyê de bigere",
+  "@categorySearchInCategory": {
+    "description": "Hint for the in-category title search."
+  },
+  "categoryProductsLoadMore": "Bêtir bar bike",
+  "@categoryProductsLoadMore": {
+    "description": "Button that loads the next page of listings."
+  },
+  "categoryProductsNoMore": "Ragihandina din nîne",
+  "@categoryProductsNoMore": {
+    "description": "End of pagination caption."
+  },
+  "productActionsLabel": "Çalakiyên berhemê",
+  "productShare": "Parve bike",
+  "productShareText": "{title} – {price} li DÛKAN",
+  "productReport": "Li ser îlanê gilî bike",
+  "productReportTitle": "Çima tu li ser vê îlanê gilî dikî?",
+  "productReportDetailsHint": "Hûrguliyên ne mecbûrî (herî zêde 3000 tîp)",
+  "productReportSubmit": "Gilî bişîne",
+  "productReportSubmitted": "Spas. Em ê giliya te binirxînin.",
+  "reportReasonSpam": "Spam",
+  "reportReasonFraud": "Xapandin",
+  "reportReasonCounterfeit": "Berhema sexte",
+  "reportReasonProhibited": "Berhemên qedexe",
+  "reportReasonHarassment": "Tacîz",
+  "reportReasonInappropriate": "Naveroka neguncaw",
+  "reportReasonOther": "Yên din",
+  "sellerVerified": "Piştrastkirî",
+  "sellerTypePrivate": "Taybet",
+  "sellerTypeBusiness": "Karsaz",
+  "sellerProfileListingsTitle": "Îlanên vî firoşkarî",
+  "sellerProfileAbout": "Derbarê firoşkar de",
+  "sellerProfileNoBio": "Vî firoşkarî hîn danasînek zêde nekiriye.",
+  "sellerProfileEmptyListings": "Niha tu îlan tune ne.",
+  "sellerProfileLoadFailed": "Firoşkar nehat dîtin.",
+  "productSimilarTitle": "Îlanên mîna vê",
+  "productSimilarEmpty": "Hîn îlanên mîna vê tune ne.",
+  "productSellerListingsTitle": "Îlanên din ên vî firoşkarî",
+  "productDetailsTitle": "Hûrguliyên berhemê",
+  "productDetailsCondition": "Rewş",
+  "productDetailsCategory": "Kategorî",
+  "productDetailsCity": "Bajar",
+  "productDetailsShipping": "Şandin",
+  "productDetailsFreeShipping": "Şandina belaş",
+  "productDetailsPaidShipping": "Firoşkar dişîne",
+  "productDetailsPickupOnly": "Tenê ji cem firoşkarî wergirtin",
+  "productDescriptionMore": "Zêdetir nîşan bide",
+  "productDescriptionLess": "Kêmtir nîşan bide",
+  "favoriteAdded": "Li bijarteyan hat zêdekirin",
+  "favoriteRemoved": "Ji bijarteyan hat derxistin",
+  "viewSellerProfile": "Profîla firoşkar bibîne",
+  "@productActionsLabel": {
+    "description": "Menu of secondary product actions."
+  },
+  "@productShare": {
+    "description": "Share this listing."
+  },
+  "@productShareText": {
+    "description": "Text used when sharing a listing.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@productReport": {
+    "description": "Opens the report listing flow."
+  },
+  "@productReportTitle": {
+    "description": "Title of the report reason sheet."
+  },
+  "@productReportDetailsHint": {
+    "description": "Optional report details field hint."
+  },
+  "@productReportSubmit": {
+    "description": "Submits the report."
+  },
+  "@productReportSubmitted": {
+    "description": "Confirmation after a report is filed."
+  },
+  "@reportReasonSpam": {
+    "description": "Report reason: spam."
+  },
+  "@reportReasonFraud": {
+    "description": "Report reason: fraud."
+  },
+  "@reportReasonCounterfeit": {
+    "description": "Report reason: counterfeit."
+  },
+  "@reportReasonProhibited": {
+    "description": "Report reason: prohibited item."
+  },
+  "@reportReasonHarassment": {
+    "description": "Report reason: harassment."
+  },
+  "@reportReasonInappropriate": {
+    "description": "Report reason: inappropriate content."
+  },
+  "@reportReasonOther": {
+    "description": "Report reason: other."
+  },
+  "@sellerVerified": {
+    "description": "Badge shown for verified business sellers."
+  },
+  "@sellerTypePrivate": {
+    "description": "Badge for private sellers."
+  },
+  "@sellerTypeBusiness": {
+    "description": "Badge for business sellers."
+  },
+  "@sellerProfileListingsTitle": {
+    "description": "Seller profile listings section title."
+  },
+  "@sellerProfileAbout": {
+    "description": "Seller profile about section title."
+  },
+  "@sellerProfileNoBio": {
+    "description": "Shown when a seller has no description."
+  },
+  "@sellerProfileEmptyListings": {
+    "description": "Empty state for seller listings."
+  },
+  "@sellerProfileLoadFailed": {
+    "description": "Error state for an unavailable seller."
+  },
+  "@productSimilarTitle": {
+    "description": "Similar listings section title."
+  },
+  "@productSimilarEmpty": {
+    "description": "Empty state for similar listings."
+  },
+  "@productSellerListingsTitle": {
+    "description": "More-from-seller section title."
+  },
+  "@productDetailsTitle": {
+    "description": "Product details section title."
+  },
+  "@productDetailsCondition": {
+    "description": "Detail row: condition."
+  },
+  "@productDetailsCategory": {
+    "description": "Detail row: category."
+  },
+  "@productDetailsCity": {
+    "description": "Detail row: city."
+  },
+  "@productDetailsShipping": {
+    "description": "Detail row: shipping."
+  },
+  "@productDetailsFreeShipping": {
+    "description": "Shipping value: free shipping."
+  },
+  "@productDetailsPaidShipping": {
+    "description": "Shipping value: seller ships."
+  },
+  "@productDetailsPickupOnly": {
+    "description": "Shipping value: pickup only."
+  },
+  "@productDescriptionMore": {
+    "description": "Expand a long description."
+  },
+  "@productDescriptionLess": {
+    "description": "Collapse a long description."
+  },
+  "@favoriteAdded": {
+    "description": "Snack bar after adding a favorite."
+  },
+  "@favoriteRemoved": {
+    "description": "Snack bar after removing a favorite."
+  },
+  "@viewSellerProfile": {
+    "description": "Semantic label for the tappable seller card."
+  },
+  "productUnavailableTitle": "Îlan ne berdest e",
+  "productUnavailableBody": "Ev îlan niha nayê nîşandan.",
+  "productImageUnavailable": "Wêne ne berdest e",
+  "productGalleryPosition": "Wêne {current} ji {total}",
+  "productDetailsBrand": "Marke",
+  "productShippingArrangement": "Li ser şandinê rasterast bi firoşkar re li hev bike.",
+  "favoriteAddAction": "Li bijarteyan zêde bike",
+  "favoriteRemoveAction": "Ji bijarteyan derxe"
 }

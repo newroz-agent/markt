@@ -8,7 +8,7 @@ class SupabaseCategoryRepository implements CategoryRepository {
   SupabaseCategoryRepository(this._client);
 
   static const _columns =
-      'id, parent_id, slug, name_de, name_en, name_ar, name_tr, '
+      'id, parent_id, slug, name_de, name_en, name_ar, name_tr, name_ku, '
       'icon_key, image_url, sort_order';
 
   final SupabaseClient _client;

@@ -291,129 +291,8 @@ class _CategoryByIdProviderElement
   String get categoryId => (origin as CategoryByIdProvider).categoryId;
 }
 
-String _$categoryProductsHash() => r'24aa8943fe55db4289d0b052a87afca9acc9d2ee';
-
-/// See also [categoryProducts].
-@ProviderFor(categoryProducts)
-const categoryProductsProvider = CategoryProductsFamily();
-
-/// See also [categoryProducts].
-class CategoryProductsFamily extends Family<AsyncValue<List<HomeProduct>>> {
-  /// See also [categoryProducts].
-  const CategoryProductsFamily();
-
-  /// See also [categoryProducts].
-  CategoryProductsProvider call(String categoryId) {
-    return CategoryProductsProvider(categoryId);
-  }
-
-  @override
-  CategoryProductsProvider getProviderOverride(
-    covariant CategoryProductsProvider provider,
-  ) {
-    return call(provider.categoryId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'categoryProductsProvider';
-}
-
-/// See also [categoryProducts].
-class CategoryProductsProvider
-    extends AutoDisposeFutureProvider<List<HomeProduct>> {
-  /// See also [categoryProducts].
-  CategoryProductsProvider(String categoryId)
-    : this._internal(
-        (ref) => categoryProducts(ref as CategoryProductsRef, categoryId),
-        from: categoryProductsProvider,
-        name: r'categoryProductsProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$categoryProductsHash,
-        dependencies: CategoryProductsFamily._dependencies,
-        allTransitiveDependencies:
-            CategoryProductsFamily._allTransitiveDependencies,
-        categoryId: categoryId,
-      );
-
-  CategoryProductsProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.categoryId,
-  }) : super.internal();
-
-  final String categoryId;
-
-  @override
-  Override overrideWith(
-    FutureOr<List<HomeProduct>> Function(CategoryProductsRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: CategoryProductsProvider._internal(
-        (ref) => create(ref as CategoryProductsRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        categoryId: categoryId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<List<HomeProduct>> createElement() {
-    return _CategoryProductsProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is CategoryProductsProvider && other.categoryId == categoryId;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, categoryId.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin CategoryProductsRef on AutoDisposeFutureProviderRef<List<HomeProduct>> {
-  /// The parameter `categoryId` of this provider.
-  String get categoryId;
-}
-
-class _CategoryProductsProviderElement
-    extends AutoDisposeFutureProviderElement<List<HomeProduct>>
-    with CategoryProductsRef {
-  _CategoryProductsProviderElement(super.provider);
-
-  @override
-  String get categoryId => (origin as CategoryProductsProvider).categoryId;
-}
-
 String _$categoryProductsFilterHash() =>
-    r'292028451b13a79f31f30c71b57ed505012f324c';
+    r'3dea06a4cf6fa0fd3d4a9fd6d357fdc7f6f7a695';
 
 abstract class _$CategoryProductsFilter
     extends BuildlessAutoDisposeNotifier<CategoryProductsFilterState> {
@@ -559,6 +438,149 @@ class _CategoryProductsFilterProviderElement
   @override
   String get categoryId =>
       (origin as CategoryProductsFilterProvider).categoryId;
+}
+
+String _$categoryProductsHash() => r'6cb9fb330ede24c9c32540291e627ffa35c1d78f';
+
+abstract class _$CategoryProducts
+    extends BuildlessAutoDisposeAsyncNotifier<List<HomeProduct>> {
+  late final String categoryId;
+
+  FutureOr<List<HomeProduct>> build(String categoryId);
+}
+
+/// See also [CategoryProducts].
+@ProviderFor(CategoryProducts)
+const categoryProductsProvider = CategoryProductsFamily();
+
+/// See also [CategoryProducts].
+class CategoryProductsFamily extends Family<AsyncValue<List<HomeProduct>>> {
+  /// See also [CategoryProducts].
+  const CategoryProductsFamily();
+
+  /// See also [CategoryProducts].
+  CategoryProductsProvider call(String categoryId) {
+    return CategoryProductsProvider(categoryId);
+  }
+
+  @override
+  CategoryProductsProvider getProviderOverride(
+    covariant CategoryProductsProvider provider,
+  ) {
+    return call(provider.categoryId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'categoryProductsProvider';
+}
+
+/// See also [CategoryProducts].
+class CategoryProductsProvider
+    extends
+        AutoDisposeAsyncNotifierProviderImpl<
+          CategoryProducts,
+          List<HomeProduct>
+        > {
+  /// See also [CategoryProducts].
+  CategoryProductsProvider(String categoryId)
+    : this._internal(
+        () => CategoryProducts()..categoryId = categoryId,
+        from: categoryProductsProvider,
+        name: r'categoryProductsProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$categoryProductsHash,
+        dependencies: CategoryProductsFamily._dependencies,
+        allTransitiveDependencies:
+            CategoryProductsFamily._allTransitiveDependencies,
+        categoryId: categoryId,
+      );
+
+  CategoryProductsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.categoryId,
+  }) : super.internal();
+
+  final String categoryId;
+
+  @override
+  FutureOr<List<HomeProduct>> runNotifierBuild(
+    covariant CategoryProducts notifier,
+  ) {
+    return notifier.build(categoryId);
+  }
+
+  @override
+  Override overrideWith(CategoryProducts Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: CategoryProductsProvider._internal(
+        () => create()..categoryId = categoryId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        categoryId: categoryId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<CategoryProducts, List<HomeProduct>>
+  createElement() {
+    return _CategoryProductsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CategoryProductsProvider && other.categoryId == categoryId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, categoryId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin CategoryProductsRef
+    on AutoDisposeAsyncNotifierProviderRef<List<HomeProduct>> {
+  /// The parameter `categoryId` of this provider.
+  String get categoryId;
+}
+
+class _CategoryProductsProviderElement
+    extends
+        AutoDisposeAsyncNotifierProviderElement<
+          CategoryProducts,
+          List<HomeProduct>
+        >
+    with CategoryProductsRef {
+  _CategoryProductsProviderElement(super.provider);
+
+  @override
+  String get categoryId => (origin as CategoryProductsProvider).categoryId;
 }
 
 // ignore_for_file: type=lint

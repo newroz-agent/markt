@@ -1,15 +1,9 @@
 import 'package:flutter/cupertino.dart' show CupertinoLocalizations;
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zerin_marketplace/l10n/ku_localizations.dart';
+import 'package:zerin_marketplace/features/home/presentation/home_formatters.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
-
-/// Mirrors the delegate list in `ZerinApp` so a regression there is caught here.
-const List<LocalizationsDelegate<dynamic>> _delegates =
-    <LocalizationsDelegate<dynamic>>[
-      ...kuFallbackDelegates,
-      ...AppLocalizations.localizationsDelegates,
-    ];
 
 /// Renders the date the way `privacy_screen.dart` and `legal_screen.dart` do.
 class _FormatsADate extends StatelessWidget {
@@ -28,7 +22,7 @@ Future<void> _pumpAt(WidgetTester tester, Locale locale) {
     MaterialApp(
       locale: locale,
       supportedLocales: AppLocale.supportedLocales,
-      localizationsDelegates: _delegates,
+      localizationsDelegates: AppLocale.localizationsDelegates,
       home: const Scaffold(body: _FormatsADate()),
     ),
   );
@@ -36,6 +30,36 @@ Future<void> _pumpAt(WidgetTester tester, Locale locale) {
 
 void main() {
   group('ku locale', () {
+    test('prices use German number symbols without changing app locale', () {
+      expect(
+        formatMarketplacePrice(AppLocale.kurdish, 123456, 'EUR'),
+        formatMarketplacePrice(AppLocale.german, 123456, 'EUR'),
+      );
+      expect(
+        formatMarketplacePrice(const Locale('ku', 'TR'), 123456, 'EUR'),
+        formatMarketplacePrice(AppLocale.german, 123456, 'EUR'),
+      );
+      expect(AppLocale.normalize(AppLocale.kurdish), AppLocale.kurdish);
+    });
+
+    testWidgets(
+      'untranslated framework labels explicitly fall back to German',
+      (tester) async {
+        await _pumpAt(tester, AppLocale.kurdish);
+        final context = tester.element(find.byType(_FormatsADate));
+        final material = MaterialLocalizations.of(context);
+        final cupertino = CupertinoLocalizations.of(context);
+        final germanMaterial = await GlobalMaterialLocalizations.delegate.load(
+          AppLocale.german,
+        );
+        final germanCupertino = await GlobalCupertinoLocalizations.delegate
+            .load(AppLocale.german);
+        expect(material.datePickerHelpText, germanMaterial.datePickerHelpText);
+        expect(cupertino.todayLabel, germanCupertino.todayLabel);
+        expect(context.l10n.localeName, 'ku');
+        expect(context.l10n.navigationHome, 'Destpêk');
+      },
+    );
     // The bug this guards: Flutter ships no Kurdish translations, so without
     // the fallback delegates `MaterialLocalizations.of` returns null and its
     // `!` throws on every screen that formats a date.
@@ -107,7 +131,7 @@ void main() {
         MaterialApp(
           locale: AppLocale.kurdish,
           supportedLocales: AppLocale.supportedLocales,
-          localizationsDelegates: _delegates,
+          localizationsDelegates: AppLocale.localizationsDelegates,
           home: Builder(
             builder: (context) {
               l10n = AppLocalizations.of(context);
@@ -136,7 +160,7 @@ void main() {
           MaterialApp(
             locale: locale,
             supportedLocales: AppLocale.supportedLocales,
-            localizationsDelegates: _delegates,
+            localizationsDelegates: AppLocale.localizationsDelegates,
             home: Builder(
               builder: (context) {
                 l10n = AppLocalizations.of(context);

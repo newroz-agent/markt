@@ -14,7 +14,10 @@ List<RouteBase> get $appRoutes => [
   $privacyRoute,
   $notificationSettingsRoute,
   $productDetailRoute,
+  $sellerProfileRoute,
   $categoryProductsRoute,
+  $chatInboxRoute,
+  $chatConversationRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -212,6 +215,29 @@ extension $ProductDetailRouteExtension on ProductDetailRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $sellerProfileRoute => GoRouteData.$route(
+  path: '/sellers/:sellerId',
+
+  factory: $SellerProfileRouteExtension._fromState,
+);
+
+extension $SellerProfileRouteExtension on SellerProfileRoute {
+  static SellerProfileRoute _fromState(GoRouterState state) =>
+      SellerProfileRoute(sellerId: state.pathParameters['sellerId']!);
+
+  String get location =>
+      GoRouteData.$location('/sellers/${Uri.encodeComponent(sellerId)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $categoryProductsRoute => GoRouteData.$route(
   path: '/categories/:categoryId',
 
@@ -224,6 +250,51 @@ extension $CategoryProductsRouteExtension on CategoryProductsRoute {
 
   String get location =>
       GoRouteData.$location('/categories/${Uri.encodeComponent(categoryId)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $chatInboxRoute => GoRouteData.$route(
+  path: '/inbox',
+
+  factory: $ChatInboxRouteExtension._fromState,
+);
+
+extension $ChatInboxRouteExtension on ChatInboxRoute {
+  static ChatInboxRoute _fromState(GoRouterState state) =>
+      const ChatInboxRoute();
+
+  String get location => GoRouteData.$location('/inbox');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $chatConversationRoute => GoRouteData.$route(
+  path: '/chat/:chatId',
+
+  factory: $ChatConversationRouteExtension._fromState,
+);
+
+extension $ChatConversationRouteExtension on ChatConversationRoute {
+  static ChatConversationRoute _fromState(GoRouterState state) =>
+      ChatConversationRoute(chatId: state.pathParameters['chatId']!);
+
+  String get location =>
+      GoRouteData.$location('/chat/${Uri.encodeComponent(chatId)}');
 
   void go(BuildContext context) => context.go(location);
 

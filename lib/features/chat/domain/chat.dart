@@ -20,6 +20,8 @@ class ChatConversation {
     required this.lastMessageAt,
     required this.lastMessagePreview,
     required this.unreadCount,
+    this.buyerName,
+    this.buyerAvatarUrl,
   });
 
   factory ChatConversation.fromJson(Map<String, dynamic> json) {
@@ -37,12 +39,15 @@ class ChatConversation {
       productImageUrl: product != null
           ? (product['image_url'] as String?)
           : null,
-      productPriceCents:
-          (product?['price_cents'] as num?)?.toInt() ?? 0,
+      productPriceCents: (product?['price_cents'] as num?)?.toInt() ?? 0,
       productCurrency: product?['currency'] as String? ?? 'EUR',
-      lastMessageAt: DateTime.tryParse(json['last_message_at'] as String? ?? ''),
+      lastMessageAt: DateTime.tryParse(
+        json['last_message_at'] as String? ?? '',
+      ),
       lastMessagePreview: json['last_message_preview'] as String?,
       unreadCount: (json['unread_count'] as num?)?.toInt() ?? 0,
+      buyerName: json['buyer_name'] as String?,
+      buyerAvatarUrl: json['buyer_avatar_url'] as String?,
     );
   }
 
@@ -61,6 +66,8 @@ class ChatConversation {
   final DateTime? lastMessageAt;
   final String? lastMessagePreview;
   final int unreadCount;
+  final String? buyerName;
+  final String? buyerAvatarUrl;
 }
 
 @immutable
@@ -92,7 +99,8 @@ class ChatMessage {
       productPriceCents: (product?['price_cents'] as num?)?.toInt() ?? 0,
       productCurrency: product?['currency'] as String? ?? 'EUR',
       readAt: DateTime.tryParse(json['read_at'] as String? ?? ''),
-      createdAt: DateTime.tryParse(json['created_at'] as String? ?? '') ??
+      createdAt:
+          DateTime.tryParse(json['created_at'] as String? ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
@@ -109,14 +117,12 @@ class ChatMessage {
   final DateTime? readAt;
   final DateTime createdAt;
 
-  bool get isMine => senderId != null;
-
   static MessageKind _kindFromName(String name) => switch (name) {
-        'image' => MessageKind.image,
-        'product' => MessageKind.product,
-        'system' => MessageKind.system,
-        _ => MessageKind.text,
-      };
+    'image' => MessageKind.image,
+    'product' => MessageKind.product,
+    'system' => MessageKind.system,
+    _ => MessageKind.text,
+  };
 }
 
 Map<String, dynamic>? _mapOrNull(Object? value) =>

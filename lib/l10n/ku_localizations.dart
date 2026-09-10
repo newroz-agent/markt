@@ -15,13 +15,14 @@ import 'package:zerin_marketplace/l10n/ku_date_symbols.dart';
 /// `legal_screen.dart` call `formatFullDate` through it, so the crash is on a
 /// path real users reach.
 ///
-/// These delegates subclass the English implementations for reach — the
+/// These delegates subclass the German implementations for reach — the
 /// framework exposes hundreds of strings — but dates render with real Kurmanji
 /// symbols (see [ensureKuDateFormatting]) and the labels users actually read
-/// are overridden below. What remains English is the long tail: date-picker
+/// are overridden below. German is the explicit framework fallback for the
+/// remaining long tail: date-picker
 /// help text, reorder hints, and similar rarely-surfaced strings.
 const String _localeName = 'ku';
-const String _numberLocale = 'en';
+const String _numberLocale = 'de';
 
 /// Order matters: register these ahead of the global delegates in
 /// `localizationsDelegates`. `Localizations._loadAll` keeps the *first*
@@ -34,8 +35,8 @@ const List<LocalizationsDelegate<dynamic>> kuFallbackDelegates =
     ];
 
 /// Material strings under `ku`: Kurmanji for the labels users read on every
-/// dialog and app bar, inherited English for the long tail.
-class KuMaterialLocalizations extends MaterialLocalizationEn {
+/// dialog and app bar, inherited German for the long tail.
+class KuMaterialLocalizations extends MaterialLocalizationDe {
   const KuMaterialLocalizations({
     super.localeName = _localeName,
     required super.fullYearFormat,
@@ -139,7 +140,7 @@ class _KuMaterialLocalizationsDelegate
 ///
 /// `SwitchListTile.adaptive` on the privacy screen resolves to the Cupertino
 /// switch on iOS, so this is reachable on the same screen as the material gap.
-class KuCupertinoLocalizations extends CupertinoLocalizationEn {
+class KuCupertinoLocalizations extends CupertinoLocalizationDe {
   const KuCupertinoLocalizations({
     super.localeName = _localeName,
     required super.fullYearFormat,

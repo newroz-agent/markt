@@ -702,4 +702,220 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get filterSortPriceDesc => 'Preis: absteigend';
+
+  @override
+  String get filterSellerKindLabel => 'Verkäuferart';
+
+  @override
+  String get filterSellerKindAll => 'Alle';
+
+  @override
+  String get filterSellerKindPrivate => 'Privat';
+
+  @override
+  String get filterSellerKindBusiness => 'Gewerblich';
+
+  @override
+  String get filterCityLabel => 'Stadt';
+
+  @override
+  String get filterCityAll => 'Überall';
+
+  @override
+  String get filterCityTitle => 'Stadt wählen';
+
+  @override
+  String get categoryViewGrid => 'Raster';
+
+  @override
+  String get categoryViewList => 'Liste';
+
+  @override
+  String get categorySearchInCategory => 'In dieser Kategorie suchen';
+
+  @override
+  String get categoryProductsLoadMore => 'Mehr laden';
+
+  @override
+  String get categoryProductsNoMore => 'Keine weiteren Anzeigen';
+
+  @override
+  String get productContactSeller => 'Verkäufer kontaktieren';
+
+  @override
+  String get chatInboxTitle => 'Nachrichten';
+
+  @override
+  String get chatInboxEmptyTitle => 'Noch keine Nachrichten';
+
+  @override
+  String get chatInboxEmptyBody =>
+      'Deine Unterhaltungen mit Käufern und Verkäufern erscheinen hier.';
+
+  @override
+  String get chatNoMessagesYet => 'Noch keine Nachrichten';
+
+  @override
+  String get chatTitle => 'Unterhaltung';
+
+  @override
+  String get chatProductCard => 'Produkt';
+
+  @override
+  String get chatInputHint => 'Nachricht schreiben …';
+
+  @override
+  String get chatSend => 'Nachricht senden';
+
+  @override
+  String get chatLoadEarlier => 'Frühere Nachrichten laden';
+
+  @override
+  String get productActionsLabel => 'Produktaktionen';
+
+  @override
+  String get productShare => 'Teilen';
+
+  @override
+  String productShareText({required String title, required String price}) {
+    return '$title – $price auf DÛKAN';
+  }
+
+  @override
+  String get productReport => 'Anzeige melden';
+
+  @override
+  String get productReportTitle => 'Warum meldest du diese Anzeige?';
+
+  @override
+  String get productReportDetailsHint =>
+      'Optionale Beschreibung (max. 3000 Zeichen)';
+
+  @override
+  String get productReportSubmit => 'Meldung senden';
+
+  @override
+  String get productReportSubmitted => 'Danke. Wir prüfen die Meldung.';
+
+  @override
+  String get reportReasonSpam => 'Spam';
+
+  @override
+  String get reportReasonFraud => 'Betrug';
+
+  @override
+  String get reportReasonCounterfeit => 'Plagiat / Fälschung';
+
+  @override
+  String get reportReasonProhibited => 'Verbotener Artikel';
+
+  @override
+  String get reportReasonHarassment => 'Belästigung';
+
+  @override
+  String get reportReasonInappropriate => 'Unangemessene Inhalte';
+
+  @override
+  String get reportReasonOther => 'Sonstiges';
+
+  @override
+  String get sellerVerified => 'Verifiziert';
+
+  @override
+  String get sellerTypePrivate => 'Privat';
+
+  @override
+  String get sellerTypeBusiness => 'Gewerblich';
+
+  @override
+  String get sellerProfileListingsTitle => 'Angebote dieses Verkäufers';
+
+  @override
+  String get sellerProfileAbout => 'Über';
+
+  @override
+  String get sellerProfileNoBio =>
+      'Dieser Verkäufer hat noch keine Beschreibung hinterlegt.';
+
+  @override
+  String get sellerProfileEmptyListings => 'Aktuell keine Angebote verfügbar.';
+
+  @override
+  String get sellerProfileLoadFailed => 'Verkäufer nicht gefunden.';
+
+  @override
+  String get productSimilarTitle => 'Ähnliche Angebote';
+
+  @override
+  String get productSimilarEmpty => 'Noch keine ähnlichen Angebote.';
+
+  @override
+  String get productSellerListingsTitle => 'Weitere Angebote dieses Verkäufers';
+
+  @override
+  String get productDetailsTitle => 'Produktdetails';
+
+  @override
+  String get productDetailsCondition => 'Zustand';
+
+  @override
+  String get productDetailsCategory => 'Kategorie';
+
+  @override
+  String get productDetailsCity => 'Stadt';
+
+  @override
+  String get productDetailsShipping => 'Versand';
+
+  @override
+  String get productDetailsFreeShipping => 'Kostenloser Versand';
+
+  @override
+  String get productDetailsPaidShipping => 'Verkäufer versendet';
+
+  @override
+  String get productDetailsPickupOnly => 'Nur Abholung';
+
+  @override
+  String get productDescriptionMore => 'Mehr anzeigen';
+
+  @override
+  String get productDescriptionLess => 'Weniger anzeigen';
+
+  @override
+  String get favoriteAdded => 'Zu Favoriten hinzugefügt';
+
+  @override
+  String get favoriteRemoved => 'Aus Favoriten entfernt';
+
+  @override
+  String get viewSellerProfile => 'Verkäuferprofil ansehen';
+
+  @override
+  String get productUnavailableTitle => 'Anzeige nicht verfügbar';
+
+  @override
+  String get productUnavailableBody =>
+      'Diese Anzeige kann derzeit nicht angezeigt werden.';
+
+  @override
+  String get productImageUnavailable => 'Bild nicht verfügbar';
+
+  @override
+  String productGalleryPosition({required int current, required int total}) {
+    return 'Bild $current von $total';
+  }
+
+  @override
+  String get productDetailsBrand => 'Marke';
+
+  @override
+  String get productShippingArrangement =>
+      'Versand direkt mit dem Verkäufer vereinbaren.';
+
+  @override
+  String get favoriteAddAction => 'Zu Favoriten hinzufügen';
+
+  @override
+  String get favoriteRemoveAction => 'Aus Favoriten entfernen';
 }

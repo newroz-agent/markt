@@ -690,4 +690,215 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get filterSortPriceDesc => 'السعر: من الأعلى';
+
+  @override
+  String get filterSellerKindLabel => 'نوع البائع';
+
+  @override
+  String get filterSellerKindAll => 'الكل';
+
+  @override
+  String get filterSellerKindPrivate => 'خاص';
+
+  @override
+  String get filterSellerKindBusiness => 'تجاري';
+
+  @override
+  String get filterCityLabel => 'المدينة';
+
+  @override
+  String get filterCityAll => 'في كل مكان';
+
+  @override
+  String get filterCityTitle => 'اختر مدينة';
+
+  @override
+  String get categoryViewGrid => 'شبكة';
+
+  @override
+  String get categoryViewList => 'قائمة';
+
+  @override
+  String get categorySearchInCategory => 'ابحث في هذه الفئة';
+
+  @override
+  String get categoryProductsLoadMore => 'تحميل المزيد';
+
+  @override
+  String get categoryProductsNoMore => 'لا المزيد من الإعلانات';
+
+  @override
+  String get productContactSeller => 'تواصل مع البائع';
+
+  @override
+  String get chatInboxTitle => 'الرسائل';
+
+  @override
+  String get chatInboxEmptyTitle => 'لا توجد رسائل بعد';
+
+  @override
+  String get chatInboxEmptyBody => 'ستظهر محادثاتك مع المشترين والبائعين هنا.';
+
+  @override
+  String get chatNoMessagesYet => 'لا توجد رسائل بعد';
+
+  @override
+  String get chatTitle => 'المحادثة';
+
+  @override
+  String get chatProductCard => 'المنتج';
+
+  @override
+  String get chatInputHint => 'اكتب رسالة …';
+
+  @override
+  String get chatSend => 'إرسال رسالة';
+
+  @override
+  String get chatLoadEarlier => 'تحميل الرسائل السابقة';
+
+  @override
+  String get productActionsLabel => 'إجراءات المنتج';
+
+  @override
+  String get productShare => 'مشاركة';
+
+  @override
+  String productShareText({required String title, required String price}) {
+    return '$title – $price على DÛKAN';
+  }
+
+  @override
+  String get productReport => 'الإبلاغ عن الإعلان';
+
+  @override
+  String get productReportTitle => 'لماذا تُبلّغ عن هذا الإعلان؟';
+
+  @override
+  String get productReportDetailsHint => 'تفاصيل اختيارية (3000 حرف كحد أقصى)';
+
+  @override
+  String get productReportSubmit => 'إرسال البلاغ';
+
+  @override
+  String get productReportSubmitted => 'شكراً. سنراجع البلاغ.';
+
+  @override
+  String get reportReasonSpam => 'رسائل غير مرغوبة';
+
+  @override
+  String get reportReasonFraud => 'احتيال';
+
+  @override
+  String get reportReasonCounterfeit => 'تقليد / مزيف';
+
+  @override
+  String get reportReasonProhibited => 'سلعة محظورة';
+
+  @override
+  String get reportReasonHarassment => 'مضايقة';
+
+  @override
+  String get reportReasonInappropriate => 'محتوى غير لائق';
+
+  @override
+  String get reportReasonOther => 'أخرى';
+
+  @override
+  String get sellerVerified => 'موثّق';
+
+  @override
+  String get sellerTypePrivate => 'خاص';
+
+  @override
+  String get sellerTypeBusiness => 'تجاري';
+
+  @override
+  String get sellerProfileListingsTitle => 'إعلانات هذا البائع';
+
+  @override
+  String get sellerProfileAbout => 'نبذة';
+
+  @override
+  String get sellerProfileNoBio => 'لم يضف هذا البائع وصفاً بعد.';
+
+  @override
+  String get sellerProfileEmptyListings => 'لا توجد إعلانات متاحة حالياً.';
+
+  @override
+  String get sellerProfileLoadFailed => 'لم يتم العثور على البائع.';
+
+  @override
+  String get productSimilarTitle => 'إعلانات مشابهة';
+
+  @override
+  String get productSimilarEmpty => 'لا توجد إعلانات مشابهة بعد.';
+
+  @override
+  String get productSellerListingsTitle => 'المزيد من هذا البائع';
+
+  @override
+  String get productDetailsTitle => 'تفاصيل المنتج';
+
+  @override
+  String get productDetailsCondition => 'الحالة';
+
+  @override
+  String get productDetailsCategory => 'الفئة';
+
+  @override
+  String get productDetailsCity => 'المدينة';
+
+  @override
+  String get productDetailsShipping => 'الشحن';
+
+  @override
+  String get productDetailsFreeShipping => 'شحن مجاني';
+
+  @override
+  String get productDetailsPaidShipping => 'البائع يشحن';
+
+  @override
+  String get productDetailsPickupOnly => 'استلام فقط';
+
+  @override
+  String get productDescriptionMore => 'عرض المزيد';
+
+  @override
+  String get productDescriptionLess => 'عرض أقل';
+
+  @override
+  String get favoriteAdded => 'أُضيف إلى المفضلة';
+
+  @override
+  String get favoriteRemoved => 'أُزيل من المفضلة';
+
+  @override
+  String get viewSellerProfile => 'عرض ملف البائع';
+
+  @override
+  String get productUnavailableTitle => 'الإعلان غير متاح';
+
+  @override
+  String get productUnavailableBody => 'لا يمكن عرض هذا الإعلان حالياً.';
+
+  @override
+  String get productImageUnavailable => 'الصورة غير متاحة';
+
+  @override
+  String productGalleryPosition({required int current, required int total}) {
+    return 'الصورة $current من $total';
+  }
+
+  @override
+  String get productDetailsBrand => 'العلامة التجارية';
+
+  @override
+  String get productShippingArrangement => 'اتفق على الشحن مباشرةً مع البائع.';
+
+  @override
+  String get favoriteAddAction => 'إضافة إلى المفضلة';
+
+  @override
+  String get favoriteRemoveAction => 'إزالة من المفضلة';
 }

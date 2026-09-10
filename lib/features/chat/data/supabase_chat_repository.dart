@@ -1,263 +1,261 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'dart:async';
+import 'dart:math';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
+import 'package:zerin_marketplace/features/chat/domain/chat_repository.dart';
 
-/// System message inserted as the very first message of every chat.
-///
-/// This is the marketplace's anti-circumvention line: all contact and
-/// payment must stay inside the app. Keep in sync with l10n copy.
-const chatSystemNotice = '请尽量在应用内沟通和交易，以保障你的权益与安全。';
-
-class SupabaseChatRepository {
+class SupabaseChatRepository implements ChatRepository {
   SupabaseChatRepository(this._client);
 
-  static const _sellerJoin =
-      'seller:sellers!inner(id, user_id, slug, shop_name, avatar_url)';
-
-  static const _conversationColumns =
-      'id, buyer_id, seller_id, last_message_at, last_message_preview, '
-      '$_sellerJoin, '
-      'product:products(id, title, price_cents, currency)';
-
+  final SupabaseClient _client;
+  final _pendingSendIds = <(String, String, String), String>{};
+  int _channelSerial = 0;
+  final _historyStart = <String, ChatMessage>{};
   static const _messageColumns =
       'id, chat_id, sender_id, kind, body, product_id, read_at, created_at, '
       'product:products(id, title, price_cents, currency)';
 
-  final SupabaseClient _client;
+  @override
+  Future<List<ChatConversation>> fetchConversations() => _inbox();
 
-  /// Inbox: every chat where the current user is buyer or seller,
-  /// newest activity first.
-  Future<List<ChatConversation>> fetchConversations() async {
-    try {
-      final uid = _currentUserId();
-      final rows = await _client
-          .from('chats')
-          .select(_conversationColumns)
-          .or('buyer_id.eq.$uid,sellers.user_id.eq.$uid')
-          .order('last_message_at', ascending: false, nullsFirst: false)
-          .order('created_at', ascending: false)
-          .limit(200);
-      return <ChatConversation>[
-        for (final row in (rows as List<dynamic>))
-          ChatConversation.fromJson(row as Map<String, dynamic>),
-      ];
-    } on PostgrestException catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        AppException(AppFailureCode.unknown, cause: error),
-        stackTrace,
-      );
-    }
+  Future<List<ChatConversation>> _inbox({String? chatId}) async {
+    _currentUserId();
+    final rows = await _client.rpc<List<dynamic>>(
+      'get_chat_inbox',
+      params: {'p_chat_id': chatId},
+    );
+    return rows
+        .map((row) => ChatConversation.fromJson(row as Map<String, dynamic>))
+        .toList();
   }
 
-  /// Historical messages of one chat (oldest last).
-  Future<List<ChatMessage>> fetchMessages(String chatId) async {
-    try {
-      final rows = await _client
-          .from('messages')
-          .select(_messageColumns)
-          .eq('chat_id', chatId)
-          .order('created_at', ascending: true)
-          .limit(500);
-      return <ChatMessage>[
-        for (final row in (rows as List<dynamic>))
-          ChatMessage.fromJson(row as Map<String, dynamic>),
-      ];
-    } on PostgrestException catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        AppException(AppFailureCode.unknown, cause: error),
-        stackTrace,
-      );
-    }
+  @override
+  Future<ChatConversation> fetchConversation(String chatId) async {
+    final rows = await _inbox(chatId: chatId);
+    if (rows.isEmpty) throw const AppException(AppFailureCode.unknown);
+    return rows.single;
   }
 
-  /// Opens (or returns the existing) chat for a product and, on first
-  /// creation, seeds the anti-circumvention system message plus a
-  /// product card message (kind: product).
+  @override
   Future<ChatConversation> openChatWithProduct({
     required String sellerId,
     required String productId,
   }) async {
-    late final Map<String, dynamic> chatRow;
-    try {
-      chatRow = await _client.rpc('get_or_create_chat', params: {
-        'p_seller_id': sellerId,
-        'p_product_id': productId,
-      });
-    } on FunctionException catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        AppException(AppFailureCode.unknown, cause: error),
-        stackTrace,
-      );
-    }
-
-    final chatId = chatRow['id']! as String;
-    final seeded = await _seedFirstMessages(chatId, productId);
-
-    try {
-      final conversations = await fetchConversations();
-      return conversations.firstWhere(
-        (c) => c.chatId == chatId,
-        orElse: () => _minimalConversation(chatRow),
-      );
-    } on AppException {
-      // Inbox refresh failed but the chat exists — return the minimal form.
-      return _minimalConversation(chatRow);
-    }
+    _currentUserId();
+    // The RPC atomically seeds system/product messages. Triggers own previews.
+    final row = await _client.rpc<Map<String, dynamic>>(
+      'get_or_create_chat',
+      params: {'p_seller_id': sellerId, 'p_product_id': productId},
+    );
+    return fetchConversation(row['id']! as String);
   }
 
-  /// Sends a text message and bumps the chat's activity columns.
+  @override
+  Future<List<ChatMessage>> fetchMessages(
+    String chatId, {
+    ChatMessage? before,
+  }) async {
+    final historyKey = '${_currentUserId()}/$chatId';
+    var query = _client
+        .from('messages')
+        .select(_messageColumns)
+        .eq('chat_id', chatId);
+    if (before != null) {
+      final time = before.createdAt.toUtc().toIso8601String();
+      query = query.or(
+        'created_at.lt.$time,and(created_at.eq.$time,id.lt.${before.id})',
+      );
+    }
+    final rows = await query
+        .order('created_at', ascending: false)
+        .order('id', ascending: false)
+        .limit(100);
+    final messages = rows.map(ChatMessage.fromJson).toList().reversed.toList();
+    if (messages.isNotEmpty &&
+        (_historyStart[historyKey] == null ||
+            _compare(messages.first, _historyStart[historyKey]!) < 0)) {
+      _historyStart[historyKey] = messages.first;
+    }
+    return messages;
+  }
+
+  @override
   Future<ChatMessage> sendTextMessage({
     required String chatId,
     required String body,
   }) async {
-    final trimmed = body.trim();
-    if (trimmed.isEmpty) {
+    final text = body.trim();
+    if (text.isEmpty || text.runes.length > 5000) {
       throw const AppException(AppFailureCode.unknown);
     }
+    final uid = _currentUserId();
+    final key = (uid, chatId, text);
+    // A failed response may hide a committed insert. Reuse its primary key.
+    final id = _pendingSendIds.putIfAbsent(key, _messageId);
+    Map<String, dynamic> row;
     try {
-      final row = await _client
+      row = await _client
           .from('messages')
           .insert({
+            'id': id,
             'chat_id': chatId,
-            'sender_id': _currentUserId(),
+            'sender_id': uid,
             'kind': 'text',
-            'body': trimmed,
+            'body': text,
           })
           .select(_messageColumns)
           .single();
-      await _touchChat(chatId, trimmed);
-      return ChatMessage.fromJson(row);
-    } on PostgrestException catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        AppException(AppFailureCode.unknown, cause: error),
-        stackTrace,
-      );
-    }
-  }
-
-  /// Realtime message stream for one chat: initial history followed by
-  /// every INSERT pushed via Supabase Realtime (no polling).
-  ///
-  /// The returned stream never completes on its own; cancel the
-  /// subscription (or dispose the listener) to stop it.
-  Stream<ChatMessage> subscribeMessages(String chatId) async* {
-    // Initial history first.
-    for (final message in await fetchMessages(chatId)) {
-      yield message;
-    }
-
-    final controller = StreamController<ChatMessage>();
-    late final RealtimeChannel channel;
-    channel = _client
-        .channel('chat-messages-$chatId')
-        .onPostgresChanges(
-          event: PostgresChangeEvent.insert,
-          schema: 'public',
-          table: 'messages',
-          filter: PostgresChangeFilter(
-            type: PostgresChangeFilterType.eq,
-            column: 'chat_id',
-            value: chatId,
-          ),
-          callback: (payload) {
-            final row = payload.newRecord;
-            if (row.isNotEmpty) {
-              controller.add(ChatMessage.fromJson(row));
-            }
-          },
-        )
-        .subscribe();
-
-    await controller.stream
-        .map<ChatMessage>((m) => m)
-        .forEach(controller.add);
-  }
-
-  Future<int> markChatRead(String chatId) async {
-    try {
-      final count = await _client.rpc('mark_chat_read', params: {
-        'p_chat_id': chatId,
-      });
-      return (count as num?)?.toInt() ?? 0;
-    } on FunctionException catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        AppException(AppFailureCode.unknown, cause: error),
-        stackTrace,
-      );
-    }
-  }
-
-  /// Inserts the anti-circumvention system message (and product card)
-  /// exactly once, keyed on the chat having no prior messages.
-  Future<bool> _seedFirstMessages(String chatId, String productId) async {
-    try {
+    } on PostgrestException catch (error) {
+      if (error.code != '23505') rethrow;
       final existing = await _client
           .from('messages')
-          .select('id')
+          .select(_messageColumns)
+          .eq('id', id)
+          .eq('sender_id', uid)
           .eq('chat_id', chatId)
-          .limit(1);
-      if ((existing as List<dynamic>).isNotEmpty) return false;
-
-      await _client.from('messages').insert(<Map<String, dynamic>>[
-        {
-          'chat_id': chatId,
-          'sender_id': null,
-          'kind': 'system',
-          'body': chatSystemNotice,
-        },
-        {
-          'chat_id': chatId,
-          'sender_id': _currentUserId(),
-          'kind': 'product',
-          'product_id': productId,
-        },
-      ]);
-      await _touchChat(chatId, chatSystemNotice);
-      return true;
-    } on PostgrestException {
-      // A concurrent session may have seeded first; the chat still works.
-      return false;
+          .eq('body', text)
+          .eq('kind', 'text')
+          .maybeSingle();
+      if (existing == null) rethrow;
+      row = existing;
     }
+    final message = ChatMessage.fromJson(row);
+    // An overlapping retry must not clear a newer send's key.
+    if (_pendingSendIds[key] == id) _pendingSendIds.remove(key);
+    return message;
   }
 
-  Future<void> _touchChat(String chatId, String preview) async {
-    await _client.from('chats').update({
-      'last_message_at': DateTime.now().toUtc().toIso8601String(),
-      'last_message_preview': preview,
-    }).eq('id', chatId);
-  }
+  @override
+  Future<int> markChatRead(String chatId) =>
+      _client.rpc<int>('mark_chat_read', params: {'p_chat_id': chatId});
 
-  ChatConversation _minimalConversation(Map<String, dynamic> chatRow) {
-    final seller = _mapOrNull(chatRow['seller'] ?? chatRow['sellers']);
-    final product = _mapOrNull(chatRow['product'] ?? chatRow['products']);
-    return ChatConversation(
-      chatId: chatRow['id']! as String,
-      buyerId: chatRow['buyer_id'] as String?,
-      sellerId: chatRow['seller_id']! as String,
-      sellerUserId: seller?['user_id'] as String?,
-      shopName: seller?['shop_name'] as String? ?? 'Seller',
-      shopSlug: seller?['slug'] as String? ?? '',
-      shopAvatarUrl: seller?['avatar_url'] as String?,
-      productId: product?['id'] as String?,
-      productTitle: product?['title'] as String?,
-      productImageUrl: null,
-      productPriceCents: (product?['price_cents'] as num?)?.toInt() ?? 0,
-      productCurrency: product?['currency'] as String? ?? 'EUR',
-      lastMessageAt: null,
-      lastMessagePreview: null,
-      unreadCount: 0,
+  @override
+  Stream<List<ChatConversation>> watchConversations() =>
+      _watch(tables: const ['chats', 'messages'], load: fetchConversations);
+
+  @override
+  Stream<List<ChatMessage>> watchMessages(String chatId) {
+    final historyKey = '${_currentUserId()}/$chatId';
+    _historyStart.remove(historyKey);
+    return _watch(
+      tables: const ['messages'],
+      chatId: chatId,
+      onCancel: () => _historyStart.remove(historyKey),
+      load: () async {
+        final oldest = _historyStart[historyKey];
+        var page = await fetchMessages(chatId);
+        final result = [...page];
+        // Refresh the loaded range, including read receipts on older pages and
+        // messages missed while disconnected. Older history stays on demand.
+        while (oldest != null &&
+            page.length == 100 &&
+            _compare(page.first, oldest) > 0) {
+          page = await fetchMessages(chatId, before: page.first);
+          result.insertAll(0, page);
+        }
+        return result;
+      },
     );
+  }
+
+  // Subscribe before loading; serialize event-driven refreshes so stale requests
+  // cannot overwrite newer data. No timer or polling is used.
+  Stream<T> _watch<T>({
+    required List<String> tables,
+    required Future<T> Function() load,
+    String? chatId,
+    void Function()? onCancel,
+  }) {
+    late final StreamController<T> controller;
+    RealtimeChannel? channel;
+    var cancelled = false;
+    var loading = false;
+    var dirty = false;
+    var ready = false;
+    Future<void> refresh() async {
+      dirty = true;
+      if (loading || !ready || cancelled) return;
+      loading = true;
+      try {
+        while (dirty && !cancelled && ready) {
+          dirty = false;
+          try {
+            final value = await load();
+            if (!cancelled) controller.add(value);
+          } catch (error, stack) {
+            if (!cancelled) controller.addError(error, stack);
+          }
+        }
+      } finally {
+        loading = false;
+      }
+    }
+
+    controller = StreamController<T>(
+      onListen: () {
+        channel = _client.channel(
+          'phase1-${_currentUserId()}-${_channelSerial++}',
+        );
+        for (final table in tables) {
+          channel!.onPostgresChanges(
+            event: PostgresChangeEvent.all,
+            schema: 'public',
+            table: table,
+            filter: chatId == null
+                ? null
+                : PostgresChangeFilter(
+                    type: PostgresChangeFilterType.eq,
+                    column: 'chat_id',
+                    value: chatId,
+                  ),
+            callback: (_) => unawaited(refresh()),
+          );
+        }
+        channel!.subscribe((status, error) {
+          if (cancelled) return;
+          ready = status == RealtimeSubscribeStatus.subscribed;
+          if (ready) {
+            unawaited(refresh());
+          } else if (status == RealtimeSubscribeStatus.channelError ||
+              status == RealtimeSubscribeStatus.timedOut ||
+              status == RealtimeSubscribeStatus.closed) {
+            controller.addError(
+              AppException(AppFailureCode.network, cause: error),
+            );
+          }
+        });
+      },
+      onCancel: () async {
+        cancelled = true;
+        onCancel?.call();
+        if (channel != null) await _client.removeChannel(channel!);
+      },
+    );
+    return controller.stream;
   }
 
   String _currentUserId() {
     final uid = _client.auth.currentUser?.id;
-    if (uid == null) {
-      throw const AppException(AppFailureCode.notAuthenticated);
-    }
+    if (uid == null) throw const AppException(AppFailureCode.notAuthenticated);
     return uid;
   }
 }
 
-Map<String, dynamic>? _mapOrNull(Object? value) =>
-    value is Map<String, dynamic> ? value : null;
+String _messageId() {
+  final random = Random.secure();
+  final bytes = List<int>.generate(16, (_) => random.nextInt(256));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  final hex = bytes
+      .map((byte) => byte.toRadixString(16).padLeft(2, '0'))
+      .join();
+  return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-'
+      '${hex.substring(12, 16)}-${hex.substring(16, 20)}-${hex.substring(20)}';
+}
+
+int _compare(ChatMessage a, ChatMessage b) {
+  final time = a.createdAt.compareTo(b.createdAt);
+  return time == 0 ? a.id.compareTo(b.id) : time;
+}

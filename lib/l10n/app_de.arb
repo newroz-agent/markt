@@ -1,463 +1,1183 @@
 {
   "@@locale": "de",
   "appName": "Zêrîn",
-  "@appName": {"description": "Public brand name of the marketplace."},
+  "@appName": {
+    "description": "Public brand name of the marketplace."
+  },
   "appTagline": "Dein Marktplatz. Besonders gut.",
-  "@appTagline": {"description": "Short brand promise shown during onboarding."},
-
+  "@appTagline": {
+    "description": "Short brand promise shown during onboarding."
+  },
   "navigationHome": "Startseite",
-  "@navigationHome": {"description": "Label for the home navigation destination."},
+  "@navigationHome": {
+    "description": "Label for the home navigation destination."
+  },
   "navigationCategories": "Kategorien",
-  "@navigationCategories": {"description": "Label for the categories navigation destination."},
+  "@navigationCategories": {
+    "description": "Label for the categories navigation destination."
+  },
   "navigationSell": "Verkaufen",
-  "@navigationSell": {"description": "Label for the central sell navigation destination."},
+  "@navigationSell": {
+    "description": "Label for the central sell navigation destination."
+  },
   "navigationCart": "Warenkorb",
-  "@navigationCart": {"description": "Label for the cart navigation destination."},
+  "@navigationCart": {
+    "description": "Label for the cart navigation destination."
+  },
   "navigationAccount": "Profil",
-  "@navigationAccount": {"description": "Label for the account navigation destination."},
+  "@navigationAccount": {
+    "description": "Label for the account navigation destination."
+  },
   "navigationFavorites": "Favoriten",
-  "@navigationFavorites": {"description": "Label for the favorites destination."},
+  "@navigationFavorites": {
+    "description": "Label for the favorites destination."
+  },
   "navigationOrders": "Bestellungen",
-  "@navigationOrders": {"description": "Label for the orders destination."},
+  "@navigationOrders": {
+    "description": "Label for the orders destination."
+  },
   "navigationMessages": "Nachrichten",
-  "@navigationMessages": {"description": "Label for the messages destination."},
+  "@navigationMessages": {
+    "description": "Label for the messages destination."
+  },
   "navigationSettings": "Einstellungen",
-  "@navigationSettings": {"description": "Label for the settings destination."},
-
+  "@navigationSettings": {
+    "description": "Label for the settings destination."
+  },
   "actionContinue": "Weiter",
-  "@actionContinue": {"description": "Generic continue action."},
+  "@actionContinue": {
+    "description": "Generic continue action."
+  },
   "actionSkip": "Überspringen",
-  "@actionSkip": {"description": "Generic skip action."},
+  "@actionSkip": {
+    "description": "Generic skip action."
+  },
   "actionGetStarted": "Los geht’s",
-  "@actionGetStarted": {"description": "Action that completes onboarding."},
+  "@actionGetStarted": {
+    "description": "Action that completes onboarding."
+  },
   "actionNext": "Weiter",
-  "@actionNext": {"description": "Action that advances to the next step."},
+  "@actionNext": {
+    "description": "Action that advances to the next step."
+  },
   "actionBack": "Zurück",
-  "@actionBack": {"description": "Generic back action."},
+  "@actionBack": {
+    "description": "Generic back action."
+  },
   "actionClose": "Schließen",
-  "@actionClose": {"description": "Generic close action."},
+  "@actionClose": {
+    "description": "Generic close action."
+  },
   "actionCancel": "Abbrechen",
-  "@actionCancel": {"description": "Generic cancel action."},
+  "@actionCancel": {
+    "description": "Generic cancel action."
+  },
   "actionSave": "Speichern",
-  "@actionSave": {"description": "Generic save action."},
+  "@actionSave": {
+    "description": "Generic save action."
+  },
   "actionDone": "Fertig",
-  "@actionDone": {"description": "Generic done action."},
+  "@actionDone": {
+    "description": "Generic done action."
+  },
   "actionRetry": "Erneut versuchen",
-  "@actionRetry": {"description": "Action used to retry a failed operation."},
+  "@actionRetry": {
+    "description": "Action used to retry a failed operation."
+  },
   "actionSeeAll": "Alle anzeigen",
-  "@actionSeeAll": {"description": "Action used to open a complete list."},
+  "@actionSeeAll": {
+    "description": "Action used to open a complete list."
+  },
   "actionSearch": "Suchen",
-  "@actionSearch": {"description": "Generic search action."},
+  "@actionSearch": {
+    "description": "Generic search action."
+  },
   "actionApply": "Anwenden",
-  "@actionApply": {"description": "Action used to apply filters or settings."},
+  "@actionApply": {
+    "description": "Action used to apply filters or settings."
+  },
   "actionClearAll": "Alle löschen",
-  "@actionClearAll": {"description": "Action used to clear all selected values."},
+  "@actionClearAll": {
+    "description": "Action used to clear all selected values."
+  },
   "actionConfirm": "Bestätigen",
-  "@actionConfirm": {"description": "Generic confirm action."},
+  "@actionConfirm": {
+    "description": "Generic confirm action."
+  },
   "actionEdit": "Bearbeiten",
-  "@actionEdit": {"description": "Generic edit action."},
+  "@actionEdit": {
+    "description": "Generic edit action."
+  },
   "actionDelete": "Löschen",
-  "@actionDelete": {"description": "Generic delete action."},
+  "@actionDelete": {
+    "description": "Generic delete action."
+  },
   "actionSignIn": "Anmelden",
-  "@actionSignIn": {"description": "Action used to sign in."},
+  "@actionSignIn": {
+    "description": "Action used to sign in."
+  },
   "actionSignUp": "Konto erstellen",
-  "@actionSignUp": {"description": "Action used to create an account."},
+  "@actionSignUp": {
+    "description": "Action used to create an account."
+  },
   "actionSignOut": "Abmelden",
-  "@actionSignOut": {"description": "Action used to sign out."},
-
+  "@actionSignOut": {
+    "description": "Action used to sign out."
+  },
   "stateLoading": "Wird geladen …",
-  "@stateLoading": {"description": "Accessible status text for loading content."},
+  "@stateLoading": {
+    "description": "Accessible status text for loading content."
+  },
   "stateErrorTitle": "Das hat nicht geklappt",
-  "@stateErrorTitle": {"description": "Generic error-state title."},
+  "@stateErrorTitle": {
+    "description": "Generic error-state title."
+  },
   "stateErrorMessage": "Bitte versuche es gleich noch einmal.",
-  "@stateErrorMessage": {"description": "Generic recoverable error-state message."},
+  "@stateErrorMessage": {
+    "description": "Generic recoverable error-state message."
+  },
   "stateOfflineTitle": "Du bist offline",
-  "@stateOfflineTitle": {"description": "Offline-state title."},
+  "@stateOfflineTitle": {
+    "description": "Offline-state title."
+  },
   "stateOfflineMessage": "Prüfe deine Internetverbindung und versuche es erneut.",
-  "@stateOfflineMessage": {"description": "Offline-state explanatory message."},
+  "@stateOfflineMessage": {
+    "description": "Offline-state explanatory message."
+  },
   "stateEmptyTitle": "Hier ist noch nichts",
-  "@stateEmptyTitle": {"description": "Generic empty-state title."},
+  "@stateEmptyTitle": {
+    "description": "Generic empty-state title."
+  },
   "authRequiredTitle": "Anmeldung erforderlich",
-  "@authRequiredTitle": {"description": "Title for a guest authentication gate."},
+  "@authRequiredTitle": {
+    "description": "Title for a guest authentication gate."
+  },
   "authRequiredMessage": "Melde dich an, um diese Funktion zu nutzen.",
-  "@authRequiredMessage": {"description": "Message explaining that a guest must sign in."},
-
+  "@authRequiredMessage": {
+    "description": "Message explaining that a guest must sign in."
+  },
   "onboardingWelcomeTitle": "Alles, was du liebst. An einem Ort.",
-  "@onboardingWelcomeTitle": {"description": "Title of the first onboarding page."},
+  "@onboardingWelcomeTitle": {
+    "description": "Title of the first onboarding page."
+  },
   "onboardingWelcomeBody": "Entdecke ausgewählte Produkte von Shops und privaten Verkäufern in ganz Deutschland.",
-  "@onboardingWelcomeBody": {"description": "Body copy of the first onboarding page."},
+  "@onboardingWelcomeBody": {
+    "description": "Body copy of the first onboarding page."
+  },
   "onboardingDiscoverTitle": "Finde Besonderes in deiner Nähe",
-  "@onboardingDiscoverTitle": {"description": "Title of the second onboarding page."},
+  "@onboardingDiscoverTitle": {
+    "description": "Title of the second onboarding page."
+  },
   "onboardingDiscoverBody": "Suche, filtere und vergleiche neue und gebrauchte Artikel – sicher und transparent.",
-  "@onboardingDiscoverBody": {"description": "Body copy of the second onboarding page."},
+  "@onboardingDiscoverBody": {
+    "description": "Body copy of the second onboarding page."
+  },
   "onboardingSellTitle": "Verkaufe einfach und sicher",
-  "@onboardingSellTitle": {"description": "Title of the third onboarding page."},
+  "@onboardingSellTitle": {
+    "description": "Title of the third onboarding page."
+  },
   "onboardingSellBody": "Stelle Artikel in wenigen Minuten ein oder baue deinen eigenen Shop auf.",
-  "@onboardingSellBody": {"description": "Body copy of the third onboarding page."},
-
+  "@onboardingSellBody": {
+    "description": "Body copy of the third onboarding page."
+  },
   "authWelcomeTitle": "Willkommen bei Zêrîn",
-  "@authWelcomeTitle": {"description": "Welcome title on the authentication entry screen."},
+  "@authWelcomeTitle": {
+    "description": "Welcome title on the authentication entry screen."
+  },
   "authWelcomeBody": "Melde dich an, um Favoriten zu speichern, einzukaufen und zu verkaufen.",
-  "@authWelcomeBody": {"description": "Benefits copy on the authentication entry screen."},
+  "@authWelcomeBody": {
+    "description": "Benefits copy on the authentication entry screen."
+  },
   "authSignInTitle": "Anmelden",
-  "@authSignInTitle": {"description": "Title of the sign-in screen."},
+  "@authSignInTitle": {
+    "description": "Title of the sign-in screen."
+  },
   "authSignInSubtitle": "Schön, dass du wieder da bist.",
-  "@authSignInSubtitle": {"description": "Supporting copy on the sign-in screen."},
+  "@authSignInSubtitle": {
+    "description": "Supporting copy on the sign-in screen."
+  },
   "authSignUpTitle": "Konto erstellen",
-  "@authSignUpTitle": {"description": "Title of the registration screen."},
+  "@authSignUpTitle": {
+    "description": "Title of the registration screen."
+  },
   "authSignUpSubtitle": "Erstelle dein Konto in wenigen Schritten.",
-  "@authSignUpSubtitle": {"description": "Supporting copy on the registration screen."},
+  "@authSignUpSubtitle": {
+    "description": "Supporting copy on the registration screen."
+  },
   "authDisplayNameLabel": "Name",
-  "@authDisplayNameLabel": {"description": "Label for the display-name input during registration."},
+  "@authDisplayNameLabel": {
+    "description": "Label for the display-name input during registration."
+  },
   "authDisplayNameHint": "Vor- und Nachname",
-  "@authDisplayNameHint": {"description": "Hint for the display-name input during registration."},
+  "@authDisplayNameHint": {
+    "description": "Hint for the display-name input during registration."
+  },
   "authEmailLabel": "E-Mail-Adresse",
-  "@authEmailLabel": {"description": "Label for an email-address input."},
+  "@authEmailLabel": {
+    "description": "Label for an email-address input."
+  },
   "authEmailHint": "name@beispiel.de",
-  "@authEmailHint": {"description": "Example hint for an email-address input."},
+  "@authEmailHint": {
+    "description": "Example hint for an email-address input."
+  },
   "authPasswordLabel": "Passwort",
-  "@authPasswordLabel": {"description": "Label for a password input."},
+  "@authPasswordLabel": {
+    "description": "Label for a password input."
+  },
   "authPasswordHint": "Mindestens 8 Zeichen",
-  "@authPasswordHint": {"description": "Hint describing the minimum password requirement."},
+  "@authPasswordHint": {
+    "description": "Hint describing the minimum password requirement."
+  },
   "authConfirmPasswordLabel": "Passwort bestätigen",
-  "@authConfirmPasswordLabel": {"description": "Label for a password confirmation input."},
+  "@authConfirmPasswordLabel": {
+    "description": "Label for a password confirmation input."
+  },
   "authForgotPassword": "Passwort vergessen?",
-  "@authForgotPassword": {"description": "Action opening the password reset flow."},
+  "@authForgotPassword": {
+    "description": "Action opening the password reset flow."
+  },
   "authResetPasswordTitle": "Passwort zurücksetzen",
-  "@authResetPasswordTitle": {"description": "Title of the password reset screen."},
+  "@authResetPasswordTitle": {
+    "description": "Title of the password reset screen."
+  },
   "authResetPasswordBody": "Wir senden dir einen Link, mit dem du ein neues Passwort festlegen kannst.",
-  "@authResetPasswordBody": {"description": "Instructions on the password reset screen."},
+  "@authResetPasswordBody": {
+    "description": "Instructions on the password reset screen."
+  },
   "authSendResetLink": "Link senden",
-  "@authSendResetLink": {"description": "Action that sends a password reset link."},
+  "@authSendResetLink": {
+    "description": "Action that sends a password reset link."
+  },
   "authResetLinkSent": "Der Link zum Zurücksetzen wurde gesendet.",
-  "@authResetLinkSent": {"description": "Confirmation shown after requesting a reset link."},
+  "@authResetLinkSent": {
+    "description": "Confirmation shown after requesting a reset link."
+  },
   "authNoAccount": "Noch kein Konto?",
-  "@authNoAccount": {"description": "Prompt shown to users who do not have an account."},
+  "@authNoAccount": {
+    "description": "Prompt shown to users who do not have an account."
+  },
   "authHaveAccount": "Du hast bereits ein Konto?",
-  "@authHaveAccount": {"description": "Prompt shown to registered users on the registration screen."},
+  "@authHaveAccount": {
+    "description": "Prompt shown to registered users on the registration screen."
+  },
   "authContinueWithGoogle": "Mit Google fortfahren",
-  "@authContinueWithGoogle": {"description": "Google authentication action."},
+  "@authContinueWithGoogle": {
+    "description": "Google authentication action."
+  },
   "authContinueWithApple": "Mit Apple fortfahren",
-  "@authContinueWithApple": {"description": "Apple authentication action."},
+  "@authContinueWithApple": {
+    "description": "Apple authentication action."
+  },
   "authContinueAsGuest": "Als Gast fortfahren",
-  "@authContinueAsGuest": {"description": "Action that enters the app without authenticating."},
+  "@authContinueAsGuest": {
+    "description": "Action that enters the app without authenticating."
+  },
   "authOrSeparator": "oder",
-  "@authOrSeparator": {"description": "Separator between social and email authentication methods."},
+  "@authOrSeparator": {
+    "description": "Separator between social and email authentication methods."
+  },
   "authTermsAgreement": "Mit deiner Anmeldung stimmst du unseren AGB und unserer Datenschutzerklärung zu.",
-  "@authTermsAgreement": {"description": "Consent notice shown beside authentication actions."},
+  "@authTermsAgreement": {
+    "description": "Consent notice shown beside authentication actions."
+  },
   "authInvalidCredentials": "E-Mail-Adresse oder Passwort ist nicht korrekt.",
-  "@authInvalidCredentials": {"description": "Error shown when sign-in credentials are invalid."},
+  "@authInvalidCredentials": {
+    "description": "Error shown when sign-in credentials are invalid."
+  },
   "authBackendNotConfigured": "Der Anmeldedienst ist für diese Vorschau noch nicht eingerichtet.",
-  "@authBackendNotConfigured": {"description": "Error shown when authentication backend configuration is missing."},
+  "@authBackendNotConfigured": {
+    "description": "Error shown when authentication backend configuration is missing."
+  },
   "authEmailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse.",
-  "@authEmailNotConfirmed": {"description": "Error shown when a user tries to sign in before confirming their email."},
+  "@authEmailNotConfirmed": {
+    "description": "Error shown when a user tries to sign in before confirming their email."
+  },
   "authEmailAlreadyRegistered": "Für diese E-Mail-Adresse besteht bereits ein Konto.",
-  "@authEmailAlreadyRegistered": {"description": "Error shown when an email address is already registered."},
+  "@authEmailAlreadyRegistered": {
+    "description": "Error shown when an email address is already registered."
+  },
   "authWeakPassword": "Dieses Passwort ist zu schwach. Verwende mindestens 8 Zeichen.",
-  "@authWeakPassword": {"description": "Error shown when the authentication provider rejects a weak password."},
+  "@authWeakPassword": {
+    "description": "Error shown when the authentication provider rejects a weak password."
+  },
   "authNetworkError": "Die Verbindung ist fehlgeschlagen. Prüfe deine Internetverbindung.",
-  "@authNetworkError": {"description": "Error shown when authentication fails because of connectivity."},
+  "@authNetworkError": {
+    "description": "Error shown when authentication fails because of connectivity."
+  },
   "authUnknownError": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
-  "@authUnknownError": {"description": "Fallback error for an unrecognized authentication failure."},
+  "@authUnknownError": {
+    "description": "Fallback error for an unrecognized authentication failure."
+  },
   "authRegistrationCheckEmail": "Konto erstellt. Prüfe jetzt dein E-Mail-Postfach, um deine Adresse zu bestätigen.",
-  "@authRegistrationCheckEmail": {"description": "Success message after registration when email confirmation is required."},
+  "@authRegistrationCheckEmail": {
+    "description": "Success message after registration when email confirmation is required."
+  },
   "authEmailVerificationTitle": "Bestätige deine E-Mail-Adresse",
-  "@authEmailVerificationTitle": {"description": "Title of the email-verification screen."},
+  "@authEmailVerificationTitle": {
+    "description": "Title of the email-verification screen."
+  },
   "authEmailVerificationBody": "Wir haben einen Bestätigungslink an {email} gesendet.",
   "@authEmailVerificationBody": {
     "description": "Message explaining where the email-verification link was sent.",
-    "placeholders": {"email": {"type": "String", "example": "name@beispiel.de"}}
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "name@beispiel.de"
+      }
+    }
   },
   "authResendVerification": "E-Mail erneut senden",
-  "@authResendVerification": {"description": "Action that resends an email-verification link."},
+  "@authResendVerification": {
+    "description": "Action that resends an email-verification link."
+  },
   "validationRequired": "Dieses Feld ist erforderlich.",
-  "@validationRequired": {"description": "Validation error for a required field."},
+  "@validationRequired": {
+    "description": "Validation error for a required field."
+  },
   "validationInvalidEmail": "Gib eine gültige E-Mail-Adresse ein.",
-  "@validationInvalidEmail": {"description": "Validation error for an invalid email address."},
+  "@validationInvalidEmail": {
+    "description": "Validation error for an invalid email address."
+  },
   "validationPasswordMinLength": "Das Passwort muss mindestens {minLength} Zeichen lang sein.",
   "@validationPasswordMinLength": {
     "description": "Validation error for a password that is too short.",
-    "placeholders": {"minLength": {"type": "int", "example": "8"}}
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "8"
+      }
+    }
   },
   "validationPasswordMismatch": "Die Passwörter stimmen nicht überein.",
-  "@validationPasswordMismatch": {"description": "Validation error for non-matching passwords."},
-
+  "@validationPasswordMismatch": {
+    "description": "Validation error for non-matching passwords."
+  },
   "homeGreeting": "Hallo!",
-  "@homeGreeting": {"description": "Generic greeting on the home screen."},
+  "@homeGreeting": {
+    "description": "Generic greeting on the home screen."
+  },
   "homeGreetingNamed": "Hallo, {name}!",
   "@homeGreetingNamed": {
     "description": "Personalized greeting on the home screen.",
-    "placeholders": {"name": {"type": "String", "example": "Mina"}}
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mina"
+      }
+    }
   },
   "homeSearchHint": "Wonach suchst du?",
-  "@homeSearchHint": {"description": "Placeholder for the marketplace search input."},
+  "@homeSearchHint": {
+    "description": "Placeholder for the marketplace search input."
+  },
   "homeCategoriesTitle": "Kategorien",
-  "@homeCategoriesTitle": {"description": "Heading for category shortcuts on the home screen."},
+  "@homeCategoriesTitle": {
+    "description": "Heading for category shortcuts on the home screen."
+  },
   "homeAllCategoriesLabel": "Alle",
-  "@homeAllCategoriesLabel": {"description": "Compact action that opens the complete category list."},
+  "@homeAllCategoriesLabel": {
+    "description": "Compact action that opens the complete category list."
+  },
   "homeDealsTitle": "Angebote",
-  "@homeDealsTitle": {"description": "Heading for discounted products on the home screen."},
+  "@homeDealsTitle": {
+    "description": "Heading for discounted products on the home screen."
+  },
   "homeNewArrivalsTitle": "Neu eingetroffen",
-  "@homeNewArrivalsTitle": {"description": "Heading for newly listed products on the home screen."},
+  "@homeNewArrivalsTitle": {
+    "description": "Heading for newly listed products on the home screen."
+  },
   "homePopularStoresTitle": "Beliebte Geschäfte",
-  "@homePopularStoresTitle": {"description": "Heading for popular stores on the home screen."},
+  "@homePopularStoresTitle": {
+    "description": "Heading for popular stores on the home screen."
+  },
   "homePopularNearbyTitle": "Beliebt in deiner Nähe",
-  "@homePopularNearbyTitle": {"description": "Heading for locally popular products on the home screen."},
+  "@homePopularNearbyTitle": {
+    "description": "Heading for locally popular products on the home screen."
+  },
   "homeRecentlyViewedTitle": "Zuletzt angesehen",
-  "@homeRecentlyViewedTitle": {"description": "Heading for recently viewed products on the home screen."},
-
+  "@homeRecentlyViewedTitle": {
+    "description": "Heading for recently viewed products on the home screen."
+  },
   "categoriesTitle": "Kategorien",
-  "@categoriesTitle": {"description": "Title of the categories screen."},
+  "@categoriesTitle": {
+    "description": "Title of the categories screen."
+  },
   "categoriesSearchHint": "Kategorien durchsuchen",
-  "@categoriesSearchHint": {"description": "Placeholder for category search."},
+  "@categoriesSearchHint": {
+    "description": "Placeholder for category search."
+  },
   "categoriesEmptyTitle": "Keine Kategorien gefunden",
-  "@categoriesEmptyTitle": {"description": "Title shown when no category matches a search."},
+  "@categoriesEmptyTitle": {
+    "description": "Title shown when no category matches a search."
+  },
   "categoriesEmptyBody": "Versuche es mit einem anderen Suchbegriff.",
-  "@categoriesEmptyBody": {"description": "Message shown when no category matches a search."},
-
+  "@categoriesEmptyBody": {
+    "description": "Message shown when no category matches a search."
+  },
   "sellTitle": "Verkaufen",
-  "@sellTitle": {"description": "Title of the sell entry screen."},
+  "@sellTitle": {
+    "description": "Title of the sell entry screen."
+  },
   "sellPrivateTitle": "Privat verkaufen",
-  "@sellPrivateTitle": {"description": "Title of the private-listing path."},
+  "@sellPrivateTitle": {
+    "description": "Title of the private-listing path."
+  },
   "sellPrivateBody": "Stelle deinen Artikel in wenigen Minuten ein.",
-  "@sellPrivateBody": {"description": "Description of the private-listing path."},
+  "@sellPrivateBody": {
+    "description": "Description of the private-listing path."
+  },
   "sellVendorTitle": "Verkäufer werden",
-  "@sellVendorTitle": {"description": "Title of the professional seller onboarding path."},
+  "@sellVendorTitle": {
+    "description": "Title of the professional seller onboarding path."
+  },
   "sellVendorBody": "Eröffne deinen Shop und erreiche Kundinnen und Kunden in ganz Deutschland.",
-  "@sellVendorBody": {"description": "Description of the professional seller onboarding path."},
-
+  "@sellVendorBody": {
+    "description": "Description of the professional seller onboarding path."
+  },
   "cartTitle": "Warenkorb",
-  "@cartTitle": {"description": "Title of the cart screen."},
+  "@cartTitle": {
+    "description": "Title of the cart screen."
+  },
   "cartEmptyTitle": "Dein Warenkorb ist leer",
-  "@cartEmptyTitle": {"description": "Title of the empty cart state."},
+  "@cartEmptyTitle": {
+    "description": "Title of the empty cart state."
+  },
   "cartEmptyBody": "Entdecke Produkte und füge deine Favoriten hinzu.",
-  "@cartEmptyBody": {"description": "Message in the empty cart state."},
+  "@cartEmptyBody": {
+    "description": "Message in the empty cart state."
+  },
   "cartItemCount": "{count, plural, =0 {Keine Artikel} one {1 Artikel} other {{count} Artikel}}",
   "@cartItemCount": {
     "description": "Number of items in the cart.",
-    "placeholders": {"count": {"type": "int", "example": "3"}}
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   },
   "cartSubtotal": "Zwischensumme",
-  "@cartSubtotal": {"description": "Label for the cart subtotal."},
+  "@cartSubtotal": {
+    "description": "Label for the cart subtotal."
+  },
   "cartShipping": "Versand",
-  "@cartShipping": {"description": "Label for shipping costs."},
+  "@cartShipping": {
+    "description": "Label for shipping costs."
+  },
   "cartVatIncluded": "inkl. MwSt.",
-  "@cartVatIncluded": {"description": "Notice that value-added tax is included."},
+  "@cartVatIncluded": {
+    "description": "Notice that value-added tax is included."
+  },
   "cartTotal": "Gesamtsumme",
-  "@cartTotal": {"description": "Label for the final cart total."},
+  "@cartTotal": {
+    "description": "Label for the final cart total."
+  },
   "cartCheckout": "Zur Kasse",
-  "@cartCheckout": {"description": "Action that starts checkout."},
-
+  "@cartCheckout": {
+    "description": "Action that starts checkout."
+  },
   "accountTitle": "Profil",
-  "@accountTitle": {"description": "Title of the account screen."},
+  "@accountTitle": {
+    "description": "Title of the account screen."
+  },
   "accountProfile": "Persönliche Daten",
-  "@accountProfile": {"description": "Account menu item for profile details."},
+  "@accountProfile": {
+    "description": "Account menu item for profile details."
+  },
   "accountAddresses": "Adressen",
-  "@accountAddresses": {"description": "Account menu item for saved addresses."},
+  "@accountAddresses": {
+    "description": "Account menu item for saved addresses."
+  },
   "accountLanguage": "Sprache",
-  "@accountLanguage": {"description": "Account menu item for language selection."},
+  "@accountLanguage": {
+    "description": "Account menu item for language selection."
+  },
   "accountAppearance": "Darstellung",
-  "@accountAppearance": {"description": "Account menu item for theme selection."},
+  "@accountAppearance": {
+    "description": "Account menu item for theme selection."
+  },
   "accountNotifications": "Benachrichtigungen",
-  "@accountNotifications": {"description": "Account menu item for notification settings."},
+  "@accountNotifications": {
+    "description": "Account menu item for notification settings."
+  },
   "accountLegal": "Rechtliches",
-  "@accountLegal": {"description": "Account menu item for legal information."},
+  "@accountLegal": {
+    "description": "Account menu item for legal information."
+  },
   "accountDelete": "Konto löschen",
-  "@accountDelete": {"description": "Account action that starts account deletion."},
+  "@accountDelete": {
+    "description": "Account action that starts account deletion."
+  },
   "accountGuestTitle": "Willkommen bei Zêrîn",
-  "@accountGuestTitle": {"description": "Title of the account screen for a guest user."},
+  "@accountGuestTitle": {
+    "description": "Title of the account screen for a guest user."
+  },
   "accountGuestBody": "Melde dich an, um Bestellungen, Favoriten und deine Verkäufe zu verwalten.",
-  "@accountGuestBody": {"description": "Benefits message on the account screen for a guest user."},
-
+  "@accountGuestBody": {
+    "description": "Benefits message on the account screen for a guest user."
+  },
   "foundationPreviewTitle": "Dein Marktplatz nimmt Form an",
-  "@foundationPreviewTitle": {"description": "Title of the temporary Phase 1 foundation preview."},
+  "@foundationPreviewTitle": {
+    "description": "Title of the temporary Phase 1 foundation preview."
+  },
   "foundationPreviewBody": "Designsystem, Navigation, Sprachen und Anmeldung sind bereit. Weitere Marktplatzfunktionen folgen.",
-  "@foundationPreviewBody": {"description": "Body copy of the temporary Phase 1 foundation preview."},
-
+  "@foundationPreviewBody": {
+    "description": "Body copy of the temporary Phase 1 foundation preview."
+  },
   "languageGerman": "Deutsch",
-  "@languageGerman": {"description": "Display name for the German language."},
+  "@languageGerman": {
+    "description": "Display name for the German language."
+  },
   "languageEnglish": "Englisch",
-  "@languageEnglish": {"description": "Display name for the English language."},
+  "@languageEnglish": {
+    "description": "Display name for the English language."
+  },
   "languageArabic": "Arabisch",
-  "@languageArabic": {"description": "Display name for the Arabic language."},
+  "@languageArabic": {
+    "description": "Display name for the Arabic language."
+  },
   "languageTurkish": "Türkisch",
-  "@languageTurkish": {"description": "Display name for the Turkish language."},
+  "@languageTurkish": {
+    "description": "Display name for the Turkish language."
+  },
   "languageKurdish": "Kurdî",
-  "@languageKurdish": {"description": "Display name for the Kurdish (Kurmanji) language. Shown as the endonym in every locale so Kurdish speakers recognize it whatever the UI language is."},
+  "@languageKurdish": {
+    "description": "Display name for the Kurdish (Kurmanji) language. Shown as the endonym in every locale so Kurdish speakers recognize it whatever the UI language is."
+  },
   "themeSystem": "Systemeinstellung",
-  "@themeSystem": {"description": "Theme option that follows the operating system."},
+  "@themeSystem": {
+    "description": "Theme option that follows the operating system."
+  },
   "themeLight": "Hell",
-  "@themeLight": {"description": "Light theme option."},
+  "@themeLight": {
+    "description": "Light theme option."
+  },
   "themeDark": "Dunkel",
-  "@themeDark": {"description": "Dark theme option."},
-
+  "@themeDark": {
+    "description": "Dark theme option."
+  },
   "productConditionNew": "Neu",
-  "@productConditionNew": {"description": "Badge for a new product."},
+  "@productConditionNew": {
+    "description": "Badge for a new product."
+  },
   "productConditionUsed": "Gebraucht",
-  "@productConditionUsed": {"description": "Badge for a used product."},
+  "@productConditionUsed": {
+    "description": "Badge for a used product."
+  },
   "productVatIncluded": "{price} inkl. MwSt.",
   "@productVatIncluded": {
     "description": "A localized, preformatted price followed by the VAT notice.",
-    "placeholders": {"price": {"type": "String", "example": "49,90 €"}}
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "49,90 €"
+      }
+    }
   },
   "productFreeShipping": "Kostenloser Versand",
-  "@productFreeShipping": {"description": "Badge for free shipping."},
+  "@productFreeShipping": {
+    "description": "Badge for free shipping."
+  },
   "favoriteAdd": "Zu Favoriten hinzufügen",
-  "@favoriteAdd": {"description": "Accessible label for adding a product to favorites."},
+  "@favoriteAdd": {
+    "description": "Accessible label for adding a product to favorites."
+  },
   "favoriteRemove": "Aus Favoriten entfernen",
-  "@favoriteRemove": {"description": "Accessible label for removing a product from favorites."},
+  "@favoriteRemove": {
+    "description": "Accessible label for removing a product from favorites."
+  },
   "cartAdd": "In den Warenkorb",
-  "@cartAdd": {"description": "Action that adds a product to the cart."},
+  "@cartAdd": {
+    "description": "Action that adds a product to the cart."
+  },
   "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {1 Ergebnis} other {{count} Ergebnisse}}",
   "@resultsCount": {
     "description": "Number of search or category results.",
-    "placeholders": {"count": {"type": "int", "example": "24"}}
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "24"
+      }
+    }
   },
   "semanticsSelectedTab": "{label}, ausgewählt",
   "@semanticsSelectedTab": {
     "description": "Accessible label for the selected navigation tab.",
-    "placeholders": {"label": {"type": "String", "example": "Startseite"}}
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Startseite"
+      }
+    }
   },
   "semanticsCartItemCount": "{count, plural, =0 {Warenkorb, keine Artikel} one {Warenkorb, 1 Artikel} other {Warenkorb, {count} Artikel}}",
   "@semanticsCartItemCount": {
     "description": "Accessible cart label including its item count.",
-    "placeholders": {"count": {"type": "int", "example": "3"}}
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   },
-
   "legalImprint": "Impressum",
-  "@legalImprint": {"description": "Label for the legally required imprint."},
+  "@legalImprint": {
+    "description": "Label for the legally required imprint."
+  },
   "legalTerms": "AGB",
-  "@legalTerms": {"description": "Label for terms and conditions."},
+  "@legalTerms": {
+    "description": "Label for terms and conditions."
+  },
   "legalPrivacy": "Datenschutzerklärung",
-  "@legalPrivacy": {"description": "Label for the privacy policy."},
+  "@legalPrivacy": {
+    "description": "Label for the privacy policy."
+  },
   "legalWithdrawal": "Widerrufsbelehrung",
-  "@legalWithdrawal": {"description": "Label for withdrawal-right information."},
+  "@legalWithdrawal": {
+    "description": "Label for withdrawal-right information."
+  },
   "legalComingSoonBody": "Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.",
-  "@legalComingSoonBody": {"description": "Temporary notice used before final legal documents are published."},
+  "@legalComingSoonBody": {
+    "description": "Temporary notice used before final legal documents are published."
+  },
   "legalUnknownDocumentBody": "Dieses rechtliche Dokument existiert nicht.",
-  "@legalUnknownDocumentBody": {"description": "Shown when a legal document slug does not match a known document."},
+  "@legalUnknownDocumentBody": {
+    "description": "Shown when a legal document slug does not match a known document."
+  },
   "legalLoadErrorTitle": "Dokument nicht geladen",
-  "@legalLoadErrorTitle": {"description": "Title of the error state when a legal document fails to load."},
+  "@legalLoadErrorTitle": {
+    "description": "Title of the error state when a legal document fails to load."
+  },
   "legalLoadErrorBody": "Der Text konnte nicht abgerufen werden. Prüfe deine Internetverbindung.",
-  "@legalLoadErrorBody": {"description": "Body of the error state when a legal document fails to load."},
+  "@legalLoadErrorBody": {
+    "description": "Body of the error state when a legal document fails to load."
+  },
   "legalVersionLine": "Fassung {version} · gültig ab {date}",
   "@legalVersionLine": {
     "description": "Version and effective date shown above the body of a legal document.",
     "placeholders": {
-      "version": {"type": "String", "example": "1.2"},
-      "date": {"type": "String", "example": "1. August 2026"}
+      "version": {
+        "type": "String",
+        "example": "1.2"
+      },
+      "date": {
+        "type": "String",
+        "example": "1. August 2026"
+      }
     }
   },
   "legalLinkFailed": "Der Link konnte nicht geöffnet werden.",
-  "@legalLinkFailed": {"description": "Snackbar shown when a link inside a legal document cannot be opened."},
-
+  "@legalLinkFailed": {
+    "description": "Snackbar shown when a link inside a legal document cannot be opened."
+  },
   "accountPrivacy": "Datenschutz & Daten",
-  "@accountPrivacy": {"description": "Account menu item leading to the privacy and data screen."},
+  "@accountPrivacy": {
+    "description": "Account menu item leading to the privacy and data screen."
+  },
   "privacyTitle": "Datenschutz & Daten",
-  "@privacyTitle": {"description": "Title of the privacy and data screen."},
+  "@privacyTitle": {
+    "description": "Title of the privacy and data screen."
+  },
   "privacySignedOutTitle": "Melde dich an",
-  "@privacySignedOutTitle": {"description": "Empty state title shown when privacy settings are opened without a session."},
+  "@privacySignedOutTitle": {
+    "description": "Empty state title shown when privacy settings are opened without a session."
+  },
   "privacySignedOutBody": "Deine Datenschutzeinstellungen gehören zu deinem Konto.",
-  "@privacySignedOutBody": {"description": "Empty state body shown when privacy settings are opened without a session."},
+  "@privacySignedOutBody": {
+    "description": "Empty state body shown when privacy settings are opened without a session."
+  },
   "privacyAnalyticsTitle": "Analyse erlauben",
-  "@privacyAnalyticsTitle": {"description": "Label of the analytics consent switch."},
+  "@privacyAnalyticsTitle": {
+    "description": "Label of the analytics consent switch."
+  },
   "privacyAnalyticsBody": "Hilft uns, Fehler zu finden und die App zu verbessern. Du kannst das jederzeit widerrufen.",
-  "@privacyAnalyticsBody": {"description": "Explanation of what the analytics consent covers."},
+  "@privacyAnalyticsBody": {
+    "description": "Explanation of what the analytics consent covers."
+  },
   "privacyAnalyticsGrantedAt": "Erteilt am {date}",
   "@privacyAnalyticsGrantedAt": {
     "description": "Shows when the user granted analytics consent.",
-    "placeholders": {"date": {"type": "String", "example": "1. August 2026"}}
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "1. August 2026"
+      }
+    }
   },
   "privacyDataSectionTitle": "Deine Daten",
-  "@privacyDataSectionTitle": {"description": "Section heading for data export and account deletion."},
+  "@privacyDataSectionTitle": {
+    "description": "Section heading for data export and account deletion."
+  },
   "privacyExportTitle": "Daten exportieren",
-  "@privacyExportTitle": {"description": "Label of the DSGVO data-export action."},
+  "@privacyExportTitle": {
+    "description": "Label of the DSGVO data-export action."
+  },
   "privacyExportBody": "Wir stellen dir eine Kopie deiner Daten zum Download bereit.",
-  "@privacyExportBody": {"description": "Explanation of the data-export action."},
+  "@privacyExportBody": {
+    "description": "Explanation of the data-export action."
+  },
   "privacyExportRequest": "Export anfordern",
-  "@privacyExportRequest": {"description": "Button that requests a data export."},
+  "@privacyExportRequest": {
+    "description": "Button that requests a data export."
+  },
   "privacyExportPending": "Dein Export wird vorbereitet. Wir benachrichtigen dich, sobald er bereit ist.",
-  "@privacyExportPending": {"description": "Status shown while a data export is being generated."},
+  "@privacyExportPending": {
+    "description": "Status shown while a data export is being generated."
+  },
   "privacyExportReady": "Dein Export ist bereit.",
-  "@privacyExportReady": {"description": "Status shown when a data export can be downloaded."},
+  "@privacyExportReady": {
+    "description": "Status shown when a data export can be downloaded."
+  },
   "privacyExportExpired": "Dieser Export ist abgelaufen. Fordere einen neuen an.",
-  "@privacyExportExpired": {"description": "Status shown when a finished export is past its retention window."},
+  "@privacyExportExpired": {
+    "description": "Status shown when a finished export is past its retention window."
+  },
   "privacyExportDownload": "Herunterladen",
-  "@privacyExportDownload": {"description": "Button that downloads a finished data export."},
+  "@privacyExportDownload": {
+    "description": "Button that downloads a finished data export."
+  },
   "privacyExportRequested": "Export angefordert.",
-  "@privacyExportRequested": {"description": "Snackbar confirming a data export was queued."},
+  "@privacyExportRequested": {
+    "description": "Snackbar confirming a data export was queued."
+  },
   "privacyDeleteTitle": "Konto löschen",
-  "@privacyDeleteTitle": {"description": "Label of the account deletion action."},
+  "@privacyDeleteTitle": {
+    "description": "Label of the account deletion action."
+  },
   "privacyDeleteBody": "Löscht dein Konto und deine persönlichen Daten. Bestellungen bleiben aus steuerrechtlichen Gründen gespeichert.",
-  "@privacyDeleteBody": {"description": "Explains what account deletion does and what is legally retained."},
+  "@privacyDeleteBody": {
+    "description": "Explains what account deletion does and what is legally retained."
+  },
   "privacyDeleteConfirmTitle": "Konto wirklich löschen?",
-  "@privacyDeleteConfirmTitle": {"description": "Title of the account deletion confirmation dialog."},
+  "@privacyDeleteConfirmTitle": {
+    "description": "Title of the account deletion confirmation dialog."
+  },
   "privacyDeleteConfirmBody": "Tippe {word}, um zu bestätigen. Du kannst die Löschung anschließend noch abbrechen, solange sie nicht bearbeitet wird.",
   "@privacyDeleteConfirmBody": {
     "description": "Instruction in the deletion dialog telling the user which word to type.",
-    "placeholders": {"word": {"type": "String", "example": "DELETE"}}
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "DELETE"
+      }
+    }
   },
   "privacyDeleteConfirmLabel": "Bestätigung",
-  "@privacyDeleteConfirmLabel": {"description": "Label of the text field in the deletion confirmation dialog."},
+  "@privacyDeleteConfirmLabel": {
+    "description": "Label of the text field in the deletion confirmation dialog."
+  },
   "privacyDeletePending": "Deine Löschung ist angefordert. Du kannst sie noch abbrechen.",
-  "@privacyDeletePending": {"description": "Status shown while an account deletion request is pending."},
+  "@privacyDeletePending": {
+    "description": "Status shown while an account deletion request is pending."
+  },
   "privacyDeleteProcessing": "Deine Löschung wird bearbeitet und kann nicht mehr abgebrochen werden.",
-  "@privacyDeleteProcessing": {"description": "Status shown once an account deletion is being processed."},
+  "@privacyDeleteProcessing": {
+    "description": "Status shown once an account deletion is being processed."
+  },
   "privacyDeleteRequested": "Löschung angefordert.",
-  "@privacyDeleteRequested": {"description": "Snackbar confirming an account deletion was requested."},
+  "@privacyDeleteRequested": {
+    "description": "Snackbar confirming an account deletion was requested."
+  },
   "privacyDeleteCancel": "Löschung abbrechen",
-  "@privacyDeleteCancel": {"description": "Button that cancels a pending account deletion."},
+  "@privacyDeleteCancel": {
+    "description": "Button that cancels a pending account deletion."
+  },
   "privacyDeleteCancelled": "Löschung abgebrochen.",
-  "@privacyDeleteCancelled": {"description": "Snackbar confirming a pending deletion was cancelled."},
+  "@privacyDeleteCancelled": {
+    "description": "Snackbar confirming a pending deletion was cancelled."
+  },
   "privacyDeleteCancelFailed": "Die Löschung wird bereits bearbeitet und kann nicht mehr abgebrochen werden.",
-  "@privacyDeleteCancelFailed": {"description": "Snackbar shown when cancelling a deletion came too late."},
-
+  "@privacyDeleteCancelFailed": {
+    "description": "Snackbar shown when cancelling a deletion came too late."
+  },
   "notificationsTitle": "Benachrichtigungen",
-  "@notificationsTitle": {"description": "Title of the notification preferences screen."},
+  "@notificationsTitle": {
+    "description": "Title of the notification preferences screen."
+  },
   "notificationsBody": "Wähle, worüber wir dich informieren dürfen.",
-  "@notificationsBody": {"description": "Introduction on the notification preferences screen."},
+  "@notificationsBody": {
+    "description": "Introduction on the notification preferences screen."
+  },
   "notificationsOrders": "Bestellungen",
-  "@notificationsOrders": {"description": "Notification channel for order status changes."},
+  "@notificationsOrders": {
+    "description": "Notification channel for order status changes."
+  },
   "notificationsOrdersBody": "Zahlung, Versand und Zustellung.",
-  "@notificationsOrdersBody": {"description": "Explains the orders notification channel."},
+  "@notificationsOrdersBody": {
+    "description": "Explains the orders notification channel."
+  },
   "notificationsChat": "Nachrichten",
-  "@notificationsChat": {"description": "Notification channel for chat messages."},
+  "@notificationsChat": {
+    "description": "Notification channel for chat messages."
+  },
   "notificationsChatBody": "Neue Nachrichten von Käufern und Verkäufern.",
-  "@notificationsChatBody": {"description": "Explains the chat notification channel."},
+  "@notificationsChatBody": {
+    "description": "Explains the chat notification channel."
+  },
   "notificationsOffers": "Angebote",
-  "@notificationsOffers": {"description": "Notification channel for marketing offers."},
+  "@notificationsOffers": {
+    "description": "Notification channel for marketing offers."
+  },
   "notificationsOffersBody": "Aktionen und Empfehlungen. Standardmäßig aus.",
-  "@notificationsOffersBody": {"description": "Explains the offers notification channel."},
+  "@notificationsOffersBody": {
+    "description": "Explains the offers notification channel."
+  },
   "notificationsPriceDrops": "Preisalarm",
-  "@notificationsPriceDrops": {"description": "Notification channel for price drops on favorites."},
+  "@notificationsPriceDrops": {
+    "description": "Notification channel for price drops on favorites."
+  },
   "notificationsPriceDropsBody": "Wenn ein Favorit günstiger wird.",
-  "@notificationsPriceDropsBody": {"description": "Explains the price-drop notification channel."},
+  "@notificationsPriceDropsBody": {
+    "description": "Explains the price-drop notification channel."
+  },
   "notificationsSystem": "System",
-  "@notificationsSystem": {"description": "Notification channel for security and account messages."},
+  "@notificationsSystem": {
+    "description": "Notification channel for security and account messages."
+  },
   "notificationsSystemBody": "Sicherheit und wichtige Kontohinweise.",
-  "@notificationsSystemBody": {"description": "Explains the system notification channel."},
+  "@notificationsSystemBody": {
+    "description": "Explains the system notification channel."
+  },
   "notificationsSaveFailed": "Die Einstellung konnte nicht gespeichert werden.",
-  "@notificationsSaveFailed": {"description": "Snackbar shown when a notification preference could not be saved."},
+  "@notificationsSaveFailed": {
+    "description": "Snackbar shown when a notification preference could not be saved."
+  },
   "notificationsSignedOutTitle": "Melde dich an",
-  "@notificationsSignedOutTitle": {"description": "Empty state title shown when notification settings are opened without a session."},
+  "@notificationsSignedOutTitle": {
+    "description": "Empty state title shown when notification settings are opened without a session."
+  },
   "notificationsSignedOutBody": "Deine Benachrichtigungen gehören zu deinem Konto.",
-  "@notificationsSignedOutBody": {"description": "Empty state body shown when notification settings are opened without a session."},
+  "@notificationsSignedOutBody": {
+    "description": "Empty state body shown when notification settings are opened without a session."
+  },
   "categoryProductsAll": "Alle",
-  "@categoryProductsAll": {"description": "Chip that selects all subcategories of a category."},
+  "@categoryProductsAll": {
+    "description": "Chip that selects all subcategories of a category."
+  },
   "categoryProductsEmptyTitle": "Keine Angebote",
-  "@categoryProductsEmptyTitle": {"description": "Title shown when a category has no visible products."},
+  "@categoryProductsEmptyTitle": {
+    "description": "Title shown when a category has no visible products."
+  },
   "categoryProductsEmptyBody": "Es gibt noch keine passenden Angebote in dieser Kategorie.",
-  "@categoryProductsEmptyBody": {"description": "Message shown when a category has no visible products."},
+  "@categoryProductsEmptyBody": {
+    "description": "Message shown when a category has no visible products."
+  },
   "filterConditionLabel": "Zustand",
-  "@filterConditionLabel": {"description": "Label for the condition filter."},
+  "@filterConditionLabel": {
+    "description": "Label for the condition filter."
+  },
   "filterConditionAll": "Alle",
-  "@filterConditionAll": {"description": "Chip that disables the condition filter."},
+  "@filterConditionAll": {
+    "description": "Chip that disables the condition filter."
+  },
   "filterSortLabel": "Sortierung",
-  "@filterSortLabel": {"description": "Semantic label for the sort menu."},
+  "@filterSortLabel": {
+    "description": "Semantic label for the sort menu."
+  },
   "filterSortNewest": "Neueste",
-  "@filterSortNewest": {"description": "Sort option: newest listings first."},
+  "@filterSortNewest": {
+    "description": "Sort option: newest listings first."
+  },
   "filterSortPriceAsc": "Preis: aufsteigend",
-  "@filterSortPriceAsc": {"description": "Sort option: cheapest listings first."},
+  "@filterSortPriceAsc": {
+    "description": "Sort option: cheapest listings first."
+  },
   "filterSortPriceDesc": "Preis: absteigend",
-  "@filterSortPriceDesc": {"description": "Sort option: most expensive listings first."}
+  "@filterSortPriceDesc": {
+    "description": "Sort option: most expensive listings first."
+  },
+  "filterSellerKindLabel": "Verkäuferart",
+  "@filterSellerKindLabel": {
+    "description": "Label for the seller type filter."
+  },
+  "filterSellerKindAll": "Alle",
+  "@filterSellerKindAll": {
+    "description": "Chip that disables the seller type filter."
+  },
+  "filterSellerKindPrivate": "Privat",
+  "@filterSellerKindPrivate": {
+    "description": "Chip for private sellers."
+  },
+  "filterSellerKindBusiness": "Gewerblich",
+  "@filterSellerKindBusiness": {
+    "description": "Chip for business sellers."
+  },
+  "filterCityLabel": "Stadt",
+  "@filterCityLabel": {
+    "description": "Label for the city filter entry point."
+  },
+  "filterCityAll": "Überall",
+  "@filterCityAll": {
+    "description": "Option that disables the city filter."
+  },
+  "filterCityTitle": "Stadt wählen",
+  "@filterCityTitle": {
+    "description": "Title of the German city selection sheet."
+  },
+  "categoryViewGrid": "Raster",
+  "@categoryViewGrid": {
+    "description": "Toggle to the grid results view."
+  },
+  "categoryViewList": "Liste",
+  "@categoryViewList": {
+    "description": "Toggle to the list results view."
+  },
+  "categorySearchInCategory": "In dieser Kategorie suchen",
+  "@categorySearchInCategory": {
+    "description": "Hint for the in-category title search."
+  },
+  "categoryProductsLoadMore": "Mehr laden",
+  "@categoryProductsLoadMore": {
+    "description": "Button that loads the next page of listings."
+  },
+  "categoryProductsNoMore": "Keine weiteren Anzeigen",
+  "@categoryProductsNoMore": {
+    "description": "End of pagination caption."
+  },
+  "productContactSeller": "Verkäufer kontaktieren",
+  "@productContactSeller": {
+    "description": "Button that opens a conversation with the seller."
+  },
+  "chatInboxTitle": "Nachrichten",
+  "@chatInboxTitle": {
+    "description": "Title of the conversations inbox."
+  },
+  "chatInboxEmptyTitle": "Noch keine Nachrichten",
+  "@chatInboxEmptyTitle": {
+    "description": "Title shown when the conversations inbox is empty."
+  },
+  "chatInboxEmptyBody": "Deine Unterhaltungen mit Käufern und Verkäufern erscheinen hier.",
+  "@chatInboxEmptyBody": {
+    "description": "Explanation shown when the conversations inbox is empty."
+  },
+  "chatNoMessagesYet": "Noch keine Nachrichten",
+  "@chatNoMessagesYet": {
+    "description": "Preview shown for a conversation without messages."
+  },
+  "chatTitle": "Unterhaltung",
+  "@chatTitle": {
+    "description": "Title of a conversation screen."
+  },
+  "chatProductCard": "Produkt",
+  "@chatProductCard": {
+    "description": "Fallback label for a product card in a conversation."
+  },
+  "chatInputHint": "Nachricht schreiben …",
+  "@chatInputHint": {
+    "description": "Hint for the conversation message composer."
+  },
+  "chatSend": "Nachricht senden",
+  "@chatSend": {
+    "description": "Send message button tooltip."
+  },
+  "chatLoadEarlier": "Frühere Nachrichten laden",
+  "@chatLoadEarlier": {
+    "description": "Load older conversation history button."
+  },
+  "productActionsLabel": "Produktaktionen",
+  "productShare": "Teilen",
+  "productShareText": "{title} – {price} auf DÛKAN",
+  "productReport": "Anzeige melden",
+  "productReportTitle": "Warum meldest du diese Anzeige?",
+  "productReportDetailsHint": "Optionale Beschreibung (max. 3000 Zeichen)",
+  "productReportSubmit": "Meldung senden",
+  "productReportSubmitted": "Danke. Wir prüfen die Meldung.",
+  "reportReasonSpam": "Spam",
+  "reportReasonFraud": "Betrug",
+  "reportReasonCounterfeit": "Plagiat / Fälschung",
+  "reportReasonProhibited": "Verbotener Artikel",
+  "reportReasonHarassment": "Belästigung",
+  "reportReasonInappropriate": "Unangemessene Inhalte",
+  "reportReasonOther": "Sonstiges",
+  "sellerVerified": "Verifiziert",
+  "sellerTypePrivate": "Privat",
+  "sellerTypeBusiness": "Gewerblich",
+  "sellerProfileListingsTitle": "Angebote dieses Verkäufers",
+  "sellerProfileAbout": "Über",
+  "sellerProfileNoBio": "Dieser Verkäufer hat noch keine Beschreibung hinterlegt.",
+  "sellerProfileEmptyListings": "Aktuell keine Angebote verfügbar.",
+  "sellerProfileLoadFailed": "Verkäufer nicht gefunden.",
+  "productSimilarTitle": "Ähnliche Angebote",
+  "productSimilarEmpty": "Noch keine ähnlichen Angebote.",
+  "productSellerListingsTitle": "Weitere Angebote dieses Verkäufers",
+  "productDetailsTitle": "Produktdetails",
+  "productDetailsCondition": "Zustand",
+  "productDetailsCategory": "Kategorie",
+  "productDetailsCity": "Stadt",
+  "productDetailsShipping": "Versand",
+  "productDetailsFreeShipping": "Kostenloser Versand",
+  "productDetailsPaidShipping": "Verkäufer versendet",
+  "productDetailsPickupOnly": "Nur Abholung",
+  "productDescriptionMore": "Mehr anzeigen",
+  "productDescriptionLess": "Weniger anzeigen",
+  "favoriteAdded": "Zu Favoriten hinzugefügt",
+  "favoriteRemoved": "Aus Favoriten entfernt",
+  "viewSellerProfile": "Verkäuferprofil ansehen",
+  "@productActionsLabel": {
+    "description": "Menu of secondary product actions."
+  },
+  "@productShare": {
+    "description": "Share this listing."
+  },
+  "@productShareText": {
+    "description": "Text used when sharing a listing.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "@productReport": {
+    "description": "Opens the report listing flow."
+  },
+  "@productReportTitle": {
+    "description": "Title of the report reason sheet."
+  },
+  "@productReportDetailsHint": {
+    "description": "Optional report details field hint."
+  },
+  "@productReportSubmit": {
+    "description": "Submits the report."
+  },
+  "@productReportSubmitted": {
+    "description": "Confirmation after a report is filed."
+  },
+  "@reportReasonSpam": {
+    "description": "Report reason: spam."
+  },
+  "@reportReasonFraud": {
+    "description": "Report reason: fraud."
+  },
+  "@reportReasonCounterfeit": {
+    "description": "Report reason: counterfeit."
+  },
+  "@reportReasonProhibited": {
+    "description": "Report reason: prohibited item."
+  },
+  "@reportReasonHarassment": {
+    "description": "Report reason: harassment."
+  },
+  "@reportReasonInappropriate": {
+    "description": "Report reason: inappropriate content."
+  },
+  "@reportReasonOther": {
+    "description": "Report reason: other."
+  },
+  "@sellerVerified": {
+    "description": "Badge shown for verified business sellers."
+  },
+  "@sellerTypePrivate": {
+    "description": "Badge for private sellers."
+  },
+  "@sellerTypeBusiness": {
+    "description": "Badge for business sellers."
+  },
+  "@sellerProfileListingsTitle": {
+    "description": "Seller profile listings section title."
+  },
+  "@sellerProfileAbout": {
+    "description": "Seller profile about section title."
+  },
+  "@sellerProfileNoBio": {
+    "description": "Shown when a seller has no description."
+  },
+  "@sellerProfileEmptyListings": {
+    "description": "Empty state for seller listings."
+  },
+  "@sellerProfileLoadFailed": {
+    "description": "Error state for an unavailable seller."
+  },
+  "@productSimilarTitle": {
+    "description": "Similar listings section title."
+  },
+  "@productSimilarEmpty": {
+    "description": "Empty state for similar listings."
+  },
+  "@productSellerListingsTitle": {
+    "description": "More-from-seller section title."
+  },
+  "@productDetailsTitle": {
+    "description": "Product details section title."
+  },
+  "@productDetailsCondition": {
+    "description": "Detail row: condition."
+  },
+  "@productDetailsCategory": {
+    "description": "Detail row: category."
+  },
+  "@productDetailsCity": {
+    "description": "Detail row: city."
+  },
+  "@productDetailsShipping": {
+    "description": "Detail row: shipping."
+  },
+  "@productDetailsFreeShipping": {
+    "description": "Shipping value: free shipping."
+  },
+  "@productDetailsPaidShipping": {
+    "description": "Shipping value: seller ships."
+  },
+  "@productDetailsPickupOnly": {
+    "description": "Shipping value: pickup only."
+  },
+  "@productDescriptionMore": {
+    "description": "Expand a long description."
+  },
+  "@productDescriptionLess": {
+    "description": "Collapse a long description."
+  },
+  "@favoriteAdded": {
+    "description": "Snack bar after adding a favorite."
+  },
+  "@favoriteRemoved": {
+    "description": "Snack bar after removing a favorite."
+  },
+  "@viewSellerProfile": {
+    "description": "Semantic label for the tappable seller card."
+  },
+  "productUnavailableTitle": "Anzeige nicht verfügbar",
+  "@productUnavailableTitle": {
+    "description": "Title when a listing is unavailable, without assuming it was sold or deleted."
+  },
+  "productUnavailableBody": "Diese Anzeige kann derzeit nicht angezeigt werden.",
+  "@productUnavailableBody": {
+    "description": "Body when a listing is unavailable, without claiming a specific cause."
+  },
+  "productImageUnavailable": "Bild nicht verfügbar",
+  "@productImageUnavailable": {
+    "description": "Accessible fallback label for a missing or failed product image."
+  },
+  "productGalleryPosition": "Bild {current} von {total}",
+  "@productGalleryPosition": {
+    "description": "Accessible gallery position. Current is the one-based image number; total is the number of images.",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "productDetailsBrand": "Marke",
+  "@productDetailsBrand": {
+    "description": "Detail row label for the product brand."
+  },
+  "productShippingArrangement": "Versand direkt mit dem Verkäufer vereinbaren.",
+  "@productShippingArrangement": {
+    "description": "Shipping fallback when terms are unknown: arrange privately and directly with the seller. Does not promise shipping availability or imply pickup, fees, or platform-managed delivery."
+  },
+  "favoriteAddAction": "Zu Favoriten hinzufügen",
+  "@favoriteAddAction": {
+    "description": "Action label to add this listing to favorites, not a success confirmation."
+  },
+  "favoriteRemoveAction": "Aus Favoriten entfernen",
+  "@favoriteRemoveAction": {
+    "description": "Action label to remove this listing from favorites, not a success confirmation."
+  }
 }
