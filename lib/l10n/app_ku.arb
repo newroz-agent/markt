@@ -149,6 +149,7 @@
   "legalWithdrawal": "Mafê vekişînê",
   "legalDataSources": "Çavkaniyên daneyan",
   "legalOsmAttribution": "Daneyên nexşe û cihan © Beşdarên OpenStreetMap, di bin Open Database License (ODbL) de lîsanskirî ne.",
+  "directoryUnverifiedOsmNote": "Nehatiye piştrastkirin · Dane © Beşdarên OpenStreetMap",
   "legalComingSoonBody": "Belgeyên qanûnî yên temam berî weşanê wê bêne pêşkêşkirin.",
   "legalUnknownDocumentBody": "Ev belgeya qanûnî tune.",
   "legalLoadErrorTitle": "Belge nehat barkirin",

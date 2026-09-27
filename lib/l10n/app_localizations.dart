@@ -998,6 +998,12 @@ abstract class AppLocalizations {
   /// **'Karten- und Ortsdaten © OpenStreetMap-Mitwirkende, lizenziert unter der Open Database License (ODbL).'**
   String get legalOsmAttribution;
 
+  /// Note on unclaimed directory entries imported from OpenStreetMap (E3 list/detail). Keep 'OpenStreetMap' untranslated.
+  ///
+  /// In de, this message translates to:
+  /// **'Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende'**
+  String get directoryUnverifiedOsmNote;
+
   /// Temporary notice used before final legal documents are published.
   ///
   /// In de, this message translates to:

@@ -515,6 +515,10 @@ class AppLocalizationsAr extends AppLocalizations {
       'بيانات الخرائط والأماكن © مساهمو OpenStreetMap، مرخّصة بموجب Open Database License (ODbL).';
 
   @override
+  String get directoryUnverifiedOsmNote =>
+      'غير موثَّق · البيانات © مساهمو OpenStreetMap';
+
+  @override
   String get legalComingSoonBody =>
       'ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق.';
 

@@ -6,3 +6,4 @@ Mapped places: 1123 (skipped without coordinates/too long: 0)
 Per type: fast_food=837, restaurant=250, cafe=36
 Per cuisine: kebab=677, turkish=268, arabic=87, lebanese=60, middle_eastern=47, falafel=39, persian=28, syrian=16, kurdish=2, iraqi=1
 Rejected opening_hours strings logged to docs/evidence/step-e1-5/rejected-opening-hours.txt
+Dry run only. Re-run with --apply to write to the local database.

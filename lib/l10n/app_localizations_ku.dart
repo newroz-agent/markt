@@ -514,6 +514,10 @@ class AppLocalizationsKu extends AppLocalizations {
       'Daneyên nexşe û cihan © Beşdarên OpenStreetMap, di bin Open Database License (ODbL) de lîsanskirî ne.';
 
   @override
+  String get directoryUnverifiedOsmNote =>
+      'Nehatiye piştrastkirin · Dane © Beşdarên OpenStreetMap';
+
+  @override
   String get legalComingSoonBody =>
       'Belgeyên qanûnî yên temam berî weşanê wê bêne pêşkêşkirin.';
 

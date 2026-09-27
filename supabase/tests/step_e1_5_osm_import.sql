@@ -98,7 +98,8 @@ begin
     and item->>'seller_id' is null, format('search item carries source and claim flag: %s',item);
   assert not (item ? 'email'), 'search item has no email key';
 
-  search_result:=public.search_business_directory(p_type=>'fast_food',p_cuisine=>'kebab',p_limit=>100);
+  search_result:=public.search_business_directory(p_type=>'fast_food',p_cuisine=>'kebab',
+    p_center_lat=>52.4990,p_center_lng=>13.4180,p_radius_km=>0.5,p_limit=>100);
   assert exists(select 1 from jsonb_array_elements(search_result->'items') i where i->>'shop_name'='E15 Imbiss Eins'),
     'fast_food and kebab filters match imports';
   search_result:=public.search_business_directory(p_language=>'kurdish');
@@ -220,6 +221,20 @@ begin
     'claimed rows are never reported as vanished';
   assert exists(select 1 from public.directory_imported_places where osm_id=990000000000001),
     'nothing is deleted automatically';
+end $$;
+
+-- Deleting a claiming seller unlinks the place instead of failing.
+insert into auth.users(id,email) values ('e1500000-0000-0000-0000-000000000004','e15-leaver@example.invalid');
+insert into public.sellers(id,user_id,kind,status,shop_name,slug,city,country_code,approved_at)
+values ('e1510000-0000-0000-0000-000000000002','e1500000-0000-0000-0000-000000000004',
+  'business','approved','E15 Leaving Owner','e15-leaving-owner','Berlin','DE',now());
+update public.directory_imported_places set claimed_seller_id='e1510000-0000-0000-0000-000000000002',claimed_at=now()
+where osm_id=990000000000003;
+delete from public.sellers where id='e1510000-0000-0000-0000-000000000002';
+do $$ begin
+  assert (select claimed_seller_id is null and claimed_at is not null
+    from public.directory_imported_places where osm_id=990000000000003),
+    'seller deletion unlinks the claimed place';
 end $$;
 
 rollback;

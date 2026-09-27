@@ -149,6 +149,7 @@
   "legalWithdrawal": "Right of withdrawal",
   "legalDataSources": "Data sources",
   "legalOsmAttribution": "Map and place data © OpenStreetMap contributors, licensed under the Open Database License (ODbL).",
+  "directoryUnverifiedOsmNote": "Not verified · Data © OpenStreetMap contributors",
   "legalComingSoonBody": "The complete legal documents will be provided before release.",
   "legalUnknownDocumentBody": "This legal document does not exist.",
   "legalLoadErrorTitle": "Document not loaded",

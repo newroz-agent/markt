@@ -509,6 +509,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'Harita ve mekân verileri © OpenStreetMap katkıda bulunanlar, Open Database License (ODbL) kapsamında lisanslıdır.';
 
   @override
+  String get directoryUnverifiedOsmNote =>
+      'Doğrulanmadı · Veriler © OpenStreetMap katkıda bulunanlar';
+
+  @override
   String get legalComingSoonBody =>
       'Eksiksiz yasal belgeler yayın öncesinde sunulacaktır.';
 

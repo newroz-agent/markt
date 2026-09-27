@@ -149,6 +149,7 @@
   "legalWithdrawal": "Cayma hakkı bilgilendirmesi",
   "legalDataSources": "Veri kaynakları",
   "legalOsmAttribution": "Harita ve mekân verileri © OpenStreetMap katkıda bulunanlar, Open Database License (ODbL) kapsamında lisanslıdır.",
+  "directoryUnverifiedOsmNote": "Doğrulanmadı · Veriler © OpenStreetMap katkıda bulunanlar",
   "legalComingSoonBody": "Eksiksiz yasal belgeler yayın öncesinde sunulacaktır.",
   "legalUnknownDocumentBody": "Bu yasal belge mevcut değil.",
   "legalLoadErrorTitle": "Belge yüklenmedi",

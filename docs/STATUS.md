@@ -49,8 +49,15 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   counts owner profiles only. `flutter analyze` clean; `flutter test` 275/275.
   Evidence: `docs/evidence/step-e1-5/`.
 - ✅ OSM/ODbL attribution tile ("Datenquellen") in the Account legal card, all five ARB files.
-- ❌ Public directory UI (list/detail with the unverified note) and the iOS screenshots are
-  not built: no directory UI exists yet (that is E3). Open decision.
+- ✅ Deferred by decision (2026-09-27): §4 directory screens and the iOS screenshots move
+  to E3, whose plan now lists the unclaimed-entry UI rules as requirements. The
+  `directoryUnverifiedOsmNote` string already exists in all five ARB files.
+- ✅ Fix: the claim check originally required `claimed_seller_id` and `claimed_at` to be
+  null together, which made deleting a claiming seller fail (FK `ON DELETE SET NULL`).
+  Now `directory_imported_places_claim_shape` only requires `claimed_at` while a seller is
+  linked; the place becomes unclaimed again. Covered by the acceptance test.
+- ✅ Snapshot stays out of git (`tools/osm/snapshots/` in `.gitignore`); SHA-256
+  `6cfdb2ab…339ee0`, date and OSM base timestamp in `docs/evidence/step-e1-5/snapshot.txt`.
 - 🟡 Migration ledger: `20260927000300` and `20260927000400` join the psql-applied list below.
 
 ## Step E1 — business directory server contracts

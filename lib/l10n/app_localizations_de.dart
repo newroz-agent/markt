@@ -516,6 +516,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Karten- und Ortsdaten © OpenStreetMap-Mitwirkende, lizenziert unter der Open Database License (ODbL).';
 
   @override
+  String get directoryUnverifiedOsmNote =>
+      'Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende';
+
+  @override
   String get legalComingSoonBody =>
       'Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.';
 

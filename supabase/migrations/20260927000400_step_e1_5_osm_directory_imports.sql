@@ -126,7 +126,10 @@ create table public.directory_imported_places (
   imported_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (osm_type, osm_id),
-  check ((claimed_seller_id is null) = (claimed_at is null))
+  -- claimed_at may outlive the link: deleting the claiming seller sets the id to null
+  -- (the place becomes unclaimed again) and must not be blocked by this check.
+  constraint directory_imported_places_claim_shape
+    check (claimed_seller_id is null or claimed_at is not null)
 );
 
 create index directory_imported_places_public_idx

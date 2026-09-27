@@ -112,8 +112,28 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
   are not verified as actual visits (transparency about review verification).
 - Admin: for reports targeting a review, add a "remove review" action to the existing
   reports queue (today review reports can only be dismissed).
+- **Unclaimed OSM entries (from Step E1.5) — requirements:**
+  - Data contract: `search_business_directory` items with `source = 'osm'` and
+    `is_claimed = false` carry `place_id` (no `seller_id`); open them with
+    `get_directory_imported_place_detail(place_id)`. Owner entries keep
+    `get_business_directory_detail(seller_id)`. Branch on `source`, never on null ids.
+  - List card and detail header show the localized note `directoryUnverifiedOsmNote`
+    („Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende“), all five locales.
+  - No verified badge, no rating/review UI (list and detail, `reviews_enabled = false`),
+    no menu section, no "Nachricht senden"/chat button, no description block.
+  - Allowed: call (`phone`), website, directions (coordinates are always present),
+    cuisines, halal/vegetarian/vegan only when the value is `true` (null = unknown,
+    never shown as "no"), opening hours.
+  - Opening hours: when `has_hours = false`, show "hours unknown" — never "closed";
+    the open-now badge is shown only when `has_hours = true`.
+  - Cover: use the type's placeholder image (`cover_image_path` is null).
+  - Filters: rating, price level and spoken language exclude imports server-side; the
+    UI must not imply imports were filtered out for any other reason.
+  - `fast_food` is a directory type with its own chip/label next to Restaurants and Cafés;
+    new cuisines `lebanese`, `iraqi`, `middle_eastern`, `kebab`, `falafel` need labels.
 - Tests + real iOS screenshots: directory list, filters, restaurant detail with menu,
-  doctor detail (no rating UI), review submission. Stop and report.
+  doctor detail (no rating UI), review submission, and one unclaimed OSM detail page
+  showing the unverified/attribution note. Stop and report.
 
 ## Out of scope for Step E
 Table reservations, appointment booking, online ordering/payment, menu item photos,

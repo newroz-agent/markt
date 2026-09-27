@@ -78,6 +78,12 @@ Import **only** what OSM provides:
 
 ## 4. Behavior in the app
 
+> **Deferred to E3 (decision 2026-09-27):** no directory UI exists before E3, so the §4
+> screens and the §7 iOS screenshots move to E3 as requirements
+> (`docs/plans/zerin-business-directory.md` → E3). E1.5 ships the ARB strings
+> (`directoryUnverifiedOsmNote`, `legalDataSources`, `legalOsmAttribution`) and the
+> Account legal attribution tile.
+
 - Unclaimed entries appear in directory search and on detail pages.
 - Detail page shows a clear localized note: **„Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende“**.
 - No verified badge, no review UI, no menu, no chat button. Call, website and directions are fine.
@@ -121,7 +127,7 @@ Goal: contact owners of imported places so they can claim their page and add the
 - [x] Proof that a suppressed `osm_id` is not re-imported.
 - [x] Re-run proof: second run changes **0 claimed rows** and updates only as expected.
 - [x] Tests for the import mapping: hours parsing (incl. unparseable cases) and cuisine filter (incl. multi-value `;` cases).
-- [ ] Real iOS screenshots in `docs/evidence/step-e1-5/`: directory list with imported entries; one unclaimed detail page showing the unverified/attribution note.
+- [~] *(Deferred to E3)* Real iOS screenshots in `docs/evidence/step-e1-5/`: directory list with imported entries; one unclaimed detail page showing the unverified/attribution note.
 
 ## 8. Standing rules
 

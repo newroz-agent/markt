@@ -510,6 +510,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Map and place data © OpenStreetMap contributors, licensed under the Open Database License (ODbL).';
 
   @override
+  String get directoryUnverifiedOsmNote =>
+      'Not verified · Data © OpenStreetMap contributors';
+
+  @override
   String get legalComingSoonBody =>
       'The complete legal documents will be provided before release.';
 

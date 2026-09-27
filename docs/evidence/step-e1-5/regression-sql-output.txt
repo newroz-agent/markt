@@ -9,9 +9,9 @@ INSERT 0 2
 DO
               set_config              
 --------------------------------------
- 64936dbc-9555-4039-8919-74c208d62677
- f5ce4c9b-e075-4477-92dd-f96a35107312
- 9bd38a01-69b4-4de5-b64b-cb8518dace25
+ 5cf6f6a9-2031-41d4-a738-43ee7eb03221
+ 8872e5b3-df03-4f0d-81da-e2151b1049db
+ 56115f8e-7e1d-4d5e-ace4-be63a7de0dce
 (3 rows)
 
 SET
@@ -88,7 +88,7 @@ SET
 
                                                                                                                                                                                                                                                    owner_replace_directory_menu                                                                                                                                                                                                                                                    
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- [{"id": "8d85d643-8107-4c2e-a0cf-64a3a6330596", "name": "Döner", "items": [{"id": "3c2125d7-eb8a-4bcc-bb2a-4d72d317b41d", "name": "Döner Kebab", "is_halal": false, "is_vegan": false, "seller_id": "e1510000-0000-0000-0000-000000000001", "created_at": "2026-09-27T15:01:09.248795+00:00", "section_id": "8d85d643-8107-4c2e-a0cf-64a3a6330596", "sort_order": 0, "updated_at": "2026-09-27T15:01:09.248795+00:00", "description": null, "price_cents": 750, "is_available": true, "is_vegetarian": false}], "sort_order": 0}]
+ [{"id": "462b758f-43d5-45be-a581-d5c534e348c7", "name": "Döner", "items": [{"id": "9dc5b93d-0063-4822-ac66-c7ea2ec04116", "name": "Döner Kebab", "is_halal": false, "is_vegan": false, "seller_id": "e1510000-0000-0000-0000-000000000001", "created_at": "2026-09-27T15:09:36.260159+00:00", "section_id": "462b758f-43d5-45be-a581-d5c534e348c7", "sort_order": 0, "updated_at": "2026-09-27T15:09:36.260159+00:00", "description": null, "price_cents": 750, "is_available": true, "is_vegetarian": false}], "sort_order": 0}]
 (1 row)
 
                               set_config                               
@@ -98,7 +98,7 @@ SET
 
                                                           upsert_directory_review                                                          
 -------------------------------------------------------------------------------------------------------------------------------------------
- {"id": "d9328827-9bd3-4372-bc9d-0f8bb442e0b6", "body": "Fast food review", "rating": 4, "updated_at": "2026-09-27T15:01:09.248795+00:00"}
+ {"id": "98fce5e0-e84c-4012-a6fc-59b0a7457440", "body": "Fast food review", "rating": 4, "updated_at": "2026-09-27T15:09:36.260159+00:00"}
 (1 row)
 
 DO
@@ -111,12 +111,12 @@ SET
 
                                          admin_set_directory_outreach_status                                         
 ---------------------------------------------------------------------------------------------------------------------
- {"status": "claimed", "place_id": "64936dbc-9555-4039-8919-74c208d62677", "is_hidden": false, "contacted_at": null}
+ {"status": "claimed", "place_id": "5cf6f6a9-2031-41d4-a738-43ee7eb03221", "is_hidden": false, "contacted_at": null}
 (1 row)
 
                                              admin_set_directory_outreach_status                                              
 ------------------------------------------------------------------------------------------------------------------------------
- {"status": "removal_requested", "place_id": "f5ce4c9b-e075-4477-92dd-f96a35107312", "is_hidden": true, "contacted_at": null}
+ {"status": "removal_requested", "place_id": "8872e5b3-df03-4f0d-81da-e2151b1049db", "is_hidden": true, "contacted_at": null}
 (1 row)
 
  expect_error 
@@ -131,6 +131,11 @@ RESET
  {}
 (1 row)
 
+DO
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+DELETE 1
 DO
 ROLLBACK
 
@@ -173,14 +178,14 @@ SET
 
 INSERT 0 1
 DO
-                                                               upsert_directory_review                                                               
------------------------------------------------------------------------------------------------------------------------------------------------------
- {"id": "fcf1b77b-63c3-4c5a-8e8a-674fb0136eec", "body": "Excellent food and service", "rating": 5, "updated_at": "2026-09-27T15:01:09.394443+00:00"}
+                                                              upsert_directory_review                                                               
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "0f27e372-91fb-499a-84b6-b1e7b0c8f9b1", "body": "Excellent food and service", "rating": 5, "updated_at": "2026-09-27T15:09:36.48649+00:00"}
 (1 row)
 
-                                                              upsert_directory_review                                                              
----------------------------------------------------------------------------------------------------------------------------------------------------
- {"id": "fcf1b77b-63c3-4c5a-8e8a-674fb0136eec", "body": "Updated directory review", "rating": 4, "updated_at": "2026-09-27T15:01:09.394443+00:00"}
+                                                             upsert_directory_review                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "0f27e372-91fb-499a-84b6-b1e7b0c8f9b1", "body": "Updated directory review", "rating": 4, "updated_at": "2026-09-27T15:09:36.48649+00:00"}
 (1 row)
 
 INSERT 0 1

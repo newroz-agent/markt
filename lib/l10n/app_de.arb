@@ -644,6 +644,10 @@
   "@legalOsmAttribution": {
     "description": "ODbL attribution for OpenStreetMap map tiles and imported directory places. Keep 'OpenStreetMap' and 'Open Database License (ODbL)' untranslated."
   },
+  "directoryUnverifiedOsmNote": "Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende",
+  "@directoryUnverifiedOsmNote": {
+    "description": "Note on unclaimed directory entries imported from OpenStreetMap (E3 list/detail). Keep 'OpenStreetMap' untranslated."
+  },
   "legalComingSoonBody": "Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.",
   "@legalComingSoonBody": {
     "description": "Temporary notice used before final legal documents are published."
