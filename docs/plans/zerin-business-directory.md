@@ -138,6 +138,60 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
   are not verified as actual visits (transparency about review verification).
 - Admin: for reports targeting a review, add a "remove review" action to the existing
   reports queue (today review reports can only be dismissed).
+- **Owner address and precise pin (decision 2026-09-27).** Owners set their address in
+  the business profile editor: typed address → suggested pin → owner confirms or drags
+  it. The address is stored as a **private draft** and published as the precise pin
+  **only after verification**. The Step D privacy rules are not weakened.
+  - *Audit of the live schema (2026-09-27):*
+    - The only public precise-location fields are `sellers.precise_location_opt_in`,
+      `latitude`, `longitude` and `address_line`. `sellers_precise_location_shape`:
+      opt-in requires business + approved + both coordinates; without opt-in all three
+      are null.
+    - `protect_seller_precise_location` (BEFORE INSERT/UPDATE OF kind, status, latitude,
+      longitude, address_line, precise_location_opt_in on `sellers`) clears the fields
+      when opt-in is false. Otherwise it raises 42501 unless the seller is business +
+      approved + has coordinates + `is_verified_seller()`.
+    - `clear_unverified_seller_location` (AFTER INSERT/UPDATE/DELETE on
+      `seller_documents`) switches opt-in off and wipes coordinates and address as soon
+      as the seller is no longer verified.
+    - Reads re-check verification: the map (`listings_within_radius`) and directory
+      search/detail call `is_verified_seller()` at read time.
+    - Step D principle: coordinates are server-owned, never device-geocoded.
+  - *Gaps found (not changed in E2):*
+    1. Since E1, verification also depends on the directory profile type (doctor vs
+       other), but a type change does not run the wipe, so stale precise coordinates can
+       stay stored. They are never shown, because reads re-check. E3 adds the same wipe
+       after profile type changes.
+    2. Pre-existing from Step D: suspending an opted-in seller fails.
+       `protect_seller_precise_location` raises because the status is no longer
+       `approved` while opt-in is still true (reproduced locally with Atelier Lale in a
+       rolled-back transaction). This needs a decision, e.g. clear the pin on a status
+       change instead of raising.
+  - *Design:*
+    1. **Draft table.** A new owner-only table `business_location_drafts`: `seller_id`
+       (PK), street, house number, postal code, city (→ `german_cities`), latitude,
+       longitude, `pin_source` (`geocoded` | `city_centroid` | `owner_moved`),
+       `confirmed_at`. RLS: the owner reads and writes their own row, admins read, no
+       anon access, and no public RPC ever reads it.
+       `clear_unverified_seller_location` only updates `sellers`, so a draft survives a
+       loss of verification.
+    2. **Suggested pin.** Geocoded on the server (Edge Function or RPC), never on the
+       device, with the `german_cities` centroid as fallback. The provider is still to be
+       chosen: OSM Nominatim (attribution, rate limit, caching) or a commercial service.
+       The owner always confirms or drags the pin.
+    3. **Publishing.** `owner_publish_directory_location()` copies the confirmed draft
+       into the public seller fields and sets opt-in. It can only be called while the
+       seller is verified, and the existing protect trigger still checks the write. It
+       is an explicit owner action ("Standort veröffentlichen" on the hub, enabled after
+       verification); nothing is published automatically, so Step D's opt-in consent
+       stays explicit.
+    4. **Unpublish.** Turning opt-in off clears the public fields through the existing
+       trigger; the draft stays. After losing and regaining verification, the owner
+       republishes with one tap.
+    5. **Distance and directions** in E3 use only the published pin.
+    6. **Tests.** The draft is invisible to anon and other users; publishing is refused
+       while unverified; a doctor ↔ other type change wipes the public pin; suspension
+       behaves as decided for gap 2.
 - **Unclaimed OSM entries (from Step E1.5) — requirements:**
   - Data contract: `search_business_directory` items with `source = 'osm'` and
     `is_claimed = false` carry `place_id` (no `seller_id`); open them with

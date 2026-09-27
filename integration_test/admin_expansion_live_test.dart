@@ -91,8 +91,7 @@ void main() {
       'get_admin_reports',
       params: const {'p_limit': 50},
     );
-    pendingListings =
-        ((dashboard['counts'] as Map)['pending'] as num).toInt();
+    pendingListings = ((dashboard['counts'] as Map)['pending'] as num).toInt();
     pendingDocs = (verification['pending'] as num).toInt();
     openReports = (reports['open'] as num).toInt();
     expect(pendingListings, greaterThan(0));

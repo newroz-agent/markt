@@ -20,6 +20,8 @@ import 'package:zerin_marketplace/features/business/presentation/controllers/bus
 import 'package:zerin_marketplace/features/moderation/presentation/moderation_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 
+import 'support/harness_cleanup.dart';
+
 // Accounts from supabase/snippets/step_e2_local_seed.sql (local-only constants)
 // and the admin account from the admin-expansion harness.
 const _ownerPassword = 'ZerinStepE2!2026';
@@ -28,6 +30,10 @@ const _doctor = 'step-e2-ios-doctor@example.invalid';
 const _restaurant = 'step-e2-ios-restaurant@example.invalid';
 const _adminEmail = 'step-b-ios-admin@example.invalid';
 const _adminPassword = 'ZerinStepB!2026';
+const _documentsBucket = 'seller-documents';
+// Seeded doctor seller (supabase/snippets/step_e2_local_seed.sql).
+const _doctorFolder =
+    'e2e30000-0000-4000-8000-000000000002/medical_professional_registration';
 
 /// The native document picker cannot be driven from a test, so the harness
 /// hands the real upload path a generated PDF. Everything after picking (the
@@ -66,6 +72,7 @@ void main() {
   late GoRouter router;
   final checks = <String, String>{};
   final evidence = <String, Object?>{};
+  var objectsBeforeRun = <String>{};
 
   Future<void> until(
     WidgetTester tester,
@@ -114,9 +121,45 @@ void main() {
     );
     preferences = await SharedPreferences.getInstance();
     await preferences.setBool(SettingsStorageKeys.onboardingComplete, true);
+    // Everything already in the folder belongs to earlier runs or the seed and is
+    // never touched; only what this run uploads is removed in tearDownAll.
+    await signIn(_adminEmail, _adminPassword);
+    objectsBeforeRun = await listObjectPaths(
+      client,
+      bucket: _documentsBucket,
+      folder: _doctorFolder,
+    );
+    await client.auth.signOut();
   });
 
   tearDownAll(() async {
+    // Runs whether the test passed or failed: remove this run's uploads and
+    // the document rows pointing at them (admin session, any status).
+    await signIn(_adminEmail, _adminPassword);
+    final uploadedThisRun = (await listObjectPaths(
+      client,
+      bucket: _documentsBucket,
+      folder: _doctorFolder,
+    )).difference(objectsBeforeRun).toList()..sort();
+    if (uploadedThisRun.isNotEmpty) {
+      await client
+          .from('seller_documents')
+          .delete()
+          .inFilter('storage_path', uploadedThisRun);
+    }
+    evidence['cleanup'] = <String, Object?>{
+      'removed_objects': await removeUploadedObjects(
+        client,
+        bucket: _documentsBucket,
+        paths: uploadedThisRun,
+      ),
+      'remaining_objects_in_folder': (await listObjectPaths(
+        client,
+        bucket: _documentsBucket,
+        folder: _doctorFolder,
+      )).length,
+    };
+
     binding.reportData ??= <String, dynamic>{};
     binding.reportData!['checks'] = checks;
     binding.reportData!['evidence'] = evidence;

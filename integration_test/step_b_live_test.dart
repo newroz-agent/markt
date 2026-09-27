@@ -18,10 +18,13 @@ import 'package:zerin_marketplace/features/sell/presentation/sell_foundation_scr
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
+import 'support/harness_cleanup.dart';
+
 const _ownerEmail = 'step-b-ios-owner@example.invalid';
 const _adminEmail = 'step-b-ios-admin@example.invalid';
 const _password = 'ZerinStepB!2026';
 const _templateTitle = 'Wireless Kopfhörer Nova X';
+const _imagesBucket = 'product-images';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +35,8 @@ void main() {
   late String categoryId;
   late String listingTitle;
   final checks = <String, String>{};
+  var runStarted = false;
+  Map<String, Object?>? cleanup;
 
   Future<void> until(
     WidgetTester tester,
@@ -96,7 +101,34 @@ void main() {
   });
 
   tearDownAll(() async {
+    // Runs whether the test passed or failed: the run's listing (unique title)
+    // and every photo it uploaded are removed, so nothing accumulates.
+    if (runStarted) {
+      await signIn(_adminEmail);
+      final rows = await client
+          .from('products')
+          .select('id, images:product_images(storage_path)')
+          .eq('title', listingTitle);
+      final ids = [for (final row in rows) row['id']! as String];
+      final paths = <String>[
+        for (final row in rows)
+          for (final image in row['images']! as List)
+            (image as Map)['storage_path']! as String,
+      ];
+      if (ids.isNotEmpty) {
+        await client.from('products').delete().inFilter('id', ids);
+      }
+      cleanup = <String, Object?>{
+        'deleted_listings': ids.length,
+        'removed_objects': await removeUploadedObjects(
+          client,
+          bucket: _imagesBucket,
+          paths: paths,
+        ),
+      };
+    }
     binding.reportData ??= <String, dynamic>{};
+    binding.reportData!['cleanup'] = cleanup;
     binding.reportData!['checks'] = checks;
     binding.reportData!['tests'] = <String, String>{
       for (final entry in binding.results.entries)
@@ -109,6 +141,7 @@ void main() {
   testWidgets('real iOS unified Sell and moderation publication flow', (
     tester,
   ) async {
+    runStarted = true;
     await signIn(_ownerEmail);
     await tester.pumpWidget(
       ProviderScope(

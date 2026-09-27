@@ -2,9 +2,11 @@
 -- (integration_test/step_e2_live_test.dart). Requires migrations up to
 -- 20260927000700_step_e2_owner_onboarding.sql.
 --
--- Idempotent: re-running restores the intended state (e.g. removes the medical
--- document the harness uploads, so the upload can be shown again). Local Supabase
--- only (Docker Desktop, 127.0.0.1:54322). Never run against a linked/remote project.
+-- Idempotent: re-running restores the intended state. The live harness removes its
+-- own uploads (row and file) in tearDownAll; if a run was killed before that, the seed
+-- refuses to continue while an uploaded doctor document still has a stored file, so a
+-- re-seed never orphans files. Local Supabase only (Docker Desktop, 127.0.0.1:54322).
+-- Never run against a linked/remote project.
 --
 --   docker exec -i supabase_db_flutterapp psql -U postgres -d postgres -X \
 --     -v ON_ERROR_STOP=1 < supabase/snippets/step_e2_local_seed.sql
@@ -55,6 +57,19 @@ values ('e2e30000-0000-4000-8000-000000000002', 'e2e20000-0000-4000-8000-0000000
   'business', 'pending', 'Praxis Dr. Ava Rahimi', 'praxis-dr-ava-rahimi', 'Berlin', 'DE', 'doctor')
 on conflict (id) do update set status = 'pending', directory_type = 'doctor',
   shop_name = excluded.shop_name, city = excluded.city;
+do $$
+begin
+  if exists (
+    select 1 from public.seller_documents document
+    join storage.objects object
+      on object.bucket_id = 'seller-documents' and object.name = document.storage_path
+    where document.seller_id = 'e2e30000-0000-4000-8000-000000000002'
+      and document.id not in ('e2e40000-0000-4000-8000-000000000021', 'e2e40000-0000-4000-8000-000000000022')
+  ) then
+    raise exception 'The E2 doctor still has uploaded documents with stored files; remove them (row and file) before re-seeding';
+  end if;
+end;
+$$;
 delete from public.seller_documents
 where seller_id = 'e2e30000-0000-4000-8000-000000000002'
   and id not in ('e2e40000-0000-4000-8000-000000000021', 'e2e40000-0000-4000-8000-000000000022');

@@ -69,10 +69,9 @@ void main() {
     compareAtCount = (deals as List).length;
     expect(compareAtCount, greaterThan(0));
 
-    final signature = await client.rpc<List<dynamic>>(
-      'submit_listing',
-      params: const <String, dynamic>{},
-    ).catchError((Object error) => <dynamic>[]);
+    final signature = await client
+        .rpc<List<dynamic>>('submit_listing', params: const <String, dynamic>{})
+        .catchError((Object error) => <dynamic>[]);
     expect(signature, isA<List<dynamic>>());
   });
 
@@ -130,7 +129,10 @@ void main() {
     await until(
       tester,
       () =>
-          find.byKey(const ValueKey('sell-details-step')).evaluate().isNotEmpty &&
+          find
+              .byKey(const ValueKey('sell-details-step'))
+              .evaluate()
+              .isNotEmpty &&
           find
               .byKey(const ValueKey('sell-compare-at-price-field'))
               .evaluate()
