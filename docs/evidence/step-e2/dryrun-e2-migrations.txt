@@ -1,12 +1,20 @@
-000600+000700 + step_e2_owner_onboarding: exit=0 last=ROLLBACK
-000600+000700 + step_e1_business_directory: exit=0 last=ROLLBACK
-000600+000700 + step_e1_5_osm_import: exit=0 last=ROLLBACK
-000600+000700 + step_b_sell_moderation: exit=0 last=ROLLBACK
-000600+000700 + step_c_user_profiles: exit=0 last=ROLLBACK
-000600+000700 + step_d_map: exit=0 last=ROLLBACK
-000600+000700 + step_d_postal_code_hardening: exit=0 last=ROLLBACK
-000600+000700 + 20260924000100_admin_verification_reports: exit=0 last=ROLLBACK
-== existing rows changed by 000600 + 000700 (rolled back)
-sellers_changed|documents_changed|sellers_total|documents_total
-0|0|5|4
+000700 + step_e2_owner_onboarding: exit=0 last=ROLLBACK
+000700 + step_e1_business_directory: exit=0 last=ROLLBACK
+000700 + step_e1_5_osm_import: exit=0 last=ROLLBACK
+000700 + step_b_sell_moderation: exit=0 last=ROLLBACK
+000700 + step_c_user_profiles: exit=0 last=ROLLBACK
+000700 + step_d_map: exit=0 last=ROLLBACK
+000700 + step_d_postal_code_hardening: exit=0 last=ROLLBACK
+000700 + 20260924000100_admin_verification_reports: exit=0 last=ROLLBACK
+== 000700 data impact at apply time (rolled back)
+sellers_changed|documents_changed|history_rows_added
+0|0|0
 (1 row)
+== who the new approval rule can affect later (only when an admin approves a document)
+shop_name|kind|status|required|documents|rule_2
+iOS Privatverkäufer|private|approved|{identity,business_registration}||never auto-approved
+Demo Manufaktur Berlin|business|pending|{identity,business_registration}|identity:pending, business_registration:pending|eligible once the full set is approved
+Atelier Lale|business|approved|{identity,business_registration}|identity:approved, business_registration:approved|never auto-approved
+Nordlicht Technik|business|approved|{identity,business_registration}||never auto-approved
+Werk & Wohn|business|approved|{identity,business_registration}||never auto-approved
+(5 rows)

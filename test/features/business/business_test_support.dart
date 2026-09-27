@@ -99,15 +99,23 @@ class FakeBusinessRepository implements BusinessRepository {
   Future<DirectoryOnboarding> fetchOnboarding() async => state;
 
   @override
-  Future<DirectoryOnboarding> startDirectory({
+  Future<DirectoryOnboarding> createBusiness({
     required DirectoryType type,
-    String? shopName,
-    String? city,
+    required String shopName,
+    required String city,
   }) async {
-    calls.add('start');
+    calls.add('create');
     startedType = type;
     startedName = shopName;
     startedCity = city;
+    state = onboarding(seller: businessSeller(type: type));
+    return state;
+  }
+
+  @override
+  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type) async {
+    calls.add('setType');
+    startedType = type;
     state = onboarding(seller: businessSeller(type: type));
     return state;
   }

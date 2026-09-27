@@ -26,15 +26,31 @@ insert into auth.users(id,email,raw_user_meta_data) values
  ('e2100000-0000-0000-0000-000000000004','e2-marketplace@example.invalid','{"display_name":"E2 Marketplace"}'),
  ('e2100000-0000-0000-0000-000000000005','e2-admin@example.invalid','{"display_name":"E2 Admin"}');
 
-insert into public.sellers(id,user_id,kind,status,shop_name,slug,city,country_code) values
- ('e2200000-0000-0000-0000-000000000003','e2100000-0000-0000-0000-000000000003','private','pending','E2 Private','e2-private','Berlin','DE'),
- ('e2200000-0000-0000-0000-000000000004','e2100000-0000-0000-0000-000000000004','business','pending','E2 Marketplace','e2-marketplace','Berlin','DE');
+insert into auth.users(id,email,raw_user_meta_data) values
+ ('e2100000-0000-0000-0000-000000000006','e2-rejected@example.invalid','{"display_name":"E2 Rejected"}'),
+ ('e2100000-0000-0000-0000-000000000007','e2-suspended@example.invalid','{"display_name":"E2 Suspended"}');
+
+insert into public.sellers(id,user_id,kind,status,shop_name,slug,city,country_code,rejection_reason) values
+ ('e2200000-0000-0000-0000-000000000003','e2100000-0000-0000-0000-000000000003','private','pending','E2 Private','e2-private','Berlin','DE',null),
+ ('e2200000-0000-0000-0000-000000000004','e2100000-0000-0000-0000-000000000004','business','pending','E2 Marketplace','e2-marketplace','Berlin','DE',null),
+ ('e2200000-0000-0000-0000-000000000006','e2100000-0000-0000-0000-000000000006','business','rejected','E2 Rejected','e2-rejected','Berlin','DE','Fake business'),
+ ('e2200000-0000-0000-0000-000000000007','e2100000-0000-0000-0000-000000000007','business','suspended','E2 Suspended','e2-suspended','Berlin','DE',null);
+
+-- Full business document sets waiting for review for the private, rejected and suspended sellers.
+insert into public.seller_documents(seller_id,kind,storage_path,mime_type)
+select seller_id::uuid,kind,seller_id||'/'||kind||'/set.pdf','application/pdf'
+from unnest(array['e2200000-0000-0000-0000-000000000003','e2200000-0000-0000-0000-000000000006',
+  'e2200000-0000-0000-0000-000000000007']) seller_id,
+  unnest(array['identity','business_registration']::public.seller_document_kind[]) kind;
 
 do $$ begin
   assert public.directory_required_document_kinds('doctor')
     = array['identity','medical_professional_registration']::public.seller_document_kind[];
   assert public.directory_required_document_kinds('fast_food')
     = array['identity','business_registration']::public.seller_document_kind[];
+  assert public.directory_required_document_kinds(null)
+    = array['identity','business_registration']::public.seller_document_kind[],
+    'a marketplace business without directory type proves identity + business registration';
   assert not has_function_privilege('anon','public.get_my_directory_onboarding()','execute');
   assert not has_function_privilege('anon','public.owner_start_directory(public.directory_business_type,text,text)','execute');
 end $$;
@@ -113,6 +129,11 @@ do $$
 declare onboarding jsonb := public.get_my_directory_onboarding();
 begin
   assert onboarding->'seller'->>'status'='approved', format('approved by documents: %s',onboarding);
+  assert exists(select 1 from public.seller_status_history history
+    where history.seller_id=current_setting('e2.doctor_seller')::uuid
+      and history.from_status='pending' and history.to_status='approved'
+      and history.actor_user_id='e2100000-0000-0000-0000-000000000005'),
+    'the automatic approval is recorded in seller_status_history with the approving admin';
   assert not (onboarding->>'is_verified')::boolean,
     'a doctor is only verified once the doctor profile (draft) exists';
 end $$;
@@ -129,7 +150,8 @@ begin
   assert (onboarding->>'is_verified')::boolean, format('doctor draft + approved proof verifies: %s',onboarding);
   assert onboarding->'profile'->>'type'='doctor' and not (onboarding->'profile'->>'is_published')::boolean;
 end $$;
-select pg_temp.expect_error($$select public.owner_start_directory('restaurant')$$,'22023');
+select pg_temp.expect_error($$select public.owner_set_directory_type('restaurant')$$,'22023');
+select pg_temp.expect_error($$select public.owner_start_directory('restaurant','Zweites Geschäft','Berlin')$$,'22023');
 
 -- A restaurant owner stays pending until BOTH required documents are approved.
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000002');
@@ -153,33 +175,61 @@ end $$;
 select public.moderate_seller_document(id,'approve') from public.seller_documents
 where seller_id=current_setting('e2.restaurant_seller')::uuid and kind='business_registration';
 do $$ begin
+  assert (select count(*)=1 from public.seller_status_history
+    where seller_id=current_setting('e2.restaurant_seller')::uuid and to_status='approved');
+end $$;
+do $$ begin
   assert (select status='approved' from public.sellers where id=current_setting('e2.restaurant_seller')::uuid);
   assert public.is_verified_seller(current_setting('e2.restaurant_seller')::uuid);
 end $$;
 
--- Marketplace-only business sellers keep the old path (no directory_type, no auto-approval).
+-- Rule 2 covers every PENDING BUSINESS seller, also a marketplace business without a
+-- directory type (it proves identity + business registration).
 insert into public.seller_documents(seller_id,kind,storage_path,mime_type,status) values
  ('e2200000-0000-0000-0000-000000000004','identity','e2200000-0000-0000-0000-000000000004/identity/a.pdf','application/pdf','pending'),
  ('e2200000-0000-0000-0000-000000000004','business_registration','e2200000-0000-0000-0000-000000000004/business_registration/b.pdf','application/pdf','pending');
 select public.moderate_seller_document(id,'approve') from public.seller_documents
 where seller_id='e2200000-0000-0000-0000-000000000004';
 do $$ begin
-  assert (select status='pending' and directory_type is null from public.sellers
-    where id='e2200000-0000-0000-0000-000000000004'), 'marketplace seller status is unchanged';
+  assert (select status='approved' and directory_type is null from public.sellers
+    where id='e2200000-0000-0000-0000-000000000004'), 'pending marketplace business approved by its document set';
 end $$;
 
--- An existing marketplace business can join the directory; private sellers cannot.
-select pg_temp.act_as('e2100000-0000-0000-0000-000000000004');
+-- Never auto-approve private sellers; never re-open rejected or suspended sellers.
+select public.moderate_seller_document(id,'approve') from public.seller_documents
+where seller_id in ('e2200000-0000-0000-0000-000000000003','e2200000-0000-0000-0000-000000000006',
+  'e2200000-0000-0000-0000-000000000007');
 do $$ begin
-  assert public.owner_start_directory('cafe')->'seller'->>'directory_type'='cafe';
+  assert (select status='pending' from public.sellers where id='e2200000-0000-0000-0000-000000000003'),
+    'private seller stays pending';
+  assert (select status='rejected' and rejection_reason='Fake business' from public.sellers
+    where id='e2200000-0000-0000-0000-000000000006'), 'rejected seller is not re-opened';
+  assert (select status='suspended' from public.sellers where id='e2200000-0000-0000-0000-000000000007'),
+    'suspended seller is not re-opened';
+  assert not exists(select 1 from public.seller_status_history where seller_id in
+    ('e2200000-0000-0000-0000-000000000003','e2200000-0000-0000-0000-000000000006','e2200000-0000-0000-0000-000000000007')
+    and to_status='approved'), 'no approval history for them';
+end $$;
+
+-- An existing business seller sets its type without any status change; private sellers
+-- are refused by both RPCs (the private -> business upgrade is not implemented).
+select pg_temp.act_as('e2100000-0000-0000-0000-000000000006');
+do $$ begin
+  assert public.owner_set_directory_type('cafe')->'seller'->>'directory_type'='cafe';
+  assert (select status='rejected' from public.sellers where id='e2200000-0000-0000-0000-000000000006'),
+    'setting a type never changes status';
 end $$;
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000003');
 select pg_temp.expect_error($$select public.owner_start_directory('cafe','E2 Private','Berlin')$$,'42501');
+select pg_temp.expect_error($$select public.owner_set_directory_type('cafe')$$,'42501');
 
 -- Owners only ever see their own onboarding data.
 do $$ begin
-  assert public.get_my_directory_onboarding()->'documents'='[]'::jsonb;
+  assert not exists(select 1 from jsonb_array_elements(public.get_my_directory_onboarding()->'documents') d
+    where d->>'storage_path' not like 'e2200000-0000-0000-0000-000000000003/%');
 end $$;
+select pg_temp.act_as('e2100000-0000-0000-0000-000000000005');
+select pg_temp.expect_error($$select public.owner_set_directory_type('cafe')$$,'P0002');
 reset role;
 
 set local role anon;

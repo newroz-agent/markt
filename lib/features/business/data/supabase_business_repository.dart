@@ -24,10 +24,10 @@ class SupabaseBusinessRepository implements BusinessRepository {
   }
 
   @override
-  Future<DirectoryOnboarding> startDirectory({
+  Future<DirectoryOnboarding> createBusiness({
     required DirectoryType type,
-    String? shopName,
-    String? city,
+    required String shopName,
+    required String city,
   }) async {
     _requireUser();
     return _guard(
@@ -36,9 +36,22 @@ class SupabaseBusinessRepository implements BusinessRepository {
           'owner_start_directory',
           params: <String, dynamic>{
             'p_directory_type': type.databaseValue,
-            'p_shop_name': shopName?.trim(),
+            'p_shop_name': shopName.trim(),
             'p_city': city,
           },
+        ),
+      ),
+    );
+  }
+
+  @override
+  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type) async {
+    _requireUser();
+    return _guard(
+      () async => DirectoryOnboarding.fromJson(
+        await _client.rpc<Map<String, dynamic>>(
+          'owner_set_directory_type',
+          params: <String, dynamic>{'p_directory_type': type.databaseValue},
         ),
       ),
     );

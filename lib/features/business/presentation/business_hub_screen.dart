@@ -132,13 +132,16 @@ class _StartCardState extends ConsumerState<_StartCard> {
     }
     setState(() => _busy = true);
     try {
-      await ref
-          .read(businessRepositoryProvider)
-          .startDirectory(
-            type: type,
-            shopName: widget.hasSeller ? null : _name.text,
-            city: widget.hasSeller ? null : _city,
-          );
+      final repository = ref.read(businessRepositoryProvider);
+      if (widget.hasSeller) {
+        await repository.setDirectoryType(type);
+      } else {
+        await repository.createBusiness(
+          type: type,
+          shopName: _name.text,
+          city: _city!,
+        );
+      }
       ref.invalidate(directoryOnboardingProvider);
       if (mounted) await const BusinessDocumentsRoute().push<void>(context);
     } on Exception catch (error) {

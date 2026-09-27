@@ -58,7 +58,7 @@ class _DocumentsBodyState extends ConsumerState<_DocumentsBody> {
     if (type == widget.onboarding.directoryType) return;
     setState(() => _changingType = true);
     try {
-      await ref.read(businessRepositoryProvider).startDirectory(type: type);
+      await ref.read(businessRepositoryProvider).setDirectoryType(type);
       ref.invalidate(directoryOnboardingProvider);
     } on Exception catch (error) {
       if (mounted) {

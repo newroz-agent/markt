@@ -37,13 +37,17 @@ class BusinessException implements Exception {
 abstract interface class BusinessRepository {
   Future<DirectoryOnboarding> fetchOnboarding();
 
-  /// Creates a pending business seller for users without one, or sets the
-  /// declared type of an existing business seller.
-  Future<DirectoryOnboarding> startDirectory({
+  /// Creates a pending business seller (no listing) for a user without any
+  /// seller. Private sellers are refused.
+  Future<DirectoryOnboarding> createBusiness({
     required DirectoryType type,
-    String? shopName,
-    String? city,
+    required String shopName,
+    required String city,
   });
+
+  /// Changes the declared type of the caller's business seller. Never changes
+  /// its status; fixed once a directory profile exists.
+  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type);
 
   /// Uploads into the private `seller-documents` bucket and records the
   /// document for the admin verification queue.
@@ -92,11 +96,15 @@ class UnconfiguredBusinessRepository implements BusinessRepository {
       DirectoryOnboarding.empty;
 
   @override
-  Future<DirectoryOnboarding> startDirectory({
+  Future<DirectoryOnboarding> createBusiness({
     required DirectoryType type,
-    String? shopName,
-    String? city,
+    required String shopName,
+    required String city,
   }) async => _unconfigured();
+
+  @override
+  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type) async =>
+      _unconfigured();
 
   @override
   Future<void> uploadDocument({

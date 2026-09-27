@@ -21,6 +21,7 @@ void main() {
       await tester.tap(find.text('Weiter zu den Nachweisen'));
       await tester.pumpAndSettle();
 
+      expect(repository.calls, ['create']);
       expect(repository.startedType, DirectoryType.doctor);
       expect(repository.startedName, 'Praxis Dr. Test');
       expect(repository.startedCity, 'Berlin');
@@ -31,6 +32,23 @@ void main() {
         findsNothing,
       );
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('an existing business seller only declares its type', (
+      tester,
+    ) async {
+      final repository = FakeBusinessRepository(
+        onboarding(seller: businessSeller(type: null)),
+      );
+      await pumpBusiness(tester, repository, location: '/business');
+
+      expect(find.text('Name des Unternehmens'), findsNothing);
+      await tester.tap(find.text('Café'));
+      await tester.pump();
+      await tester.tap(find.text('Weiter zu den Nachweisen'));
+      await tester.pumpAndSettle();
+      expect(repository.calls, ['setType']);
+      expect(repository.startedType, DirectoryType.cafe);
     });
 
     testWidgets('private sellers are told the directory needs a business '
@@ -174,7 +192,7 @@ void main() {
       );
       await tester.tap(find.text('Café'));
       await tester.pumpAndSettle();
-      expect(repository.calls, isNot(contains('start')));
+      expect(repository.calls, isNot(contains('setType')));
     });
   });
 
