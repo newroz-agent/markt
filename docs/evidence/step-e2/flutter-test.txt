@@ -1,17 +1,17 @@
 00:00 +0: loading /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart
-00:00 +0: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: cuisine filter splits multi-value tags on ; with trim and lowercase
-00:00 +1: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: cuisine filter matches when any value is in scope
-00:00 +2: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: cuisine filter maps agreed aliases and deduplicates
-00:00 +3: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: cuisine filter excludes afghan and unknown values
-00:00 +4: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: cuisine filter requires a name and an included amenity
-00:00 +5: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: opening hours parses weekday ranges into database weekdays (0 = Sunday)
-00:00 +6: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: opening hours applies later ; rules as overrides and , rules as additions
-00:00 +7: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: opening hours supports wrap-around days, overnight closing and 24/7
-00:00 +8: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: opening hours rejects unsupported or ambiguous syntax
-00:00 +9: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: element mapping maps only OSM-provided fields
-00:00 +10: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: element mapping uses the center of ways and reports rejected hours
-00:00 +11: /Users/lawand/flutterapp/test/tools/osm_food_test.dart: element mapping skips out-of-scope elements and drops invalid emails
-00:00 +12: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale prices use German number symbols without changing app locale
+00:00 +0: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale prices use German number symbols without changing app locale
+00:00 +1: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +2: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +3: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +4: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +5: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +6: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +7: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +8: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +9: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +10: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +11: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
+00:00 +12: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
 00:00 +13: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
 00:00 +14: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
 00:00 +15: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
@@ -23,34 +23,34 @@
 00:00 +21: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
 00:00 +22: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
 00:00 +23: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
-00:01 +24: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
-00:01 +25: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
-00:01 +26: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
-00:01 +27: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale untranslated framework labels explicitly fall back to German
-00:01 +28: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
-00:01 +29: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale formats dates with Kurmanji month and weekday names
-00:01 +30: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent drops the gradient entirely when disabled
-00:01 +31: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale uses Kurmanji for common framework labels
-00:01 +32: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent labels itself as a button for assistive tech
-00:01 +33: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent labels itself as a button for assistive tech
-00:01 +34: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale stays left-to-right
-00:01 +35: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent meets the minimum touch target
-00:01 +36: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale the switcher labels it with the endonym
-00:01 +37: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a second gold CTA on one screen is reported
-00:01 +38: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: every supported locale de formats a date
-00:01 +39: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent one gold CTA per route survives a transition
-00:01 +40: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent one gold CTA per route survives a transition
-00:01 +41: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent one gold CTA per route survives a transition
-00:01 +42: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: every supported locale tr formats a date
-00:01 +43: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a route releases its slot when popped
-00:01 +44: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a route releases its slot when popped
-00:01 +45: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a route releases its slot when popped
+00:00 +24: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale formats dates with Kurmanji month and weekday names
+00:00 +25: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale uses Kurmanji for common framework labels
+00:00 +26: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale resolves our own Kurdish strings, not English
+00:00 +27: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale stays left-to-right
+00:00 +28: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: ku locale the switcher labels it with the endonym
+00:00 +29: /Users/lawand/flutterapp/test/l10n/ku_locale_test.dart: every supported locale de formats a date
+00:01 +30: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +31: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +32: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +33: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +34: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +35: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +36: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +37: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +38: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +39: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +40: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent paints the gold sweep when enabled
+00:01 +41: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent drops the gradient entirely when disabled
+00:01 +42: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent labels itself as a button for assistive tech
+00:01 +43: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent meets the minimum touch target
+00:01 +44: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a second gold CTA on one screen is reported
+00:01 +45: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent one gold CTA per route survives a transition
 00:01 +46: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton.accent a route releases its slot when popped
 00:01 +47: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton other variants carry no gold and stay unrestricted in number
-00:01 +48: /Users/lawand/flutterapp/test/core/widgets/app_button_test.dart: AppButton other variants loading replaces the leading slot and blocks the tap
+00:02 +48: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: catalog search applies a template in the unified flow
 00:02 +49: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: catalog search applies a template in the unified flow
-00:03 +50: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: catalog search applies a template in the unified flow
-00:03 +51: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
+00:04 +50: /Users/lawand/flutterapp/test/features/sell/my_listings_test.dart: owner sees pending and rejected states including reason
+00:04 +51: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
 00:04 +52: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
 00:04 +53: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
 00:04 +54: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
@@ -58,237 +58,237 @@
 00:04 +56: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
 00:04 +57: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
 00:04 +58: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +59: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +60: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +61: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +62: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +63: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +64: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +65: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +66: /Users/lawand/flutterapp/test/features/products/product_view_recording_test.dart: detail open records the view once for authenticated users
-00:04 +67: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +68: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +69: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +70: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +71: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +72: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +73: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:04 +74: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +75: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +76: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +77: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +78: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +79: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +80: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +81: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +82: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
-00:05 +83: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: empty gallery has a fallback and price has no VAT claim
-00:05 +84: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +85: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +86: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +87: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +88: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +89: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +90: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +91: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:05 +92: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:04 +59: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +60: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +61: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +62: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +63: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +64: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +65: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:04 +66: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:05 +67: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:05 +68: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:05 +69: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: free-form listing reaches photo review and pending confirmation
+00:05 +70: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: empty gallery has a fallback and price has no VAT claim
+00:05 +71: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:05 +72: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +73: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +74: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +75: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +76: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +77: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +78: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +79: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +80: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +81: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +82: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +83: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +84: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +85: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +86: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +87: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +88: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +89: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +90: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +91: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +92: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
 00:06 +93: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
-00:06 +94: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: category links and optional structured details are rendered
-00:06 +95: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +96: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +97: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +98: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +99: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +100: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +101: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +102: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +103: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +104: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +105: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +106: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +107: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +108: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +109: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +110: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +111: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +112: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +113: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:06 +114: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:06 +94: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +95: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price passes to the draft and lower values are rejected
+00:06 +96: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: product loading, error retry and missing states are real
+00:06 +97: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price below the price blocks details continue
+00:07 +98: /Users/lawand/flutterapp/test/features/sell/sell_flow_test.dart: compare-at price below the price blocks details continue
+00:07 +99: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +100: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +101: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +102: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +103: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +104: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +105: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +106: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +107: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +108: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
+00:07 +109: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:07 +110: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:07 +111: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:07 +112: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:07 +113: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:07 +114: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
 00:07 +115: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
 00:07 +116: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:07 +117: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:07 +118: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:07 +119: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:07 +120: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
-00:07 +121: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +122: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +123: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +124: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +125: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +126: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +127: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +128: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +129: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +130: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report stays keyboard safe and can be dismissed and reopened
-00:07 +131: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
-00:07 +132: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
-00:07 +133: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
-00:08 +134: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +135: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +136: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +137: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +138: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +139: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +140: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +141: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +142: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +143: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +144: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +145: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +146: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +147: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +148: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +149: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +150: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +151: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +152: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +153: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +154: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +155: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +156: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +157: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +158: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +159: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +160: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +161: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
-00:08 +162: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:08 +163: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:08 +164: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:08 +165: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +166: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +167: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +168: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +169: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +170: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +171: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +172: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +173: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +174: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +175: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:09 +176: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:08 +117: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact opens only on tap, guards pending taps and uses real ID
+00:08 +118: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: seller rail retries failed loading and shows genuine empty state
+00:08 +119: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: seller rail retries failed loading and shows genuine empty state
+00:08 +120: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: seller rail retries failed loading and shows genuine empty state
+00:08 +121: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: seller rail retries failed loading and shows genuine empty state
+00:08 +122: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: seller rail retries failed loading and shows genuine empty state
+00:08 +123: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +124: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +125: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +126: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +127: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +128: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +129: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +130: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +131: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: contact failure allows a fresh tap retry
+00:08 +132: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
+00:08 +133: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: report requires reason, limits text and retains failure for retry
+00:08 +134: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
+00:08 +135: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
+00:08 +136: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
+00:09 +137: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: empty conversation, send pending guard and draft kept on failure
+00:09 +138: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: detail renders ar in dark mode on mobile
+00:09 +139: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: send success does not clear a newer draft typed while pending
+00:09 +140: /Users/lawand/flutterapp/test/features/products/product_detail_ui_test.dart: detail renders tr in dark mode on mobile
+00:09 +141: /Users/lawand/flutterapp/test/features/chat/data/supabase_chat_repository_test.dart: opening uses only atomic creation and inbox RPCs, including repeats
+00:09 +142: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: bubbles use authenticated sender identity and center system notices
+00:09 +143: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: bubbles use authenticated sender identity and center system notices
+00:09 +144: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: bubbles use authenticated sender identity and center system notices
+00:09 +145: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: bubbles use authenticated sender identity and center system notices
+00:09 +146: /Users/lawand/flutterapp/test/features/chat/data/supabase_chat_repository_test.dart: send limits count Unicode scalars after trimming
+00:09 +147: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +148: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +149: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +150: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +151: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +152: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: separate details pins product even outside the message page
+00:09 +153: /Users/lawand/flutterapp/test/features/chat/data/supabase_chat_repository_test.dart: reconnect catches up across pages to the previous oldest message
+00:09 +154: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: conversation error retries history
+00:09 +155: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: conversation error retries history
+00:09 +156: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: conversation error retries history
+00:09 +157: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: conversation error retries history
+00:09 +158: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: conversation error retries history
+00:09 +159: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: reads only visible foreground conversation and resumes on uncover
+00:09 +160: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: successful identical sends receive distinct UUID v4 primary keys
+00:09 +161: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +162: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +163: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +164: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +165: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +166: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +167: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +168: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +169: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +170: /Users/lawand/flutterapp/test/features/chat/chat_ui_test.dart: history loading can retry and incoming messages do not snap to bottom
+00:10 +171: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:10 +172: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:10 +173: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:10 +174: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:10 +175: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:11 +176: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
 00:11 +177: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +178: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +179: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +180: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +181: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +182: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +183: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:11 +184: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +185: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +186: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +187: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +188: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +189: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +190: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +191: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +192: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +193: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +194: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +195: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +196: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +197: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:12 +198: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:13 +199: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:13 +200: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:13 +201: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:14 +202: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:14 +203: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:14 +204: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +205: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +206: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +207: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +208: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +209: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +210: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
-00:15 +211: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: category results pass category context to the Map route
-00:15 +212: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: category results pass category context to the Map route
-00:15 +213: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: category results pass category context to the Map route
-00:15 +214: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: save shows loading and localized success
-00:15 +215: /Users/lawand/flutterapp/test/features/map/map_screen_test.dart: nearby markers render as a tappable cluster
-00:15 +216: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: unexpected save failure is visible and localized
-00:15 +217: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: unexpected save failure is visible and localized
-00:16 +218: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: typed profile routes generate canonical encoded locations
-00:16 +219: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +220: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +221: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +222: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +223: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +224: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +225: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +226: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +227: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +228: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +229: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:16 +230: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
-00:17 +231: /Users/lawand/flutterapp/test/features/profile/edit_profile_controller_test.dart: checkUsername records advisory availability
-00:17 +232: /Users/lawand/flutterapp/test/features/profile/edit_profile_controller_test.dart: empty username clears availability without querying
-00:17 +233: /Users/lawand/flutterapp/test/features/profile/edit_profile_controller_test.dart: save success sets saved flag
-00:17 +234: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:17 +235: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:17 +236: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:17 +237: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:17 +238: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:17 +239: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
-00:18 +240: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +241: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +242: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +243: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +244: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +245: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +246: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +247: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +248: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +249: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +250: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +251: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +252: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:18 +253: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:19 +254: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
-00:19 +255: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
-00:19 +256: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
-00:19 +257: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
-00:19 +258: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
-00:19 +259: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
-00:19 +260: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is offered to users without a seller
-00:20 +261: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is hidden for private sellers
-00:20 +262: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is hidden for private sellers
-00:20 +263: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
-00:21 +264: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
-00:21 +265: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
-00:21 +266: /Users/lawand/flutterapp/test/features/categories/category_browse_test.dart: Home renders categories supplied by the browse provider
-00:21 +267: /Users/lawand/flutterapp/test/features/categories/category_browse_test.dart: Home renders categories supplied by the browse provider
-00:22 +268: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: seller kind sheet filters private listings
-00:22 +269: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: in-category search feeds the query state
-00:22 +270: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: profile exposes only public seller fields and navigable listings
-00:22 +271: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: profile exposes only public seller fields and navigable listings
-00:23 +272: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: profile exposes only public seller fields and navigable listings
-00:23 +273: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin overview links into each queue
-00:23 +274: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: pagination retains first page on failure and retries offset 24
-00:23 +275: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin sees counts and can approve a pending listing
-00:23 +276: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin sees counts and can approve a pending listing
-00:23 +277: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin sees counts and can approve a pending listing
-00:23 +278: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: de private profile renders in dark mobile layout
-00:23 +279: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:23 +280: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:23 +281: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:23 +282: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:23 +283: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:24 +284: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:24 +285: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
-00:24 +286: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: tr business profile renders in dark mobile layout
-00:24 +287: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can approve a seller document
-00:24 +288: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can approve a seller document
-00:24 +289: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can approve a seller document
-00:24 +290: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection of a document passes the note
-00:24 +291: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can dismiss and block from the reports queue
-00:24 +292: All tests passed!
+00:12 +178: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:12 +179: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:12 +180: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:12 +181: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:13 +182: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:13 +183: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:13 +184: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:13 +185: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +186: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +187: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +188: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +189: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +190: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +191: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +192: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +193: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +194: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +195: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:14 +196: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +197: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +198: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +199: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +200: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +201: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:15 +202: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:16 +203: /Users/lawand/flutterapp/test/features/chat/data/send_retry_test.dart: a failed duplicate lookup retains its ID for another retry
+00:17 +204: /Users/lawand/flutterapp/test/features/map/map_screen_test.dart: denied GPS falls back to Berlin and radius changes server query
+00:17 +205: /Users/lawand/flutterapp/test/features/map/map_screen_test.dart: denied GPS falls back to Berlin and radius changes server query
+00:17 +206: /Users/lawand/flutterapp/test/features/map/map_screen_test.dart: shared condition and price filters reach the server query
+00:18 +207: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: Home map icon is separate from the Categories search action
+00:19 +208: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: Home map icon is separate from the Categories search action
+00:19 +209: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: Home map icon is separate from the Categories search action
+00:19 +210: /Users/lawand/flutterapp/test/features/map/map_screen_test.dart: nearby markers render as a tappable cluster
+00:19 +211: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: root Categories app bar opens the dedicated Map route
+00:19 +212: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: root Categories app bar opens the dedicated Map route
+00:19 +213: /Users/lawand/flutterapp/test/features/map/map_entry_points_test.dart: category results pass category context to the Map route
+00:21 +214: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: overlays approved private seller identity onto listings
+00:21 +215: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: business stores keep their distinct identity and never overlay
+00:21 +216: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: private seller without a summary is left unchanged
+00:21 +217: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: overlay failure degrades to the original listings
+00:21 +218: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: overlayStore applies to private and skips business
+00:21 +219: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: overlayStores batches private identities and preserves businesses
+00:21 +220: /Users/lawand/flutterapp/test/features/profile/public_identity_resolver_test.dart: empty product list returns immediately without RPC
+00:21 +221: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: typed profile routes generate canonical encoded locations
+00:21 +222: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: shows existing values, shared city picker and both photo sources
+00:21 +223: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: shows existing values, shared city picker and both photo sources
+00:21 +224: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: shows existing values, shared city picker and both photo sources
+00:21 +225: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: shows existing values, shared city picker and both photo sources
+00:21 +226: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: shows existing values, shared city picker and both photo sources
+00:22 +227: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
+00:22 +228: /Users/lawand/flutterapp/test/features/profile/profile_routes_test.dart: public profile stays public while edit profile preserves return URL
+00:22 +229: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: save shows loading and localized success
+00:23 +230: /Users/lawand/flutterapp/test/features/profile/edit_profile_screen_test.dart: unexpected save failure is visible and localized
+00:24 +231: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +232: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +233: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +234: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +235: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +236: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +237: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +238: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +239: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +240: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +241: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +242: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +243: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +244: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +245: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +246: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +247: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:25 +248: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: renders safe header fields and hides private data
+00:26 +249: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
+00:26 +250: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: own profile header uses public identity and never email
+00:26 +251: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: anonymous message CTA redirects to auth with return url
+00:26 +252: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
+00:26 +253: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: legal area shows the OpenStreetMap ODbL attribution
+00:26 +254: /Users/lawand/flutterapp/test/features/profile/public_profile_screen_test.dart: own profile hides the message CTA
+00:26 +255: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is offered to users without a seller
+00:26 +256: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is offered to users without a seller
+00:27 +257: /Users/lawand/flutterapp/test/features/profile/my_profile_account_test.dart: business entry is hidden for private sellers
+00:27 +258: /Users/lawand/flutterapp/test/features/categories/category_products_repository_test.dart: queries the subtree, applies German city and seller kind filters
+00:27 +259: /Users/lawand/flutterapp/test/features/categories/category_products_repository_test.dart: in-category search narrows titles and pagination uses a range
+00:27 +260: /Users/lawand/flutterapp/test/features/categories/category_products_repository_test.dart: whitespace-only search is ignored and empty subtree skips the call
+00:27 +261: /Users/lawand/flutterapp/test/features/categories/category_products_repository_test.dart: unconfigured repository returns an empty page
+00:28 +262: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: Kurdish category names come from the database column
+00:28 +263: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
+00:29 +264: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
+00:29 +265: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: grid/list toggle switches the results view
+00:29 +266: /Users/lawand/flutterapp/test/features/categories/category_browse_test.dart: Home renders categories supplied by the browse provider
+00:30 +267: /Users/lawand/flutterapp/test/features/categories/category_browse_test.dart: Home renders categories supplied by the browse provider
+00:30 +268: /Users/lawand/flutterapp/test/features/categories/category_browse_test.dart: Home renders categories supplied by the browse provider
+00:30 +269: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: in-category search feeds the query state
+00:30 +270: /Users/lawand/flutterapp/test/features/categories/category_products_screen_test.dart: load more appends a page without duplicates
+00:32 +271: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: profile exposes only public seller fields and navigable listings
+00:33 +272: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: pagination retains first page on failure and retries offset 24
+00:33 +273: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: seller loading, retry, missing and empty listing states
+00:33 +274: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: listing loading resolves to retryable error without blank section
+00:33 +275: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: de private profile renders in dark mobile layout
+00:33 +276: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: de business profile renders in dark mobile layout
+00:33 +277: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: en private profile renders in dark mobile layout
+00:33 +278: /Users/lawand/flutterapp/test/features/sellers/seller_profile_ui_test.dart: en business profile renders in dark mobile layout
+00:33 +279: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:33 +280: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:33 +281: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:34 +282: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:34 +283: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:34 +284: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:34 +285: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: non-admin never receives the moderation queue
+00:34 +286: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin overview links into each queue
+00:34 +287: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin sees counts and can approve a pending listing
+00:34 +288: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection passes the optional reason
+00:35 +289: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can approve a seller document
+00:35 +290: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin rejection of a document passes the note
+00:35 +291: /Users/lawand/flutterapp/test/features/moderation/moderation_screen_test.dart: admin can dismiss and block from the reports queue
+00:35 +292: All tests passed!

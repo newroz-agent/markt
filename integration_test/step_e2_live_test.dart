@@ -15,7 +15,9 @@ import 'package:zerin_marketplace/core/config/app_environment.dart';
 import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
 import 'package:zerin_marketplace/features/business/domain/business_repository.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_profile_editor_screen.dart';
 import 'package:zerin_marketplace/features/business/presentation/controllers/business_controller.dart';
+import 'package:zerin_marketplace/features/moderation/presentation/moderation_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 
 // Accounts from supabase/snippets/step_e2_local_seed.sql (local-only constants)
@@ -166,7 +168,7 @@ void main() {
       () => shows('Unternehmen eintragen') && shows('Arztpraxis'),
       'Start card offers the directory types',
     );
-    await tester.tap(find.text('Arztpraxis'));
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Arztpraxis'));
     await tester.enterText(find.byType(TextField).first, 'Praxis Dr. Neu');
     await screenshot(tester, 'start');
 
@@ -222,12 +224,19 @@ void main() {
     // 4. The admin verification queue receives the upload.
     await signIn(_adminEmail, _adminPassword);
     router.go(const ModerationRoute().location);
+    // Wait for the moderation screen itself: the previous screen also has chips.
+    final moderationChips = find.descendant(
+      of: find.byType(ModerationScreen),
+      matching: find.byType(ChoiceChip),
+    );
     await until(
       tester,
-      () => find.byType(ChoiceChip).evaluate().length > 2,
+      () =>
+          moderationChips.evaluate().length > 2 &&
+          shows('Offene Verkäuferdokumente'),
       'Admin hub loaded',
     );
-    await tester.tap(find.byType(ChoiceChip).at(2));
+    await tester.tap(moderationChips.at(2));
     await until(
       tester,
       () =>
@@ -250,10 +259,26 @@ void main() {
     router.go(const BusinessProfileRoute().location);
     await until(
       tester,
-      () => shows('Kurdische Grillküche') && shows('Küche'),
-      'Profile editor shows the restaurant fields',
+      () => shows('Kurdische Grillküche') && shows('Titelbild'),
+      'Profile editor loads the saved restaurant profile',
     );
     await screenshot(tester, 'profile');
+    await tester.scrollUntilVisible(
+      find.text('Preisniveau'),
+      300,
+      scrollable: find
+          .descendant(
+            of: find.byType(BusinessProfileEditorScreen),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await until(
+      tester,
+      () => shows('Gesprochene Sprachen') || shows('Küche'),
+      'Restaurant-only fields: cuisines and price level',
+    );
+    await screenshot(tester, 'profile_fields');
 
     router.go(const BusinessHoursRoute().location);
     await until(
@@ -271,6 +296,6 @@ void main() {
     );
     await screenshot(tester, 'menu');
 
-    expect(checks, hasLength(8));
+    expect(checks, hasLength(9));
   });
 }

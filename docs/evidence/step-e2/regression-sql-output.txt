@@ -1,0 +1,670 @@
+== step_e2_owner_onboarding (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+INSERT 0 5
+INSERT 0 2
+INSERT 0 4
+INSERT 0 6
+DO
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+INSERT 0 1
+INSERT 0 1
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "b1e04cbe-8072-4ead-b1ac-c99d04e2670a", "status": "rejected", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+INSERT 0 1
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "27c64aa2-44d6-4d54-a8a9-326fea9c3aad", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "3d6b6386-3b10-4bc2-bbf7-b73e79493217", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(2 rows)
+
+RESET
+UPDATE 1
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "27c64aa2-44d6-4d54-a8a9-326fea9c3aad", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+                                                                                                                                                                                                                                                                                            owner_upsert_directory_profile                                                                                                                                                                                                                                                                                             
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"type": "doctor", "phone": "030 1234567", "website": null, "cuisines": [], "has_halal": false, "insurance": "both", "languages": ["german", "kurdish"], "seller_id": "733894a2-fc41-4322-b602-946d8c80e16c", "specialty": "general_medicine", "created_at": "2026-09-27T21:25:18.31222+00:00", "updated_at": "2026-09-27T21:25:18.31222+00:00", "description": "Allgemeinmedizinische Praxis mit kurdisch- und arabischsprachigem Team.", "price_level": null, "is_published": false, "rating_count": 0, "rating_average": 0, "cover_image_path": null, "has_vegan_options": false, "has_vegetarian_options": false}
+(1 row)
+
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+INSERT 0 2
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "c9c2c329-a3e3-4f72-9363-7c79904f0e2f", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+DO
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "66df88c1-0a4c-4841-bde2-76ef5ac302eb", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+DO
+DO
+INSERT 0 2
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "104f346d-e372-4326-bf96-0fa5fb11a6a4", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "cf725bfc-cf46-46f1-9dcc-f00a05b4a798", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(2 rows)
+
+DO
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "7f945124-b701-4a3f-8712-79ba9894f0bf", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "c6f59022-7e16-427d-9aad-e4cd4072d10b", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "ed0d99af-bbd9-4846-9602-6b63bea64d65", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "49997d42-32a2-4b1b-ba50-691ada805eba", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "a880a12a-7ebc-4144-af8a-6bf4199c6072", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "99f167cd-6368-43cb-9dbd-82da55936416", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(6 rows)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+SET
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ROLLBACK
+
+== step_e1_business_directory (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+DO
+INSERT 0 4
+INSERT 0 3
+INSERT 0 5
+INSERT 0 3
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+DO
+UPDATE 1
+DO
+UPDATE 1
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000004","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+INSERT 0 1
+DO
+                                                               upsert_directory_review                                                               
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "009f371b-36fd-405c-a25f-150c46fa23fd", "body": "Excellent food and service", "rating": 5, "updated_at": "2026-09-27T21:25:18.464264+00:00"}
+(1 row)
+
+                                                              upsert_directory_review                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "009f371b-36fd-405c-a25f-150c46fa23fd", "body": "Updated directory review", "rating": 4, "updated_at": "2026-09-27T21:25:18.464264+00:00"}
+(1 row)
+
+INSERT 0 1
+DO
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000001","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+UPDATE 1
+DO
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+SET
+DO
+RESET
+DO
+ROLLBACK
+
+== step_e1_5_osm_import (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+DO
+INSERT 0 3
+INSERT 0 1
+INSERT 0 2
+DO
+              set_config              
+--------------------------------------
+ f26dca72-402e-45aa-afc9-c8466d2900c6
+ 258cc1c8-7bc3-428d-af98-f9003e8f0a61
+ 2c6bf808-24b9-46fe-a374-58a7f2efea50
+(3 rows)
+
+SET
+   set_config    
+-----------------
+ {"role":"anon"}
+(1 row)
+
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+INSERT 0 1
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000003","role":"authenticated"}
+(1 row)
+
+                                                                                                                                                                                                                                                  owner_replace_directory_menu                                                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ [{"id": "dee614f1-4ecd-4668-b33f-fb71b139f0f0", "name": "Döner", "items": [{"id": "c3d5f2f4-302f-4c79-b5e2-c5509c56c796", "name": "Döner Kebab", "is_halal": false, "is_vegan": false, "seller_id": "e1510000-0000-0000-0000-000000000001", "created_at": "2026-09-27T21:25:19.56614+00:00", "section_id": "dee614f1-4ecd-4668-b33f-fb71b139f0f0", "sort_order": 0, "updated_at": "2026-09-27T21:25:19.56614+00:00", "description": null, "price_cents": 750, "is_available": true, "is_vegetarian": false}], "sort_order": 0}]
+(1 row)
+
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+                                                         upsert_directory_review                                                          
+------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "a306d5c0-b4fb-47b6-b20f-374f2c79345a", "body": "Fast food review", "rating": 4, "updated_at": "2026-09-27T21:25:19.56614+00:00"}
+(1 row)
+
+DO
+RESET
+SET
+                                              set_config                                               
+-------------------------------------------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}
+(1 row)
+
+                                         admin_set_directory_outreach_status                                         
+---------------------------------------------------------------------------------------------------------------------
+ {"status": "claimed", "place_id": "f26dca72-402e-45aa-afc9-c8466d2900c6", "is_hidden": false, "contacted_at": null}
+(1 row)
+
+                                             admin_set_directory_outreach_status                                              
+------------------------------------------------------------------------------------------------------------------------------
+ {"status": "removal_requested", "place_id": "258cc1c8-7bc3-428d-af98-f9003e8f0a61", "is_hidden": true, "contacted_at": null}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+DO
+DO
+INSERT 0 1
+INSERT 0 1
+INSERT 0 2
+INSERT 0 1
+INSERT 0 1
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000004","role":"authenticated"}
+(1 row)
+
+                                                                                                                                                                                                                                                owner_replace_directory_menu                                                                                                                                                                                                                                                
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ [{"id": "f62b27fa-ebc5-44f6-9dd2-ff583aa17721", "name": "Kaffee", "items": [{"id": "6b8db303-0aa1-4a50-8cb9-8ac67e417901", "name": "Mokka", "is_halal": false, "is_vegan": false, "seller_id": "e1510000-0000-0000-0000-000000000002", "created_at": "2026-09-27T21:25:19.56614+00:00", "section_id": "f62b27fa-ebc5-44f6-9dd2-ff583aa17721", "sort_order": 0, "updated_at": "2026-09-27T21:25:19.56614+00:00", "description": null, "price_cents": 300, "is_available": true, "is_vegetarian": false}], "sort_order": 0}]
+(1 row)
+
+                                              set_config                                               
+-------------------------------------------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}
+(1 row)
+
+                                         admin_set_directory_outreach_status                                         
+---------------------------------------------------------------------------------------------------------------------
+ {"status": "claimed", "place_id": "2c6bf808-24b9-46fe-a374-58a7f2efea50", "is_hidden": false, "contacted_at": null}
+(1 row)
+
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+DELETE 1
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1500000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ROLLBACK
+
+== step_b_sell_moderation (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE TABLE
+GRANT
+GRANT
+INSERT 0 3
+INSERT 0 1
+SET
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+DO
+SET
+DO
+SET
+SET
+DO
+RESET
+DO
+ROLLBACK
+
+== step_c_user_profiles (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE TABLE
+GRANT
+GRANT
+INSERT 0 4
+INSERT 0 1
+INSERT 0 2
+INSERT 0 2
+INSERT 0 4
+SET
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+                                                                         update_my_profile                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"bio": "Käuferprofil", "city": "Hamburg", "seller": null, "username": "buyer_profile", "display_name": "Buyer Person", "avatar_object": null, "listing_count": 0}
+(1 row)
+
+DO
+SET
+SET
+DO
+SET
+SET
+UPDATE 1
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+UPDATE 1
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+DO
+RESET
+ROLLBACK
+
+== step_d_map (exit 0)
+BEGIN
+CREATE FUNCTION
+DO
+INSERT 0 1
+INSERT 0 2
+INSERT 0 2
+UPDATE 1
+INSERT 0 4
+DO
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"d1000000-0000-0000-0000-000000000001","role":"authenticated"}
+(1 row)
+
+DO
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+UPDATE 1
+DO
+ROLLBACK
+
+== step_d_postal_code_hardening (exit 0)
+BEGIN
+DO
+DO
+DO
+ROLLBACK
+
+== 20260924000100_admin_verification_reports (exit 0)
+BEGIN
+INSERT 0 1
+SET
+              set_config              
+--------------------------------------
+ a1000000-0000-0000-0000-000000000001
+(1 row)
+
+                                              set_config                                               
+-------------------------------------------------------------------------------------------------------
+ {"sub":"a1000000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}
+(1 row)
+
+DO
+ROLLBACK
+

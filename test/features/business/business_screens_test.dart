@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
 
@@ -267,6 +268,14 @@ void main() {
       await pumpBusiness(tester, repository, location: '/business/hours');
 
       expect(find.text('18:00 – 02:00 (nächster Tag)'), findsOneWidget);
+      final overnight = tester.renderObject<RenderParagraph>(
+        find.text('18:00 – 02:00 (nächster Tag)'),
+      );
+      expect(
+        overnight.didExceedMaxLines,
+        isFalse,
+        reason: 'overnight label fits at phone width',
+      );
       expect(find.text('Geschlossen'), findsNWidgets(6));
 
       await tester.tap(find.byTooltip('Zeitfenster hinzufügen').first);
@@ -279,7 +288,12 @@ void main() {
 
       await tester.tap(find.byTooltip('Zeitfenster entfernen').last);
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Speichern').first);
+      await tester.tap(
+        find.descendant(
+          of: find.byType(AppBar),
+          matching: find.text('Speichern'),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final saved = repository.savedHours!;

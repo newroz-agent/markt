@@ -233,6 +233,8 @@ class DirectoryTypeChoice extends StatelessWidget {
       children: <Widget>[
         for (final type in DirectoryType.values)
           ChoiceChip(
+            // The type icon stays visible; the selected colour marks the choice.
+            showCheckmark: false,
             avatar: Icon(type.icon, size: AppSizes.iconMedium),
             label: Text(type.label(l10n)),
             selected: selected == type,

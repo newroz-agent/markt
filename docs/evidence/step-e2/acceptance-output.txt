@@ -1,0 +1,191 @@
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+INSERT 0 5
+INSERT 0 2
+INSERT 0 4
+INSERT 0 6
+DO
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+INSERT 0 1
+INSERT 0 1
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "b1e04cbe-8072-4ead-b1ac-c99d04e2670a", "status": "rejected", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+INSERT 0 1
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "27c64aa2-44d6-4d54-a8a9-326fea9c3aad", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "3d6b6386-3b10-4bc2-bbf7-b73e79493217", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(2 rows)
+
+RESET
+UPDATE 1
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "27c64aa2-44d6-4d54-a8a9-326fea9c3aad", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+                                                                                                                                                                                                                                                                                            owner_upsert_directory_profile                                                                                                                                                                                                                                                                                             
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"type": "doctor", "phone": "030 1234567", "website": null, "cuisines": [], "has_halal": false, "insurance": "both", "languages": ["german", "kurdish"], "seller_id": "733894a2-fc41-4322-b602-946d8c80e16c", "specialty": "general_medicine", "created_at": "2026-09-27T21:25:18.31222+00:00", "updated_at": "2026-09-27T21:25:18.31222+00:00", "description": "Allgemeinmedizinische Praxis mit kurdisch- und arabischsprachigem Team.", "price_level": null, "is_published": false, "rating_count": 0, "rating_average": 0, "cover_image_path": null, "has_vegan_options": false, "has_vegetarian_options": false}
+(1 row)
+
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+INSERT 0 2
+ act_as 
+--------
+ 
+(1 row)
+
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "c9c2c329-a3e3-4f72-9363-7c79904f0e2f", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+DO
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "66df88c1-0a4c-4841-bde2-76ef5ac302eb", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(1 row)
+
+DO
+DO
+INSERT 0 2
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "104f346d-e372-4326-bf96-0fa5fb11a6a4", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "cf725bfc-cf46-46f1-9dcc-f00a05b4a798", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(2 rows)
+
+DO
+                                                moderate_seller_document                                                
+------------------------------------------------------------------------------------------------------------------------
+ {"id": "7f945124-b701-4a3f-8712-79ba9894f0bf", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "c6f59022-7e16-427d-9aad-e4cd4072d10b", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "ed0d99af-bbd9-4846-9602-6b63bea64d65", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "49997d42-32a2-4b1b-ba50-691ada805eba", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "a880a12a-7ebc-4144-af8a-6bf4199c6072", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+ {"id": "99f167cd-6368-43cb-9dbd-82da55936416", "status": "approved", "reviewed_at": "2026-09-27T21:25:18.31222+00:00"}
+(6 rows)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+ act_as 
+--------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+SET
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ROLLBACK

@@ -188,56 +188,13 @@ class _HoursFormState extends ConsumerState<_HoursForm> {
               Text(l10n.businessHoursHint, style: theme.textTheme.bodySmall),
               const SizedBox(height: AppSpacing.sm),
               for (final weekday in displayWeekdays)
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      AppSpacing.md,
-                      AppSpacing.xs,
-                      AppSpacing.xs,
-                      AppSpacing.xs,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 104,
-                          child: Text(
-                            weekdayLabel(l10n, weekday),
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        ),
-                        Expanded(
-                          child: _days[weekday]!.isEmpty
-                              ? Text(
-                                  l10n.businessHoursClosed,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
-                                )
-                              : Wrap(
-                                  spacing: AppSpacing.xs,
-                                  runSpacing: AppSpacing.xs,
-                                  children: <Widget>[
-                                    for (final interval in _days[weekday]!)
-                                      InputChip(
-                                        label: Text(_intervalLabel(interval)),
-                                        deleteButtonTooltipMessage:
-                                            l10n.businessHoursRemove,
-                                        onDeleted: () => setState(
-                                          () =>
-                                              _days[weekday]!.remove(interval),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                        ),
-                        IconButton(
-                          tooltip: l10n.businessHoursAdd,
-                          icon: const Icon(Icons.add_circle_outline_rounded),
-                          onPressed: () => _addInterval(weekday),
-                        ),
-                      ],
-                    ),
-                  ),
+                _WeekdayCard(
+                  label: weekdayLabel(l10n, weekday),
+                  intervals: _days[weekday]!,
+                  intervalLabel: _intervalLabel,
+                  onAdd: () => _addInterval(weekday),
+                  onRemove: (interval) =>
+                      setState(() => _days[weekday]!.remove(interval)),
                 ),
               const SizedBox(height: AppSpacing.lg),
               AppButton.primary(
@@ -248,6 +205,75 @@ class _HoursFormState extends ConsumerState<_HoursForm> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// One weekday: name and add button on top, slots below at full width so an
+/// overnight label such as "12:00 – 02:00 (nächster Tag)" never truncates.
+class _WeekdayCard extends StatelessWidget {
+  const _WeekdayCard({
+    required this.label,
+    required this.intervals,
+    required this.intervalLabel,
+    required this.onAdd,
+    required this.onRemove,
+  });
+
+  final String label;
+  final List<OpeningInterval> intervals;
+  final String Function(OpeningInterval) intervalLabel;
+  final VoidCallback onAdd;
+  final ValueChanged<OpeningInterval> onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.xxs,
+          AppSpacing.xs,
+          AppSpacing.sm,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(child: Text(label, style: theme.textTheme.titleSmall)),
+                IconButton(
+                  tooltip: l10n.businessHoursAdd,
+                  icon: const Icon(Icons.add_circle_outline_rounded),
+                  onPressed: onAdd,
+                ),
+              ],
+            ),
+            if (intervals.isEmpty)
+              Text(
+                l10n.businessHoursClosed,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              )
+            else
+              Wrap(
+                spacing: AppSpacing.xs,
+                runSpacing: AppSpacing.xs,
+                children: <Widget>[
+                  for (final interval in intervals)
+                    InputChip(
+                      label: Text(intervalLabel(interval)),
+                      deleteButtonTooltipMessage: l10n.businessHoursRemove,
+                      onDeleted: () => onRemove(interval),
+                    ),
+                ],
+              ),
+          ],
         ),
       ),
     );

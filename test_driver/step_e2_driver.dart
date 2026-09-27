@@ -12,6 +12,7 @@ const expectedScreenshots = <String>{
   'step_e2_admin_queue',
   'step_e2_hub',
   'step_e2_profile',
+  'step_e2_profile_fields',
   'step_e2_hours',
   'step_e2_menu',
 };
@@ -72,7 +73,7 @@ Future<void> main() async {
           tests?.length != 1 ||
           tests?.values.any((value) => value != 'PASS') != false) {
         throw StateError(
-          'Step E2 did not produce eight passing real-iOS checkpoints; '
+          'Step E2 did not produce nine passing real-iOS checkpoints; '
           'see $outputDirectory/results.json',
         );
       }

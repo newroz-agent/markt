@@ -1,0 +1,85 @@
+{
+  "screenshots": [
+    {
+      "name": "step_e2_start",
+      "bytes": 300655,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_documents_rejected",
+      "bytes": 427538,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_documents_uploaded",
+      "bytes": 403521,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_admin_queue",
+      "bytes": 394398,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_hub",
+      "bytes": 305871,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_profile",
+      "bytes": 336083,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_profile_fields",
+      "bytes": 330049,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_hours",
+      "bytes": 354183,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e2_menu",
+      "bytes": 341037,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "start": "PASS",
+    "documents_rejected": "PASS",
+    "documents_uploaded": "PASS",
+    "admin_queue": "PASS",
+    "hub": "PASS",
+    "profile": "PASS",
+    "profile_fields": "PASS",
+    "hours": "PASS",
+    "menu": "PASS"
+  },
+  "evidence": {
+    "uploaded_document": {
+      "kind": "medical_professional_registration",
+      "status": "pending",
+      "mime_type": "application/pdf",
+      "stored_in_private_bucket": true
+    }
+  },
+  "tests": {
+    "real iOS owner onboarding, documents, admin queue, editors": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro (iOS 26.1, CFF133B6-F73A-4335-A497-5244B15D1C39)"
+  }
+}

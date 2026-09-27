@@ -106,6 +106,13 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
 
 ---
 
+### Private sellers and the directory (decision 2026-09-27)
+- Users who already have a seller (in particular a private seller) are refused by
+  `owner_start_directory`; nothing else is built in E2.
+- **Step F — account switching (option D), after E2, only once the Step F brief arrives:**
+  one login, up to one private and one business seller per user; private listings always
+  stay under the private identity, so no relabeling of existing listings is needed.
+
 ## E3 — Public discovery
 - New route `/directory` (NOT a new bottom tab), entered from a Home section with
   four chips: Restaurants, Cafés, Imbiss, Ärzte.
