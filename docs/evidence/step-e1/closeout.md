@@ -115,6 +115,9 @@ stored in a new column `reviews.context` (NOT NULL, default `'purchase'`).
   marketplace *and* runs a restaurant, the rating is one combined number. That was the
   approved "reuse the seller rating" design, but it is worth a conscious decision
   before E3 shows ratings.
+  **Superseded 2026-09-27:** ratings are no longer blended. Migration
+  `20260927000600_directory_rating_separate.sql` adds a directory-only rating on the
+  profile and makes the seller rating purchase-only (see STATUS.md, "Rating decision").
 - Review text follows the pre-existing rule: null, or 3–3000 characters.
 
 ## Verification at E1 close

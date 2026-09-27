@@ -6,6 +6,11 @@ import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_documents_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_hours_editor_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_hub_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_menu_editor_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_profile_editor_screen.dart';
 import 'package:zerin_marketplace/features/categories/presentation/category_products_screen.dart';
 import 'package:zerin_marketplace/features/chat/presentation/chat_conversation_screen.dart';
 import 'package:zerin_marketplace/features/chat/presentation/chat_inbox_screen.dart';
@@ -59,7 +64,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           state.matchedLocation == '/edit-profile' ||
           state.matchedLocation == '/favorites' ||
           state.matchedLocation == '/recently-viewed' ||
-          state.matchedLocation == '/moderation';
+          state.matchedLocation == '/moderation' ||
+          state.matchedLocation == '/business' ||
+          state.matchedLocation.startsWith('/business/');
       if (isProtected && ref.read(authRepositoryProvider).currentUser == null) {
         return AuthRoute(redirectTo: state.uri.toString()).location;
       }
@@ -279,4 +286,49 @@ class RecentlyViewedRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const RecentlyViewedScreen();
+}
+
+@TypedGoRoute<BusinessHubRoute>(path: '/business')
+class BusinessHubRoute extends GoRouteData {
+  const BusinessHubRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BusinessHubScreen();
+}
+
+@TypedGoRoute<BusinessDocumentsRoute>(path: '/business/documents')
+class BusinessDocumentsRoute extends GoRouteData {
+  const BusinessDocumentsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BusinessDocumentsScreen();
+}
+
+@TypedGoRoute<BusinessProfileRoute>(path: '/business/profile')
+class BusinessProfileRoute extends GoRouteData {
+  const BusinessProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BusinessProfileEditorScreen();
+}
+
+@TypedGoRoute<BusinessHoursRoute>(path: '/business/hours')
+class BusinessHoursRoute extends GoRouteData {
+  const BusinessHoursRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BusinessHoursEditorScreen();
+}
+
+@TypedGoRoute<BusinessMenuRoute>(path: '/business/menu')
+class BusinessMenuRoute extends GoRouteData {
+  const BusinessMenuRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BusinessMenuEditorScreen();
 }

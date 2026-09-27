@@ -59,6 +59,7 @@ dependencies:
   # v13 pulls in win32 6 syntax unsupported by the Riverpod 2 generator's analyzer.
   share_plus: 12.0.2
   collection: ^1.19.1
+  file_selector: ^1.1.0
 
 # geolocator 14.0.3's Linux implementation requires package_info_plus 10,
 # which conflicts with the intentionally pinned share_plus 12 / win32 5 graph.

@@ -1517,4 +1517,501 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mapOsmAttribution => '© OpenStreetMap-Mitwirkende';
+
+  @override
+  String get businessHubTitle => 'Mein Unternehmen';
+
+  @override
+  String get businessAccountEntrySubtitle =>
+      'Restaurant, Café, Imbiss oder Arztpraxis eintragen';
+
+  @override
+  String get businessStartTitle => 'Unternehmen eintragen';
+
+  @override
+  String get businessStartBody =>
+      'Wähle zuerst die Art deines Eintrags. Danach siehst du genau, welche Nachweise wir dafür brauchen.';
+
+  @override
+  String get businessTypeLabel => 'Art des Eintrags';
+
+  @override
+  String get businessNameLabel => 'Name des Unternehmens';
+
+  @override
+  String get businessStartAction => 'Weiter zu den Nachweisen';
+
+  @override
+  String get businessPrivateSellerTitle => 'Privates Verkaufskonto';
+
+  @override
+  String get businessPrivateSellerBody =>
+      'Dein Konto verkauft als Privatperson. Einträge im Verzeichnis sind nur mit einem Geschäftskonto möglich. Bitte wende dich an den Support.';
+
+  @override
+  String get businessStatusVerified => 'Verifiziert';
+
+  @override
+  String get businessStatusInReview => 'In Prüfung';
+
+  @override
+  String get businessStatusDocumentsMissing => 'Nachweise fehlen';
+
+  @override
+  String get businessDocumentsTile => 'Nachweise';
+
+  @override
+  String businessDocumentsProgress({
+    required int approved,
+    required int total,
+  }) {
+    return '$approved von $total freigegeben';
+  }
+
+  @override
+  String get businessProfileTile => 'Profil';
+
+  @override
+  String get businessProfileMissing => 'Noch nicht angelegt';
+
+  @override
+  String get businessProfileDraft => 'Entwurf – nicht öffentlich';
+
+  @override
+  String get businessProfilePublished => 'Veröffentlicht';
+
+  @override
+  String get businessHoursTile => 'Öffnungszeiten';
+
+  @override
+  String businessHoursSummary({required int count}) {
+    return '$count Zeitfenster';
+  }
+
+  @override
+  String get businessMenuTile => 'Speisekarte';
+
+  @override
+  String businessMenuSummary({required int sections, required int items}) {
+    return '$sections Bereiche · $items Gerichte';
+  }
+
+  @override
+  String get businessNeedsProfileFirst => 'Lege zuerst dein Profil an.';
+
+  @override
+  String get businessPublishTitle => 'Im Verzeichnis anzeigen';
+
+  @override
+  String get businessPublishHintUnverified =>
+      'Veröffentlichen ist möglich, sobald deine Nachweise freigegeben sind.';
+
+  @override
+  String get businessPublishOn => 'Dein Eintrag ist öffentlich sichtbar.';
+
+  @override
+  String get businessPublishOff => 'Dein Eintrag ist nur für dich sichtbar.';
+
+  @override
+  String get businessDraftNote =>
+      'Profil, Öffnungszeiten und Speisekarte kannst du schon als Entwurf vorbereiten.';
+
+  @override
+  String get directoryTypeRestaurant => 'Restaurant';
+
+  @override
+  String get directoryTypeCafe => 'Café';
+
+  @override
+  String get directoryTypeFastFood => 'Imbiss';
+
+  @override
+  String get directoryTypeDoctor => 'Arztpraxis';
+
+  @override
+  String businessDocumentsIntro({required String type}) {
+    return 'Für einen Eintrag als $type brauchen wir diese Nachweise. Nur das Zêrîn-Team sieht deine Dokumente.';
+  }
+
+  @override
+  String get businessDocumentsFormats => 'Foto oder PDF, höchstens 15 MB.';
+
+  @override
+  String get businessTypeLockedHint =>
+      'Die Art kannst du jetzt nur noch im Profil ändern.';
+
+  @override
+  String get documentKindIdentity => 'Personalausweis oder Reisepass';
+
+  @override
+  String get documentKindIdentityHint => 'Gut lesbar, alle Ecken sichtbar.';
+
+  @override
+  String get documentKindBusinessRegistration =>
+      'Gewerbeanmeldung oder Handelsregisterauszug';
+
+  @override
+  String get documentKindBusinessRegistrationHint =>
+      'Auf den Namen deines Unternehmens.';
+
+  @override
+  String get documentKindMedicalHint =>
+      'Approbationsurkunde oder Nachweis der Ärztekammer.';
+
+  @override
+  String get documentStatusMissing => 'Fehlt';
+
+  @override
+  String get documentStatusPending => 'In Prüfung';
+
+  @override
+  String get documentStatusApproved => 'Freigegeben';
+
+  @override
+  String get documentStatusRejected => 'Abgelehnt';
+
+  @override
+  String documentRejectionNote({required String note}) {
+    return 'Hinweis des Teams: $note';
+  }
+
+  @override
+  String get documentUploadAction => 'Hochladen';
+
+  @override
+  String get documentReuploadAction => 'Neu hochladen';
+
+  @override
+  String get documentWithdrawAction => 'Zurückziehen';
+
+  @override
+  String get documentSourceCamera => 'Foto aufnehmen';
+
+  @override
+  String get documentSourceGallery => 'Foto aus der Galerie';
+
+  @override
+  String get documentSourcePdf => 'PDF auswählen';
+
+  @override
+  String get documentUploaded => 'Hochgeladen. Wir prüfen den Nachweis.';
+
+  @override
+  String get documentWithdrawn => 'Nachweis zurückgezogen.';
+
+  @override
+  String documentUploadedAt({required String date}) {
+    return 'Hochgeladen am $date';
+  }
+
+  @override
+  String get businessErrorName => 'Der Name muss 2 bis 100 Zeichen lang sein.';
+
+  @override
+  String get businessErrorCity => 'Bitte wähle eine Stadt aus der Liste.';
+
+  @override
+  String get businessErrorDocumentPending =>
+      'Für diesen Nachweis wartet schon ein Dokument auf die Prüfung.';
+
+  @override
+  String get businessErrorFileTooLarge => 'Die Datei ist größer als 15 MB.';
+
+  @override
+  String get businessErrorInvalid => 'Bitte prüfe deine Angaben.';
+
+  @override
+  String get businessCoverLabel => 'Titelbild';
+
+  @override
+  String get businessCoverAction => 'Titelbild wählen';
+
+  @override
+  String get businessDescriptionLabel => 'Beschreibung';
+
+  @override
+  String get businessDescriptionHelper => '20 bis 3000 Zeichen';
+
+  @override
+  String get businessPhoneLabel => 'Telefon';
+
+  @override
+  String get businessWebsiteLabel => 'Website (optional)';
+
+  @override
+  String get businessWebsiteHelper => 'Beginnt mit https://';
+
+  @override
+  String get businessLanguagesLabel => 'Gesprochene Sprachen';
+
+  @override
+  String get businessCuisinesLabel => 'Küche';
+
+  @override
+  String get businessPriceLevelLabel => 'Preisniveau';
+
+  @override
+  String get businessDietLabel => 'Ernährung';
+
+  @override
+  String get businessHalal => 'Halal';
+
+  @override
+  String get businessVegetarian => 'Vegetarische Gerichte';
+
+  @override
+  String get businessVegan => 'Vegane Gerichte';
+
+  @override
+  String get businessSpecialtyLabel => 'Fachrichtung';
+
+  @override
+  String get businessInsuranceLabel => 'Versicherung';
+
+  @override
+  String get insuranceStatutory => 'Gesetzlich';
+
+  @override
+  String get insurancePrivate => 'Privat';
+
+  @override
+  String get insuranceBoth => 'Gesetzlich und privat';
+
+  @override
+  String get businessSaved => 'Gespeichert.';
+
+  @override
+  String get businessDescriptionInvalid =>
+      'Die Beschreibung muss 20 bis 3000 Zeichen lang sein.';
+
+  @override
+  String get businessPhoneInvalid =>
+      'Bitte gib eine Telefonnummer mit 5 bis 40 Zeichen an.';
+
+  @override
+  String get businessWebsiteInvalid =>
+      'Die Website muss mit https:// beginnen.';
+
+  @override
+  String get businessLanguagesRequired => 'Wähle mindestens eine Sprache.';
+
+  @override
+  String get businessCuisinesRequired => 'Wähle mindestens eine Küche.';
+
+  @override
+  String get businessPriceRequired => 'Wähle ein Preisniveau.';
+
+  @override
+  String get businessSpecialtyRequired => 'Wähle eine Fachrichtung.';
+
+  @override
+  String get businessInsuranceRequired =>
+      'Wähle, welche Versicherung du annimmst.';
+
+  @override
+  String get cuisineKurdish => 'Kurdisch';
+
+  @override
+  String get cuisineSyrian => 'Syrisch';
+
+  @override
+  String get cuisineTurkish => 'Türkisch';
+
+  @override
+  String get cuisineArabic => 'Arabisch';
+
+  @override
+  String get cuisinePersian => 'Persisch';
+
+  @override
+  String get cuisineLebanese => 'Libanesisch';
+
+  @override
+  String get cuisineIraqi => 'Irakisch';
+
+  @override
+  String get cuisineMiddleEastern => 'Orientalisch';
+
+  @override
+  String get cuisineKebab => 'Kebab & Döner';
+
+  @override
+  String get cuisineFalafel => 'Falafel';
+
+  @override
+  String get cuisineGerman => 'Deutsch';
+
+  @override
+  String get cuisineItalian => 'Italienisch';
+
+  @override
+  String get cuisineMediterranean => 'Mediterran';
+
+  @override
+  String get cuisineIndian => 'Indisch';
+
+  @override
+  String get cuisineAsian => 'Asiatisch';
+
+  @override
+  String get cuisineInternational => 'International';
+
+  @override
+  String get specialtyGeneralMedicine => 'Allgemeinmedizin';
+
+  @override
+  String get specialtyInternalMedicine => 'Innere Medizin';
+
+  @override
+  String get specialtyPediatrics => 'Kinderheilkunde';
+
+  @override
+  String get specialtyGynecology => 'Frauenheilkunde';
+
+  @override
+  String get specialtyDermatology => 'Hautheilkunde';
+
+  @override
+  String get specialtyOrthopedics => 'Orthopädie';
+
+  @override
+  String get specialtyNeurology => 'Neurologie';
+
+  @override
+  String get specialtyPsychiatry => 'Psychiatrie';
+
+  @override
+  String get specialtyOphthalmology => 'Augenheilkunde';
+
+  @override
+  String get specialtyEnt => 'HNO';
+
+  @override
+  String get specialtyDentistry => 'Zahnmedizin';
+
+  @override
+  String get specialtyCardiology => 'Kardiologie';
+
+  @override
+  String get specialtyUrology => 'Urologie';
+
+  @override
+  String get specialtyOther => 'Andere';
+
+  @override
+  String get businessHoursClosed => 'Geschlossen';
+
+  @override
+  String get businessHoursAdd => 'Zeitfenster hinzufügen';
+
+  @override
+  String businessHoursInterval({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes';
+  }
+
+  @override
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes (nächster Tag)';
+  }
+
+  @override
+  String get businessHoursPickOpen => 'Öffnet um';
+
+  @override
+  String get businessHoursPickClose => 'Schließt um';
+
+  @override
+  String get businessHoursHint =>
+      'Schließt ihr nach Mitternacht, wähle einfach die Uhrzeit am nächsten Morgen.';
+
+  @override
+  String get businessHoursSameTime =>
+      'Öffnungs- und Schließzeit dürfen nicht gleich sein.';
+
+  @override
+  String get businessHoursTooMany => 'Höchstens 6 Zeitfenster pro Tag.';
+
+  @override
+  String get businessHoursRemove => 'Zeitfenster entfernen';
+
+  @override
+  String get weekdayMonday => 'Montag';
+
+  @override
+  String get weekdayTuesday => 'Dienstag';
+
+  @override
+  String get weekdayWednesday => 'Mittwoch';
+
+  @override
+  String get weekdayThursday => 'Donnerstag';
+
+  @override
+  String get weekdayFriday => 'Freitag';
+
+  @override
+  String get weekdaySaturday => 'Samstag';
+
+  @override
+  String get weekdaySunday => 'Sonntag';
+
+  @override
+  String get businessMenuEmpty =>
+      'Noch keine Bereiche. Lege zum Beispiel „Vorspeisen“ oder „Getränke“ an.';
+
+  @override
+  String get businessMenuAddSection => 'Bereich hinzufügen';
+
+  @override
+  String get businessMenuSectionName => 'Name des Bereichs';
+
+  @override
+  String get businessMenuAddItem => 'Gericht hinzufügen';
+
+  @override
+  String get businessMenuEditItem => 'Gericht bearbeiten';
+
+  @override
+  String get businessMenuItemName => 'Name';
+
+  @override
+  String get businessMenuItemDescription => 'Beschreibung (optional)';
+
+  @override
+  String get businessMenuItemPrice => 'Preis in €';
+
+  @override
+  String get businessMenuItemAvailable => 'Verfügbar';
+
+  @override
+  String get businessMenuItemUnavailable => 'Nicht verfügbar';
+
+  @override
+  String get businessMenuMoveUp => 'Nach oben';
+
+  @override
+  String get businessMenuMoveDown => 'Nach unten';
+
+  @override
+  String get businessMenuPriceInvalid => 'Bitte gib einen gültigen Preis an.';
+
+  @override
+  String get businessMenuNameRequired => 'Bitte gib einen Namen an.';
+
+  @override
+  String businessMenuDeleteSection({required String name}) {
+    return 'Bereich „$name“ mit allen Gerichten löschen?';
+  }
+
+  @override
+  String get menuFlagVegetarian => 'Vegetarisch';
+
+  @override
+  String get menuFlagVegan => 'Vegan';
 }

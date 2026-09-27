@@ -38,7 +38,11 @@ class _AuthRepository implements AuthRepository {
       throw UnimplementedError('${invocation.memberName}');
 }
 
-Future<void> _pumpAccount(WidgetTester tester, Locale locale) async {
+Future<void> _pumpAccount(
+  WidgetTester tester,
+  Locale locale, {
+  MyProfile profile = _profile,
+}) async {
   SharedPreferences.setMockInitialValues(<String, Object>{});
   final preferences = await SharedPreferences.getInstance();
   await tester.pumpWidget(
@@ -47,7 +51,7 @@ Future<void> _pumpAccount(WidgetTester tester, Locale locale) async {
         sharedPreferencesProvider.overrideWithValue(preferences),
         authRepositoryProvider.overrideWithValue(const _AuthRepository()),
         authStateProvider.overrideWith((ref) => Stream.value(_user)),
-        myProfileProvider.overrideWith((ref) async => _profile),
+        myProfileProvider.overrideWith((ref) async => profile),
         unreadChatCountProvider.overrideWith((ref) async => 2),
         currentUserIsAdminProvider.overrideWith((ref) async => false),
       ],
@@ -109,5 +113,29 @@ void main() {
       findsOneWidget,
     );
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('business entry is offered to users without a seller', (
+    tester,
+  ) async {
+    await _pumpAccount(tester, const Locale('de'));
+    expect(find.text('Mein Unternehmen'), findsOneWidget);
+  });
+
+  testWidgets('business entry is hidden for private sellers', (tester) async {
+    await _pumpAccount(
+      tester,
+      const Locale('de'),
+      profile: const MyProfile(
+        displayName: 'Alice Public',
+        username: 'alice_name',
+        city: 'Berlin',
+        bio: null,
+        avatarUrl: null,
+        listingCount: 1,
+        seller: ProfileSeller(id: 's1', kind: 'private', verified: false),
+      ),
+    );
+    expect(find.text('Mein Unternehmen'), findsNothing);
   });
 }

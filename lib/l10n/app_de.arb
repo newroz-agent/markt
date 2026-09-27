@@ -1921,5 +1921,666 @@
   "mapOsmAttribution": "© OpenStreetMap-Mitwirkende",
   "@mapOsmAttribution": {
     "description": "Visible OpenStreetMap tile attribution."
+  },
+  "businessHubTitle": "Mein Unternehmen",
+  "@businessHubTitle": {
+    "description": "Title of the owner hub for directory businesses and the Account entry."
+  },
+  "businessAccountEntrySubtitle": "Restaurant, Café, Imbiss oder Arztpraxis eintragen",
+  "@businessAccountEntrySubtitle": {
+    "description": "Subtitle of the Account entry that opens the owner hub."
+  },
+  "businessStartTitle": "Unternehmen eintragen",
+  "@businessStartTitle": {
+    "description": "Title of the card that starts a directory listing."
+  },
+  "businessStartBody": "Wähle zuerst die Art deines Eintrags. Danach siehst du genau, welche Nachweise wir dafür brauchen.",
+  "@businessStartBody": {
+    "description": "Explains that the type decides the required documents."
+  },
+  "businessTypeLabel": "Art des Eintrags",
+  "@businessTypeLabel": {
+    "description": "Label of the directory type choice."
+  },
+  "businessNameLabel": "Name des Unternehmens",
+  "@businessNameLabel": {
+    "description": "Label of the business name field."
+  },
+  "businessStartAction": "Weiter zu den Nachweisen",
+  "@businessStartAction": {
+    "description": "Button that creates the business and opens the documents screen."
+  },
+  "businessPrivateSellerTitle": "Privates Verkaufskonto",
+  "@businessPrivateSellerTitle": {
+    "description": "Title shown to private sellers, who cannot join the directory."
+  },
+  "businessPrivateSellerBody": "Dein Konto verkauft als Privatperson. Einträge im Verzeichnis sind nur mit einem Geschäftskonto möglich. Bitte wende dich an den Support.",
+  "@businessPrivateSellerBody": {
+    "description": "Explains why private sellers cannot join the directory."
+  },
+  "businessStatusVerified": "Verifiziert",
+  "@businessStatusVerified": {
+    "description": "Owner hub status: documents approved and verified."
+  },
+  "businessStatusInReview": "In Prüfung",
+  "@businessStatusInReview": {
+    "description": "Owner hub status: all required documents uploaded, waiting for review."
+  },
+  "businessStatusDocumentsMissing": "Nachweise fehlen",
+  "@businessStatusDocumentsMissing": {
+    "description": "Owner hub status: at least one required document is missing or rejected."
+  },
+  "businessDocumentsTile": "Nachweise",
+  "@businessDocumentsTile": {
+    "description": "Title of the verification documents screen and hub tile."
+  },
+  "businessDocumentsProgress": "{approved} von {total} freigegeben",
+  "@businessDocumentsProgress": {
+    "description": "Number of approved required documents.",
+    "placeholders": {
+      "approved": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "businessProfileTile": "Profil",
+  "@businessProfileTile": {
+    "description": "Title of the directory profile editor and hub tile."
+  },
+  "businessProfileMissing": "Noch nicht angelegt",
+  "@businessProfileMissing": {
+    "description": "Hub subtitle when no directory profile exists yet."
+  },
+  "businessProfileDraft": "Entwurf – nicht öffentlich",
+  "@businessProfileDraft": {
+    "description": "Hub subtitle for an unpublished profile."
+  },
+  "businessProfilePublished": "Veröffentlicht",
+  "@businessProfilePublished": {
+    "description": "Hub subtitle for a published profile."
+  },
+  "businessHoursTile": "Öffnungszeiten",
+  "@businessHoursTile": {
+    "description": "Title of the opening hours editor and hub tile."
+  },
+  "businessHoursSummary": "{count} Zeitfenster",
+  "@businessHoursSummary": {
+    "description": "Number of weekly opening intervals.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "businessMenuTile": "Speisekarte",
+  "@businessMenuTile": {
+    "description": "Title of the menu editor and hub tile."
+  },
+  "businessMenuSummary": "{sections} Bereiche · {items} Gerichte",
+  "@businessMenuSummary": {
+    "description": "Menu size summary.",
+    "placeholders": {
+      "sections": {
+        "type": "int"
+      },
+      "items": {
+        "type": "int"
+      }
+    }
+  },
+  "businessNeedsProfileFirst": "Lege zuerst dein Profil an.",
+  "@businessNeedsProfileFirst": {
+    "description": "Shown on hub tiles that need an existing profile."
+  },
+  "businessPublishTitle": "Im Verzeichnis anzeigen",
+  "@businessPublishTitle": {
+    "description": "Label of the publish switch."
+  },
+  "businessPublishHintUnverified": "Veröffentlichen ist möglich, sobald deine Nachweise freigegeben sind.",
+  "@businessPublishHintUnverified": {
+    "description": "Why the publish switch is disabled before verification."
+  },
+  "businessPublishOn": "Dein Eintrag ist öffentlich sichtbar.",
+  "@businessPublishOn": {
+    "description": "Publish switch helper when published."
+  },
+  "businessPublishOff": "Dein Eintrag ist nur für dich sichtbar.",
+  "@businessPublishOff": {
+    "description": "Publish switch helper when unpublished."
+  },
+  "businessDraftNote": "Profil, Öffnungszeiten und Speisekarte kannst du schon als Entwurf vorbereiten.",
+  "@businessDraftNote": {
+    "description": "Hub note that editors work as drafts before verification."
+  },
+  "directoryTypeRestaurant": "Restaurant",
+  "@directoryTypeRestaurant": {
+    "description": "Directory type label."
+  },
+  "directoryTypeCafe": "Café",
+  "@directoryTypeCafe": {
+    "description": "Directory type label."
+  },
+  "directoryTypeFastFood": "Imbiss",
+  "@directoryTypeFastFood": {
+    "description": "Directory type label for fast food (the \"Imbiss\" chip in E3)."
+  },
+  "directoryTypeDoctor": "Arztpraxis",
+  "@directoryTypeDoctor": {
+    "description": "Directory type label."
+  },
+  "businessDocumentsIntro": "Für einen Eintrag als {type} brauchen wir diese Nachweise. Nur das Zêrîn-Team sieht deine Dokumente.",
+  "@businessDocumentsIntro": {
+    "description": "Intro of the documents screen. {type} is a directory type label.",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "businessDocumentsFormats": "Foto oder PDF, höchstens 15 MB.",
+  "@businessDocumentsFormats": {
+    "description": "Accepted document formats."
+  },
+  "businessTypeLockedHint": "Die Art kannst du jetzt nur noch im Profil ändern.",
+  "@businessTypeLockedHint": {
+    "description": "Shown when the type is fixed by an existing profile."
+  },
+  "documentKindIdentity": "Personalausweis oder Reisepass",
+  "@documentKindIdentity": {
+    "description": "Seller document kind: identity."
+  },
+  "documentKindIdentityHint": "Gut lesbar, alle Ecken sichtbar.",
+  "@documentKindIdentityHint": {
+    "description": "What a good identity upload looks like."
+  },
+  "documentKindBusinessRegistration": "Gewerbeanmeldung oder Handelsregisterauszug",
+  "@documentKindBusinessRegistration": {
+    "description": "Seller document kind: business registration."
+  },
+  "documentKindBusinessRegistrationHint": "Auf den Namen deines Unternehmens.",
+  "@documentKindBusinessRegistrationHint": {
+    "description": "What a good business registration upload looks like."
+  },
+  "documentKindMedicalHint": "Approbationsurkunde oder Nachweis der Ärztekammer.",
+  "@documentKindMedicalHint": {
+    "description": "What a good medical registration upload looks like."
+  },
+  "documentStatusMissing": "Fehlt",
+  "@documentStatusMissing": {
+    "description": "Document status: not uploaded yet."
+  },
+  "documentStatusPending": "In Prüfung",
+  "@documentStatusPending": {
+    "description": "Document status: waiting for admin review."
+  },
+  "documentStatusApproved": "Freigegeben",
+  "@documentStatusApproved": {
+    "description": "Document status: approved."
+  },
+  "documentStatusRejected": "Abgelehnt",
+  "@documentStatusRejected": {
+    "description": "Document status: rejected."
+  },
+  "documentRejectionNote": "Hinweis des Teams: {note}",
+  "@documentRejectionNote": {
+    "description": "Admin rejection note shown to the owner.",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "documentUploadAction": "Hochladen",
+  "@documentUploadAction": {
+    "description": "Upload a missing document."
+  },
+  "documentReuploadAction": "Neu hochladen",
+  "@documentReuploadAction": {
+    "description": "Upload a replacement after rejection."
+  },
+  "documentWithdrawAction": "Zurückziehen",
+  "@documentWithdrawAction": {
+    "description": "Withdraw a pending document."
+  },
+  "documentSourceCamera": "Foto aufnehmen",
+  "@documentSourceCamera": {
+    "description": "Upload source: camera."
+  },
+  "documentSourceGallery": "Foto aus der Galerie",
+  "@documentSourceGallery": {
+    "description": "Upload source: photo library."
+  },
+  "documentSourcePdf": "PDF auswählen",
+  "@documentSourcePdf": {
+    "description": "Upload source: PDF file."
+  },
+  "documentUploaded": "Hochgeladen. Wir prüfen den Nachweis.",
+  "@documentUploaded": {
+    "description": "Snackbar after a successful upload."
+  },
+  "documentWithdrawn": "Nachweis zurückgezogen.",
+  "@documentWithdrawn": {
+    "description": "Snackbar after withdrawing a document."
+  },
+  "documentUploadedAt": "Hochgeladen am {date}",
+  "@documentUploadedAt": {
+    "description": "Upload date of a document.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "businessErrorName": "Der Name muss 2 bis 100 Zeichen lang sein.",
+  "@businessErrorName": {
+    "description": "Business name validation error."
+  },
+  "businessErrorCity": "Bitte wähle eine Stadt aus der Liste.",
+  "@businessErrorCity": {
+    "description": "City validation error."
+  },
+  "businessErrorDocumentPending": "Für diesen Nachweis wartet schon ein Dokument auf die Prüfung.",
+  "@businessErrorDocumentPending": {
+    "description": "Error when a pending document of the same kind exists."
+  },
+  "businessErrorFileTooLarge": "Die Datei ist größer als 15 MB.",
+  "@businessErrorFileTooLarge": {
+    "description": "Error for oversized uploads."
+  },
+  "businessErrorInvalid": "Bitte prüfe deine Angaben.",
+  "@businessErrorInvalid": {
+    "description": "Generic validation error from the server."
+  },
+  "businessCoverLabel": "Titelbild",
+  "@businessCoverLabel": {
+    "description": "Label of the cover image section."
+  },
+  "businessCoverAction": "Titelbild wählen",
+  "@businessCoverAction": {
+    "description": "Button that picks a cover image."
+  },
+  "businessDescriptionLabel": "Beschreibung",
+  "@businessDescriptionLabel": {
+    "description": "Label of the profile description field."
+  },
+  "businessDescriptionHelper": "20 bis 3000 Zeichen",
+  "@businessDescriptionHelper": {
+    "description": "Helper of the description field."
+  },
+  "businessPhoneLabel": "Telefon",
+  "@businessPhoneLabel": {
+    "description": "Label of the phone field."
+  },
+  "businessWebsiteLabel": "Website (optional)",
+  "@businessWebsiteLabel": {
+    "description": "Label of the website field."
+  },
+  "businessWebsiteHelper": "Beginnt mit https://",
+  "@businessWebsiteHelper": {
+    "description": "Helper of the website field."
+  },
+  "businessLanguagesLabel": "Gesprochene Sprachen",
+  "@businessLanguagesLabel": {
+    "description": "Label of the spoken languages choice."
+  },
+  "businessCuisinesLabel": "Küche",
+  "@businessCuisinesLabel": {
+    "description": "Label of the cuisines choice."
+  },
+  "businessPriceLevelLabel": "Preisniveau",
+  "@businessPriceLevelLabel": {
+    "description": "Label of the price level choice."
+  },
+  "businessDietLabel": "Ernährung",
+  "@businessDietLabel": {
+    "description": "Label of the diet options."
+  },
+  "businessHalal": "Halal",
+  "@businessHalal": {
+    "description": "Diet option: halal."
+  },
+  "businessVegetarian": "Vegetarische Gerichte",
+  "@businessVegetarian": {
+    "description": "Diet option: vegetarian dishes."
+  },
+  "businessVegan": "Vegane Gerichte",
+  "@businessVegan": {
+    "description": "Diet option: vegan dishes."
+  },
+  "businessSpecialtyLabel": "Fachrichtung",
+  "@businessSpecialtyLabel": {
+    "description": "Label of the doctor specialty choice."
+  },
+  "businessInsuranceLabel": "Versicherung",
+  "@businessInsuranceLabel": {
+    "description": "Label of the accepted insurance choice."
+  },
+  "insuranceStatutory": "Gesetzlich",
+  "@insuranceStatutory": {
+    "description": "Accepted insurance: statutory."
+  },
+  "insurancePrivate": "Privat",
+  "@insurancePrivate": {
+    "description": "Accepted insurance: private."
+  },
+  "insuranceBoth": "Gesetzlich und privat",
+  "@insuranceBoth": {
+    "description": "Accepted insurance: both."
+  },
+  "businessSaved": "Gespeichert.",
+  "@businessSaved": {
+    "description": "Snackbar after saving an owner editor."
+  },
+  "businessDescriptionInvalid": "Die Beschreibung muss 20 bis 3000 Zeichen lang sein.",
+  "@businessDescriptionInvalid": {
+    "description": "Description validation error."
+  },
+  "businessPhoneInvalid": "Bitte gib eine Telefonnummer mit 5 bis 40 Zeichen an.",
+  "@businessPhoneInvalid": {
+    "description": "Phone validation error."
+  },
+  "businessWebsiteInvalid": "Die Website muss mit https:// beginnen.",
+  "@businessWebsiteInvalid": {
+    "description": "Website validation error."
+  },
+  "businessLanguagesRequired": "Wähle mindestens eine Sprache.",
+  "@businessLanguagesRequired": {
+    "description": "Languages validation error."
+  },
+  "businessCuisinesRequired": "Wähle mindestens eine Küche.",
+  "@businessCuisinesRequired": {
+    "description": "Cuisines validation error."
+  },
+  "businessPriceRequired": "Wähle ein Preisniveau.",
+  "@businessPriceRequired": {
+    "description": "Price level validation error."
+  },
+  "businessSpecialtyRequired": "Wähle eine Fachrichtung.",
+  "@businessSpecialtyRequired": {
+    "description": "Specialty validation error."
+  },
+  "businessInsuranceRequired": "Wähle, welche Versicherung du annimmst.",
+  "@businessInsuranceRequired": {
+    "description": "Insurance validation error."
+  },
+  "cuisineKurdish": "Kurdisch",
+  "@cuisineKurdish": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineSyrian": "Syrisch",
+  "@cuisineSyrian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineTurkish": "Türkisch",
+  "@cuisineTurkish": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineArabic": "Arabisch",
+  "@cuisineArabic": {
+    "description": "Directory cuisine label."
+  },
+  "cuisinePersian": "Persisch",
+  "@cuisinePersian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineLebanese": "Libanesisch",
+  "@cuisineLebanese": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineIraqi": "Irakisch",
+  "@cuisineIraqi": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineMiddleEastern": "Orientalisch",
+  "@cuisineMiddleEastern": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineKebab": "Kebab & Döner",
+  "@cuisineKebab": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineFalafel": "Falafel",
+  "@cuisineFalafel": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineGerman": "Deutsch",
+  "@cuisineGerman": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineItalian": "Italienisch",
+  "@cuisineItalian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineMediterranean": "Mediterran",
+  "@cuisineMediterranean": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineIndian": "Indisch",
+  "@cuisineIndian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineAsian": "Asiatisch",
+  "@cuisineAsian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineInternational": "International",
+  "@cuisineInternational": {
+    "description": "Directory cuisine label."
+  },
+  "specialtyGeneralMedicine": "Allgemeinmedizin",
+  "@specialtyGeneralMedicine": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyInternalMedicine": "Innere Medizin",
+  "@specialtyInternalMedicine": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyPediatrics": "Kinderheilkunde",
+  "@specialtyPediatrics": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyGynecology": "Frauenheilkunde",
+  "@specialtyGynecology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyDermatology": "Hautheilkunde",
+  "@specialtyDermatology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOrthopedics": "Orthopädie",
+  "@specialtyOrthopedics": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyNeurology": "Neurologie",
+  "@specialtyNeurology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyPsychiatry": "Psychiatrie",
+  "@specialtyPsychiatry": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOphthalmology": "Augenheilkunde",
+  "@specialtyOphthalmology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyEnt": "HNO",
+  "@specialtyEnt": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyDentistry": "Zahnmedizin",
+  "@specialtyDentistry": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyCardiology": "Kardiologie",
+  "@specialtyCardiology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyUrology": "Urologie",
+  "@specialtyUrology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOther": "Andere",
+  "@specialtyOther": {
+    "description": "Doctor specialty label."
+  },
+  "businessHoursClosed": "Geschlossen",
+  "@businessHoursClosed": {
+    "description": "Weekday without opening intervals."
+  },
+  "businessHoursAdd": "Zeitfenster hinzufügen",
+  "@businessHoursAdd": {
+    "description": "Adds an opening interval to a weekday."
+  },
+  "businessHoursInterval": "{opens} – {closes}",
+  "@businessHoursInterval": {
+    "description": "An opening interval.",
+    "placeholders": {
+      "opens": {
+        "type": "String"
+      },
+      "closes": {
+        "type": "String"
+      }
+    }
+  },
+  "businessHoursOvernight": "{opens} – {closes} (nächster Tag)",
+  "@businessHoursOvernight": {
+    "description": "An opening interval that ends after midnight.",
+    "placeholders": {
+      "opens": {
+        "type": "String"
+      },
+      "closes": {
+        "type": "String"
+      }
+    }
+  },
+  "businessHoursPickOpen": "Öffnet um",
+  "@businessHoursPickOpen": {
+    "description": "Time picker title for the opening time."
+  },
+  "businessHoursPickClose": "Schließt um",
+  "@businessHoursPickClose": {
+    "description": "Time picker title for the closing time."
+  },
+  "businessHoursHint": "Schließt ihr nach Mitternacht, wähle einfach die Uhrzeit am nächsten Morgen.",
+  "@businessHoursHint": {
+    "description": "Explains overnight intervals."
+  },
+  "businessHoursSameTime": "Öffnungs- und Schließzeit dürfen nicht gleich sein.",
+  "@businessHoursSameTime": {
+    "description": "Validation error for an empty interval."
+  },
+  "businessHoursTooMany": "Höchstens 6 Zeitfenster pro Tag.",
+  "@businessHoursTooMany": {
+    "description": "Validation error for too many intervals."
+  },
+  "businessHoursRemove": "Zeitfenster entfernen",
+  "@businessHoursRemove": {
+    "description": "Semantic label of the remove-interval button."
+  },
+  "weekdayMonday": "Montag",
+  "@weekdayMonday": {
+    "description": "Weekday name."
+  },
+  "weekdayTuesday": "Dienstag",
+  "@weekdayTuesday": {
+    "description": "Weekday name."
+  },
+  "weekdayWednesday": "Mittwoch",
+  "@weekdayWednesday": {
+    "description": "Weekday name."
+  },
+  "weekdayThursday": "Donnerstag",
+  "@weekdayThursday": {
+    "description": "Weekday name."
+  },
+  "weekdayFriday": "Freitag",
+  "@weekdayFriday": {
+    "description": "Weekday name."
+  },
+  "weekdaySaturday": "Samstag",
+  "@weekdaySaturday": {
+    "description": "Weekday name."
+  },
+  "weekdaySunday": "Sonntag",
+  "@weekdaySunday": {
+    "description": "Weekday name."
+  },
+  "businessMenuEmpty": "Noch keine Bereiche. Lege zum Beispiel „Vorspeisen“ oder „Getränke“ an.",
+  "@businessMenuEmpty": {
+    "description": "Empty state of the menu editor."
+  },
+  "businessMenuAddSection": "Bereich hinzufügen",
+  "@businessMenuAddSection": {
+    "description": "Adds a menu section."
+  },
+  "businessMenuSectionName": "Name des Bereichs",
+  "@businessMenuSectionName": {
+    "description": "Menu section name field."
+  },
+  "businessMenuAddItem": "Gericht hinzufügen",
+  "@businessMenuAddItem": {
+    "description": "Adds a dish to a section."
+  },
+  "businessMenuEditItem": "Gericht bearbeiten",
+  "@businessMenuEditItem": {
+    "description": "Title of the dish form."
+  },
+  "businessMenuItemName": "Name",
+  "@businessMenuItemName": {
+    "description": "Dish name field."
+  },
+  "businessMenuItemDescription": "Beschreibung (optional)",
+  "@businessMenuItemDescription": {
+    "description": "Dish description field."
+  },
+  "businessMenuItemPrice": "Preis in €",
+  "@businessMenuItemPrice": {
+    "description": "Dish price field."
+  },
+  "businessMenuItemAvailable": "Verfügbar",
+  "@businessMenuItemAvailable": {
+    "description": "Dish availability switch."
+  },
+  "businessMenuItemUnavailable": "Nicht verfügbar",
+  "@businessMenuItemUnavailable": {
+    "description": "Badge of an unavailable dish."
+  },
+  "businessMenuMoveUp": "Nach oben",
+  "@businessMenuMoveUp": {
+    "description": "Reorder action."
+  },
+  "businessMenuMoveDown": "Nach unten",
+  "@businessMenuMoveDown": {
+    "description": "Reorder action."
+  },
+  "businessMenuPriceInvalid": "Bitte gib einen gültigen Preis an.",
+  "@businessMenuPriceInvalid": {
+    "description": "Dish price validation error."
+  },
+  "businessMenuNameRequired": "Bitte gib einen Namen an.",
+  "@businessMenuNameRequired": {
+    "description": "Name validation error."
+  },
+  "businessMenuDeleteSection": "Bereich „{name}“ mit allen Gerichten löschen?",
+  "@businessMenuDeleteSection": {
+    "description": "Confirmation before deleting a menu section.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "menuFlagVegetarian": "Vegetarisch",
+  "@menuFlagVegetarian": {
+    "description": "Dish flag."
+  },
+  "menuFlagVegan": "Vegan",
+  "@menuFlagVegan": {
+    "description": "Dish flag."
   }
 }

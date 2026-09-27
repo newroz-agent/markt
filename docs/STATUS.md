@@ -1,6 +1,6 @@
 # Zêrîn Project Status
 
-Updated: 2026-09-27 — Step E1.5 OSM restaurant import (server side, local DB)
+Updated: 2026-09-27 — Step E2 owner side built; migrations 000600/000700 and live evidence await approval
 Canonical product contract: `docs/SCOPE.md`
 
 > Step D evidence note (2026-09-22). The migration
@@ -17,6 +17,34 @@ Canonical product contract: `docs/SCOPE.md`
 Status rule: `✅ done` means implemented and covered by current evidence; `🟡 partial`
 means a working slice exists but named acceptance remains; `❌ missing` means no
 operational implementation. Out-of-scope historical SQL is not counted as product work.
+
+## Rating decision (2026-09-27)
+
+- ✅ Decision: directory and purchase ratings are **never blended**. The directory rating
+  (`business_directory_profiles.rating_average/rating_count`) counts only
+  `context = 'directory'` reviews and is what directory search/detail return; the seller
+  rating (`sellers.rating_*`) counts only `context = 'purchase'` reviews. Purchase reviews
+  can no longer be created (checkout was removed). Owners cannot write their directory
+  rating (trigger resets it for non-admin callers).
+- 🟡 Implemented in `20260927000600_directory_rating_separate.sql`; the E1 acceptance test
+  now expects seller 5/1 (purchase) and directory 4/1 → 0/0 after the soft delete, instead
+  of the blended 4.5/2. Dry-run: every SQL suite passes with it and it changes 0 existing
+  rows (`docs/evidence/step-e2/dryrun-000600.txt`). **Not applied yet** — awaiting approval.
+
+## Step E2 — owner side ("Mein Unternehmen") — in progress
+
+- ✅ Item 0 (document upload), hub, profile/hours/menu editors, publish switch, Account
+  entry, routes under `/business`, all copy in five ARB files; admin queue now labels
+  identity/business-registration documents too. `flutter analyze` clean; `flutter test`
+  291/291 (`docs/evidence/step-e2/`).
+- 🟡 `20260927000700_step_e2_owner_onboarding.sql` (declared `sellers.directory_type`,
+  `owner_start_directory`, `get_my_directory_onboarding`, auto-approval of a pending
+  directory seller once its required documents are approved, document-path hardening, one
+  pending document per kind) and `supabase/tests/step_e2_owner_onboarding.sql`: dry-run
+  passes with every suite, 0 existing rows changed. **Not applied yet** — awaiting approval.
+- 🟡 Live iOS evidence: seed `supabase/snippets/step_e2_local_seed.sql` (dry-run in
+  `dryrun-seed.txt`) and harness `integration_test/step_e2_live_test.dart` +
+  `test_driver/step_e2_driver.dart` are ready; they run after approval.
 
 ## Step E1.5 — OpenStreetMap restaurant/café import (server side)
 
@@ -123,7 +151,7 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - ✅ `/moderation` is now an admin-gated hub with Overview (pending listings / pending seller documents / open reports, each linking into its section), Listings (unchanged logic), Seller Verification (pending docs with shop name, kind, date, signed-URL preview via `url_launcher` for PDFs and `CachedNetworkImage` for images, approve/reject with optional `admin_note` on reject), and Reports (open reports with target title, reason, details, dismiss + product-only block-listing with confirm). Every user-facing string is localized through ARB keys in all five locales (`de`, `ku`, `en`, `ar`, `tr`); only the numeric `Text('$count')` / `Text('$value')` remain literal. Oversized lines were split; `flutter gen-l10n` regenerated `app_localizations*.dart`.
 - ✅ `flutter analyze --no-pub`: `No issues found!` (zero oversized lines, zero hardcoded English UI strings); `flutter test --no-pub`: 260/260 pass (Step D's 256 + 4 new: overview links, document approve, document reject-with-note, reports dismiss+block; the 3 pre-existing listing tests were updated for the hub tabs and German l10n).
 - ✅ Three 1206×2622 PNGs and machine-readable `results.json` record three PASS checkpoints + one PASS integration test at `docs/evidence/admin-expansion/` on the real iPhone 17 Pro simulator (`iOS 26.1`, UDID `CFF133B6-F73A-4335-A497-5244B15D1C39`) against local Supabase `http://127.0.0.1:54321`: `admin_expansion_overview.png`, `admin_expansion_seller_verification.png`, `admin_expansion_reports_queue.png` (`pending_listings=1`, `pending_docs=2`, `open_reports=1`). Screenshots show the German UI. Harness: `integration_test/admin_expansion_live_test.dart` with driver `test_driver/admin_expansion_driver.dart`.
-- 🟡 Migration-ledger caveat (same as Steps B–D): the effective local schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, or `20260927000400` because they were applied through the documented direct-`psql` path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema. Remote parity remains unverified. No `supabase db reset`, Colima use, Docker context switch, or remote mutation was performed.
+- 🟡 Migration-ledger caveat (same as Steps B–D): the effective local schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, or `20260927000500` because they were applied through the documented direct-`psql` path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema. Remote parity remains unverified. No `supabase db reset`, Colima use, Docker context switch, or remote mutation was performed.
 - ⚠️ Known pre-existing schema issue: reports target foreign keys use `ON DELETE SET NULL`, while `reports_exactly_one_target` requires exactly one non-null target. Deleting a reported product, seller, review, or message can therefore fail; this pass records the issue but does not change it.
 - ℹ️ Demo fixtures left in the local DB for the iOS evidence (local-only, not migrations): pending business seller `Demo Manufaktur Berlin` with 2 pending docs, 1 `pending_review` listing `Admin Demo Kamera`, 1 open `spam` report. They do not affect the committed schema.
 
@@ -304,7 +332,7 @@ one PASS integration test.
   `supabase migration list --linked` attempt remains the Step B attempt that timed out
   while creating the temporary login role (status 544). No diff was available to
   review and no migration push or remote mutation was attempted.
-- 🟡 Local migration history remains noncanonical: the effective schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, or `20260927000400` because they were applied through the documented direct-`psql` effective-schema path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema, so the push does not re-apply or skip migrations.
+- 🟡 Local migration history remains noncanonical: the effective schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, or `20260927000500` because they were applied through the documented direct-`psql` effective-schema path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema, so the push does not re-apply or skip migrations.
 - ✅ Admin expansion migration `20260924000100_admin_verification_reports.sql` adds `get_admin_verification_queue`, `get_admin_reports`, `moderate_seller_document`, and `resolve_report` (all admin-gated, `authenticated` execute grants), reusing `is_verified_seller()`, the `blocked` product status, and `create_user_notification`. Acceptance `supabase/tests/20260924000100_admin_verification_reports.sql` passes to `ROLLBACK` against the live local schema. `moderate_listing` is untouched.
 - ✅ Categories migration `20260925000100_new_categories_and_deals.sql` adds 13 category rows (1 top-level Musikinstrumente + 12 subcategories) with all 5 language names, matching the seed data shape (`icon_key`, `image_url`, `sort_order`, `is_active`); activates the Lebensmittel tree (parent + spec-listed children). No new columns: `compare_at_price_cents` is reused for the existing Home Angebote section. Applied via direct `psql`, idempotent on re-run.
 - ✅ Sell compare-at-price migration `20260925000200_sell_compare_at_price.sql` adds CHECK constraint `products_compare_at_price_check` (NULL or > price_cents) on `products`, replaces the 10-param `submit_listing` with an 11-param version adding `p_compare_at_price_cents bigint default null`, validated server-side. Existing 10-arg positional callers still resolve (default fills 11th). Applied via direct `psql` (drop old signature, create new, revoke/grant). Step B acceptance test re-ran to `ROLLBACK`.

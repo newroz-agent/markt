@@ -2797,6 +2797,915 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'© OpenStreetMap-Mitwirkende'**
   String get mapOsmAttribution;
+
+  /// Title of the owner hub for directory businesses and the Account entry.
+  ///
+  /// In de, this message translates to:
+  /// **'Mein Unternehmen'**
+  String get businessHubTitle;
+
+  /// Subtitle of the Account entry that opens the owner hub.
+  ///
+  /// In de, this message translates to:
+  /// **'Restaurant, Café, Imbiss oder Arztpraxis eintragen'**
+  String get businessAccountEntrySubtitle;
+
+  /// Title of the card that starts a directory listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Unternehmen eintragen'**
+  String get businessStartTitle;
+
+  /// Explains that the type decides the required documents.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle zuerst die Art deines Eintrags. Danach siehst du genau, welche Nachweise wir dafür brauchen.'**
+  String get businessStartBody;
+
+  /// Label of the directory type choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Art des Eintrags'**
+  String get businessTypeLabel;
+
+  /// Label of the business name field.
+  ///
+  /// In de, this message translates to:
+  /// **'Name des Unternehmens'**
+  String get businessNameLabel;
+
+  /// Button that creates the business and opens the documents screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiter zu den Nachweisen'**
+  String get businessStartAction;
+
+  /// Title shown to private sellers, who cannot join the directory.
+  ///
+  /// In de, this message translates to:
+  /// **'Privates Verkaufskonto'**
+  String get businessPrivateSellerTitle;
+
+  /// Explains why private sellers cannot join the directory.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Konto verkauft als Privatperson. Einträge im Verzeichnis sind nur mit einem Geschäftskonto möglich. Bitte wende dich an den Support.'**
+  String get businessPrivateSellerBody;
+
+  /// Owner hub status: documents approved and verified.
+  ///
+  /// In de, this message translates to:
+  /// **'Verifiziert'**
+  String get businessStatusVerified;
+
+  /// Owner hub status: all required documents uploaded, waiting for review.
+  ///
+  /// In de, this message translates to:
+  /// **'In Prüfung'**
+  String get businessStatusInReview;
+
+  /// Owner hub status: at least one required document is missing or rejected.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachweise fehlen'**
+  String get businessStatusDocumentsMissing;
+
+  /// Title of the verification documents screen and hub tile.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachweise'**
+  String get businessDocumentsTile;
+
+  /// Number of approved required documents.
+  ///
+  /// In de, this message translates to:
+  /// **'{approved} von {total} freigegeben'**
+  String businessDocumentsProgress({required int approved, required int total});
+
+  /// Title of the directory profile editor and hub tile.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil'**
+  String get businessProfileTile;
+
+  /// Hub subtitle when no directory profile exists yet.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch nicht angelegt'**
+  String get businessProfileMissing;
+
+  /// Hub subtitle for an unpublished profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Entwurf – nicht öffentlich'**
+  String get businessProfileDraft;
+
+  /// Hub subtitle for a published profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Veröffentlicht'**
+  String get businessProfilePublished;
+
+  /// Title of the opening hours editor and hub tile.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnungszeiten'**
+  String get businessHoursTile;
+
+  /// Number of weekly opening intervals.
+  ///
+  /// In de, this message translates to:
+  /// **'{count} Zeitfenster'**
+  String businessHoursSummary({required int count});
+
+  /// Title of the menu editor and hub tile.
+  ///
+  /// In de, this message translates to:
+  /// **'Speisekarte'**
+  String get businessMenuTile;
+
+  /// Menu size summary.
+  ///
+  /// In de, this message translates to:
+  /// **'{sections} Bereiche · {items} Gerichte'**
+  String businessMenuSummary({required int sections, required int items});
+
+  /// Shown on hub tiles that need an existing profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Lege zuerst dein Profil an.'**
+  String get businessNeedsProfileFirst;
+
+  /// Label of the publish switch.
+  ///
+  /// In de, this message translates to:
+  /// **'Im Verzeichnis anzeigen'**
+  String get businessPublishTitle;
+
+  /// Why the publish switch is disabled before verification.
+  ///
+  /// In de, this message translates to:
+  /// **'Veröffentlichen ist möglich, sobald deine Nachweise freigegeben sind.'**
+  String get businessPublishHintUnverified;
+
+  /// Publish switch helper when published.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Eintrag ist öffentlich sichtbar.'**
+  String get businessPublishOn;
+
+  /// Publish switch helper when unpublished.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Eintrag ist nur für dich sichtbar.'**
+  String get businessPublishOff;
+
+  /// Hub note that editors work as drafts before verification.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil, Öffnungszeiten und Speisekarte kannst du schon als Entwurf vorbereiten.'**
+  String get businessDraftNote;
+
+  /// Directory type label.
+  ///
+  /// In de, this message translates to:
+  /// **'Restaurant'**
+  String get directoryTypeRestaurant;
+
+  /// Directory type label.
+  ///
+  /// In de, this message translates to:
+  /// **'Café'**
+  String get directoryTypeCafe;
+
+  /// Directory type label for fast food (the "Imbiss" chip in E3).
+  ///
+  /// In de, this message translates to:
+  /// **'Imbiss'**
+  String get directoryTypeFastFood;
+
+  /// Directory type label.
+  ///
+  /// In de, this message translates to:
+  /// **'Arztpraxis'**
+  String get directoryTypeDoctor;
+
+  /// Intro of the documents screen. {type} is a directory type label.
+  ///
+  /// In de, this message translates to:
+  /// **'Für einen Eintrag als {type} brauchen wir diese Nachweise. Nur das Zêrîn-Team sieht deine Dokumente.'**
+  String businessDocumentsIntro({required String type});
+
+  /// Accepted document formats.
+  ///
+  /// In de, this message translates to:
+  /// **'Foto oder PDF, höchstens 15 MB.'**
+  String get businessDocumentsFormats;
+
+  /// Shown when the type is fixed by an existing profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Art kannst du jetzt nur noch im Profil ändern.'**
+  String get businessTypeLockedHint;
+
+  /// Seller document kind: identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Personalausweis oder Reisepass'**
+  String get documentKindIdentity;
+
+  /// What a good identity upload looks like.
+  ///
+  /// In de, this message translates to:
+  /// **'Gut lesbar, alle Ecken sichtbar.'**
+  String get documentKindIdentityHint;
+
+  /// Seller document kind: business registration.
+  ///
+  /// In de, this message translates to:
+  /// **'Gewerbeanmeldung oder Handelsregisterauszug'**
+  String get documentKindBusinessRegistration;
+
+  /// What a good business registration upload looks like.
+  ///
+  /// In de, this message translates to:
+  /// **'Auf den Namen deines Unternehmens.'**
+  String get documentKindBusinessRegistrationHint;
+
+  /// What a good medical registration upload looks like.
+  ///
+  /// In de, this message translates to:
+  /// **'Approbationsurkunde oder Nachweis der Ärztekammer.'**
+  String get documentKindMedicalHint;
+
+  /// Document status: not uploaded yet.
+  ///
+  /// In de, this message translates to:
+  /// **'Fehlt'**
+  String get documentStatusMissing;
+
+  /// Document status: waiting for admin review.
+  ///
+  /// In de, this message translates to:
+  /// **'In Prüfung'**
+  String get documentStatusPending;
+
+  /// Document status: approved.
+  ///
+  /// In de, this message translates to:
+  /// **'Freigegeben'**
+  String get documentStatusApproved;
+
+  /// Document status: rejected.
+  ///
+  /// In de, this message translates to:
+  /// **'Abgelehnt'**
+  String get documentStatusRejected;
+
+  /// Admin rejection note shown to the owner.
+  ///
+  /// In de, this message translates to:
+  /// **'Hinweis des Teams: {note}'**
+  String documentRejectionNote({required String note});
+
+  /// Upload a missing document.
+  ///
+  /// In de, this message translates to:
+  /// **'Hochladen'**
+  String get documentUploadAction;
+
+  /// Upload a replacement after rejection.
+  ///
+  /// In de, this message translates to:
+  /// **'Neu hochladen'**
+  String get documentReuploadAction;
+
+  /// Withdraw a pending document.
+  ///
+  /// In de, this message translates to:
+  /// **'Zurückziehen'**
+  String get documentWithdrawAction;
+
+  /// Upload source: camera.
+  ///
+  /// In de, this message translates to:
+  /// **'Foto aufnehmen'**
+  String get documentSourceCamera;
+
+  /// Upload source: photo library.
+  ///
+  /// In de, this message translates to:
+  /// **'Foto aus der Galerie'**
+  String get documentSourceGallery;
+
+  /// Upload source: PDF file.
+  ///
+  /// In de, this message translates to:
+  /// **'PDF auswählen'**
+  String get documentSourcePdf;
+
+  /// Snackbar after a successful upload.
+  ///
+  /// In de, this message translates to:
+  /// **'Hochgeladen. Wir prüfen den Nachweis.'**
+  String get documentUploaded;
+
+  /// Snackbar after withdrawing a document.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachweis zurückgezogen.'**
+  String get documentWithdrawn;
+
+  /// Upload date of a document.
+  ///
+  /// In de, this message translates to:
+  /// **'Hochgeladen am {date}'**
+  String documentUploadedAt({required String date});
+
+  /// Business name validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Name muss 2 bis 100 Zeichen lang sein.'**
+  String get businessErrorName;
+
+  /// City validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte wähle eine Stadt aus der Liste.'**
+  String get businessErrorCity;
+
+  /// Error when a pending document of the same kind exists.
+  ///
+  /// In de, this message translates to:
+  /// **'Für diesen Nachweis wartet schon ein Dokument auf die Prüfung.'**
+  String get businessErrorDocumentPending;
+
+  /// Error for oversized uploads.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Datei ist größer als 15 MB.'**
+  String get businessErrorFileTooLarge;
+
+  /// Generic validation error from the server.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte prüfe deine Angaben.'**
+  String get businessErrorInvalid;
+
+  /// Label of the cover image section.
+  ///
+  /// In de, this message translates to:
+  /// **'Titelbild'**
+  String get businessCoverLabel;
+
+  /// Button that picks a cover image.
+  ///
+  /// In de, this message translates to:
+  /// **'Titelbild wählen'**
+  String get businessCoverAction;
+
+  /// Label of the profile description field.
+  ///
+  /// In de, this message translates to:
+  /// **'Beschreibung'**
+  String get businessDescriptionLabel;
+
+  /// Helper of the description field.
+  ///
+  /// In de, this message translates to:
+  /// **'20 bis 3000 Zeichen'**
+  String get businessDescriptionHelper;
+
+  /// Label of the phone field.
+  ///
+  /// In de, this message translates to:
+  /// **'Telefon'**
+  String get businessPhoneLabel;
+
+  /// Label of the website field.
+  ///
+  /// In de, this message translates to:
+  /// **'Website (optional)'**
+  String get businessWebsiteLabel;
+
+  /// Helper of the website field.
+  ///
+  /// In de, this message translates to:
+  /// **'Beginnt mit https://'**
+  String get businessWebsiteHelper;
+
+  /// Label of the spoken languages choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Gesprochene Sprachen'**
+  String get businessLanguagesLabel;
+
+  /// Label of the cuisines choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Küche'**
+  String get businessCuisinesLabel;
+
+  /// Label of the price level choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Preisniveau'**
+  String get businessPriceLevelLabel;
+
+  /// Label of the diet options.
+  ///
+  /// In de, this message translates to:
+  /// **'Ernährung'**
+  String get businessDietLabel;
+
+  /// Diet option: halal.
+  ///
+  /// In de, this message translates to:
+  /// **'Halal'**
+  String get businessHalal;
+
+  /// Diet option: vegetarian dishes.
+  ///
+  /// In de, this message translates to:
+  /// **'Vegetarische Gerichte'**
+  String get businessVegetarian;
+
+  /// Diet option: vegan dishes.
+  ///
+  /// In de, this message translates to:
+  /// **'Vegane Gerichte'**
+  String get businessVegan;
+
+  /// Label of the doctor specialty choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Fachrichtung'**
+  String get businessSpecialtyLabel;
+
+  /// Label of the accepted insurance choice.
+  ///
+  /// In de, this message translates to:
+  /// **'Versicherung'**
+  String get businessInsuranceLabel;
+
+  /// Accepted insurance: statutory.
+  ///
+  /// In de, this message translates to:
+  /// **'Gesetzlich'**
+  String get insuranceStatutory;
+
+  /// Accepted insurance: private.
+  ///
+  /// In de, this message translates to:
+  /// **'Privat'**
+  String get insurancePrivate;
+
+  /// Accepted insurance: both.
+  ///
+  /// In de, this message translates to:
+  /// **'Gesetzlich und privat'**
+  String get insuranceBoth;
+
+  /// Snackbar after saving an owner editor.
+  ///
+  /// In de, this message translates to:
+  /// **'Gespeichert.'**
+  String get businessSaved;
+
+  /// Description validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Beschreibung muss 20 bis 3000 Zeichen lang sein.'**
+  String get businessDescriptionInvalid;
+
+  /// Phone validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte gib eine Telefonnummer mit 5 bis 40 Zeichen an.'**
+  String get businessPhoneInvalid;
+
+  /// Website validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Website muss mit https:// beginnen.'**
+  String get businessWebsiteInvalid;
+
+  /// Languages validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle mindestens eine Sprache.'**
+  String get businessLanguagesRequired;
+
+  /// Cuisines validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle mindestens eine Küche.'**
+  String get businessCuisinesRequired;
+
+  /// Price level validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle ein Preisniveau.'**
+  String get businessPriceRequired;
+
+  /// Specialty validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle eine Fachrichtung.'**
+  String get businessSpecialtyRequired;
+
+  /// Insurance validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle, welche Versicherung du annimmst.'**
+  String get businessInsuranceRequired;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Kurdisch'**
+  String get cuisineKurdish;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Syrisch'**
+  String get cuisineSyrian;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Türkisch'**
+  String get cuisineTurkish;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Arabisch'**
+  String get cuisineArabic;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Persisch'**
+  String get cuisinePersian;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Libanesisch'**
+  String get cuisineLebanese;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Irakisch'**
+  String get cuisineIraqi;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Orientalisch'**
+  String get cuisineMiddleEastern;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Kebab & Döner'**
+  String get cuisineKebab;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Falafel'**
+  String get cuisineFalafel;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Deutsch'**
+  String get cuisineGerman;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Italienisch'**
+  String get cuisineItalian;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Mediterran'**
+  String get cuisineMediterranean;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Indisch'**
+  String get cuisineIndian;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'Asiatisch'**
+  String get cuisineAsian;
+
+  /// Directory cuisine label.
+  ///
+  /// In de, this message translates to:
+  /// **'International'**
+  String get cuisineInternational;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Allgemeinmedizin'**
+  String get specialtyGeneralMedicine;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Innere Medizin'**
+  String get specialtyInternalMedicine;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Kinderheilkunde'**
+  String get specialtyPediatrics;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Frauenheilkunde'**
+  String get specialtyGynecology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Hautheilkunde'**
+  String get specialtyDermatology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Orthopädie'**
+  String get specialtyOrthopedics;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Neurologie'**
+  String get specialtyNeurology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Psychiatrie'**
+  String get specialtyPsychiatry;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Augenheilkunde'**
+  String get specialtyOphthalmology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'HNO'**
+  String get specialtyEnt;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Zahnmedizin'**
+  String get specialtyDentistry;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Kardiologie'**
+  String get specialtyCardiology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Urologie'**
+  String get specialtyUrology;
+
+  /// Doctor specialty label.
+  ///
+  /// In de, this message translates to:
+  /// **'Andere'**
+  String get specialtyOther;
+
+  /// Weekday without opening intervals.
+  ///
+  /// In de, this message translates to:
+  /// **'Geschlossen'**
+  String get businessHoursClosed;
+
+  /// Adds an opening interval to a weekday.
+  ///
+  /// In de, this message translates to:
+  /// **'Zeitfenster hinzufügen'**
+  String get businessHoursAdd;
+
+  /// An opening interval.
+  ///
+  /// In de, this message translates to:
+  /// **'{opens} – {closes}'**
+  String businessHoursInterval({required String opens, required String closes});
+
+  /// An opening interval that ends after midnight.
+  ///
+  /// In de, this message translates to:
+  /// **'{opens} – {closes} (nächster Tag)'**
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  });
+
+  /// Time picker title for the opening time.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnet um'**
+  String get businessHoursPickOpen;
+
+  /// Time picker title for the closing time.
+  ///
+  /// In de, this message translates to:
+  /// **'Schließt um'**
+  String get businessHoursPickClose;
+
+  /// Explains overnight intervals.
+  ///
+  /// In de, this message translates to:
+  /// **'Schließt ihr nach Mitternacht, wähle einfach die Uhrzeit am nächsten Morgen.'**
+  String get businessHoursHint;
+
+  /// Validation error for an empty interval.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnungs- und Schließzeit dürfen nicht gleich sein.'**
+  String get businessHoursSameTime;
+
+  /// Validation error for too many intervals.
+  ///
+  /// In de, this message translates to:
+  /// **'Höchstens 6 Zeitfenster pro Tag.'**
+  String get businessHoursTooMany;
+
+  /// Semantic label of the remove-interval button.
+  ///
+  /// In de, this message translates to:
+  /// **'Zeitfenster entfernen'**
+  String get businessHoursRemove;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Montag'**
+  String get weekdayMonday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Dienstag'**
+  String get weekdayTuesday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Mittwoch'**
+  String get weekdayWednesday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Donnerstag'**
+  String get weekdayThursday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Freitag'**
+  String get weekdayFriday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Samstag'**
+  String get weekdaySaturday;
+
+  /// Weekday name.
+  ///
+  /// In de, this message translates to:
+  /// **'Sonntag'**
+  String get weekdaySunday;
+
+  /// Empty state of the menu editor.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Bereiche. Lege zum Beispiel „Vorspeisen“ oder „Getränke“ an.'**
+  String get businessMenuEmpty;
+
+  /// Adds a menu section.
+  ///
+  /// In de, this message translates to:
+  /// **'Bereich hinzufügen'**
+  String get businessMenuAddSection;
+
+  /// Menu section name field.
+  ///
+  /// In de, this message translates to:
+  /// **'Name des Bereichs'**
+  String get businessMenuSectionName;
+
+  /// Adds a dish to a section.
+  ///
+  /// In de, this message translates to:
+  /// **'Gericht hinzufügen'**
+  String get businessMenuAddItem;
+
+  /// Title of the dish form.
+  ///
+  /// In de, this message translates to:
+  /// **'Gericht bearbeiten'**
+  String get businessMenuEditItem;
+
+  /// Dish name field.
+  ///
+  /// In de, this message translates to:
+  /// **'Name'**
+  String get businessMenuItemName;
+
+  /// Dish description field.
+  ///
+  /// In de, this message translates to:
+  /// **'Beschreibung (optional)'**
+  String get businessMenuItemDescription;
+
+  /// Dish price field.
+  ///
+  /// In de, this message translates to:
+  /// **'Preis in €'**
+  String get businessMenuItemPrice;
+
+  /// Dish availability switch.
+  ///
+  /// In de, this message translates to:
+  /// **'Verfügbar'**
+  String get businessMenuItemAvailable;
+
+  /// Badge of an unavailable dish.
+  ///
+  /// In de, this message translates to:
+  /// **'Nicht verfügbar'**
+  String get businessMenuItemUnavailable;
+
+  /// Reorder action.
+  ///
+  /// In de, this message translates to:
+  /// **'Nach oben'**
+  String get businessMenuMoveUp;
+
+  /// Reorder action.
+  ///
+  /// In de, this message translates to:
+  /// **'Nach unten'**
+  String get businessMenuMoveDown;
+
+  /// Dish price validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte gib einen gültigen Preis an.'**
+  String get businessMenuPriceInvalid;
+
+  /// Name validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte gib einen Namen an.'**
+  String get businessMenuNameRequired;
+
+  /// Confirmation before deleting a menu section.
+  ///
+  /// In de, this message translates to:
+  /// **'Bereich „{name}“ mit allen Gerichten löschen?'**
+  String businessMenuDeleteSection({required String name});
+
+  /// Dish flag.
+  ///
+  /// In de, this message translates to:
+  /// **'Vegetarisch'**
+  String get menuFlagVegetarian;
+
+  /// Dish flag.
+  ///
+  /// In de, this message translates to:
+  /// **'Vegan'**
+  String get menuFlagVegan;
 }
 
 class _AppLocalizationsDelegate

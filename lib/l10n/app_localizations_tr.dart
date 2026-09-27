@@ -1491,4 +1491,497 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get mapOsmAttribution => '© OpenStreetMap katkıda bulunanlar';
+
+  @override
+  String get businessHubTitle => 'İşletmem';
+
+  @override
+  String get businessAccountEntrySubtitle =>
+      'Restoran, kafe, büfe veya muayenehane ekle';
+
+  @override
+  String get businessStartTitle => 'İşletmeni ekle';
+
+  @override
+  String get businessStartBody =>
+      'Önce kayıt türünü seç. Ardından bunun için hangi belgelere ihtiyacımız olduğunu tam olarak göreceksin.';
+
+  @override
+  String get businessTypeLabel => 'Kayıt türü';
+
+  @override
+  String get businessNameLabel => 'İşletme adı';
+
+  @override
+  String get businessStartAction => 'Belgelere devam et';
+
+  @override
+  String get businessPrivateSellerTitle => 'Bireysel satıcı hesabı';
+
+  @override
+  String get businessPrivateSellerBody =>
+      'Hesabın bireysel olarak satış yapıyor. Rehberde kayıt yalnızca işletme hesabıyla mümkün. Lütfen destekle iletişime geç.';
+
+  @override
+  String get businessStatusVerified => 'Doğrulandı';
+
+  @override
+  String get businessStatusInReview => 'İncelemede';
+
+  @override
+  String get businessStatusDocumentsMissing => 'Belgeler eksik';
+
+  @override
+  String get businessDocumentsTile => 'Belgeler';
+
+  @override
+  String businessDocumentsProgress({
+    required int approved,
+    required int total,
+  }) {
+    return '$total belgeden $approved onaylandı';
+  }
+
+  @override
+  String get businessProfileTile => 'Profil';
+
+  @override
+  String get businessProfileMissing => 'Henüz oluşturulmadı';
+
+  @override
+  String get businessProfileDraft => 'Taslak – herkese açık değil';
+
+  @override
+  String get businessProfilePublished => 'Yayında';
+
+  @override
+  String get businessHoursTile => 'Çalışma saatleri';
+
+  @override
+  String businessHoursSummary({required int count}) {
+    return '$count zaman aralığı';
+  }
+
+  @override
+  String get businessMenuTile => 'Menü';
+
+  @override
+  String businessMenuSummary({required int sections, required int items}) {
+    return '$sections bölüm · $items yemek';
+  }
+
+  @override
+  String get businessNeedsProfileFirst => 'Önce profilini oluştur.';
+
+  @override
+  String get businessPublishTitle => 'Rehberde göster';
+
+  @override
+  String get businessPublishHintUnverified =>
+      'Belgelerin onaylandığında yayınlayabilirsin.';
+
+  @override
+  String get businessPublishOn => 'Kaydın herkese görünür.';
+
+  @override
+  String get businessPublishOff => 'Kaydını yalnızca sen görebilirsin.';
+
+  @override
+  String get businessDraftNote =>
+      'Profilini, çalışma saatlerini ve menünü şimdiden taslak olarak hazırlayabilirsin.';
+
+  @override
+  String get directoryTypeRestaurant => 'Restoran';
+
+  @override
+  String get directoryTypeCafe => 'Kafe';
+
+  @override
+  String get directoryTypeFastFood => 'Büfe';
+
+  @override
+  String get directoryTypeDoctor => 'Muayenehane';
+
+  @override
+  String businessDocumentsIntro({required String type}) {
+    return '$type olarak kayıt için bu belgelere ihtiyacımız var. Belgelerini yalnızca Zêrîn ekibi görür.';
+  }
+
+  @override
+  String get businessDocumentsFormats => 'Fotoğraf veya PDF, en fazla 15 MB.';
+
+  @override
+  String get businessTypeLockedHint =>
+      'Türü artık yalnızca profilinde değiştirebilirsin.';
+
+  @override
+  String get documentKindIdentity => 'Kimlik kartı veya pasaport';
+
+  @override
+  String get documentKindIdentityHint => 'Net okunur, tüm köşeleri görünür.';
+
+  @override
+  String get documentKindBusinessRegistration =>
+      'İşletme kaydı veya ticaret sicili özeti';
+
+  @override
+  String get documentKindBusinessRegistrationHint => 'İşletmenin adına.';
+
+  @override
+  String get documentKindMedicalHint =>
+      'Hekimlik ruhsatı veya tabip odası üyelik belgesi.';
+
+  @override
+  String get documentStatusMissing => 'Eksik';
+
+  @override
+  String get documentStatusPending => 'İncelemede';
+
+  @override
+  String get documentStatusApproved => 'Onaylandı';
+
+  @override
+  String get documentStatusRejected => 'Reddedildi';
+
+  @override
+  String documentRejectionNote({required String note}) {
+    return 'Ekibin notu: $note';
+  }
+
+  @override
+  String get documentUploadAction => 'Yükle';
+
+  @override
+  String get documentReuploadAction => 'Yeniden yükle';
+
+  @override
+  String get documentWithdrawAction => 'Geri çek';
+
+  @override
+  String get documentSourceCamera => 'Fotoğraf çek';
+
+  @override
+  String get documentSourceGallery => 'Galeriden fotoğraf';
+
+  @override
+  String get documentSourcePdf => 'PDF seç';
+
+  @override
+  String get documentUploaded => 'Yüklendi. Belgeyi inceleyeceğiz.';
+
+  @override
+  String get documentWithdrawn => 'Belge geri çekildi.';
+
+  @override
+  String documentUploadedAt({required String date}) {
+    return '$date tarihinde yüklendi';
+  }
+
+  @override
+  String get businessErrorName => 'Ad 2 ile 100 karakter arasında olmalı.';
+
+  @override
+  String get businessErrorCity => 'Lütfen listeden bir şehir seç.';
+
+  @override
+  String get businessErrorDocumentPending =>
+      'Bunun için incelemeyi bekleyen bir belge zaten var.';
+
+  @override
+  String get businessErrorFileTooLarge => 'Dosya 15 MB’tan büyük.';
+
+  @override
+  String get businessErrorInvalid => 'Lütfen bilgilerini kontrol et.';
+
+  @override
+  String get businessCoverLabel => 'Kapak görseli';
+
+  @override
+  String get businessCoverAction => 'Kapak görseli seç';
+
+  @override
+  String get businessDescriptionLabel => 'Açıklama';
+
+  @override
+  String get businessDescriptionHelper => '20 ile 3000 karakter';
+
+  @override
+  String get businessPhoneLabel => 'Telefon';
+
+  @override
+  String get businessWebsiteLabel => 'Web sitesi (isteğe bağlı)';
+
+  @override
+  String get businessWebsiteHelper => 'https:// ile başlar';
+
+  @override
+  String get businessLanguagesLabel => 'Konuşulan diller';
+
+  @override
+  String get businessCuisinesLabel => 'Mutfak';
+
+  @override
+  String get businessPriceLevelLabel => 'Fiyat seviyesi';
+
+  @override
+  String get businessDietLabel => 'Beslenme seçenekleri';
+
+  @override
+  String get businessHalal => 'Helal';
+
+  @override
+  String get businessVegetarian => 'Vejetaryen yemekler';
+
+  @override
+  String get businessVegan => 'Vegan yemekler';
+
+  @override
+  String get businessSpecialtyLabel => 'Uzmanlık alanı';
+
+  @override
+  String get businessInsuranceLabel => 'Sigorta';
+
+  @override
+  String get insuranceStatutory => 'Yasal';
+
+  @override
+  String get insurancePrivate => 'Özel';
+
+  @override
+  String get insuranceBoth => 'Yasal ve özel';
+
+  @override
+  String get businessSaved => 'Kaydedildi.';
+
+  @override
+  String get businessDescriptionInvalid =>
+      'Açıklama 20 ile 3000 karakter arasında olmalı.';
+
+  @override
+  String get businessPhoneInvalid =>
+      'Lütfen 5 ile 40 karakter arasında bir telefon numarası gir.';
+
+  @override
+  String get businessWebsiteInvalid => 'Web sitesi https:// ile başlamalı.';
+
+  @override
+  String get businessLanguagesRequired => 'En az bir dil seç.';
+
+  @override
+  String get businessCuisinesRequired => 'En az bir mutfak seç.';
+
+  @override
+  String get businessPriceRequired => 'Bir fiyat seviyesi seç.';
+
+  @override
+  String get businessSpecialtyRequired => 'Bir uzmanlık alanı seç.';
+
+  @override
+  String get businessInsuranceRequired => 'Hangi sigortayı kabul ettiğini seç.';
+
+  @override
+  String get cuisineKurdish => 'Kürt';
+
+  @override
+  String get cuisineSyrian => 'Suriye';
+
+  @override
+  String get cuisineTurkish => 'Türk';
+
+  @override
+  String get cuisineArabic => 'Arap';
+
+  @override
+  String get cuisinePersian => 'İran';
+
+  @override
+  String get cuisineLebanese => 'Lübnan';
+
+  @override
+  String get cuisineIraqi => 'Irak';
+
+  @override
+  String get cuisineMiddleEastern => 'Orta Doğu';
+
+  @override
+  String get cuisineKebab => 'Kebap ve döner';
+
+  @override
+  String get cuisineFalafel => 'Falafel';
+
+  @override
+  String get cuisineGerman => 'Alman';
+
+  @override
+  String get cuisineItalian => 'İtalyan';
+
+  @override
+  String get cuisineMediterranean => 'Akdeniz';
+
+  @override
+  String get cuisineIndian => 'Hint';
+
+  @override
+  String get cuisineAsian => 'Asya';
+
+  @override
+  String get cuisineInternational => 'Uluslararası';
+
+  @override
+  String get specialtyGeneralMedicine => 'Genel tıp';
+
+  @override
+  String get specialtyInternalMedicine => 'İç hastalıkları';
+
+  @override
+  String get specialtyPediatrics => 'Çocuk sağlığı';
+
+  @override
+  String get specialtyGynecology => 'Kadın hastalıkları';
+
+  @override
+  String get specialtyDermatology => 'Dermatoloji';
+
+  @override
+  String get specialtyOrthopedics => 'Ortopedi';
+
+  @override
+  String get specialtyNeurology => 'Nöroloji';
+
+  @override
+  String get specialtyPsychiatry => 'Psikiyatri';
+
+  @override
+  String get specialtyOphthalmology => 'Göz hastalıkları';
+
+  @override
+  String get specialtyEnt => 'KBB';
+
+  @override
+  String get specialtyDentistry => 'Diş hekimliği';
+
+  @override
+  String get specialtyCardiology => 'Kardiyoloji';
+
+  @override
+  String get specialtyUrology => 'Üroloji';
+
+  @override
+  String get specialtyOther => 'Diğer';
+
+  @override
+  String get businessHoursClosed => 'Kapalı';
+
+  @override
+  String get businessHoursAdd => 'Zaman aralığı ekle';
+
+  @override
+  String businessHoursInterval({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes';
+  }
+
+  @override
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes (ertesi gün)';
+  }
+
+  @override
+  String get businessHoursPickOpen => 'Açılış saati';
+
+  @override
+  String get businessHoursPickClose => 'Kapanış saati';
+
+  @override
+  String get businessHoursHint =>
+      'Gece yarısından sonra kapatıyorsanız, ertesi sabahki saati seçin.';
+
+  @override
+  String get businessHoursSameTime => 'Açılış ve kapanış saati aynı olamaz.';
+
+  @override
+  String get businessHoursTooMany => 'Günde en fazla 6 zaman aralığı.';
+
+  @override
+  String get businessHoursRemove => 'Zaman aralığını kaldır';
+
+  @override
+  String get weekdayMonday => 'Pazartesi';
+
+  @override
+  String get weekdayTuesday => 'Salı';
+
+  @override
+  String get weekdayWednesday => 'Çarşamba';
+
+  @override
+  String get weekdayThursday => 'Perşembe';
+
+  @override
+  String get weekdayFriday => 'Cuma';
+
+  @override
+  String get weekdaySaturday => 'Cumartesi';
+
+  @override
+  String get weekdaySunday => 'Pazar';
+
+  @override
+  String get businessMenuEmpty =>
+      'Henüz bölüm yok. Örneğin “Başlangıçlar” veya “İçecekler” ekle.';
+
+  @override
+  String get businessMenuAddSection => 'Bölüm ekle';
+
+  @override
+  String get businessMenuSectionName => 'Bölüm adı';
+
+  @override
+  String get businessMenuAddItem => 'Yemek ekle';
+
+  @override
+  String get businessMenuEditItem => 'Yemeği düzenle';
+
+  @override
+  String get businessMenuItemName => 'Ad';
+
+  @override
+  String get businessMenuItemDescription => 'Açıklama (isteğe bağlı)';
+
+  @override
+  String get businessMenuItemPrice => 'Fiyat (€)';
+
+  @override
+  String get businessMenuItemAvailable => 'Mevcut';
+
+  @override
+  String get businessMenuItemUnavailable => 'Mevcut değil';
+
+  @override
+  String get businessMenuMoveUp => 'Yukarı taşı';
+
+  @override
+  String get businessMenuMoveDown => 'Aşağı taşı';
+
+  @override
+  String get businessMenuPriceInvalid => 'Lütfen geçerli bir fiyat gir.';
+
+  @override
+  String get businessMenuNameRequired => 'Lütfen bir ad gir.';
+
+  @override
+  String businessMenuDeleteSection({required String name}) {
+    return '“$name” bölümü tüm yemekleriyle silinsin mi?';
+  }
+
+  @override
+  String get menuFlagVegetarian => 'Vejetaryen';
+
+  @override
+  String get menuFlagVegan => 'Vegan';
 }

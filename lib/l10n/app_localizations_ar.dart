@@ -1478,4 +1478,496 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mapOsmAttribution => '© مساهمو OpenStreetMap';
+
+  @override
+  String get businessHubTitle => 'نشاطي التجاري';
+
+  @override
+  String get businessAccountEntrySubtitle =>
+      'أضف مطعمًا أو مقهى أو مطعم وجبات سريعة أو عيادة';
+
+  @override
+  String get businessStartTitle => 'أضف نشاطك التجاري';
+
+  @override
+  String get businessStartBody =>
+      'اختر أولًا نوع الإدراج. بعد ذلك سترى بالضبط المستندات التي نحتاجها.';
+
+  @override
+  String get businessTypeLabel => 'نوع الإدراج';
+
+  @override
+  String get businessNameLabel => 'اسم النشاط التجاري';
+
+  @override
+  String get businessStartAction => 'متابعة إلى المستندات';
+
+  @override
+  String get businessPrivateSellerTitle => 'حساب بائع خاص';
+
+  @override
+  String get businessPrivateSellerBody =>
+      'يبيع حسابك بصفة شخصية. الإدراج في الدليل متاح فقط لحسابات الأعمال. يُرجى التواصل مع الدعم.';
+
+  @override
+  String get businessStatusVerified => 'موثَّق';
+
+  @override
+  String get businessStatusInReview => 'قيد المراجعة';
+
+  @override
+  String get businessStatusDocumentsMissing => 'مستندات ناقصة';
+
+  @override
+  String get businessDocumentsTile => 'المستندات';
+
+  @override
+  String businessDocumentsProgress({
+    required int approved,
+    required int total,
+  }) {
+    return 'تمت الموافقة على $approved من $total';
+  }
+
+  @override
+  String get businessProfileTile => 'الملف التعريفي';
+
+  @override
+  String get businessProfileMissing => 'لم يُنشأ بعد';
+
+  @override
+  String get businessProfileDraft => 'مسودة – غير منشورة';
+
+  @override
+  String get businessProfilePublished => 'منشور';
+
+  @override
+  String get businessHoursTile => 'ساعات العمل';
+
+  @override
+  String businessHoursSummary({required int count}) {
+    return '$count فترات زمنية';
+  }
+
+  @override
+  String get businessMenuTile => 'قائمة الطعام';
+
+  @override
+  String businessMenuSummary({required int sections, required int items}) {
+    return '$sections أقسام · $items أطباق';
+  }
+
+  @override
+  String get businessNeedsProfileFirst => 'أنشئ ملفك التعريفي أولًا.';
+
+  @override
+  String get businessPublishTitle => 'إظهار في الدليل';
+
+  @override
+  String get businessPublishHintUnverified =>
+      'يمكنك النشر بعد الموافقة على مستنداتك.';
+
+  @override
+  String get businessPublishOn => 'إدراجك ظاهر للجميع.';
+
+  @override
+  String get businessPublishOff => 'إدراجك ظاهر لك فقط.';
+
+  @override
+  String get businessDraftNote =>
+      'يمكنك تجهيز ملفك التعريفي وساعات العمل وقائمة الطعام كمسودة من الآن.';
+
+  @override
+  String get directoryTypeRestaurant => 'مطعم';
+
+  @override
+  String get directoryTypeCafe => 'مقهى';
+
+  @override
+  String get directoryTypeFastFood => 'وجبات سريعة';
+
+  @override
+  String get directoryTypeDoctor => 'عيادة طبية';
+
+  @override
+  String businessDocumentsIntro({required String type}) {
+    return 'لإدراج من نوع $type نحتاج هذه المستندات. فريق زيرين وحده يطّلع على مستنداتك.';
+  }
+
+  @override
+  String get businessDocumentsFormats => 'صورة أو PDF، بحد أقصى 15 ميغابايت.';
+
+  @override
+  String get businessTypeLockedHint =>
+      'يمكنك الآن تغيير النوع من ملفك التعريفي فقط.';
+
+  @override
+  String get documentKindIdentity => 'بطاقة الهوية أو جواز السفر';
+
+  @override
+  String get documentKindIdentityHint => 'واضحة القراءة مع ظهور جميع الزوايا.';
+
+  @override
+  String get documentKindBusinessRegistration =>
+      'تسجيل النشاط التجاري أو مستخرج السجل التجاري';
+
+  @override
+  String get documentKindBusinessRegistrationHint => 'باسم نشاطك التجاري.';
+
+  @override
+  String get documentKindMedicalHint =>
+      'ترخيص مزاولة المهنة أو إثبات العضوية في نقابة الأطباء.';
+
+  @override
+  String get documentStatusMissing => 'ناقص';
+
+  @override
+  String get documentStatusPending => 'قيد المراجعة';
+
+  @override
+  String get documentStatusApproved => 'تمت الموافقة';
+
+  @override
+  String get documentStatusRejected => 'مرفوض';
+
+  @override
+  String documentRejectionNote({required String note}) {
+    return 'ملاحظة الفريق: $note';
+  }
+
+  @override
+  String get documentUploadAction => 'رفع';
+
+  @override
+  String get documentReuploadAction => 'رفع من جديد';
+
+  @override
+  String get documentWithdrawAction => 'سحب';
+
+  @override
+  String get documentSourceCamera => 'التقاط صورة';
+
+  @override
+  String get documentSourceGallery => 'صورة من المعرض';
+
+  @override
+  String get documentSourcePdf => 'اختيار ملف PDF';
+
+  @override
+  String get documentUploaded => 'تم الرفع. سنراجع المستند.';
+
+  @override
+  String get documentWithdrawn => 'تم سحب المستند.';
+
+  @override
+  String documentUploadedAt({required String date}) {
+    return 'تم الرفع في $date';
+  }
+
+  @override
+  String get businessErrorName => 'يجب أن يتكون الاسم من 2 إلى 100 حرف.';
+
+  @override
+  String get businessErrorCity => 'يُرجى اختيار مدينة من القائمة.';
+
+  @override
+  String get businessErrorDocumentPending =>
+      'يوجد مستند لهذا الغرض بانتظار المراجعة بالفعل.';
+
+  @override
+  String get businessErrorFileTooLarge => 'حجم الملف أكبر من 15 ميغابايت.';
+
+  @override
+  String get businessErrorInvalid => 'يُرجى التحقق من بياناتك.';
+
+  @override
+  String get businessCoverLabel => 'صورة الغلاف';
+
+  @override
+  String get businessCoverAction => 'اختيار صورة الغلاف';
+
+  @override
+  String get businessDescriptionLabel => 'الوصف';
+
+  @override
+  String get businessDescriptionHelper => 'من 20 إلى 3000 حرف';
+
+  @override
+  String get businessPhoneLabel => 'الهاتف';
+
+  @override
+  String get businessWebsiteLabel => 'الموقع الإلكتروني (اختياري)';
+
+  @override
+  String get businessWebsiteHelper => 'يبدأ بـ https://';
+
+  @override
+  String get businessLanguagesLabel => 'اللغات المستخدمة';
+
+  @override
+  String get businessCuisinesLabel => 'المطبخ';
+
+  @override
+  String get businessPriceLevelLabel => 'مستوى الأسعار';
+
+  @override
+  String get businessDietLabel => 'الخيارات الغذائية';
+
+  @override
+  String get businessHalal => 'حلال';
+
+  @override
+  String get businessVegetarian => 'أطباق نباتية';
+
+  @override
+  String get businessVegan => 'أطباق نباتية صرفة';
+
+  @override
+  String get businessSpecialtyLabel => 'التخصص';
+
+  @override
+  String get businessInsuranceLabel => 'التأمين';
+
+  @override
+  String get insuranceStatutory => 'تأمين حكومي';
+
+  @override
+  String get insurancePrivate => 'تأمين خاص';
+
+  @override
+  String get insuranceBoth => 'حكومي وخاص';
+
+  @override
+  String get businessSaved => 'تم الحفظ.';
+
+  @override
+  String get businessDescriptionInvalid =>
+      'يجب أن يتكون الوصف من 20 إلى 3000 حرف.';
+
+  @override
+  String get businessPhoneInvalid => 'يُرجى إدخال رقم هاتف من 5 إلى 40 حرفًا.';
+
+  @override
+  String get businessWebsiteInvalid => 'يجب أن يبدأ الموقع بـ https://.';
+
+  @override
+  String get businessLanguagesRequired => 'اختر لغة واحدة على الأقل.';
+
+  @override
+  String get businessCuisinesRequired => 'اختر مطبخًا واحدًا على الأقل.';
+
+  @override
+  String get businessPriceRequired => 'اختر مستوى الأسعار.';
+
+  @override
+  String get businessSpecialtyRequired => 'اختر تخصصًا.';
+
+  @override
+  String get businessInsuranceRequired => 'اختر نوع التأمين الذي تقبله.';
+
+  @override
+  String get cuisineKurdish => 'كردي';
+
+  @override
+  String get cuisineSyrian => 'سوري';
+
+  @override
+  String get cuisineTurkish => 'تركي';
+
+  @override
+  String get cuisineArabic => 'عربي';
+
+  @override
+  String get cuisinePersian => 'فارسي';
+
+  @override
+  String get cuisineLebanese => 'لبناني';
+
+  @override
+  String get cuisineIraqi => 'عراقي';
+
+  @override
+  String get cuisineMiddleEastern => 'شرق أوسطي';
+
+  @override
+  String get cuisineKebab => 'كباب وشاورما';
+
+  @override
+  String get cuisineFalafel => 'فلافل';
+
+  @override
+  String get cuisineGerman => 'ألماني';
+
+  @override
+  String get cuisineItalian => 'إيطالي';
+
+  @override
+  String get cuisineMediterranean => 'متوسطي';
+
+  @override
+  String get cuisineIndian => 'هندي';
+
+  @override
+  String get cuisineAsian => 'آسيوي';
+
+  @override
+  String get cuisineInternational => 'عالمي';
+
+  @override
+  String get specialtyGeneralMedicine => 'طب عام';
+
+  @override
+  String get specialtyInternalMedicine => 'الطب الباطني';
+
+  @override
+  String get specialtyPediatrics => 'طب الأطفال';
+
+  @override
+  String get specialtyGynecology => 'أمراض النساء';
+
+  @override
+  String get specialtyDermatology => 'الأمراض الجلدية';
+
+  @override
+  String get specialtyOrthopedics => 'جراحة العظام';
+
+  @override
+  String get specialtyNeurology => 'طب الأعصاب';
+
+  @override
+  String get specialtyPsychiatry => 'الطب النفسي';
+
+  @override
+  String get specialtyOphthalmology => 'طب العيون';
+
+  @override
+  String get specialtyEnt => 'الأنف والأذن والحنجرة';
+
+  @override
+  String get specialtyDentistry => 'طب الأسنان';
+
+  @override
+  String get specialtyCardiology => 'أمراض القلب';
+
+  @override
+  String get specialtyUrology => 'المسالك البولية';
+
+  @override
+  String get specialtyOther => 'أخرى';
+
+  @override
+  String get businessHoursClosed => 'مغلق';
+
+  @override
+  String get businessHoursAdd => 'إضافة فترة زمنية';
+
+  @override
+  String businessHoursInterval({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes';
+  }
+
+  @override
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes (اليوم التالي)';
+  }
+
+  @override
+  String get businessHoursPickOpen => 'يفتح الساعة';
+
+  @override
+  String get businessHoursPickClose => 'يغلق الساعة';
+
+  @override
+  String get businessHoursHint =>
+      'إذا كنتم تغلقون بعد منتصف الليل، فاختاروا الوقت في صباح اليوم التالي.';
+
+  @override
+  String get businessHoursSameTime => 'يجب أن يختلف وقت الفتح عن وقت الإغلاق.';
+
+  @override
+  String get businessHoursTooMany => '6 فترات زمنية كحد أقصى في اليوم.';
+
+  @override
+  String get businessHoursRemove => 'إزالة الفترة الزمنية';
+
+  @override
+  String get weekdayMonday => 'الاثنين';
+
+  @override
+  String get weekdayTuesday => 'الثلاثاء';
+
+  @override
+  String get weekdayWednesday => 'الأربعاء';
+
+  @override
+  String get weekdayThursday => 'الخميس';
+
+  @override
+  String get weekdayFriday => 'الجمعة';
+
+  @override
+  String get weekdaySaturday => 'السبت';
+
+  @override
+  String get weekdaySunday => 'الأحد';
+
+  @override
+  String get businessMenuEmpty =>
+      'لا توجد أقسام بعد. أضف مثلًا «المقبلات» أو «المشروبات».';
+
+  @override
+  String get businessMenuAddSection => 'إضافة قسم';
+
+  @override
+  String get businessMenuSectionName => 'اسم القسم';
+
+  @override
+  String get businessMenuAddItem => 'إضافة طبق';
+
+  @override
+  String get businessMenuEditItem => 'تعديل الطبق';
+
+  @override
+  String get businessMenuItemName => 'الاسم';
+
+  @override
+  String get businessMenuItemDescription => 'الوصف (اختياري)';
+
+  @override
+  String get businessMenuItemPrice => 'السعر باليورو';
+
+  @override
+  String get businessMenuItemAvailable => 'متوفر';
+
+  @override
+  String get businessMenuItemUnavailable => 'غير متوفر';
+
+  @override
+  String get businessMenuMoveUp => 'نقل للأعلى';
+
+  @override
+  String get businessMenuMoveDown => 'نقل للأسفل';
+
+  @override
+  String get businessMenuPriceInvalid => 'يُرجى إدخال سعر صالح.';
+
+  @override
+  String get businessMenuNameRequired => 'يُرجى إدخال اسم.';
+
+  @override
+  String businessMenuDeleteSection({required String name}) {
+    return 'حذف القسم «$name» مع جميع أطباقه؟';
+  }
+
+  @override
+  String get menuFlagVegetarian => 'نباتي';
+
+  @override
+  String get menuFlagVegan => 'نباتي صرف';
 }

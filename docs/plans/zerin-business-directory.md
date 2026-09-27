@@ -87,6 +87,15 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
 ---
 
 ## E2 — Owner side ("Mein Unternehmen")
+- **0. Seller document upload (added 2026-09-27).** Without it no business or doctor can
+  ever be verified and the admin queue never receives anything. The seller picks the
+  directory type first, then sees exactly the documents that type needs (identity +
+  business_registration, or identity + medical_professional_registration for doctors),
+  uploads each as image or PDF to the private `seller-documents` bucket, and sees each
+  document's status and any rejection note. Reuses the existing storage policies and the
+  admin verification queue. Server support: a declared `sellers.directory_type` before any
+  profile exists, and approving the last required document of a pending directory seller
+  approves the seller (directory sellers never get a listing approved).
 - Entry in Account, visible only to business sellers; if not yet verified, show the
   path to the existing verification flow instead of the editor.
 - Editors: directory profile (type-aware fields), opening hours (weekly editor with

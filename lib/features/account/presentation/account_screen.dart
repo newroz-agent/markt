@@ -29,6 +29,10 @@ class AccountScreen extends ConsumerWidget {
     final isAdmin =
         user != null &&
         ref.watch(currentUserIsAdminProvider).asData?.value == true;
+    // The directory needs a business seller; private sellers cannot join.
+    final isPrivateSeller =
+        user != null &&
+        ref.watch(myProfileProvider).asData?.value?.seller?.isBusiness == false;
     final settings =
         ref.watch(appSettingsControllerProvider).asData?.value ??
         const AppSettings();
@@ -82,6 +86,17 @@ class AccountScreen extends ConsumerWidget {
                 Card(
                   child: Column(
                     children: <Widget>[
+                      if (!isPrivateSeller) ...<Widget>[
+                        ListTile(
+                          leading: const Icon(Icons.storefront_outlined),
+                          title: Text(l10n.businessHubTitle),
+                          subtitle: Text(l10n.businessAccountEntrySubtitle),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () =>
+                              const BusinessHubRoute().push<void>(context),
+                        ),
+                        const Divider(),
+                      ],
                       ListTile(
                         leading: const Icon(Icons.inventory_2_outlined),
                         title: Text(l10n.accountMyListings),

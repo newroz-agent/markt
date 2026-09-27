@@ -262,6 +262,9 @@ class _ModerationScreenState extends ConsumerState<ModerationScreen> {
 
   String _documentKindLabel(BuildContext context, String kind) =>
       switch (kind) {
+        'identity' => context.l10n.documentKindIdentity,
+        'business_registration' =>
+          context.l10n.documentKindBusinessRegistration,
         'medical_professional_registration' =>
           context.l10n.moderationDocumentKindMedicalProfessionalRegistration,
         _ => kind,

@@ -25,6 +25,11 @@ List<RouteBase> get $appRoutes => [
   $editProfileRoute,
   $favoritesRoute,
   $recentlyViewedRoute,
+  $businessHubRoute,
+  $businessDocumentsRoute,
+  $businessProfileRoute,
+  $businessHoursRoute,
+  $businessMenuRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -457,6 +462,116 @@ extension $RecentlyViewedRouteExtension on RecentlyViewedRoute {
       const RecentlyViewedRoute();
 
   String get location => GoRouteData.$location('/recently-viewed');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $businessHubRoute => GoRouteData.$route(
+  path: '/business',
+
+  factory: $BusinessHubRouteExtension._fromState,
+);
+
+extension $BusinessHubRouteExtension on BusinessHubRoute {
+  static BusinessHubRoute _fromState(GoRouterState state) =>
+      const BusinessHubRoute();
+
+  String get location => GoRouteData.$location('/business');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $businessDocumentsRoute => GoRouteData.$route(
+  path: '/business/documents',
+
+  factory: $BusinessDocumentsRouteExtension._fromState,
+);
+
+extension $BusinessDocumentsRouteExtension on BusinessDocumentsRoute {
+  static BusinessDocumentsRoute _fromState(GoRouterState state) =>
+      const BusinessDocumentsRoute();
+
+  String get location => GoRouteData.$location('/business/documents');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $businessProfileRoute => GoRouteData.$route(
+  path: '/business/profile',
+
+  factory: $BusinessProfileRouteExtension._fromState,
+);
+
+extension $BusinessProfileRouteExtension on BusinessProfileRoute {
+  static BusinessProfileRoute _fromState(GoRouterState state) =>
+      const BusinessProfileRoute();
+
+  String get location => GoRouteData.$location('/business/profile');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $businessHoursRoute => GoRouteData.$route(
+  path: '/business/hours',
+
+  factory: $BusinessHoursRouteExtension._fromState,
+);
+
+extension $BusinessHoursRouteExtension on BusinessHoursRoute {
+  static BusinessHoursRoute _fromState(GoRouterState state) =>
+      const BusinessHoursRoute();
+
+  String get location => GoRouteData.$location('/business/hours');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $businessMenuRoute => GoRouteData.$route(
+  path: '/business/menu',
+
+  factory: $BusinessMenuRouteExtension._fromState,
+);
+
+extension $BusinessMenuRouteExtension on BusinessMenuRoute {
+  static BusinessMenuRoute _fromState(GoRouterState state) =>
+      const BusinessMenuRoute();
+
+  String get location => GoRouteData.$location('/business/menu');
 
   void go(BuildContext context) => context.go(location);
 

@@ -157,14 +157,24 @@ select id,auth.uid(),'other' from public.reviews
 where seller_id='e2000000-0000-0000-0000-000000000001' and context='directory';
 do $$ begin
   assert (select count(*)=1 from public.reviews where seller_id='e2000000-0000-0000-0000-000000000001' and context='directory');
-  assert (select rating_average=4.5 and rating_count=2 from public.sellers where id='e2000000-0000-0000-0000-000000000001');
+  -- Ratings are never blended (decision 2026-09-27): the seller rating counts purchase
+  -- reviews only, the directory rating counts directory reviews only.
+  assert (select rating_average=5 and rating_count=1 from public.sellers where id='e2000000-0000-0000-0000-000000000001'),
+    'Seller rating counts only the purchase review';
+  assert (select rating_average=4 and rating_count=1 from public.business_directory_profiles
+    where seller_id='e2000000-0000-0000-0000-000000000001'), 'Directory rating counts only the directory review';
+  assert (public.get_business_directory_detail('e2000000-0000-0000-0000-000000000001')->>'rating_average')::numeric=4,
+    'Directory detail shows the directory rating';
   assert public.delete_directory_review('e2000000-0000-0000-0000-000000000001');
   assert (select status='hidden' from public.reviews where seller_id='e2000000-0000-0000-0000-000000000001' and context='directory');
   assert exists(select 1 from public.reports report join public.reviews review on review.id=report.review_id
     where review.seller_id='e2000000-0000-0000-0000-000000000001'),
     'Soft delete preserves reported review and report target';
   assert (select rating_average=5 and rating_count=1 from public.sellers where id='e2000000-0000-0000-0000-000000000001'),
-    'Soft delete excludes only the directory review and preserves purchase rating';
+    'Soft delete leaves the purchase rating unchanged';
+  assert (select rating_average=0 and rating_count=0 from public.business_directory_profiles
+    where seller_id='e2000000-0000-0000-0000-000000000001'),
+    'Soft delete removes the directory review from the directory rating';
 end $$;
 
 select set_config('request.jwt.claims','{"sub":"e1000000-0000-0000-0000-000000000001","role":"authenticated"}',true);
@@ -172,6 +182,12 @@ select pg_temp.expect_error(
  $$select public.upsert_directory_review('e2000000-0000-0000-0000-000000000001',5::smallint,'Owner review forbidden')$$,
  '23514'
 );
+update public.business_directory_profiles set rating_average=5,rating_count=99
+where seller_id='e2000000-0000-0000-0000-000000000001';
+do $$ begin
+  assert (select rating_average=0 and rating_count=0 from public.business_directory_profiles
+    where seller_id='e2000000-0000-0000-0000-000000000001'), 'Owners cannot write their directory rating';
+end $$;
 
 select set_config('request.jwt.claims','{"sub":"e1000000-0000-0000-0000-000000000002","role":"authenticated"}',true);
 select pg_temp.expect_error(

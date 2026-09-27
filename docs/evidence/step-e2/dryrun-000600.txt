@@ -1,0 +1,14 @@
+000600 + step_e1_business_directory: exit=0 last=ROLLBACK
+000600 + step_e1_5_osm_import: exit=0 last=ROLLBACK
+000600 + step_b_sell_moderation: exit=0 last=ROLLBACK
+000600 + step_c_user_profiles: exit=0 last=ROLLBACK
+000600 + step_d_map: exit=0 last=ROLLBACK
+000600 + step_d_postal_code_hardening: exit=0 last=ROLLBACK
+000600 + 20260924000100_admin_verification_reports: exit=0 last=ROLLBACK
+== rows changed by 000600 (inside rolled-back transaction)
+sellers_changed|products_changed|directory_profiles_total|directory_reviews
+0|0|0|0
+(1 row)
+profile_rating_column_after_rollback
+0
+(1 row)

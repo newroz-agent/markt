@@ -1,0 +1,13 @@
+== seed dry run: what each owner would see (rolled back)
+owner|jsonb_pretty
+new|{
+    "seller": null
+}
+?column?|status|verified|required|documents
+doctor|pending|false|["identity", "medical_professional_registration"]|[{"kind": "identity", "note": null, "status": "approved"}, {"kind": "medical_professional_registration", "note": "Die Approbationsurkunde ist abgeschnitten. Bitte das ganze Dokument als PDF oder Foto hochladen.", "status": "rejected"}]
+?column?|status|verified|published|hours|sections|items
+restaurant|approved|true|false|7|3|7
+what|users|identities|sellers|documents|profiles|hours|menu_items
+rows the seed writes|3|3|2|4|1|7|7
+?column?|count
+after rollback: e2 users|0
