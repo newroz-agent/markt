@@ -2,7 +2,7 @@
   "screenshots": [
     {
       "name": "step_e2_start",
-      "bytes": 300655,
+      "bytes": 300584,
       "width": 1206,
       "height": 2622
     },
@@ -20,7 +20,7 @@
     },
     {
       "name": "step_e2_admin_queue",
-      "bytes": 394398,
+      "bytes": 360708,
       "width": 1206,
       "height": 2622
     },
@@ -44,7 +44,7 @@
     },
     {
       "name": "step_e2_hours",
-      "bytes": 354183,
+      "bytes": 321904,
       "width": 1206,
       "height": 2622
     },
@@ -72,6 +72,12 @@
       "status": "pending",
       "mime_type": "application/pdf",
       "stored_in_private_bucket": true
+    },
+    "cleanup": {
+      "removed_objects": [
+        "e2e30000-0000-4000-8000-000000000002/medical_professional_registration/1790545619927933.pdf"
+      ],
+      "remaining_objects_in_folder": 0
     }
   },
   "tests": {

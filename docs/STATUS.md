@@ -61,6 +61,30 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - 🟡 The hours screenshot shows a truncated overnight label; fixed in code afterwards with a
   widget test, screenshot not refreshed (needs another approved harness run).
 
+## Loose ends before Step F (2026-09-27)
+
+- ✅ Snackbars: `ZerinApp` owns the app-wide `ScaffoldMessenger` and clears it whenever
+  the signed-in account changes (sign-in, sign-out, switch); widget test
+  `test/app/app_snackbar_reset_test.dart` (mutation-checked). Confirmed live: the refreshed
+  admin-queue screenshot no longer shows the doctor's snackbar.
+- ✅ E2 orphans: the 3 approved items were deleted (pending row first, then the 3 PDFs via
+  the storage service); the doctor's folder is empty and back to the seeded state.
+- ✅ Harness cleanup (`integration_test/support/harness_cleanup.dart`), pass or fail:
+  E2 removes what it uploaded — re-run 9/9 PASS, 1 upload removed, 0 files left, hours
+  screenshot refreshed. The E2 seed refuses to orphan uploaded files.
+- 🟡 Step B: the harness itself was out of date (the details list is lazily built since the
+  compare-at field; `/moderation` opens on the overview tab since the admin expansion) —
+  both fixed. Its first cleanup version deleted the listing before the photo; because
+  `product_images_storage_select` only shows a photo while its listing exists (admins
+  included), the photo could no longer be removed. Order fixed (photos first). One photo
+  is left behind: `8bfc114f-0b44-45dc-9a1f-0e767eb8575d/2ace6666-b043-45b0-b90f-ea9fb8b35c0d/1790545861569718-0.webp`
+  (no listing, no image row; only the service role can remove it). Same pattern affects
+  owners: deleting a listing leaves its photos in storage. Awaiting approval.
+- 🟡 `20260927000800_precise_location_gaps.sql` + `supabase/tests/precise_location_gaps.sql`:
+  suspending/rejecting clears the public pin in the same write; profile create/delete/type
+  change runs the unverified wipe. Dry-run passes with all suites, 0 rows changed
+  (`docs/evidence/location-gaps/`). **Not applied yet** — awaiting approval.
+
 ## Step F — account switching (decided, not started)
 
 - Decision 2026-09-27: option D. One login, up to one private and one business seller per

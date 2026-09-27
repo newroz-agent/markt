@@ -1,0 +1,6 @@
+== product-images objects and what references them (read-only)
+name|created_at|referenced_by_image_row|listing_exists
+8bfc114f-0b44-45dc-9a1f-0e767eb8575d/bb58adaf-08be-45b3-a839-db773b322638/1789395716992260-0.webp|2026-09-14 14:21:57.048927+00|t|t
+8bfc114f-0b44-45dc-9a1f-0e767eb8575d/f20e7d45-a27e-410e-96fb-3216f83056c2/1789395912211201-0.webp|2026-09-14 14:25:12.304605+00|t|t
+8bfc114f-0b44-45dc-9a1f-0e767eb8575d/2ace6666-b043-45b0-b90f-ea9fb8b35c0d/1790545861569718-0.webp|2026-09-27 21:51:01.601789+00|f|f
+(3 rows)

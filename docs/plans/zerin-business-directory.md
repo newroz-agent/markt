@@ -157,7 +157,7 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
     - Reads re-check verification: the map (`listings_within_radius`) and directory
       search/detail call `is_verified_seller()` at read time.
     - Step D principle: coordinates are server-owned, never device-geocoded.
-  - *Gaps found (not changed in E2):*
+  - *Gaps found (fixed by `20260927000800_precise_location_gaps.sql`, pending approval):*
     1. Since E1, verification also depends on the directory profile type (doctor vs
        other), but a type change does not run the wipe, so stale precise coordinates can
        stay stored. They are never shown, because reads re-check. E3 adds the same wipe

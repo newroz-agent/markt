@@ -115,16 +115,19 @@ void main() {
           for (final image in row['images']! as List)
             (image as Map)['storage_path']! as String,
       ];
+      // Photos first: product-images objects are only visible (and therefore
+      // removable) while their listing row exists, even for admins.
+      final removed = await removeUploadedObjects(
+        client,
+        bucket: _imagesBucket,
+        paths: paths,
+      );
       if (ids.isNotEmpty) {
         await client.from('products').delete().inFilter('id', ids);
       }
       cleanup = <String, Object?>{
         'deleted_listings': ids.length,
-        'removed_objects': await removeUploadedObjects(
-          client,
-          bucket: _imagesBucket,
-          paths: paths,
-        ),
+        'removed_objects': removed,
       };
     }
     binding.reportData ??= <String, dynamic>{};
@@ -233,8 +236,18 @@ void main() {
     await tester.pumpAndSettle();
     await screenshot(tester, 'free_form_details');
 
+    // The details list is built lazily and has grown since Step B (compare-at
+    // price), so scroll the button into existence instead of assuming it is built.
     final detailsNext = find.byKey(const ValueKey('sell-details-next'));
-    await tester.ensureVisible(detailsNext);
+    final detailsList = find.descendant(
+      of: find.byKey(const ValueKey('sell-details-step')),
+      matching: find.byType(Scrollable),
+    );
+    await tester.scrollUntilVisible(
+      detailsNext,
+      300,
+      scrollable: detailsList.first,
+    );
     await tester.drag(
       find.byKey(const ValueKey('sell-details-step')),
       const Offset(0, -220),
@@ -317,7 +330,22 @@ void main() {
       'Server-admin moderation queue contains pending listing',
     );
     await screenshot(tester, 'moderation_queue');
+    // Since the admin expansion, /moderation opens on the overview tab; the
+    // approve action lives on the listings tab.
+    await tester.tap(
+      find
+          .descendant(
+            of: find.byType(ModerationScreen),
+            matching: find.byType(ChoiceChip),
+          )
+          .at(1),
+    );
     final approve = find.byKey(ValueKey('moderation-approve-$productId'));
+    await until(
+      tester,
+      () => approve.evaluate().isNotEmpty,
+      'Listings tab shows the pending listing with its approve action',
+    );
     final moderationScroll = find
         .descendant(
           of: find.byType(ModerationScreen),
