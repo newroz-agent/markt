@@ -1,0 +1,8 @@
+Mapped places: 1123 (skipped without coordinates/too long: 0)
+  opening hours parsed: 472 of 564 with an opening_hours tag (rejected: 92)
+  phone: 217
+  website: 221
+  OSM email: 66
+Per type: fast_food=837, restaurant=250, cafe=36
+Per cuisine: kebab=677, turkish=268, arabic=87, lebanese=60, middle_eastern=47, falafel=39, persian=28, syrian=16, kurdish=2, iraqi=1
+Rejected opening_hours strings logged to docs/evidence/step-e1-5/rejected-opening-hours.txt
