@@ -13,6 +13,19 @@ begin
   raise exception 'Expected command to fail: %',command;
 end; $$;
 
+-- Pages through every search result so assertions target fixture ids and never depend
+-- on how much other data (e.g. imported OSM places) the local database holds.
+create function pg_temp.search_all() returns setof jsonb language plpgsql as $$
+declare page jsonb; page_offset integer := 0;
+begin
+  loop
+    page := public.search_business_directory(p_limit=>100,p_offset=>page_offset);
+    return query select value from jsonb_array_elements(page->'items');
+    page_offset := page_offset + 100;
+    exit when page_offset >= (page->>'total_count')::integer;
+  end loop;
+end; $$;
+
 do $$ begin
   assert exists(select 1 from pg_enum e join pg_type t on t.oid=e.enumtypid
     where t.typname='seller_document_kind' and e.enumlabel='medical_professional_registration');
@@ -72,7 +85,6 @@ insert into public.order_items(
 );
 
 do $$
-declare search_result jsonb;
 begin
   assert public.is_verified_seller('e2000000-0000-0000-0000-000000000001'),
     'Non-doctor remains verified by business registration';
@@ -86,10 +98,10 @@ begin
     'Overnight interval remains open after midnight';
   assert not public.directory_is_open('e2000000-0000-0000-0000-000000000001','2026-09-29 02:00:00+02'),
     'Closing boundary is exclusive';
-  -- The language filter excludes E1.5 OSM imports (they carry no spoken languages),
-  -- so only owner profiles are counted; every fixture profile lists German.
-  search_result:=public.search_business_directory(p_language=>'german');
-  assert jsonb_array_length(search_result->'items')=2,
+  assert exists(select 1 from pg_temp.search_all() i where i->>'seller_id'='e2000000-0000-0000-0000-000000000001')
+    and exists(select 1 from pg_temp.search_all() i where i->>'seller_id'='e2000000-0000-0000-0000-000000000002'),
+    'Verified published fixtures are listed';
+  assert not exists(select 1 from pg_temp.search_all() i where i->>'seller_id'='e2000000-0000-0000-0000-000000000003'),
     'Unverified published businesses stay hidden';
   assert public.get_business_directory_detail('e2000000-0000-0000-0000-000000000003') is null,
     'Unverified detail stays hidden';
@@ -172,9 +184,14 @@ select set_config('request.jwt.claims','{}',true);
 
 set local role anon;
 do $$ begin
-  assert (select count(*)=2 from public.business_directory_profiles),
+  assert (select array_agg(seller_id order by seller_id) from public.business_directory_profiles
+    where seller_id in ('e2000000-0000-0000-0000-000000000001','e2000000-0000-0000-0000-000000000002',
+      'e2000000-0000-0000-0000-000000000003'))
+    = array['e2000000-0000-0000-0000-000000000001','e2000000-0000-0000-0000-000000000002']::uuid[],
     'Anonymous direct reads see only published, currently verified profiles';
-  assert (select count(*)=0 from public.business_directory_menu_sections),
+  assert not exists(select 1 from public.business_directory_menu_sections
+    where seller_id in ('e2000000-0000-0000-0000-000000000001','e2000000-0000-0000-0000-000000000002',
+      'e2000000-0000-0000-0000-000000000003')),
     'Fixture has no public menu sections';
 end $$;
 reset role;

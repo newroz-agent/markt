@@ -13,6 +13,24 @@ begin
   raise exception 'Expected command to fail: %',command;
 end; $$;
 
+-- Pages through every search result so assertions target fixture ids and never depend
+-- on how much other data (e.g. the real OSM import) the local database holds.
+create function pg_temp.search_all(
+  p_type public.directory_business_type default null,
+  p_cuisine public.directory_cuisine default null,
+  p_language public.directory_spoken_language default null
+) returns setof jsonb language plpgsql as $$
+declare page jsonb; page_offset integer := 0;
+begin
+  loop
+    page := public.search_business_directory(p_type=>p_type,p_cuisine=>p_cuisine,
+      p_language=>p_language,p_limit=>100,p_offset=>page_offset);
+    return query select value from jsonb_array_elements(page->'items');
+    page_offset := page_offset + 100;
+    exit when page_offset >= (page->>'total_count')::integer;
+  end loop;
+end; $$;
+
 create function pg_temp.fixture_places(first_name text default 'E15 Imbiss Eins')
 returns jsonb language sql as $$
   select jsonb_build_array(
@@ -87,26 +105,28 @@ from generate_series(1,3) n;
 set local role anon;
 select set_config('request.jwt.claims','{"role":"anon"}',true);
 do $$
-declare search_result jsonb; detail jsonb; item jsonb;
+declare detail jsonb; item jsonb;
 begin
-  search_result:=public.search_business_directory(p_center_lat=>52.4990,p_center_lng=>13.4180,p_radius_km=>0.5);
-  assert search_result::text not like '%e15-secret%', 'search never exposes outreach emails';
-  select value into item from jsonb_array_elements(search_result->'items')
-    where value->>'shop_name'='E15 Imbiss Eins';
+  assert not exists(select 1 from pg_temp.search_all() i where i::text like '%e15-secret%'),
+    'search never exposes outreach emails';
+  select i into item from pg_temp.search_all() i where i->>'place_id'=current_setting('e15.p1');
   assert item->>'source'='osm' and (item->>'is_claimed')::boolean=false
-    and (item->>'reviews_enabled')::boolean=false and item->>'place_id' is not null
-    and item->>'seller_id' is null, format('search item carries source and claim flag: %s',item);
+    and (item->>'reviews_enabled')::boolean=false and item->>'seller_id' is null
+    and item->>'shop_name'='E15 Imbiss Eins', format('search item carries source and claim flag: %s',item);
   assert not (item ? 'email'), 'search item has no email key';
+  assert (select count(*) from pg_temp.search_all() i
+    where i->>'place_id' in (current_setting('e15.p1'),current_setting('e15.p2'),current_setting('e15.p3')))=3,
+    'all three unclaimed fixtures are public';
 
-  search_result:=public.search_business_directory(p_type=>'fast_food',p_cuisine=>'kebab',
-    p_center_lat=>52.4990,p_center_lng=>13.4180,p_radius_km=>0.5,p_limit=>100);
-  assert exists(select 1 from jsonb_array_elements(search_result->'items') i where i->>'shop_name'='E15 Imbiss Eins'),
-    'fast_food and kebab filters match imports';
-  search_result:=public.search_business_directory(p_language=>'kurdish');
-  assert not exists(select 1 from jsonb_array_elements(search_result->'items') i where i->>'source'='osm'),
+  assert exists(select 1 from pg_temp.search_all(p_type=>'fast_food',p_cuisine=>'kebab') i
+    where i->>'place_id'=current_setting('e15.p1')), 'fast_food and kebab filters match the fixture';
+  assert not exists(select 1 from pg_temp.search_all(p_type=>'fast_food') i
+    where i->>'place_id'=current_setting('e15.p3')), 'type filter excludes the cafe fixture';
+  assert not exists(select 1 from pg_temp.search_all(p_language=>'kurdish') i
+    where i->>'place_id' in (current_setting('e15.p1'),current_setting('e15.p2'),current_setting('e15.p3'))),
     'language filter excludes imports without language data';
 
-  detail:=public.get_directory_imported_place_detail((item->>'place_id')::uuid);
+  detail:=public.get_directory_imported_place_detail(current_setting('e15.p1')::uuid);
   assert detail->>'source'='osm' and (detail->>'is_claimed')::boolean=false
     and (detail->>'reviews_enabled')::boolean=false and jsonb_array_length(detail->'hours')=1
     and detail->>'address'='Oranienstraße 1, 10999 Berlin', format('detail projection: %s',detail);
@@ -148,9 +168,8 @@ select public.upsert_directory_review('e1510000-0000-0000-0000-000000000001',4::
 do $$
 declare owner_item jsonb;
 begin
-  select value into owner_item from jsonb_array_elements(
-    public.search_business_directory(p_type=>'fast_food',p_language=>'german')->'items')
-  where value->>'seller_id'='e1510000-0000-0000-0000-000000000001';
+  select i into owner_item from pg_temp.search_all(p_type=>'fast_food') i
+  where i->>'seller_id'='e1510000-0000-0000-0000-000000000001';
   assert owner_item->>'source'='owner' and (owner_item->>'is_claimed')::boolean
     and (owner_item->>'reviews_enabled')::boolean, format('owner projection: %s',owner_item);
   assert (public.get_business_directory_detail('e1510000-0000-0000-0000-000000000001')->>'source')='owner';
@@ -184,16 +203,17 @@ reset role;
 select set_config('request.jwt.claims','{}',true);
 
 do $$
-declare result jsonb; search_result jsonb;
+declare result jsonb;
 begin
   assert (select is_hidden from public.directory_imported_places where osm_id=990000000000002),
     'removal request hides the place immediately';
   assert exists(select 1 from public.directory_import_suppressions
     where osm_type='way' and osm_id=990000000000002 and reason='removal_requested');
-  search_result:=public.search_business_directory(p_limit=>100,p_center_lat=>52.5,p_center_lng=>13.4,p_radius_km=>0.2);
-  assert not exists(select 1 from jsonb_array_elements(search_result->'items') i
-    where i->>'shop_name' in ('E15 Imbiss Eins','E15 Restaurant Zwei')),
+  assert not exists(select 1 from pg_temp.search_all() i
+    where i->>'place_id' in (current_setting('e15.p1'),current_setting('e15.p2'))),
     'claimed and removed imports leave public search';
+  assert exists(select 1 from pg_temp.search_all() i where i->>'place_id'=current_setting('e15.p3')),
+    'the untouched unclaimed fixture stays public';
   assert public.get_directory_imported_place_detail(
     current_setting('e15.p1')::uuid) is null;
 
@@ -223,18 +243,91 @@ begin
     'nothing is deleted automatically';
 end $$;
 
--- Deleting a claiming seller unlinks the place instead of failing.
+-- Seller deletion while a place is claimed.
+-- (a) A seller that has received reviews cannot be deleted (reviews.seller_id RESTRICT),
+--     so its reviews can never end up next to a reverted, unclaimed place.
+do $$
+declare failed_constraint text;
+begin
+  begin
+    delete from public.sellers where id='e1510000-0000-0000-0000-000000000001';
+  exception when foreign_key_violation then
+    get stacked diagnostics failed_constraint = constraint_name;
+  end;
+  assert failed_constraint='reviews_seller_id_fkey',
+    format('reviewed claiming seller is not deletable (got %s)',failed_constraint);
+  assert (select claimed_seller_id='e1510000-0000-0000-0000-000000000001'
+    from public.directory_imported_places where osm_id=990000000000001),
+    'place stays claimed and hidden';
+end $$;
+
+-- (b) A seller with a published fast_food profile, hours and menu but no reviews claims
+--     the cafe fixture, then is deleted: the place reverts to a plain unclaimed entry.
 insert into auth.users(id,email) values ('e1500000-0000-0000-0000-000000000004','e15-leaver@example.invalid');
 insert into public.sellers(id,user_id,kind,status,shop_name,slug,city,country_code,approved_at)
 values ('e1510000-0000-0000-0000-000000000002','e1500000-0000-0000-0000-000000000004',
   'business','approved','E15 Leaving Owner','e15-leaving-owner','Berlin','DE',now());
-update public.directory_imported_places set claimed_seller_id='e1510000-0000-0000-0000-000000000002',claimed_at=now()
-where osm_id=990000000000003;
+insert into public.seller_documents(seller_id,kind,storage_path,mime_type,status) values
+ ('e1510000-0000-0000-0000-000000000002','identity','e15/leaver-identity.pdf','application/pdf','approved'),
+ ('e1510000-0000-0000-0000-000000000002','business_registration','e15/leaver-business.pdf','application/pdf','approved');
+insert into public.business_directory_profiles(seller_id,type,description,phone,languages,cuisines,price_level,is_published)
+values('e1510000-0000-0000-0000-000000000002','cafe','A claiming cafe owner fixture for E1.5 acceptance.',
+  '030 500000',array['german']::public.directory_spoken_language[],array['arabic']::public.directory_cuisine[],1,true);
+insert into public.business_directory_hours(seller_id,weekday,opens_at,closes_at)
+values('e1510000-0000-0000-0000-000000000002',1,'08:00','18:00');
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"e1500000-0000-0000-0000-000000000004","role":"authenticated"}',true);
+select public.owner_replace_directory_menu('[{"name":"Kaffee","items":[{"name":"Mokka","price_cents":300}]}]');
+select set_config('request.jwt.claims',
+  '{"sub":"e1500000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}',true);
+select public.admin_set_directory_outreach_status(
+  current_setting('e15.p3')::uuid,'claimed',null,'e1510000-0000-0000-0000-000000000002');
+reset role;
+select set_config('request.jwt.claims','{}',true);
+
 delete from public.sellers where id='e1510000-0000-0000-0000-000000000002';
-do $$ begin
-  assert (select claimed_seller_id is null and claimed_at is not null
+
+do $$
+declare detail jsonb; item jsonb; result jsonb;
+begin
+  assert (select claimed_seller_id is null and claimed_at is not null and not is_hidden
     from public.directory_imported_places where osm_id=990000000000003),
     'seller deletion unlinks the claimed place';
+  assert not exists(select 1 from public.business_directory_profiles where seller_id='e1510000-0000-0000-0000-000000000002')
+    and not exists(select 1 from public.business_directory_menu_sections where seller_id='e1510000-0000-0000-0000-000000000002')
+    and not exists(select 1 from public.business_directory_menu_items where seller_id='e1510000-0000-0000-0000-000000000002')
+    and not exists(select 1 from public.business_directory_hours where seller_id='e1510000-0000-0000-0000-000000000002'),
+    'owner profile, hours and menu cascade away with the seller';
+  assert (select status='contacted' and contacted_at is not null from public.directory_outreach_contacts
+    where place_id=current_setting('e15.p3')::uuid), 'outreach status no longer claims a seller';
+  assert not exists(select 1 from public.reviews where seller_id=current_setting('e15.p3')::uuid),
+    'no review references the reverted place';
+
+  select i into item from pg_temp.search_all() i where i->>'place_id'=current_setting('e15.p3');
+  assert item->>'source'='osm' and not (item->>'is_claimed')::boolean
+    and not (item->>'reviews_enabled')::boolean and item->>'rating_count' is null,
+    format('reverted place is public as unclaimed OSM entry: %s',item);
+  detail:=public.get_directory_imported_place_detail(current_setting('e15.p3')::uuid);
+  assert detail->'menu'='[]'::jsonb and not (detail->>'reviews_enabled')::boolean
+    and not (detail->>'is_claimed')::boolean and detail->>'description' is null,
+    format('reverted detail has no menu, reviews or owner copy: %s',detail);
+
+  -- Unclaimed again means the next import may refresh it like any other unclaimed row.
+  result:=public.import_osm_directory_places(
+    jsonb_build_array(jsonb_set(pg_temp.fixture_places()->2,'{name}','"E15 Café Wieder OSM"')),'2026-10-02');
+  assert (result->>'updated')::int=1 and (result->>'skipped_claimed')::int=0,
+    format('reverted place is updated by re-imports: %s',result);
 end $$;
+
+-- The reverted place still rejects menus and reviews in the database.
+select pg_temp.expect_error(format(
+  $f$insert into public.business_directory_menu_sections(seller_id,name) values(%L,'Forbidden')$f$,
+  current_setting('e15.p3')::uuid),'23514');
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"e1500000-0000-0000-0000-000000000002","role":"authenticated"}',true);
+select pg_temp.expect_error(format(
+  $f$select public.upsert_directory_review(%L,5::smallint,'Reverted places cannot be reviewed')$f$,
+  current_setting('e15.p3')::uuid),'23514');
+reset role;
 
 rollback;

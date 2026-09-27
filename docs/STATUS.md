@@ -58,6 +58,25 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   linked; the place becomes unclaimed again. Covered by the acceptance test.
 - ✅ Snapshot stays out of git (`tools/osm/snapshots/` in `.gitignore`); SHA-256
   `6cfdb2ab…339ee0`, date and OSM base timestamp in `docs/evidence/step-e1-5/snapshot.txt`.
+- ✅ Test isolation: the E1 and E1.5 SQL tests no longer depend on local data. Both page
+  through the full search result (`pg_temp.search_all()`) and assert on fixture ids
+  (verified fixtures present, unverified/claimed/removed fixtures absent); the E1
+  anonymous direct-read checks are scoped to the fixture seller ids.
+- ✅ Seller deletion with a claimed place: a seller with reviews cannot be deleted
+  (`reviews.seller_id` RESTRICT → place stays claimed/hidden); otherwise the owner profile,
+  hours and menu cascade away and the place reverts to a plain unclaimed OSM entry (no
+  menu, `reviews_enabled = false`, reviews/menus still rejected with 23514). Proven in
+  the E1.5 acceptance test.
+- 🟡 `20260927000500_step_e1_5_claim_revert.sql` (resets the outreach status from
+  `claimed` to `contacted` when the seller link is lost) is written and dry-run proven —
+  migration + full acceptance in one rolled-back transaction
+  (`docs/evidence/step-e1-5/dryrun-000500-with-acceptance.txt`) — but **not applied**:
+  awaiting approval under the dry-run-first rule. Until then the standalone E1.5
+  acceptance test stops at `outreach status no longer claims a seller`
+  (`acceptance-output-without-000500.txt`).
+- ✅ E3 plan: default directory = restaurants + cafés; `fast_food` only via an "Imbiss"
+  chip (837 of 1123 imports); server needs a type-set filter in E3.
+- ✅ E1 closeout delivered: `docs/evidence/step-e1/closeout.md`. E2 not started.
 - 🟡 Migration ledger: `20260927000300` and `20260927000400` join the psql-applied list below.
 
 ## Step E1 — business directory server contracts

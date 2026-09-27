@@ -99,7 +99,17 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
 
 ## E3 — Public discovery
 - New route `/directory` (NOT a new bottom tab), entered from a Home section with
-  three chips: Restaurants, Cafés, Ärzte.
+  four chips: Restaurants, Cafés, Imbiss, Ärzte.
+- **Default type set (decision 2026-09-27):** the directory shows restaurants and cafés
+  together by default. `fast_food` is *not* in the default list; it appears only through
+  a separate "Imbiss" filter chip, because it is 837 of the 1123 imported places and
+  would otherwise dominate the list. Doctors stay behind the "Ärzte" chip.
+  - Server gap to close in E3: `search_business_directory` filters by a single
+    `p_type`. Add a type-set filter (e.g. `p_types directory_business_type[]`, keeping
+    `p_type` for compatibility) so the default {restaurant, cafe} is one paged query
+    with a correct `total_count` — never merge two paged calls client-side.
+  - Chip label: new ARB key (e.g. `directoryTypeFastFood`), de "Imbiss", in all five
+    locales.
 - List cards: cover, name, type, cuisine or specialty, rating (restaurants/cafés only),
   distance, open-now badge, spoken languages.
 - Filters: reuse the existing filter bottom-sheet pattern; rating filter hidden for
@@ -129,7 +139,7 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
   - Cover: use the type's placeholder image (`cover_image_path` is null).
   - Filters: rating, price level and spoken language exclude imports server-side; the
     UI must not imply imports were filtered out for any other reason.
-  - `fast_food` is a directory type with its own chip/label next to Restaurants and Cafés;
+  - `fast_food` entries are reachable only via the "Imbiss" chip (see default type set);
     new cuisines `lebanese`, `iraqi`, `middle_eastern`, `kebab`, `falafel` need labels.
 - Tests + real iOS screenshots: directory list, filters, restaurant detail with menu,
   doctor detail (no rating UI), review submission, and one unclaimed OSM detail page
