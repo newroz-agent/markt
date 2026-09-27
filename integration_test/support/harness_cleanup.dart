@@ -31,3 +31,32 @@ Future<Set<String>> listObjectPaths(
       if (entry.id != null) '$folder/${entry.name}',
   };
 }
+
+/// Counts every object in a bucket through the Storage service's flat,
+/// cursor-paginated listing. Folder placeholders are never counted.
+Future<int> countStorageObjects(
+  SupabaseClient client, {
+  required String bucket,
+}) async {
+  const pageSize = 1000;
+  String? cursor;
+  var count = 0;
+  while (true) {
+    final page = await client.storage
+        .from(bucket)
+        .listPaginated(
+          options: PaginatedSearchOptions(
+            limit: pageSize,
+            cursor: cursor,
+            withDelimiter: false,
+          ),
+        );
+    count += page.objects.length;
+    if (!page.hasNext) return count;
+    final nextCursor = page.nextCursor;
+    if (nextCursor == null || nextCursor == cursor) {
+      throw StateError('Storage pagination did not advance for $bucket.');
+    }
+    cursor = nextCursor;
+  }
+}

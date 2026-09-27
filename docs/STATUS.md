@@ -1,6 +1,6 @@
 # Zêrîn Project Status
 
-Updated: 2026-09-27 — Step E2 owner side closed (closeout: docs/evidence/step-e2/closeout.md)
+Updated: 2026-09-28 — pre-Step F handoff remediation and regression audit
 Canonical product contract: `docs/SCOPE.md`
 
 > Step D evidence note (2026-09-22). The migration
@@ -17,6 +17,30 @@ Canonical product contract: `docs/SCOPE.md`
 Status rule: `✅ done` means implemented and covered by current evidence; `🟡 partial`
 means a working slice exists but named acceptance remains; `❌ missing` means no
 operational implementation. Out-of-scope historical SQL is not counted as product work.
+
+## Pre-Step F handoff remediation (2026-09-28)
+
+- ✅ `20260927000800_precise_location_gaps.sql` applied exactly once to the local
+  effective schema via direct `psql`; its acceptance test passed exactly once through
+  `ROLLBACK`. It remains intentionally absent from `schema_migrations` pending the
+  migration-ledger repair required before any remote push.
+- ✅ The exact unreferenced Step B object listed below was deleted once through the local
+  Storage service with the local service role; post-check: 0 objects, 0 image rows,
+  0 listings at that path.
+- 🟡 The one approved Step B iPhone rerun proved cleanup count parity (`33` listings,
+  `32` image rows, `2` Storage objects both before and after; one listing/object removed)
+  and produced six PASS screenshots under `docs/evidence/step-b/`. The functional test
+  stopped before approval/publication because an obsolete viewport assertion required
+  the approve-button center below 800 px but measured 818 px. The harness now checks
+  actual hit-testability instead; no second live run was made under the one-run limit.
+- ✅ Final integrated Flutter gate: `flutter analyze --no-pub` — `No issues found!`
+  (4.4s); `flutter test --no-pub` — `00:41 +293: All tests passed!` (293/293).
+- 🟡 Twelve current transaction-scoped SQL suites were each run once across this pass;
+  10 passed to `ROLLBACK`. `chat_phase1.sql` has a stale raw buyer-avatar expectation
+  that conflicts with Step C's opaque-avatar projection. `phase3_country_moderation.sql`
+  still attempts a direct authenticated product insert that Step B intentionally
+  revoked. The legacy `phase3_country_upgrade.sql` is a pre-008, migration-applying
+  probe without `ROLLBACK` and was correctly excluded from the live current-schema gate.
 
 ## Rating decision (2026-09-27)
 
@@ -74,16 +98,29 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   screenshot refreshed. The E2 seed refuses to orphan uploaded files.
 - 🟡 Step B: the harness itself was out of date (the details list is lazily built since the
   compare-at field; `/moderation` opens on the overview tab since the admin expansion) —
-  both fixed. Its first cleanup version deleted the listing before the photo; because
-  `product_images_storage_select` only shows a photo while its listing exists (admins
-  included), the photo could no longer be removed. Order fixed (photos first). One photo
-  is left behind: `8bfc114f-0b44-45dc-9a1f-0e767eb8575d/2ace6666-b043-45b0-b90f-ea9fb8b35c0d/1790545861569718-0.webp`
-  (no listing, no image row; only the service role can remove it). Same pattern affects
-  owners: deleting a listing leaves its photos in storage. Awaiting approval.
-- 🟡 `20260927000800_precise_location_gaps.sql` + `supabase/tests/precise_location_gaps.sql`:
-  suspending/rejecting clears the public pin in the same write; profile create/delete/type
-  change runs the unverified wipe. Dry-run passes with all suites, 0 rows changed
-  (`docs/evidence/location-gaps/`). **Not applied yet** — awaiting approval.
+  both fixed. Cleanup now removes photos before deleting the listing and records global
+  before/after counts for listings, image rows, and Storage objects. The one approved
+  iPhone rerun restored all three counts exactly (`33/32/2` before and after; one listing
+  and one object removed), but stopped after six PASS screenshots because the approve
+  button center was 818 px while an old assertion required less than 800 px. That
+  arbitrary coordinate assertion is now a hit-testability check, but it was not rerun
+  under the one-run approval. Partial evidence is in `docs/evidence/step-b/`.
+- ✅ The pre-existing unreferenced Step B object
+  `8bfc114f-0b44-45dc-9a1f-0e767eb8575d/2ace6666-b043-45b0-b90f-ea9fb8b35c0d/1790545861569718-0.webp`
+  was deleted exactly once through the local Storage service with the local service role;
+  a read-only post-check returned 0 Storage objects, 0 image rows, and 0 listings.
+- ⚠️ Required pre-launch lifecycle fix: ordinary listing deletion currently deletes the
+  database row before its protected `product-images` objects, after which Storage RLS
+  hides those objects even from the app's admin client. The listing photos then stay in
+  Storage forever unless a service-role cleanup removes them. Product deletion must
+  remove every listing photo before deleting the row, and account deletion must also
+  remove all photos for every listing owned by that account. Harness cleanup does not
+  fix the production lifecycle.
+- ✅ `20260927000800_precise_location_gaps.sql` was applied once via direct `psql` and
+  `supabase/tests/precise_location_gaps.sql` passed once through `ROLLBACK`: suspending
+  or rejecting clears the public pin in the same write, and directory profile
+  create/delete/type changes run the unverified wipe. The migration remains absent from
+  `supabase_migrations.schema_migrations` under the direct-psql ledger caveat.
 
 ## Step F — account switching (decided, not started)
 
@@ -197,7 +234,7 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - ✅ `/moderation` is now an admin-gated hub with Overview (pending listings / pending seller documents / open reports, each linking into its section), Listings (unchanged logic), Seller Verification (pending docs with shop name, kind, date, signed-URL preview via `url_launcher` for PDFs and `CachedNetworkImage` for images, approve/reject with optional `admin_note` on reject), and Reports (open reports with target title, reason, details, dismiss + product-only block-listing with confirm). Every user-facing string is localized through ARB keys in all five locales (`de`, `ku`, `en`, `ar`, `tr`); only the numeric `Text('$count')` / `Text('$value')` remain literal. Oversized lines were split; `flutter gen-l10n` regenerated `app_localizations*.dart`.
 - ✅ `flutter analyze --no-pub`: `No issues found!` (zero oversized lines, zero hardcoded English UI strings); `flutter test --no-pub`: 260/260 pass (Step D's 256 + 4 new: overview links, document approve, document reject-with-note, reports dismiss+block; the 3 pre-existing listing tests were updated for the hub tabs and German l10n).
 - ✅ Three 1206×2622 PNGs and machine-readable `results.json` record three PASS checkpoints + one PASS integration test at `docs/evidence/admin-expansion/` on the real iPhone 17 Pro simulator (`iOS 26.1`, UDID `CFF133B6-F73A-4335-A497-5244B15D1C39`) against local Supabase `http://127.0.0.1:54321`: `admin_expansion_overview.png`, `admin_expansion_seller_verification.png`, `admin_expansion_reports_queue.png` (`pending_listings=1`, `pending_docs=2`, `open_reports=1`). Screenshots show the German UI. Harness: `integration_test/admin_expansion_live_test.dart` with driver `test_driver/admin_expansion_driver.dart`.
-- 🟡 Migration-ledger caveat (same as Steps B–D): the effective local schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, `20260927000500`, `20260927000600`, or `20260927000700` because they were applied through the documented direct-`psql` path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema. Remote parity remains unverified. No `supabase db reset`, Colima use, Docker context switch, or remote mutation was performed.
+- 🟡 Migration-ledger caveat (same as Steps B–D): the effective local schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, `20260927000500`, `20260927000600`, `20260927000700`, or `20260927000800` because they were applied through the documented direct-`psql` path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema. Remote parity remains unverified. No `supabase db reset`, Colima use, Docker context switch, or remote mutation was performed.
 - ⚠️ Known pre-existing schema issue: reports target foreign keys use `ON DELETE SET NULL`, while `reports_exactly_one_target` requires exactly one non-null target. Deleting a reported product, seller, review, or message can therefore fail; this pass records the issue but does not change it.
 - ℹ️ Demo fixtures left in the local DB for the iOS evidence (local-only, not migrations): pending business seller `Demo Manufaktur Berlin` with 2 pending docs, 1 `pending_review` listing `Admin Demo Kamera`, 1 open `spam` report. They do not affect the committed schema.
 
@@ -378,7 +415,7 @@ one PASS integration test.
   `supabase migration list --linked` attempt remains the Step B attempt that timed out
   while creating the temporary login role (status 544). No diff was available to
   review and no migration push or remote mutation was attempted.
-- 🟡 Local migration history remains noncanonical: the effective schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, `20260927000500`, `20260927000600`, or `20260927000700` because they were applied through the documented direct-`psql` effective-schema path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema, so the push does not re-apply or skip migrations.
+- 🟡 Local migration history remains noncanonical: the effective schema contains Steps B/C/D plus the admin expansion, categories, compare-at-price, and E1 passes, but `supabase_migrations.schema_migrations` has no rows for `20260914000100`, `20260914000200`, `20260920000100`, `20260922000100`, `20260924000100`, `20260925000100`, `20260925000200`, `20260927000100`, `20260927000200`, `20260927000300`, `20260927000400`, `20260927000500`, `20260927000600`, `20260927000700`, or `20260927000800` because they were applied through the documented direct-`psql` effective-schema path. Before any real `supabase db push` to remote, run `supabase migration repair` to reconcile ledger rows vs. effective schema, so the push does not re-apply or skip migrations.
 - ✅ Admin expansion migration `20260924000100_admin_verification_reports.sql` adds `get_admin_verification_queue`, `get_admin_reports`, `moderate_seller_document`, and `resolve_report` (all admin-gated, `authenticated` execute grants), reusing `is_verified_seller()`, the `blocked` product status, and `create_user_notification`. Acceptance `supabase/tests/20260924000100_admin_verification_reports.sql` passes to `ROLLBACK` against the live local schema. `moderate_listing` is untouched.
 - ✅ Categories migration `20260925000100_new_categories_and_deals.sql` adds 13 category rows (1 top-level Musikinstrumente + 12 subcategories) with all 5 language names, matching the seed data shape (`icon_key`, `image_url`, `sort_order`, `is_active`); activates the Lebensmittel tree (parent + spec-listed children). No new columns: `compare_at_price_cents` is reused for the existing Home Angebote section. Applied via direct `psql`, idempotent on re-run.
 - ✅ Sell compare-at-price migration `20260925000200_sell_compare_at_price.sql` adds CHECK constraint `products_compare_at_price_check` (NULL or > price_cents) on `products`, replaces the 10-param `submit_listing` with an 11-param version adding `p_compare_at_price_cents bigint default null`, validated server-side. Existing 10-arg positional callers still resolve (default fills 11th). Applied via direct `psql` (drop old signature, create new, revoke/grant). Step B acceptance test re-ran to `ROLLBACK`.

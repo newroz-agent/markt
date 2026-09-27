@@ -34,6 +34,8 @@ void main() {
   late GoRouter router;
   late String categoryId;
   late String listingTitle;
+  late Map<String, int> beforeCounts;
+  Map<String, int>? afterCounts;
   final checks = <String, String>{};
   var runStarted = false;
   Map<String, Object?>? cleanup;
@@ -76,6 +78,20 @@ void main() {
     expect(response.session, isNotNull);
   }
 
+  Future<Map<String, int>> captureCounts() async {
+    final listings = await client.from('products').select('id');
+    final imageRows = await client.from('product_images').select('id');
+    final storageObjects = await countStorageObjects(
+      client,
+      bucket: _imagesBucket,
+    );
+    return <String, int>{
+      'listings': listings.length,
+      'image_rows': imageRows.length,
+      'storage_objects': storageObjects,
+    };
+  }
+
   setUpAll(() async {
     expect(AppEnvironment.isSupabaseConfigured, isTrue);
     expect(
@@ -98,6 +114,9 @@ void main() {
         .single();
     categoryId = template['category_id'] as String;
     listingTitle = 'Zêrîn Prüfangebot ${DateTime.now().millisecondsSinceEpoch}';
+
+    await signIn(_adminEmail);
+    beforeCounts = await captureCounts();
   });
 
   tearDownAll(() async {
@@ -127,11 +146,26 @@ void main() {
       }
       cleanup = <String, Object?>{
         'deleted_listings': ids.length,
-        'removed_objects': removed,
+        'removed_objects': removed.length,
+        'removed_paths': removed,
       };
+    } else {
+      await signIn(_adminEmail);
     }
+
+    afterCounts = await captureCounts();
+    final countsMatch =
+        beforeCounts.length == afterCounts!.length &&
+        beforeCounts.entries.every(
+          (entry) => afterCounts![entry.key] == entry.value,
+        );
     binding.reportData ??= <String, dynamic>{};
     binding.reportData!['cleanup'] = cleanup;
+    binding.reportData!['counts'] = <String, Object?>{
+      'before': beforeCounts,
+      'after': afterCounts,
+      'matched': countsMatch,
+    };
     binding.reportData!['checks'] = checks;
     binding.reportData!['tests'] = <String, String>{
       for (final entry in binding.results.entries)
@@ -139,6 +173,11 @@ void main() {
     };
     await client.auth.signOut();
     await client.dispose();
+    expect(
+      countsMatch,
+      isTrue,
+      reason: 'Step B listing, image-row, and Storage counts must be restored',
+    );
   });
 
   testWidgets('real iOS unified Sell and moderation publication flow', (
@@ -357,8 +396,9 @@ void main() {
       await tester.drag(moderationScroll, const Offset(0, -400));
       await tester.pumpAndSettle();
     }
-    expect(tester.getCenter(approve).dy, lessThan(800));
-    await tester.tap(approve);
+    final hitTestableApprove = approve.hitTestable();
+    expect(hitTestableApprove, findsOneWidget);
+    await tester.tap(hitTestableApprove);
     await until(tester, () {
       final dashboard = container.read(moderationDashboardProvider);
       return dashboard.hasValue &&
