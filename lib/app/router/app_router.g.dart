@@ -16,8 +16,15 @@ List<RouteBase> get $appRoutes => [
   $productDetailRoute,
   $sellerProfileRoute,
   $categoryProductsRoute,
+  $mapRoute,
   $chatInboxRoute,
   $chatConversationRoute,
+  $myListingsRoute,
+  $moderationRoute,
+  $publicProfileRoute,
+  $editProfileRoute,
+  $favoritesRoute,
+  $recentlyViewedRoute,
 ];
 
 RouteBase get $marketplaceRoute => GoRouteData.$route(
@@ -261,6 +268,28 @@ extension $CategoryProductsRouteExtension on CategoryProductsRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $mapRoute =>
+    GoRouteData.$route(path: '/map', factory: $MapRouteExtension._fromState);
+
+extension $MapRouteExtension on MapRoute {
+  static MapRoute _fromState(GoRouterState state) =>
+      MapRoute(categoryId: state.uri.queryParameters['category-id']);
+
+  String get location => GoRouteData.$location(
+    '/map',
+    queryParams: {if (categoryId != null) 'category-id': categoryId},
+  );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $chatInboxRoute => GoRouteData.$route(
   path: '/inbox',
 
@@ -295,6 +324,139 @@ extension $ChatConversationRouteExtension on ChatConversationRoute {
 
   String get location =>
       GoRouteData.$location('/chat/${Uri.encodeComponent(chatId)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $myListingsRoute => GoRouteData.$route(
+  path: '/my-listings',
+
+  factory: $MyListingsRouteExtension._fromState,
+);
+
+extension $MyListingsRouteExtension on MyListingsRoute {
+  static MyListingsRoute _fromState(GoRouterState state) =>
+      const MyListingsRoute();
+
+  String get location => GoRouteData.$location('/my-listings');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $moderationRoute => GoRouteData.$route(
+  path: '/moderation',
+
+  factory: $ModerationRouteExtension._fromState,
+);
+
+extension $ModerationRouteExtension on ModerationRoute {
+  static ModerationRoute _fromState(GoRouterState state) =>
+      const ModerationRoute();
+
+  String get location => GoRouteData.$location('/moderation');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $publicProfileRoute => GoRouteData.$route(
+  path: '/profile/:username',
+
+  factory: $PublicProfileRouteExtension._fromState,
+);
+
+extension $PublicProfileRouteExtension on PublicProfileRoute {
+  static PublicProfileRoute _fromState(GoRouterState state) =>
+      PublicProfileRoute(username: state.pathParameters['username']!);
+
+  String get location =>
+      GoRouteData.$location('/profile/${Uri.encodeComponent(username)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $editProfileRoute => GoRouteData.$route(
+  path: '/edit-profile',
+
+  factory: $EditProfileRouteExtension._fromState,
+);
+
+extension $EditProfileRouteExtension on EditProfileRoute {
+  static EditProfileRoute _fromState(GoRouterState state) =>
+      const EditProfileRoute();
+
+  String get location => GoRouteData.$location('/edit-profile');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $favoritesRoute => GoRouteData.$route(
+  path: '/favorites',
+
+  factory: $FavoritesRouteExtension._fromState,
+);
+
+extension $FavoritesRouteExtension on FavoritesRoute {
+  static FavoritesRoute _fromState(GoRouterState state) =>
+      const FavoritesRoute();
+
+  String get location => GoRouteData.$location('/favorites');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $recentlyViewedRoute => GoRouteData.$route(
+  path: '/recently-viewed',
+
+  factory: $RecentlyViewedRouteExtension._fromState,
+);
+
+extension $RecentlyViewedRouteExtension on RecentlyViewedRoute {
+  static RecentlyViewedRoute _fromState(GoRouterState state) =>
+      const RecentlyViewedRoute();
+
+  String get location => GoRouteData.$location('/recently-viewed');
 
   void go(BuildContext context) => context.go(location);
 

@@ -166,9 +166,7 @@ abstract final class MarkdownParser {
       if (link != null) {
         spans.add(MarkdownSpan(link, link: match.group(2)));
       } else if (match.group(3) != null || match.group(4) != null) {
-        spans.add(
-          MarkdownSpan(match.group(3) ?? match.group(4)!, bold: true),
-        );
+        spans.add(MarkdownSpan(match.group(3) ?? match.group(4)!, bold: true));
       } else {
         spans.add(
           MarkdownSpan(match.group(5) ?? match.group(6)!, italic: true),

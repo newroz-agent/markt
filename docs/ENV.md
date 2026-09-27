@@ -18,12 +18,9 @@ does not initialize Supabase.
 Generated Riverpod files also read the SDK-provided `dart.vm.product` boolean.
 It is not application configuration and must not be added to the defines file.
 
-There is currently no Stripe `String.fromEnvironment` or
-`bool.fromEnvironment` read in `lib/`, and the client does not assign
-`Stripe.publishableKey`. Adding a Stripe value to the JSON file today would be
-unused. When Stripe client initialization is implemented, only its publishable
-key (`pk_...`) may be exposed to the Flutter app. Stripe secret and restricted
-keys (`sk_...` and `rk_...`) must remain in server-side secrets.
+Stripe is outside the canonical product scope. The Flutter client has no
+Stripe environment variable, initialization, or payment flow. Do not add
+Stripe keys to client configuration.
 
 ## Local setup
 

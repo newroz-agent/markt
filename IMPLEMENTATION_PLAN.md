@@ -1,126 +1,147 @@
-# DÛKAN — Implementation Plan (Phase 0)
+# Zêrîn — Implementation Plan
 
-Created: 2026-09-07 · Based on live audit of this worktree (branch `master`, HEAD `8161b52`, 22 modified + 6 new files from Phase 1 chat, all green).
+Updated: 2026-09-14
+Canonical scope: `docs/SCOPE.md`
+Deferred Profile/Map detail: `zerin-addendum-profile-and-map.md`
 
-Legend: ✅ complete · 🟡 partial · 🔴 missing · ⚠️ broken · 🟦 infrastructure only
+Legend: ✅ complete · 🟡 partial · 🔴 missing · ⛔ out of scope
 
----
+## 0. Product contract
 
-## 0. Audit Summary (source of truth: code + tests, not filenames)
+Zêrîn is a Germany-only unified private/business listing marketplace. Every
+listing uses one Sell flow, enters `pending_review`, and becomes public only
+after moderation. Buyer–seller contact is in-app chat only.
 
-### Worktree
-- Branch `master`, HEAD `8161b52 wip: chat slice, category products, unified listing moderation`.
-- Uncommitted: Phase 1 chat slice (22 files, +1160/−458) + new chat migrations/tests. Consistent, buildable.
-- Two agent worktrees (`.kilo/worktrees/*`) at same commit, clean.
-- Generated files fresh: `build_runner`, `go_router_builder`, `gen-l10n` all in sync.
+The following are out of scope: cart, checkout, orders, product payments,
+Stripe, commissions/payouts, a separate partner-store flow, and a Stores tab.
+Historical SQL objects are not an instruction to rebuild those features.
 
-### Build status (verified this session)
-- `flutter pub get` ✅ · `flutter analyze` ✅ 0 issues · `flutter test` ✅ 111/111 ·
-- `flutter run --dart-define-from-file=dart_defines.json` ✅ launches on iPhone 17 Pro simulator.
-- Blockers: **none**. No new env vars needed.
+Shell: **Home · Categories · Sell · Chat · Account**.
 
-### Feature matrix
-| Feature | Status | Notes |
-|---|---|---|
-| Auth | ✅ | Email + Apple/Google, guards |
-| Home feed | ✅ | Live campaigns/categories/rails; "nearby/map/recently viewed" sections 🔴 |
-| Categories | 🟡 | 51 cats/11 roots live; subcategory drilldown works; search + ku columns missing |
-| Product detail | 🟡 | Live core; gallery/reviews/share/report/similar missing; CTA = chat ✅ |
-| Chat + Inbox (Phase 1) | ✅ | Realtime, unread badges, product card, system msg, read tracking, idempotent send |
-| Sellers (browse/profile) | 🔴 | No screens/routes |
-| Sell flow | 🔴 | Placeholder screen only; SQL unified+moderation done |
-| Favorites | 🟦 | SQL complete, zero Dart |
-| Search | 🟦 | SQL RPCs exist, no UI |
-| Map | 🔴 | Only dormant lat/lng columns |
-| Cart/Checkout/Orders/Payments | 🟦 legacy | SQL + static screens + `flutter_stripe` dep; **zero wired Dart** |
-| Notifications | 🟦 | SQL + prefs UI; no center/FCM |
-| Admin/moderation | 🔴 UI | SQL live-verified; no admin frontend |
-| Subscriptions | 🔴 | Intentionally deferred (Apple IAP later) |
+## 1. Stabilization and scope cleanup
 
-### Supabase matrix (12 migrations)
-- Core: profiles ✅, sellers ✅, products ✅ (+FTS, lat/lng), categories ✅ (de/en/ar/tr, no ku), product_images ✅ — all RLS+indexes+triggers, used by UI.
-- Messaging: chats/messages ✅ hardened by `20260907000100` (RPC-only chat writes, read_at-only message updates, atomic German system message + product card seeding) + `20260907000200` (`get_chat_inbox` projection with buyer name/avatar, earliest-product pin, unread counts). **⚠️ NOT yet applied to the linked remote project — required manual step.**
-- Moderation: unified listing `pending_review` flow ✅ live-verified; private auto-approval removed.
-- Legacy commerce: orders/payments/Stripe columns/enums — 🟦 isolated, unused by any active flow; **do not delete, document only**.
-- Favorites/reports/notifications/social-promotion: 🟦/🔴 per matrix above.
+- ✅ Replace the superseded scope contract.
+- ✅ Remove dead Flutter cart/checkout/order code.
+- ✅ Remove `flutter_stripe`; retain image and connectivity dependencies needed by upcoming work.
+- ✅ Replace Cart with an auth-gated Chat tab and unread badge.
+- ✅ Re-run tests/analyzer and record current evidence in `docs/STATUS.md`.
+- 🟡 Inspect linked Supabase migration parity; review before any push (the latest read-only
+  attempt timed out before returning the remote ledger).
+- ✅ Confirm the obsolete `enchanted-apricot` worktree contains nothing unique to merge.
+- ✅ Retire `enchanted-apricot` without merging it after explicit destructive-action confirmation.
 
-### Routing (type-safe go_router)
-Existing: `/`, `/onboarding`, `/auth`, `/legal/:document`, `/privacy`, `/notifications`, `/products/:productId`, `/categories/:categoryId`, `/inbox`, `/chat/:chatId`.
-Missing: `/map`, `/search`, `/favorites`, `/sellers/:sellerId`, `/admin`.
+## 2. Unified Sell and moderation vertical slice
 
-### Localization
-de (primary, template), ku (first-class), en, ar, tr. All chat keys present in all 5 ARBs. Gaps: Kurdish absent from DB locale structures; full-route locale symmetry unaccepted.
+Build Sell and moderation together so submitted listings have an operational
+path to publication.
 
-### Design system
-✅ Coherent and reused (petrol/gold tokens, Bricolage/Figtree/IBM Plex Arabic, M3, dark, RTL, AppButton/AppTextField/empty/error states). Extend, never fork.
+### Sell
 
-### Chat (Phase 1) — final state
-Complete flow verified in code + 111 tests: tap-driven contact-seller → auth guard → RPC get-or-create (atomic, no duplicates, no `chatId: ""`) → server-seeded German system message + `kind: product` card → real chatId navigation → realtime (no polling) → read tracking → pagination → idempotent retry. Both previously reported build errors (`icon` param, empty chatId) are fixed.
+1. Catalog/template search, with a free-form fallback.
+2. Required title, price, German city, category, condition, description, and photos.
+3. Pick and compress images with the existing dependencies.
+4. Upload through existing Supabase storage policies.
+5. Create/reuse the current seller identity and insert the listing through the existing moderated write path.
+6. Server-authoritative result is `pending_review`; never auto-approve.
+7. Show draft, submitting, pending, rejected-with-reason, and approved states.
 
----
+### Moderation
 
-## 1. Non-negotiables honored by this plan
-Germany-only · unified seller model · everything `pending_review` · no auto-approval · chat-only contact · no product payments/checkout/Stripe activation · subscriptions separate (Apple IAP, later) · city-only public location, privacy enforced server-side · map = city + radius (5/10/20/30/50/100 km + "Überall") · map/list synchronized · server-side geo filtering · Kurdish first-class · realtime chat, no polling · reuse-first.
+1. Add a minimal role-restricted review queue.
+2. Show listing content, photos, category, city, price, and seller kind.
+3. Approve/reject through server-authorized functions or policies.
+4. Require a rejection reason.
+5. Notify the seller and expose the resulting listing state.
+6. Verify that approval makes a listing publicly queryable in realtime or on refresh.
 
----
+## 3. Username and own-profile foundation
 
-## 2. Phase plan and task breakdown
+Start only after the Sell/moderation slice is operational.
 
-### PHASE 1 — Finish chat foundation ✅ (code done)
-1. Apply `20260907000100_chat_phase1.sql` + `20260907000200_chat_inbox.sql` to linked project. *(manual)*
-2. System message wording: implemented text is „…Kommunikation und Zahlung…"; master spec says „…Kommunikation und die Zahlungsabsprachen…". Update the seed text in a small follow-up migration before/with the remote push so newly created chats use the final wording. *(existing chats are not backfilled by design)*
-3. Live simulator acceptance: product → Verkäufer kontaktieren → chat → send → realtime receive → badge; de/dark + ar/RTL pass.
-4. Update `docs/STATUS.md`.
+1. Extend `public.profiles`; do not create a second user table.
+2. Add username, German city, and optional bio while retaining existing display name.
+3. Enforce case-insensitive uniqueness, syntax/length rules, reserved names, and
+   anti-impersonation rules in PostgreSQL; treat client availability checks as advisory.
+4. Reuse the `avatars` bucket, but first replace/review its auth-UUID-based public path
+   contract so public avatar delivery does not expose an auth identifier.
+5. Make `public.profiles` the public identity source of truth while keeping email, phone,
+   preferences, consent, auth metadata, and sensitive verification data private.
+6. Expand Account into My Profile, my listings, favorites, messages, recent views,
+   settings, and edit profile using existing components and destinations.
+7. Test profile editing, normalized conflicts, avatar replace/delete, privacy boundaries,
+   loading/error/offline states, all five locales, RTL, and route-independent state.
 
-### PHASE 2 — Categories & subcategories
-- Extend seed migration to target 8-root structure (§14 incl. Kultur & Tradition) with parent-child (3rd level optional), add `ku` columns, keep admin-manageable.
-- Subcategory navigation UI, condition/sort filters on grid, map view hook (Phase 9).
-- Reuse: `categories` table, `CategoryProductsRoute`, existing chips/grid.
+## 4. Public user profiles
 
-### PHASE 3 — Product detail finalization
-- Image gallery, favorite toggle (Phase 6 store), share, report (Phase 10), seller card → seller profile, similar listings (same category RPC), more-from-seller.
-- CTA stays "Verkäufer kontaktieren".
+1. Add the typed `/profile/:username` route while preserving `/sellers/:sellerId` for
+   the distinct linked seller/store identity.
+2. Add a public-safe view or RPC that omits auth UUIDs and returns only avatar delivery
+   data, display name, username, city, bio, relevant seller type/verification, and
+   active/approved listings.
+3. Never expose draft, `pending_review`, rejected, blocked, or owner-only listing data.
+4. Reuse the existing product-detail and listing-card components.
+5. Route “Nachricht senden” through the existing `chats`/`messages` system. Because
+   `get_or_create_chat` currently requires an approved seller, design and review a
+   compatible extension for profiles without seller rows rather than adding another
+   messaging model.
+6. Test anonymous/authenticated visibility, profile/listing privacy, typed routing, and
+   existing-chat reuse.
 
-### PHASE 4 — Seller profiles
-- `/sellers/:sellerId`: store/private variants, verification badge only when backed by state, listings grid.
-- Reuse `sellers` public identity columns; optional public business contact later.
+## 5. Dedicated Map route
 
-### PHASE 5 — Search + filters
-- Wire existing SQL FTS/RPCs; suggestions, recent searches, pagination, empty states.
-- Filters: Preis, Kategorie, Unterkategorie, Zustand, Gewerblich/Privat, Stadt, Entfernung.
-- Results: Liste/Grid/Karte toggle sharing one query-state controller.
+Start after public profiles.
 
-### PHASE 6 — Favorites + recently viewed
-- Favorites screen + toggles over existing `favorites` tables; unavailable-state handling.
-- "Zuletzt angesehen": local persistence + server backup, remove/clear.
+1. Add `/map` as a typed full-screen route, not a sixth tab or embedded results toggle.
+2. Enter from map actions on Home search and Categories/Search app bars.
+3. Use permission-gated viewer GPS only as the transient center, with manual German-city
+   fallback; never persist viewer GPS to listings or profiles.
+4. Offer 5/10/20/30/50/100 km and `Alle`, clustered markers, listing previews, the
+   existing product-detail route, and shared category/condition/price filters.
+5. Reuse `public.products.latitude`/`longitude`, `products_location_idx`,
+   `marketplace_distance_km`, and `search_marketplace_products`; do not create
+   `public.listings`, duplicate `city_lat`/`city_lng`, or a disconnected search path.
+6. Add a reviewed canonical German-city reference source and a server-authoritative
+   submission contract that stores a stable, jittered centroid for private listings.
+   Close the current coordinate-write privilege gap before populating map points.
+7. Extend/version the radius RPC to return only effective safe marker coordinates,
+   enforce active/approved and explicit-DE eligibility, and support the shared filters.
+8. Add optional precise public business coordinates only for verified business sellers
+   who explicitly opt in; never derive these from private/legal address data.
+9. Add pinned map/location dependencies only when implementation begins, then test
+   permission denial, manual fallback, clustering, radii, privacy, RTL, and simulator UI.
 
-### PHASE 7 — Unified sell flow
-- 11-step flow (§35) over `prepare_seller_write`/products; city-only public location; postal internal; draft → `pending_review`.
-- Photos to storage bucket; required-field validation; preview; submit.
+## 6. Discovery consistency
 
-### PHASE 8 — Moderation/Admin
-- Admin queue (approve/reject+reason/block), seller notifications ("Dein Angebot wurde abgelehnt./freigeschaltet.") via `notifications` tables.
-- Contact-data flagging in descriptions (configurable, no silent deletion).
+- Route Home and Categories search controls to a real Search screen.
+- Reuse existing search and suggestion RPCs.
+- Preserve server-side filtering, pagination, empty/error/offline states, and Germany-only eligibility.
+- Add a Favorites destination.
+- Replace Home's local favorite set with the account-scoped persistent favorite controller.
 
-### PHASE 9 — MAP (core)
-- Package decision (evaluate `google_maps_flutter` vs `flutter_map`+`maplibre` for iOS perf/cluster/styling/licensing; document choice).
-- SQL: PostGIS or geodesic RPCs `find_listings_near_location` / `find_listings_in_viewport`; city-level/privacy-safe coords for private sellers enforced server-side; Germany-only filter; approved-only.
-- `/map`: Standort suchen, radius chips (5/10/20/30/50/100 km, Überall), Mein Standort (optional permission), price markers, clustering, draggable preview → existing product detail, "Dieses Gebiet durchsuchen" (debounced, explicit), Karte/Liste state persistence.
-- Acceptance per §60 checklist + screenshots.
+## 7. Partial-feature completion
 
-### PHASE 10 — Trust & safety (reports/block UI)
-### PHASE 11 — Notifications center (+FCM later, non-blocking)
-### PHASE 12 — Social promotion (submit → review → approved)
-### PHASE 13 — Apple IAP entitlement (€25/mo + annual; separate from marketplace)
+1. Notification inbox, device registration, and push delivery respecting preferences.
+2. Seller banner, hours, directions, and explicitly approved public contact information.
+3. Kurdish support for database-localized content and full-route Kurdish QA.
+4. Connectivity-driven offline and recovery behavior.
+5. Operational data-export and deletion processors behind existing request UI.
 
----
+## 8. Release readiness
 
-## 3. What to reuse (do not rebuild)
-Supabase client/bootstrap, clean-architecture feature layers, Riverpod codegen, chat slice end-to-end, categories/products repos + screens, design tokens & core widgets, go_router typed routes, l10n toolchain, all moderation SQL, favorites/reports/notification SQL.
+1. Android production signing.
+2. Export launcher assets from the approved icon source and verify all targets.
+3. Final German legal/operator content.
+4. Product deep-link handling on Android and iOS.
+5. Real project README and operational setup documentation.
+6. Crash monitoring, performance QA, privacy/security review, and store metadata.
 
-## 4. Intentionally deferred
-Stripe/checkout/orders/payments (legacy, isolated) · FCM push · Apple IAP · social promotions · admin frontend beyond moderation · multi-country.
+## Acceptance rules for every increment
 
-## 5. Manual steps required now
-1. `supabase db push` (or apply both `2026090700*.sql`) to the linked remote project.
-2. None other — no new env vars.
+- Reuse the existing Riverpod/repository/router/design-system architecture.
+- Extend existing migrations; never recreate or drop schema objects casually.
+- Keep public private-seller location city-only and require explicit German eligibility.
+- Keep chat realtime; do not add polling.
+- Keep all five ARBs symmetric and preserve Kurdish framework delegates.
+- Run targeted tests, full unit/widget tests, analyzer, and `git diff --check`.
+- Exercise completed screens on a real iOS simulator in light/dark and relevant RTL/LTR locales.
+- Update `docs/STATUS.md` with commands and observed results, not intended behavior.

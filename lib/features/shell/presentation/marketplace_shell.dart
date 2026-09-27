@@ -4,8 +4,9 @@ import 'package:zerin_marketplace/app/router/app_router.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/account/presentation/account_screen.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
-import 'package:zerin_marketplace/features/cart/presentation/cart_foundation_screen.dart';
 import 'package:zerin_marketplace/features/categories/presentation/categories_foundation_screen.dart';
+import 'package:zerin_marketplace/features/chat/presentation/chat_inbox_screen.dart';
+import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
 import 'package:zerin_marketplace/features/home/presentation/home_foundation_screen.dart';
 import 'package:zerin_marketplace/features/sell/presentation/sell_foundation_screen.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -21,7 +22,7 @@ class MarketplaceShell extends ConsumerStatefulWidget {
 
 class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
   static const _sellIndex = 2;
-  static const _cartIndex = 3;
+  static const _chatIndex = 3;
   static const _lastIndex = 4;
 
   late int _currentIndex;
@@ -44,7 +45,7 @@ class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
       index >= 0 && index <= _lastIndex ? index : 0;
 
   void _select(int index) {
-    if (index == _sellIndex || index == _cartIndex) {
+    if (index == _sellIndex || index == _chatIndex) {
       final user = ref.read(authRepositoryProvider).currentUser;
       if (user == null) {
         AuthRoute(
@@ -59,6 +60,12 @@ class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    ref.watch(authStateProvider);
+    final user = ref.watch(authRepositoryProvider).currentUser;
+    final unread = user == null
+        ? 0
+        : ref.watch(unreadChatCountProvider).asData?.value ?? 0;
+
     return Scaffold(
       extendBody: true,
       body: IndexedStack(
@@ -67,7 +74,7 @@ class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
           HomeFoundationScreen(),
           CategoriesFoundationScreen(),
           SellFoundationScreen(),
-          CartFoundationScreen(),
+          ChatInboxScreen(),
           AccountScreen(),
         ],
       ),
@@ -123,11 +130,12 @@ class _MarketplaceShellState extends ConsumerState<MarketplaceShell> {
             ),
             Expanded(
               child: _NavigationItem(
-                label: l10n.navigationCart,
-                icon: Icons.shopping_bag_outlined,
-                selectedIcon: Icons.shopping_bag_rounded,
-                selected: _currentIndex == _cartIndex,
-                onTap: () => _select(_cartIndex),
+                label: l10n.navigationMessages,
+                icon: Icons.forum_outlined,
+                selectedIcon: Icons.forum_rounded,
+                selected: _currentIndex == _chatIndex,
+                unreadCount: unread,
+                onTap: () => _select(_chatIndex),
               ),
             ),
             Expanded(
@@ -153,6 +161,7 @@ class _NavigationItem extends StatelessWidget {
     required this.selectedIcon,
     required this.selected,
     required this.onTap,
+    this.unreadCount = 0,
   });
 
   final String label;
@@ -160,11 +169,14 @@ class _NavigationItem extends StatelessWidget {
   final IconData selectedIcon;
   final bool selected;
   final VoidCallback onTap;
+  final int unreadCount;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final color = selected ? colorScheme.primary : colorScheme.onSurfaceVariant;
+    final iconWidget = Icon(selected ? selectedIcon : icon, color: color);
+
     return Semantics(
       button: true,
       selected: selected,
@@ -175,7 +187,11 @@ class _NavigationItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(selected ? selectedIcon : icon, color: color),
+            Badge(
+              isLabelVisible: unreadCount > 0,
+              label: Text(unreadCount > 99 ? '99+' : '$unreadCount'),
+              child: iconWidget,
+            ),
             const SizedBox(height: AppSpacing.xxs),
             Text(
               label,

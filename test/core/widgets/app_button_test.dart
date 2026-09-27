@@ -49,9 +49,7 @@ void main() {
       expect(_accentGradient(tester), isNull);
     });
 
-    testWidgets('labels itself as a button for assistive tech', (
-      tester,
-    ) async {
+    testWidgets('labels itself as a button for assistive tech', (tester) async {
       await tester.pumpWidget(
         _host(
           AppButton.accent(
@@ -67,7 +65,8 @@ void main() {
       expect(
         tester.getSemantics(find.byType(AppButton)),
         isSemantics(scopesRoute: true),
-        reason: 'AppButton must not add a semantics node of its own; the '
+        reason:
+            'AppButton must not add a semantics node of its own; the '
             'nearest node above it should be the route scope',
       );
       expect(

@@ -29,6 +29,16 @@ abstract interface class HomeRepository {
   /// Whether the signed-in user has favorited this product.
   Future<bool> fetchFavoriteState(String productId);
 
+  /// The signed-in user's favorited active listings, newest favorite first.
+  Future<List<HomeProduct>> fetchFavoriteProducts();
+
+  /// The signed-in user's recently viewed active listings, most recent first.
+  Future<List<HomeProduct>> fetchRecentlyViewedProducts();
+
+  /// Records a product view for the signed-in user through the existing RPC.
+  /// Callers must only invoke this for an explicit detail open, never previews.
+  Future<void> recordProductView(String productId);
+
   /// Adds or removes the product favorite for the signed-in user.
   Future<void> setFavorite({required String productId, required bool favorite});
 

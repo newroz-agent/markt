@@ -20,6 +20,7 @@ class ChatConversation {
     required this.lastMessageAt,
     required this.lastMessagePreview,
     required this.unreadCount,
+    this.shopProfileUsername,
     this.buyerName,
     this.buyerAvatarUrl,
   });
@@ -34,6 +35,7 @@ class ChatConversation {
       shopName: json['shop_name'] as String? ?? 'Seller',
       shopSlug: json['shop_slug'] as String? ?? '',
       shopAvatarUrl: json['shop_avatar_url'] as String?,
+      shopProfileUsername: json['shop_profile_username'] as String?,
       productId: product != null ? product['id'] as String? : null,
       productTitle: product != null ? product['title'] as String? : null,
       productImageUrl: product != null
@@ -58,6 +60,10 @@ class ChatConversation {
   final String shopName;
   final String shopSlug;
   final String? shopAvatarUrl;
+
+  /// Public @username of a private seller's person profile, when the inbox RPC
+  /// projects it. Null for business sellers (distinct store identity).
+  final String? shopProfileUsername;
   final String? productId;
   final String? productTitle;
   final String? productImageUrl;

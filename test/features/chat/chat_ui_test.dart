@@ -117,6 +117,15 @@ class _ChatRepository implements ChatRepository {
   }
 
   @override
+  Future<ChatConversation> openChatWithSeller(String sellerId) async {
+    opens++;
+    openedSeller = sellerId;
+    openedProduct = null;
+    if (failOpen) throw StateError('open failed');
+    return opening == null ? details : opening!.future;
+  }
+
+  @override
   Future<ChatConversation> fetchConversation(String chatId) async => details;
 
   @override

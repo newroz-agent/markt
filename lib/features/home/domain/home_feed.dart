@@ -52,6 +52,7 @@ class MarketplaceStore {
     this.sellerKind,
     this.verified,
     this.countryCode,
+    this.profileUsername,
   });
 
   factory MarketplaceStore.fromJson(Map<String, dynamic> json) {
@@ -69,6 +70,7 @@ class MarketplaceStore {
       responseTimeMinutes: json['response_time_minutes'] as int?,
       sellerKind: json['kind'] as String?,
       verified: json['verified'] as bool?,
+      profileUsername: json['profile_username'] as String?,
     );
   }
 
@@ -91,7 +93,45 @@ class MarketplaceStore {
   /// documents; null when not fetched. Approval alone never implies a badge.
   final bool? verified;
 
+  /// Public @username of the owning private-seller profile, when overlaid from
+  /// `get_public_profile_summaries`. Null for business sellers, which keep a
+  /// distinct store identity and route to [SellerProfileRoute].
+  final String? profileUsername;
+
   bool get isBusiness => sellerKind == 'business';
+
+  /// A private seller whose person profile has a public @username. Product
+  /// detail routes these to the public profile; business stores never overlay.
+  bool get hasPublicProfile =>
+      !isBusiness && (profileUsername?.isNotEmpty ?? false);
+
+  MarketplaceStore copyWith({
+    String? shopName,
+    Object? avatarUrl = _sentinel,
+    Object? city = _sentinel,
+    Object? profileUsername = _sentinel,
+  }) {
+    return MarketplaceStore(
+      id: id,
+      slug: slug,
+      shopName: shopName ?? this.shopName,
+      bio: bio,
+      avatarUrl: avatarUrl == _sentinel ? this.avatarUrl : avatarUrl as String?,
+      bannerUrl: bannerUrl,
+      city: city == _sentinel ? this.city : city as String?,
+      ratingAverage: ratingAverage,
+      ratingCount: ratingCount,
+      responseTimeMinutes: responseTimeMinutes,
+      sellerKind: sellerKind,
+      verified: verified,
+      countryCode: countryCode,
+      profileUsername: profileUsername == _sentinel
+          ? this.profileUsername
+          : profileUsername as String?,
+    );
+  }
+
+  static const _sentinel = Object();
 }
 
 @immutable

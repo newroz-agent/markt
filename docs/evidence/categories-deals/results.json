@@ -1,0 +1,32 @@
+{
+  "screenshots": [
+    {
+      "name": "categories_deals_category_grid",
+      "bytes": 362596,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "categories_deals_home_deals",
+      "bytes": 2620576,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "category_grid": "PASS",
+    "home_deals": "PASS"
+  },
+  "tests": {
+    "real iOS category grid and Home deals section": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro / iOS 26.1 / CFF133B6-F73A-4335-A497-5244B15D1C39"
+  },
+  "evidence": {
+    "root_count": 13,
+    "deals_count": 10
+  }
+}

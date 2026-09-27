@@ -147,6 +147,8 @@
   "legalTerms": "الشروط والأحكام",
   "legalPrivacy": "سياسة الخصوصية",
   "legalWithdrawal": "تعليمات حق الانسحاب",
+  "legalDataSources": "مصادر البيانات",
+  "legalOsmAttribution": "بيانات الخرائط والأماكن © مساهمو OpenStreetMap، مرخّصة بموجب Open Database License (ODbL).",
   "legalComingSoonBody": "ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق.",
   "legalUnknownDocumentBody": "هذا المستند القانوني غير موجود.",
   "legalLoadErrorTitle": "لم يتم تحميل المستند",
@@ -433,5 +435,290 @@
   "productDetailsBrand": "العلامة التجارية",
   "productShippingArrangement": "اتفق على الشحن مباشرةً مع البائع.",
   "favoriteAddAction": "إضافة إلى المفضلة",
-  "favoriteRemoveAction": "إزالة من المفضلة"
+  "favoriteRemoveAction": "إزالة من المفضلة",
+  "sellCatalogTitle": "ماذا تريد أن تبيع؟",
+  "sellCatalogBody": "ابحث أولاً عن منتج مشابه أو ابدأ من دون قالب.",
+  "sellCatalogSearchHint": "البحث في الكتالوج",
+  "sellCatalogUseTemplate": "استخدام القالب",
+  "sellFreeForm": "البدء من دون قالب",
+  "sellNoTemplatesTitle": "لا يوجد قالب مناسب",
+  "sellNoTemplatesBody": "يمكنك إدخال إعلانك من البداية.",
+  "sellDetailsTitle": "تفاصيل الإعلان",
+  "sellSellerKindLabel": "نوع البائع",
+  "sellSellerPrivate": "خاص",
+  "sellSellerBusiness": "تجاري",
+  "sellSellerNameLabel": "اسم العرض",
+  "sellListingTitleLabel": "العنوان",
+  "sellPriceLabel": "السعر باليورو",
+  "sellCityLabel": "المدينة",
+  "sellCategoryLabel": "الفئة",
+  "sellConditionLabel": "الحالة",
+  "sellDescriptionLabel": "الوصف",
+  "sellPhotosTitle": "الصور",
+  "sellPhotosBody": "أضف من صورة واحدة إلى 10 صور. تُضغط الصور قبل الرفع.",
+  "sellPickPhotos": "اختيار الصور",
+  "sellTakePhoto": "التقاط صورة",
+  "sellPhotoLimit": "الحد الأقصى 10 صور",
+  "sellPhotoFailed": "تعذرت معالجة الصورة.",
+  "sellReviewTitle": "المراجعة والإرسال",
+  "sellSubmit": "الإرسال للمراجعة",
+  "sellValidationRequired": "هذا الحقل مطلوب.",
+  "sellValidationPrice": "أدخل سعراً صالحاً أكبر من صفر.",
+  "sellValidationDescription": "يجب ألا يقل الوصف عن 10 أحرف.",
+  "sellValidationPhotos": "أضف صورة واحدة على الأقل.",
+  "sellConfirmationTitle": "الإعلان قيد المراجعة",
+  "sellConfirmationBody": "تم إرسال إعلانك ولم يصبح عاماً بعد. سنبلغك بعد المراجعة.",
+  "sellViewMyListings": "عرض إعلاناتي",
+  "sellCreateAnother": "إنشاء إعلان آخر",
+  "sellTemplateImported": "تم تطبيق القالب. تحقق من جميع التفاصيل قبل الإرسال.",
+  "myListingsTitle": "إعلاناتي",
+  "myListingsEmptyTitle": "لا توجد إعلانات بعد",
+  "myListingsEmptyBody": "ستظهر إعلاناتك المرسلة وحالة مراجعتها هنا.",
+  "listingStatusPending": "قيد المراجعة",
+  "listingStatusActive": "منشور",
+  "listingStatusRejected": "مرفوض",
+  "listingStatusDraft": "مسودة",
+  "listingStatusSold": "مباع",
+  "listingStatusBlocked": "محظور",
+  "listingModerationReason": "السبب",
+  "accountMyListings": "إعلاناتي",
+  "accountModeration": "الإشراف",
+  "moderationTitle": "مراجعة الإعلانات",
+  "moderationPending": "قيد الانتظار",
+  "moderationApprovedToday": "تمت الموافقة اليوم",
+  "moderationRejectedToday": "تم الرفض اليوم",
+  "moderationEmptyTitle": "لا توجد إعلانات معلقة",
+  "moderationEmptyBody": "ستظهر الطلبات الجديدة هنا تلقائياً.",
+  "moderationApprove": "موافقة",
+  "moderationReject": "رفض",
+  "moderationReasonLabel": "السبب (اختياري)",
+  "moderationReasonHint": "ملاحظة قصيرة للبائع",
+  "moderationApproveSuccess": "أصبح الإعلان عاماً الآن.",
+  "moderationRejectSuccess": "تم رفض الإعلان.",
+  "moderationForbiddenTitle": "للمشرفين فقط",
+  "moderationForbiddenBody": "لا يمكنك الوصول إلى قائمة الإشراف.",
+  "moderationSubmittedLabel": "تاريخ الإرسال",
+  "moderationSellerLabel": "البائع",
+  "moderationCategoryLabel": "الفئة",
+  "moderationDecisionFailed": "تعذر حفظ القرار.",
+  "profileNotFoundTitle": "لم يتم العثور على الملف الشخصي",
+  "profileNotFoundBody": "هذا الملف الشخصي غير متاح.",
+  "profileFallbackName": "عضو Zêrîn",
+  "profileListingCount": "{count, plural, =0{لا إعلانات} =1{إعلان واحد} other{{count} إعلانات}}",
+  "profileAboutTitle": "نبذة",
+  "profileNoBio": "لا يوجد وصف بعد.",
+  "profileListingsTitle": "الإعلانات النشطة",
+  "profileNoListings": "لا توجد إعلانات نشطة حاليًا.",
+  "profileSendMessage": "إرسال رسالة",
+  "editProfileTitle": "تعديل الملف الشخصي",
+  "profileEditAvatar": "تغيير الصورة",
+  "profileAvatarFromGallery": "الاختيار من المعرض",
+  "profileAvatarFromCamera": "التقاط صورة",
+  "profileAvatarRemove": "إزالة الصورة",
+  "profileAvatarError": "تعذر حفظ صورة الملف الشخصي.",
+  "profileDisplayNameLabel": "الاسم الظاهر",
+  "profileDisplayNameInvalid": "يرجى إدخال اسم من 1 إلى 80 حرفًا.",
+  "profileUsernameLabel": "اسم المستخدم",
+  "profileUsernameHelper": "3–30 حرفًا: أحرف صغيرة وأرقام وشرطة سفلية.",
+  "profileUsernameTaken": "اسم المستخدم هذا مستخدم بالفعل.",
+  "profileUsernameReserved": "اسم المستخدم هذا محجوز.",
+  "profileUsernameInvalid": "اسم المستخدم هذا غير صالح.",
+  "profileCityLabel": "المدينة",
+  "profileCityRequired": "يرجى اختيار مدينة.",
+  "profileCityInvalid": "يرجى اختيار مدينة ألمانية مدعومة.",
+  "profileBioLabel": "نبذة عني",
+  "profileBioHint": "أخبر الآخرين قليلاً عن نفسك.",
+  "profileBioTooLong": "يمكن أن يحتوي الوصف على 500 حرف كحد أقصى.",
+  "profileSave": "حفظ الملف الشخصي",
+  "profileSaved": "تم حفظ الملف الشخصي.",
+  "favoritesTitle": "المفضلة",
+  "favoritesEmptyTitle": "لا توجد مفضلات بعد",
+  "favoritesEmptyBody": "ستظهر الإعلانات التي تحفظها هنا.",
+  "recentlyViewedTitle": "شوهدت مؤخرًا",
+  "recentlyViewedEmptyTitle": "لم تتم مشاهدة أي شيء بعد",
+  "recentlyViewedEmptyBody": "ستظهر الإعلانات التي تشاهدها هنا.",
+  "accountEditProfile": "تعديل الملف الشخصي",
+  "accountViewPublicProfile": "الملف الشخصي العام",
+  "accountProfileIncomplete": "أكمل ملفك الشخصي",
+  "mapTitle": "الخريطة",
+  "mapOpenTooltip": "فتح الخريطة",
+  "mapUseMyLocation": "استخدام موقعي",
+  "mapRetryLocation": "إعادة محاولة تحديد الموقع",
+  "mapLocationPrivacy": "يُستخدم موقعك فقط لتوسيط الخريطة ولا يتم حفظه.",
+  "mapLocationDenied": "تم رفض الوصول إلى الموقع. اختر مدينة بدلاً من ذلك.",
+  "mapLocationDeniedForever": "الوصول إلى الموقع معطّل. اختر مدينة أو غيّر الإذن في الإعدادات.",
+  "mapLocationServiceDisabled": "خدمات الموقع متوقفة. اختر مدينة بدلاً من ذلك.",
+  "mapLocationUnavailable": "موقعك غير متاح الآن. اختر مدينة بدلاً من ذلك.",
+  "mapChooseCity": "اختيار مدينة",
+  "mapCitySearchHint": "البحث عن مدينة",
+  "mapCenterCurrent": "الموقع الحالي",
+  "mapCenterCity": "المركز: {city}",
+  "mapRadiusLabel": "النطاق",
+  "mapRadiusAll": "الكل",
+  "mapFiltersTitle": "مرشحات الخريطة",
+  "mapFiltersTooltip": "تصفية الإعلانات",
+  "mapCategoryLabel": "الفئة",
+  "mapCategoryAll": "كل الفئات",
+  "mapConditionAll": "كل الحالات",
+  "mapPriceMin": "الحد الأدنى للسعر (€)",
+  "mapPriceMax": "الحد الأقصى للسعر (€)",
+  "mapPriceInvalid": "أدخل أسعاراً صالحة؛ لا يمكن أن يكون الحد الأدنى أعلى.",
+  "mapListingsCount": "{count, plural, =0{لا إعلانات على الخريطة} =1{إعلان واحد على الخريطة} other{{count} إعلانات على الخريطة}}",
+  "mapEmptyTitle": "لا توجد إعلانات ضمن هذا النطاق",
+  "mapEmptyBody": "وسّع النطاق أو غيّر المركز أو عدّل المرشحات.",
+  "mapLoading": "جارٍ تحميل الإعلانات القريبة …",
+  "mapPinSemantic": "{title}، {city}",
+  "mapClusterSemantic": "{count, plural, =1{إعلان واحد} other{{count} إعلانات}}",
+  "mapApproximateLocation": "موقع تقريبي لحماية البائعين الأفراد",
+  "mapPreciseStoreLocation": "موقع دقيق لنشاط تجاري موثّق",
+  "mapDirections": "حساب المسار",
+  "mapDirectionsFailed": "تعذّر فتح المسار.",
+  "mapOpenListing": "فتح الإعلان",
+  "moderationLoadFailed": "تعذر تحميل الإشراف.",
+  "@moderationLoadFailed": {
+    "description": "Error when the moderation overview fails to load."
+  },
+  "moderationAdminRequired": "الوصول مطلوب للمسؤول.",
+  "@moderationAdminRequired": {
+    "description": "Shown when a non-admin user reaches the moderation screen."
+  },
+  "moderationTabOverview": "نظرة عامة",
+  "@moderationTabOverview": {
+    "description": "Tab label for the admin overview."
+  },
+  "moderationTabListings": "الإعلانات",
+  "@moderationTabListings": {
+    "description": "Tab label for the listings moderation queue."
+  },
+  "moderationTabVerification": "تحقق من البائع",
+  "@moderationTabVerification": {
+    "description": "Tab label for the seller verification queue."
+  },
+  "moderationTabReports": "البلاغات",
+  "@moderationTabReports": {
+    "description": "Tab label for the reports queue."
+  },
+  "moderationOverviewPendingListings": "الإعلانات المعلقة",
+  "@moderationOverviewPendingListings": {
+    "description": "Overview card title for pending listings count."
+  },
+  "moderationOverviewPendingDocuments": "مستندات البائع المعلقة",
+  "@moderationOverviewPendingDocuments": {
+    "description": "Overview card title for pending seller documents count."
+  },
+  "moderationOverviewOpenReports": "البلاغات المفتوحة",
+  "@moderationOverviewOpenReports": {
+    "description": "Overview card title for open reports count."
+  },
+  "moderationListingsLoadFailed": "تعذر تحميل الإعلانات.",
+  "@moderationListingsLoadFailed": {
+    "description": "Error when the listings queue fails to load."
+  },
+  "moderationListingsEmpty": "لا توجد إعلانات معلقة.",
+  "@moderationListingsEmpty": {
+    "description": "Empty state for the listings moderation queue."
+  },
+  "moderationDocumentsLoadFailed": "تعذر تحميل مستندات البائع.",
+  "@moderationDocumentsLoadFailed": {
+    "description": "Error when the seller verification queue fails to load."
+  },
+  "moderationDocumentsEmpty": "لا توجد مستندات بائع معلقة.",
+  "@moderationDocumentsEmpty": {
+    "description": "Empty state for the seller verification queue."
+  },
+  "moderationOpenDocument": "فتح المستند",
+  "@moderationOpenDocument": {
+    "description": "Action to open a seller document."
+  },
+  "moderationDocumentKindMedicalProfessionalRegistration": "ترخيص مزاولة الطب / إثبات عضوية النقابة",
+  "@moderationDocumentKindMedicalProfessionalRegistration": {
+    "description": "Label for a doctor's approved professional verification document."
+  },
+  "moderationReportSeller": "البائع: {shopName}",
+  "@moderationReportSeller": {
+    "description": "Seller label in a report card.",
+    "placeholders": {
+      "shopName": {
+        "type": "String"
+      }
+    }
+  },
+  "moderationReportDismiss": "رفض",
+  "@moderationReportDismiss": {
+    "description": "Action to dismiss a report without action."
+  },
+  "moderationReportBlock": "حظر الإعلان",
+  "@moderationReportBlock": {
+    "description": "Action to block a reported listing."
+  },
+  "moderationBlockConfirmTitle": "حظر هذا الإعلان؟",
+  "@moderationBlockConfirmTitle": {
+    "description": "Title of the block-listing confirmation dialog."
+  },
+  "moderationBlockConfirmBody": "سيتم حظر {title} وحل هذا البلاغ.",
+  "@moderationBlockConfirmBody": {
+    "description": "Body of the block-listing confirmation dialog.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "moderationBlockConfirmAction": "حظر",
+  "@moderationBlockConfirmAction": {
+    "description": "Confirm action in the block-listing dialog."
+  },
+  "moderationRejectionReasonTitle": "سبب الرفض",
+  "@moderationRejectionReasonTitle": {
+    "description": "Title of the rejection reason dialog."
+  },
+  "moderationReportFallbackTarget": "الإعلان المُبلّغ عنه",
+  "@moderationReportFallbackTarget": {
+    "description": "Fallback title when a reported listing title is unavailable."
+  },
+  "moderationDocumentSaved": "تم حفظ قرار المستند.",
+  "@moderationDocumentSaved": {
+    "description": "Confirmation after a document moderation decision is saved."
+  },
+  "moderationDocumentFailed": "فشل القرار.",
+  "@moderationDocumentFailed": {
+    "description": "Error when a document moderation decision fails."
+  },
+  "moderationReportResolved": "تم حل البلاغ.",
+  "@moderationReportResolved": {
+    "description": "Confirmation after a report is resolved."
+  },
+  "moderationReportActionFailed": "فشلت العملية.",
+  "@moderationReportActionFailed": {
+    "description": "Error when a report action fails."
+  },
+  "moderationReportTargetUnavailable": "الهدف المُبلّغ عنه غير متاح",
+  "@moderationReportTargetUnavailable": {
+    "description": "Fallback when a report target has no title."
+  },
+  "moderationReportsLoadFailed": "تعذر تحميل البلاغات.",
+  "@moderationReportsLoadFailed": {
+    "description": "Error when the reports queue fails to load."
+  },
+  "moderationDocumentOpenFailed": "تعذر فتح المستند.",
+  "@moderationDocumentOpenFailed": {
+    "description": "Error when a signed document URL cannot be opened."
+  },
+  "moderationReportsEmpty": "لا توجد بلاغات مفتوحة.",
+  "@moderationReportsEmpty": {
+    "description": "Empty state for the reports queue."
+  },
+  "sellCompareAtPriceLabel": "السعر الأصلي باليورو (اختياري)",
+  "@sellCompareAtPriceLabel": {
+    "description": "Label for the optional compare-at price field."
+  },
+  "sellCompareAtPriceHint": "السعر المشطوب بجانب سعرك",
+  "@sellCompareAtPriceHint": {
+    "description": "Hint for the optional compare-at price field."
+  },
+  "sellValidationCompareAtPrice": "يجب أن يكون السعر الأصلي أعلى من سعرك.",
+  "@sellValidationCompareAtPrice": {
+    "description": "Validation error when compare-at price is not greater than price."
+  },
+  "mapOsmAttribution": "© مساهمو OpenStreetMap"
 }

@@ -10,11 +10,7 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 /// handed back through [onLinkTap] rather than opened here, so the caller
 /// decides what leaving the app means.
 class AppMarkdown extends StatefulWidget {
-  const AppMarkdown({
-    required this.source,
-    this.onLinkTap,
-    super.key,
-  });
+  const AppMarkdown({required this.source, this.onLinkTap, super.key});
 
   final String source;
   final void Function(String url)? onLinkTap;

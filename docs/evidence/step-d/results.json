@@ -1,0 +1,52 @@
+{
+  "screenshots": [
+    {
+      "name": "step_d_map_pins_30km",
+      "bytes": 7124713,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_d_radius_all_clusters",
+      "bytes": 7953590,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_d_private_pin_preview",
+      "bytes": 2099848,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_d_listing_detail_handoff",
+      "bytes": 273032,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "map_pins_30km": "PASS",
+    "radius_all_clusters": "PASS",
+    "private_pin_preview": "PASS",
+    "listing_detail_handoff": "PASS"
+  },
+  "tests": {
+    "real iOS Map radius, private preview, and detail hand-off": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro / iOS 26.1 / CFF133B6-F73A-4335-A497-5244B15D1C39"
+  },
+  "evidence": {
+    "near_count": 12,
+    "all_count": 32,
+    "private_product_id": "bb58adaf-08be-45b3-a839-db773b322638",
+    "private_jitter_km": 0.3816056229927245,
+    "precise_product_id": "c0000000-0000-4000-8000-000000000011",
+    "precise_store_latitude": 52.516275,
+    "precise_store_longitude": 13.377704,
+    "precise_store_address": "Unter den Linden 77, Berlin"
+  }
+}

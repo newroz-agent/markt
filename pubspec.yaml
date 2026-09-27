@@ -51,11 +51,21 @@ dependencies:
   google_sign_in: ^7.2.0
   intl: ^0.20.2
   connectivity_plus: ^7.3.1
-  flutter_stripe: ^11.5.0
   url_launcher: ^6.3.2
+  flutter_map: 8.2.2
+  flutter_map_marker_cluster: 8.2.2
+  latlong2: 0.9.1
+  geolocator: 14.0.3
   # v13 pulls in win32 6 syntax unsupported by the Riverpod 2 generator's analyzer.
   share_plus: 12.0.2
   collection: ^1.19.1
+
+# geolocator 14.0.3's Linux implementation requires package_info_plus 10,
+# which conflicts with the intentionally pinned share_plus 12 / win32 5 graph.
+# 0.2.4 implements the same geolocator platform interface without changing any
+# unrelated direct dependency constraint.
+dependency_overrides:
+  geolocator_linux: 0.2.4
 
 dev_dependencies:
   flutter_test:

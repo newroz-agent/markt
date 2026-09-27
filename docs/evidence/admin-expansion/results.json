@@ -1,0 +1,40 @@
+{
+  "screenshots": [
+    {
+      "name": "admin_expansion_overview",
+      "bytes": 249935,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "admin_expansion_seller_verification",
+      "bytes": 297291,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "admin_expansion_reports_queue",
+      "bytes": 278421,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "overview": "PASS",
+    "seller_verification": "PASS",
+    "reports_queue": "PASS"
+  },
+  "tests": {
+    "real iOS admin overview, verification queue, and reports": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro / iOS 26.1 / CFF133B6-F73A-4335-A497-5244B15D1C39"
+  },
+  "evidence": {
+    "pending_listings": 1,
+    "pending_docs": 2,
+    "open_reports": 1
+  }
+}

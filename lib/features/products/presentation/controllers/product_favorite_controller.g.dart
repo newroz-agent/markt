@@ -169,7 +169,7 @@ class _ProductFavoriteFutureProviderElement
   String get productId => (origin as _ProductFavoriteFutureProvider).productId;
 }
 
-String _$productFavoriteHash() => r'589322181acc9fb696ec83cd9a20f4dca7eac0d0';
+String _$productFavoriteHash() => r'0e4c367dea1e03bd3492272228e04da555f4057b';
 
 abstract class _$ProductFavorite
     extends BuildlessAutoDisposeNotifier<AsyncValue<bool>> {

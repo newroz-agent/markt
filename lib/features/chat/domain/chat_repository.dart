@@ -10,6 +10,7 @@ abstract interface class ChatRepository {
     required String sellerId,
     required String productId,
   });
+  Future<ChatConversation> openChatWithSeller(String sellerId);
   Future<ChatMessage> sendTextMessage({
     required String chatId,
     required String body,

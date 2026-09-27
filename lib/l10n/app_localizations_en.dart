@@ -503,6 +503,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalWithdrawal => 'Right of withdrawal';
 
   @override
+  String get legalDataSources => 'Data sources';
+
+  @override
+  String get legalOsmAttribution =>
+      'Map and place data © OpenStreetMap contributors, licensed under the Open Database License (ODbL).';
+
+  @override
   String get legalComingSoonBody =>
       'The complete legal documents will be provided before release.';
 
@@ -909,4 +916,582 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Remove from favorites';
+
+  @override
+  String get sellCatalogTitle => 'What would you like to sell?';
+
+  @override
+  String get sellCatalogBody =>
+      'Search for a similar item first, or start without a template.';
+
+  @override
+  String get sellCatalogSearchHint => 'Search catalog';
+
+  @override
+  String get sellCatalogUseTemplate => 'Use template';
+
+  @override
+  String get sellFreeForm => 'Start without template';
+
+  @override
+  String get sellNoTemplatesTitle => 'No matching template';
+
+  @override
+  String get sellNoTemplatesBody => 'You can enter your listing from scratch.';
+
+  @override
+  String get sellDetailsTitle => 'Listing details';
+
+  @override
+  String get sellSellerKindLabel => 'Seller type';
+
+  @override
+  String get sellSellerPrivate => 'Private';
+
+  @override
+  String get sellSellerBusiness => 'Business';
+
+  @override
+  String get sellSellerNameLabel => 'Display name';
+
+  @override
+  String get sellListingTitleLabel => 'Title';
+
+  @override
+  String get sellPriceLabel => 'Price in euros';
+
+  @override
+  String get sellCityLabel => 'City';
+
+  @override
+  String get sellCategoryLabel => 'Category';
+
+  @override
+  String get sellConditionLabel => 'Condition';
+
+  @override
+  String get sellDescriptionLabel => 'Description';
+
+  @override
+  String get sellPhotosTitle => 'Photos';
+
+  @override
+  String get sellPhotosBody =>
+      'Add 1 to 10 photos. Images are compressed before upload.';
+
+  @override
+  String get sellPickPhotos => 'Choose photos';
+
+  @override
+  String get sellTakePhoto => 'Take photo';
+
+  @override
+  String get sellPhotoLimit => 'Maximum 10 photos';
+
+  @override
+  String get sellPhotoFailed => 'The photo could not be processed.';
+
+  @override
+  String get sellReviewTitle => 'Review and submit';
+
+  @override
+  String get sellSubmit => 'Submit for review';
+
+  @override
+  String get sellValidationRequired => 'This field is required.';
+
+  @override
+  String get sellValidationPrice => 'Enter a valid price greater than 0.';
+
+  @override
+  String get sellValidationDescription =>
+      'The description must have at least 10 characters.';
+
+  @override
+  String get sellValidationPhotos => 'Add at least one photo.';
+
+  @override
+  String get sellConfirmationTitle => 'Listing under review';
+
+  @override
+  String get sellConfirmationBody =>
+      'Your listing was submitted and is not public yet. We will notify you after review.';
+
+  @override
+  String get sellViewMyListings => 'View my listings';
+
+  @override
+  String get sellCreateAnother => 'Create another listing';
+
+  @override
+  String get sellTemplateImported =>
+      'Template applied. Check every detail before submitting.';
+
+  @override
+  String get myListingsTitle => 'My listings';
+
+  @override
+  String get myListingsEmptyTitle => 'No listings yet';
+
+  @override
+  String get myListingsEmptyBody =>
+      'Your submitted listings and review status will appear here.';
+
+  @override
+  String get listingStatusPending => 'Under review';
+
+  @override
+  String get listingStatusActive => 'Published';
+
+  @override
+  String get listingStatusRejected => 'Rejected';
+
+  @override
+  String get listingStatusDraft => 'Draft';
+
+  @override
+  String get listingStatusSold => 'Sold';
+
+  @override
+  String get listingStatusBlocked => 'Blocked';
+
+  @override
+  String get listingModerationReason => 'Reason';
+
+  @override
+  String get accountMyListings => 'My listings';
+
+  @override
+  String get accountModeration => 'Moderation';
+
+  @override
+  String get moderationTitle => 'Review listings';
+
+  @override
+  String get moderationPending => 'Pending';
+
+  @override
+  String get moderationApprovedToday => 'Approved today';
+
+  @override
+  String get moderationRejectedToday => 'Rejected today';
+
+  @override
+  String get moderationEmptyTitle => 'No pending listings';
+
+  @override
+  String get moderationEmptyBody =>
+      'New submissions will appear here automatically.';
+
+  @override
+  String get moderationApprove => 'Approve';
+
+  @override
+  String get moderationReject => 'Reject';
+
+  @override
+  String get moderationReasonLabel => 'Reason (optional)';
+
+  @override
+  String get moderationReasonHint => 'Short feedback for the seller';
+
+  @override
+  String get moderationApproveSuccess => 'The listing is now public.';
+
+  @override
+  String get moderationRejectSuccess => 'The listing was rejected.';
+
+  @override
+  String get moderationForbiddenTitle => 'Administrators only';
+
+  @override
+  String get moderationForbiddenBody =>
+      'You cannot access the moderation queue.';
+
+  @override
+  String get moderationSubmittedLabel => 'Submitted';
+
+  @override
+  String get moderationSellerLabel => 'Seller';
+
+  @override
+  String get moderationCategoryLabel => 'Category';
+
+  @override
+  String get moderationDecisionFailed => 'The decision could not be saved.';
+
+  @override
+  String get profileNotFoundTitle => 'Profile not found';
+
+  @override
+  String get profileNotFoundBody => 'This profile is not available.';
+
+  @override
+  String get profileFallbackName => 'Zêrîn member';
+
+  @override
+  String profileListingCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count listings',
+      one: '1 listing',
+      zero: 'No listings',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileAboutTitle => 'About';
+
+  @override
+  String get profileNoBio => 'No description yet.';
+
+  @override
+  String get profileListingsTitle => 'Active listings';
+
+  @override
+  String get profileNoListings => 'No active listings right now.';
+
+  @override
+  String get profileSendMessage => 'Send message';
+
+  @override
+  String get editProfileTitle => 'Edit profile';
+
+  @override
+  String get profileEditAvatar => 'Change photo';
+
+  @override
+  String get profileAvatarFromGallery => 'Choose from gallery';
+
+  @override
+  String get profileAvatarFromCamera => 'Take a photo';
+
+  @override
+  String get profileAvatarRemove => 'Remove photo';
+
+  @override
+  String get profileAvatarError => 'The profile photo could not be saved.';
+
+  @override
+  String get profileDisplayNameLabel => 'Display name';
+
+  @override
+  String get profileDisplayNameInvalid =>
+      'Please enter a name with 1 to 80 characters.';
+
+  @override
+  String get profileUsernameLabel => 'Username';
+
+  @override
+  String get profileUsernameHelper =>
+      '3–30 characters: lowercase letters, digits and underscores.';
+
+  @override
+  String get profileUsernameTaken => 'This username is already taken.';
+
+  @override
+  String get profileUsernameReserved => 'This username is reserved.';
+
+  @override
+  String get profileUsernameInvalid => 'This username is invalid.';
+
+  @override
+  String get profileCityLabel => 'City';
+
+  @override
+  String get profileCityRequired => 'Please choose a city.';
+
+  @override
+  String get profileCityInvalid => 'Please choose a supported German city.';
+
+  @override
+  String get profileBioLabel => 'About me';
+
+  @override
+  String get profileBioHint => 'Tell others a little about yourself.';
+
+  @override
+  String get profileBioTooLong =>
+      'The description may contain at most 500 characters.';
+
+  @override
+  String get profileSave => 'Save profile';
+
+  @override
+  String get profileSaved => 'Profile saved.';
+
+  @override
+  String get favoritesTitle => 'Favorites';
+
+  @override
+  String get favoritesEmptyTitle => 'No favorites yet';
+
+  @override
+  String get favoritesEmptyBody => 'Listings you save will appear here.';
+
+  @override
+  String get recentlyViewedTitle => 'Recently viewed';
+
+  @override
+  String get recentlyViewedEmptyTitle => 'Nothing viewed yet';
+
+  @override
+  String get recentlyViewedEmptyBody => 'Listings you view will appear here.';
+
+  @override
+  String get accountEditProfile => 'Edit profile';
+
+  @override
+  String get accountViewPublicProfile => 'Public profile';
+
+  @override
+  String get accountProfileIncomplete => 'Complete your profile';
+
+  @override
+  String get mapTitle => 'Map';
+
+  @override
+  String get mapOpenTooltip => 'Open map';
+
+  @override
+  String get mapUseMyLocation => 'Use my location';
+
+  @override
+  String get mapRetryLocation => 'Try location again';
+
+  @override
+  String get mapLocationPrivacy =>
+      'Your location is used only to center the map and is never stored.';
+
+  @override
+  String get mapLocationDenied =>
+      'Location access was denied. Choose a city instead.';
+
+  @override
+  String get mapLocationDeniedForever =>
+      'Location access is disabled. Choose a city or change permission in Settings.';
+
+  @override
+  String get mapLocationServiceDisabled =>
+      'Location services are off. Choose a city instead.';
+
+  @override
+  String get mapLocationUnavailable =>
+      'Your location is unavailable right now. Choose a city instead.';
+
+  @override
+  String get mapChooseCity => 'Choose city';
+
+  @override
+  String get mapCitySearchHint => 'Search cities';
+
+  @override
+  String get mapCenterCurrent => 'Current location';
+
+  @override
+  String mapCenterCity({required String city}) {
+    return 'Center: $city';
+  }
+
+  @override
+  String get mapRadiusLabel => 'Radius';
+
+  @override
+  String get mapRadiusAll => 'All';
+
+  @override
+  String get mapFiltersTitle => 'Map filters';
+
+  @override
+  String get mapFiltersTooltip => 'Filter listings';
+
+  @override
+  String get mapCategoryLabel => 'Category';
+
+  @override
+  String get mapCategoryAll => 'All categories';
+
+  @override
+  String get mapConditionAll => 'All conditions';
+
+  @override
+  String get mapPriceMin => 'Minimum price (€)';
+
+  @override
+  String get mapPriceMax => 'Maximum price (€)';
+
+  @override
+  String get mapPriceInvalid =>
+      'Enter valid prices; the minimum cannot be higher.';
+
+  @override
+  String mapListingsCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count listings on the map',
+      one: '1 listing on the map',
+      zero: 'No listings on the map',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapEmptyTitle => 'No listings in this radius';
+
+  @override
+  String get mapEmptyBody =>
+      'Increase the radius, move the center, or adjust the filters.';
+
+  @override
+  String get mapLoading => 'Loading nearby listings …';
+
+  @override
+  String mapPinSemantic({required String title, required String city}) {
+    return '$title, $city';
+  }
+
+  @override
+  String mapClusterSemantic({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count listings',
+      one: '1 listing',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapApproximateLocation =>
+      'Approximate location protecting private sellers';
+
+  @override
+  String get mapPreciseStoreLocation =>
+      'Precise location of a verified business';
+
+  @override
+  String get mapDirections => 'Get directions';
+
+  @override
+  String get mapDirectionsFailed => 'Directions could not be opened.';
+
+  @override
+  String get mapOpenListing => 'Open listing';
+
+  @override
+  String get moderationLoadFailed => 'Could not load moderation.';
+
+  @override
+  String get moderationAdminRequired => 'Administrator access required.';
+
+  @override
+  String get moderationTabOverview => 'Overview';
+
+  @override
+  String get moderationTabListings => 'Listings';
+
+  @override
+  String get moderationTabVerification => 'Seller verification';
+
+  @override
+  String get moderationTabReports => 'Reports';
+
+  @override
+  String get moderationOverviewPendingListings => 'Pending listings';
+
+  @override
+  String get moderationOverviewPendingDocuments => 'Pending seller documents';
+
+  @override
+  String get moderationOverviewOpenReports => 'Open reports';
+
+  @override
+  String get moderationListingsLoadFailed => 'Could not load listings.';
+
+  @override
+  String get moderationListingsEmpty => 'No pending listings.';
+
+  @override
+  String get moderationDocumentsLoadFailed =>
+      'Could not load seller documents.';
+
+  @override
+  String get moderationDocumentsEmpty => 'No pending seller documents.';
+
+  @override
+  String get moderationOpenDocument => 'Open document';
+
+  @override
+  String get moderationDocumentKindMedicalProfessionalRegistration =>
+      'Medical license / chamber registration';
+
+  @override
+  String moderationReportSeller({required String shopName}) {
+    return 'Seller: $shopName';
+  }
+
+  @override
+  String get moderationReportDismiss => 'Dismiss';
+
+  @override
+  String get moderationReportBlock => 'Block listing';
+
+  @override
+  String get moderationBlockConfirmTitle => 'Block this listing?';
+
+  @override
+  String moderationBlockConfirmBody({required String title}) {
+    return 'This will block $title and resolve this report.';
+  }
+
+  @override
+  String get moderationBlockConfirmAction => 'Block';
+
+  @override
+  String get moderationRejectionReasonTitle => 'Rejection reason';
+
+  @override
+  String get moderationReportFallbackTarget => 'the reported listing';
+
+  @override
+  String get moderationDocumentSaved => 'Document decision saved.';
+
+  @override
+  String get moderationDocumentFailed => 'Decision failed.';
+
+  @override
+  String get moderationReportResolved => 'Report resolved.';
+
+  @override
+  String get moderationReportActionFailed => 'Action failed.';
+
+  @override
+  String get moderationReportTargetUnavailable => 'Reported target unavailable';
+
+  @override
+  String get moderationReportsLoadFailed => 'Could not load reports.';
+
+  @override
+  String get moderationDocumentOpenFailed =>
+      'The document could not be opened.';
+
+  @override
+  String get moderationReportsEmpty => 'No open reports.';
+
+  @override
+  String get sellCompareAtPriceLabel => 'Original price in euros (optional)';
+
+  @override
+  String get sellCompareAtPriceHint =>
+      'Crossed-out price shown next to your price';
+
+  @override
+  String get sellValidationCompareAtPrice =>
+      'The original price must be higher than your price.';
+
+  @override
+  String get mapOsmAttribution => '© OpenStreetMap contributors';
 }

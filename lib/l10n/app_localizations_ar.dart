@@ -508,6 +508,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get legalWithdrawal => 'تعليمات حق الانسحاب';
 
   @override
+  String get legalDataSources => 'مصادر البيانات';
+
+  @override
+  String get legalOsmAttribution =>
+      'بيانات الخرائط والأماكن © مساهمو OpenStreetMap، مرخّصة بموجب Open Database License (ODbL).';
+
+  @override
   String get legalComingSoonBody =>
       'ستتوفر المستندات القانونية الكاملة قبل إطلاق التطبيق.';
 
@@ -901,4 +908,570 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'إزالة من المفضلة';
+
+  @override
+  String get sellCatalogTitle => 'ماذا تريد أن تبيع؟';
+
+  @override
+  String get sellCatalogBody => 'ابحث أولاً عن منتج مشابه أو ابدأ من دون قالب.';
+
+  @override
+  String get sellCatalogSearchHint => 'البحث في الكتالوج';
+
+  @override
+  String get sellCatalogUseTemplate => 'استخدام القالب';
+
+  @override
+  String get sellFreeForm => 'البدء من دون قالب';
+
+  @override
+  String get sellNoTemplatesTitle => 'لا يوجد قالب مناسب';
+
+  @override
+  String get sellNoTemplatesBody => 'يمكنك إدخال إعلانك من البداية.';
+
+  @override
+  String get sellDetailsTitle => 'تفاصيل الإعلان';
+
+  @override
+  String get sellSellerKindLabel => 'نوع البائع';
+
+  @override
+  String get sellSellerPrivate => 'خاص';
+
+  @override
+  String get sellSellerBusiness => 'تجاري';
+
+  @override
+  String get sellSellerNameLabel => 'اسم العرض';
+
+  @override
+  String get sellListingTitleLabel => 'العنوان';
+
+  @override
+  String get sellPriceLabel => 'السعر باليورو';
+
+  @override
+  String get sellCityLabel => 'المدينة';
+
+  @override
+  String get sellCategoryLabel => 'الفئة';
+
+  @override
+  String get sellConditionLabel => 'الحالة';
+
+  @override
+  String get sellDescriptionLabel => 'الوصف';
+
+  @override
+  String get sellPhotosTitle => 'الصور';
+
+  @override
+  String get sellPhotosBody =>
+      'أضف من صورة واحدة إلى 10 صور. تُضغط الصور قبل الرفع.';
+
+  @override
+  String get sellPickPhotos => 'اختيار الصور';
+
+  @override
+  String get sellTakePhoto => 'التقاط صورة';
+
+  @override
+  String get sellPhotoLimit => 'الحد الأقصى 10 صور';
+
+  @override
+  String get sellPhotoFailed => 'تعذرت معالجة الصورة.';
+
+  @override
+  String get sellReviewTitle => 'المراجعة والإرسال';
+
+  @override
+  String get sellSubmit => 'الإرسال للمراجعة';
+
+  @override
+  String get sellValidationRequired => 'هذا الحقل مطلوب.';
+
+  @override
+  String get sellValidationPrice => 'أدخل سعراً صالحاً أكبر من صفر.';
+
+  @override
+  String get sellValidationDescription => 'يجب ألا يقل الوصف عن 10 أحرف.';
+
+  @override
+  String get sellValidationPhotos => 'أضف صورة واحدة على الأقل.';
+
+  @override
+  String get sellConfirmationTitle => 'الإعلان قيد المراجعة';
+
+  @override
+  String get sellConfirmationBody =>
+      'تم إرسال إعلانك ولم يصبح عاماً بعد. سنبلغك بعد المراجعة.';
+
+  @override
+  String get sellViewMyListings => 'عرض إعلاناتي';
+
+  @override
+  String get sellCreateAnother => 'إنشاء إعلان آخر';
+
+  @override
+  String get sellTemplateImported =>
+      'تم تطبيق القالب. تحقق من جميع التفاصيل قبل الإرسال.';
+
+  @override
+  String get myListingsTitle => 'إعلاناتي';
+
+  @override
+  String get myListingsEmptyTitle => 'لا توجد إعلانات بعد';
+
+  @override
+  String get myListingsEmptyBody =>
+      'ستظهر إعلاناتك المرسلة وحالة مراجعتها هنا.';
+
+  @override
+  String get listingStatusPending => 'قيد المراجعة';
+
+  @override
+  String get listingStatusActive => 'منشور';
+
+  @override
+  String get listingStatusRejected => 'مرفوض';
+
+  @override
+  String get listingStatusDraft => 'مسودة';
+
+  @override
+  String get listingStatusSold => 'مباع';
+
+  @override
+  String get listingStatusBlocked => 'محظور';
+
+  @override
+  String get listingModerationReason => 'السبب';
+
+  @override
+  String get accountMyListings => 'إعلاناتي';
+
+  @override
+  String get accountModeration => 'الإشراف';
+
+  @override
+  String get moderationTitle => 'مراجعة الإعلانات';
+
+  @override
+  String get moderationPending => 'قيد الانتظار';
+
+  @override
+  String get moderationApprovedToday => 'تمت الموافقة اليوم';
+
+  @override
+  String get moderationRejectedToday => 'تم الرفض اليوم';
+
+  @override
+  String get moderationEmptyTitle => 'لا توجد إعلانات معلقة';
+
+  @override
+  String get moderationEmptyBody => 'ستظهر الطلبات الجديدة هنا تلقائياً.';
+
+  @override
+  String get moderationApprove => 'موافقة';
+
+  @override
+  String get moderationReject => 'رفض';
+
+  @override
+  String get moderationReasonLabel => 'السبب (اختياري)';
+
+  @override
+  String get moderationReasonHint => 'ملاحظة قصيرة للبائع';
+
+  @override
+  String get moderationApproveSuccess => 'أصبح الإعلان عاماً الآن.';
+
+  @override
+  String get moderationRejectSuccess => 'تم رفض الإعلان.';
+
+  @override
+  String get moderationForbiddenTitle => 'للمشرفين فقط';
+
+  @override
+  String get moderationForbiddenBody => 'لا يمكنك الوصول إلى قائمة الإشراف.';
+
+  @override
+  String get moderationSubmittedLabel => 'تاريخ الإرسال';
+
+  @override
+  String get moderationSellerLabel => 'البائع';
+
+  @override
+  String get moderationCategoryLabel => 'الفئة';
+
+  @override
+  String get moderationDecisionFailed => 'تعذر حفظ القرار.';
+
+  @override
+  String get profileNotFoundTitle => 'لم يتم العثور على الملف الشخصي';
+
+  @override
+  String get profileNotFoundBody => 'هذا الملف الشخصي غير متاح.';
+
+  @override
+  String get profileFallbackName => 'عضو Zêrîn';
+
+  @override
+  String profileListingCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إعلانات',
+      one: 'إعلان واحد',
+      zero: 'لا إعلانات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileAboutTitle => 'نبذة';
+
+  @override
+  String get profileNoBio => 'لا يوجد وصف بعد.';
+
+  @override
+  String get profileListingsTitle => 'الإعلانات النشطة';
+
+  @override
+  String get profileNoListings => 'لا توجد إعلانات نشطة حاليًا.';
+
+  @override
+  String get profileSendMessage => 'إرسال رسالة';
+
+  @override
+  String get editProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get profileEditAvatar => 'تغيير الصورة';
+
+  @override
+  String get profileAvatarFromGallery => 'الاختيار من المعرض';
+
+  @override
+  String get profileAvatarFromCamera => 'التقاط صورة';
+
+  @override
+  String get profileAvatarRemove => 'إزالة الصورة';
+
+  @override
+  String get profileAvatarError => 'تعذر حفظ صورة الملف الشخصي.';
+
+  @override
+  String get profileDisplayNameLabel => 'الاسم الظاهر';
+
+  @override
+  String get profileDisplayNameInvalid => 'يرجى إدخال اسم من 1 إلى 80 حرفًا.';
+
+  @override
+  String get profileUsernameLabel => 'اسم المستخدم';
+
+  @override
+  String get profileUsernameHelper =>
+      '3–30 حرفًا: أحرف صغيرة وأرقام وشرطة سفلية.';
+
+  @override
+  String get profileUsernameTaken => 'اسم المستخدم هذا مستخدم بالفعل.';
+
+  @override
+  String get profileUsernameReserved => 'اسم المستخدم هذا محجوز.';
+
+  @override
+  String get profileUsernameInvalid => 'اسم المستخدم هذا غير صالح.';
+
+  @override
+  String get profileCityLabel => 'المدينة';
+
+  @override
+  String get profileCityRequired => 'يرجى اختيار مدينة.';
+
+  @override
+  String get profileCityInvalid => 'يرجى اختيار مدينة ألمانية مدعومة.';
+
+  @override
+  String get profileBioLabel => 'نبذة عني';
+
+  @override
+  String get profileBioHint => 'أخبر الآخرين قليلاً عن نفسك.';
+
+  @override
+  String get profileBioTooLong => 'يمكن أن يحتوي الوصف على 500 حرف كحد أقصى.';
+
+  @override
+  String get profileSave => 'حفظ الملف الشخصي';
+
+  @override
+  String get profileSaved => 'تم حفظ الملف الشخصي.';
+
+  @override
+  String get favoritesTitle => 'المفضلة';
+
+  @override
+  String get favoritesEmptyTitle => 'لا توجد مفضلات بعد';
+
+  @override
+  String get favoritesEmptyBody => 'ستظهر الإعلانات التي تحفظها هنا.';
+
+  @override
+  String get recentlyViewedTitle => 'شوهدت مؤخرًا';
+
+  @override
+  String get recentlyViewedEmptyTitle => 'لم تتم مشاهدة أي شيء بعد';
+
+  @override
+  String get recentlyViewedEmptyBody => 'ستظهر الإعلانات التي تشاهدها هنا.';
+
+  @override
+  String get accountEditProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get accountViewPublicProfile => 'الملف الشخصي العام';
+
+  @override
+  String get accountProfileIncomplete => 'أكمل ملفك الشخصي';
+
+  @override
+  String get mapTitle => 'الخريطة';
+
+  @override
+  String get mapOpenTooltip => 'فتح الخريطة';
+
+  @override
+  String get mapUseMyLocation => 'استخدام موقعي';
+
+  @override
+  String get mapRetryLocation => 'إعادة محاولة تحديد الموقع';
+
+  @override
+  String get mapLocationPrivacy =>
+      'يُستخدم موقعك فقط لتوسيط الخريطة ولا يتم حفظه.';
+
+  @override
+  String get mapLocationDenied =>
+      'تم رفض الوصول إلى الموقع. اختر مدينة بدلاً من ذلك.';
+
+  @override
+  String get mapLocationDeniedForever =>
+      'الوصول إلى الموقع معطّل. اختر مدينة أو غيّر الإذن في الإعدادات.';
+
+  @override
+  String get mapLocationServiceDisabled =>
+      'خدمات الموقع متوقفة. اختر مدينة بدلاً من ذلك.';
+
+  @override
+  String get mapLocationUnavailable =>
+      'موقعك غير متاح الآن. اختر مدينة بدلاً من ذلك.';
+
+  @override
+  String get mapChooseCity => 'اختيار مدينة';
+
+  @override
+  String get mapCitySearchHint => 'البحث عن مدينة';
+
+  @override
+  String get mapCenterCurrent => 'الموقع الحالي';
+
+  @override
+  String mapCenterCity({required String city}) {
+    return 'المركز: $city';
+  }
+
+  @override
+  String get mapRadiusLabel => 'النطاق';
+
+  @override
+  String get mapRadiusAll => 'الكل';
+
+  @override
+  String get mapFiltersTitle => 'مرشحات الخريطة';
+
+  @override
+  String get mapFiltersTooltip => 'تصفية الإعلانات';
+
+  @override
+  String get mapCategoryLabel => 'الفئة';
+
+  @override
+  String get mapCategoryAll => 'كل الفئات';
+
+  @override
+  String get mapConditionAll => 'كل الحالات';
+
+  @override
+  String get mapPriceMin => 'الحد الأدنى للسعر (€)';
+
+  @override
+  String get mapPriceMax => 'الحد الأقصى للسعر (€)';
+
+  @override
+  String get mapPriceInvalid =>
+      'أدخل أسعاراً صالحة؛ لا يمكن أن يكون الحد الأدنى أعلى.';
+
+  @override
+  String mapListingsCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إعلانات على الخريطة',
+      one: 'إعلان واحد على الخريطة',
+      zero: 'لا إعلانات على الخريطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapEmptyTitle => 'لا توجد إعلانات ضمن هذا النطاق';
+
+  @override
+  String get mapEmptyBody => 'وسّع النطاق أو غيّر المركز أو عدّل المرشحات.';
+
+  @override
+  String get mapLoading => 'جارٍ تحميل الإعلانات القريبة …';
+
+  @override
+  String mapPinSemantic({required String title, required String city}) {
+    return '$title، $city';
+  }
+
+  @override
+  String mapClusterSemantic({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إعلانات',
+      one: 'إعلان واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapApproximateLocation => 'موقع تقريبي لحماية البائعين الأفراد';
+
+  @override
+  String get mapPreciseStoreLocation => 'موقع دقيق لنشاط تجاري موثّق';
+
+  @override
+  String get mapDirections => 'حساب المسار';
+
+  @override
+  String get mapDirectionsFailed => 'تعذّر فتح المسار.';
+
+  @override
+  String get mapOpenListing => 'فتح الإعلان';
+
+  @override
+  String get moderationLoadFailed => 'تعذر تحميل الإشراف.';
+
+  @override
+  String get moderationAdminRequired => 'الوصول مطلوب للمسؤول.';
+
+  @override
+  String get moderationTabOverview => 'نظرة عامة';
+
+  @override
+  String get moderationTabListings => 'الإعلانات';
+
+  @override
+  String get moderationTabVerification => 'تحقق من البائع';
+
+  @override
+  String get moderationTabReports => 'البلاغات';
+
+  @override
+  String get moderationOverviewPendingListings => 'الإعلانات المعلقة';
+
+  @override
+  String get moderationOverviewPendingDocuments => 'مستندات البائع المعلقة';
+
+  @override
+  String get moderationOverviewOpenReports => 'البلاغات المفتوحة';
+
+  @override
+  String get moderationListingsLoadFailed => 'تعذر تحميل الإعلانات.';
+
+  @override
+  String get moderationListingsEmpty => 'لا توجد إعلانات معلقة.';
+
+  @override
+  String get moderationDocumentsLoadFailed => 'تعذر تحميل مستندات البائع.';
+
+  @override
+  String get moderationDocumentsEmpty => 'لا توجد مستندات بائع معلقة.';
+
+  @override
+  String get moderationOpenDocument => 'فتح المستند';
+
+  @override
+  String get moderationDocumentKindMedicalProfessionalRegistration =>
+      'ترخيص مزاولة الطب / إثبات عضوية النقابة';
+
+  @override
+  String moderationReportSeller({required String shopName}) {
+    return 'البائع: $shopName';
+  }
+
+  @override
+  String get moderationReportDismiss => 'رفض';
+
+  @override
+  String get moderationReportBlock => 'حظر الإعلان';
+
+  @override
+  String get moderationBlockConfirmTitle => 'حظر هذا الإعلان؟';
+
+  @override
+  String moderationBlockConfirmBody({required String title}) {
+    return 'سيتم حظر $title وحل هذا البلاغ.';
+  }
+
+  @override
+  String get moderationBlockConfirmAction => 'حظر';
+
+  @override
+  String get moderationRejectionReasonTitle => 'سبب الرفض';
+
+  @override
+  String get moderationReportFallbackTarget => 'الإعلان المُبلّغ عنه';
+
+  @override
+  String get moderationDocumentSaved => 'تم حفظ قرار المستند.';
+
+  @override
+  String get moderationDocumentFailed => 'فشل القرار.';
+
+  @override
+  String get moderationReportResolved => 'تم حل البلاغ.';
+
+  @override
+  String get moderationReportActionFailed => 'فشلت العملية.';
+
+  @override
+  String get moderationReportTargetUnavailable => 'الهدف المُبلّغ عنه غير متاح';
+
+  @override
+  String get moderationReportsLoadFailed => 'تعذر تحميل البلاغات.';
+
+  @override
+  String get moderationDocumentOpenFailed => 'تعذر فتح المستند.';
+
+  @override
+  String get moderationReportsEmpty => 'لا توجد بلاغات مفتوحة.';
+
+  @override
+  String get sellCompareAtPriceLabel => 'السعر الأصلي باليورو (اختياري)';
+
+  @override
+  String get sellCompareAtPriceHint => 'السعر المشطوب بجانب سعرك';
+
+  @override
+  String get sellValidationCompareAtPrice =>
+      'يجب أن يكون السعر الأصلي أعلى من سعرك.';
+
+  @override
+  String get mapOsmAttribution => '© مساهمو OpenStreetMap';
 }

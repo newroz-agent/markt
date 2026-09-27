@@ -3,13 +3,16 @@ import 'dart:math';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
+import 'package:zerin_marketplace/core/storage/avatar_url_resolver.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat_repository.dart';
 
 class SupabaseChatRepository implements ChatRepository {
-  SupabaseChatRepository(this._client);
+  SupabaseChatRepository(this._client)
+    : _avatarUrls = AvatarUrlResolver(_client);
 
   final SupabaseClient _client;
+  final AvatarUrlResolver _avatarUrls;
   final _pendingSendIds = <(String, String, String), String>{};
   int _channelSerial = 0;
   final _historyStart = <String, ChatMessage>{};
@@ -26,9 +29,18 @@ class SupabaseChatRepository implements ChatRepository {
       'get_chat_inbox',
       params: {'p_chat_id': chatId},
     );
-    return rows
-        .map((row) => ChatConversation.fromJson(row as Map<String, dynamic>))
-        .toList();
+    return rows.map((row) {
+      final map = Map<String, dynamic>.from(row as Map);
+      // Inbox RPC returns opaque avatar object paths; resolve to public URLs
+      // so the UI only ever renders resolved delivery URLs.
+      map['shop_avatar_url'] = _avatarUrls.resolve(
+        map['shop_avatar_url'] as String?,
+      );
+      map['buyer_avatar_url'] = _avatarUrls.resolve(
+        map['buyer_avatar_url'] as String?,
+      );
+      return ChatConversation.fromJson(map);
+    }).toList();
   }
 
   @override
@@ -48,6 +60,17 @@ class SupabaseChatRepository implements ChatRepository {
     final row = await _client.rpc<Map<String, dynamic>>(
       'get_or_create_chat',
       params: {'p_seller_id': sellerId, 'p_product_id': productId},
+    );
+    return fetchConversation(row['id']! as String);
+  }
+
+  @override
+  Future<ChatConversation> openChatWithSeller(String sellerId) async {
+    _currentUserId();
+    // Productless profile chat reuses get_or_create_chat with only the seller.
+    final row = await _client.rpc<Map<String, dynamic>>(
+      'get_or_create_chat',
+      params: {'p_seller_id': sellerId},
     );
     return fetchConversation(row['id']! as String);
   }

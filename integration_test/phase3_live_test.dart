@@ -406,7 +406,7 @@ void main() {
           pageView.controller!.page!.round(),
           product.imageUrls.length > 1 ? initial + 1 : 0,
         );
-        if (product.imageUrls.length > 1)
+        if (product.imageUrls.length > 1) {
           expect(
             tester
                 .widget<Semantics>(
@@ -416,6 +416,7 @@ void main() {
                 .value,
             '${initial + 2} / ${product.imageUrls.length}',
           );
+        }
         await screenshot(tester, 'gallery_${locale}_dark');
         await openSeller(tester);
         expect(find.text(labels(tester).sellerProfileAbout), findsOneWidget);

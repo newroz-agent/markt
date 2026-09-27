@@ -88,12 +88,17 @@ Future<void> _settle(WidgetTester tester) async {
   await tester.pump(const Duration(milliseconds: 100));
 }
 
-Future<void> _pumpScreen(WidgetTester tester, _FakeRepository repository) async {
+Future<void> _pumpScreen(
+  WidgetTester tester,
+  _FakeRepository repository,
+) async {
   await tester.pumpWidget(
     ProviderScope(
       overrides: <Override>[
         categoryProductsRepositoryProvider.overrideWithValue(repository),
-        activeCategoriesProvider.overrideWith((ref) async => const [_root, _child]),
+        activeCategoriesProvider.overrideWith(
+          (ref) async => const [_root, _child],
+        ),
       ],
       child: _app(const CategoryProductsScreen(categoryId: 'root-id')),
     ),
@@ -160,7 +165,10 @@ void main() {
     final container = ProviderScope.containerOf(
       tester.element(find.byType(CategoryProductsScreen)),
     );
-    expect(container.read(categoryProductsFilterProvider('root-id')).city, 'Berlin');
+    expect(
+      container.read(categoryProductsFilterProvider('root-id')).city,
+      'Berlin',
+    );
     expect(
       repository.queries.last.city,
       'Berlin',
@@ -220,8 +228,9 @@ void main() {
     final container = ProviderScope.containerOf(
       tester.element(find.byType(CategoryProductsScreen)),
     );
-    final loaded =
-        container.read(categoryProductsProvider('root-id')).requireValue;
+    final loaded = container
+        .read(categoryProductsProvider('root-id'))
+        .requireValue;
     expect(loaded, hasLength(25));
     expect(loaded.map((p) => p.id), contains('p-24'));
   });

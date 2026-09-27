@@ -986,6 +986,18 @@ abstract class AppLocalizations {
   /// **'Widerrufsbelehrung'**
   String get legalWithdrawal;
 
+  /// Account legal tile that lists third-party data sources and their licenses.
+  ///
+  /// In de, this message translates to:
+  /// **'Datenquellen'**
+  String get legalDataSources;
+
+  /// ODbL attribution for OpenStreetMap map tiles and imported directory places. Keep 'OpenStreetMap' and 'Open Database License (ODbL)' untranslated.
+  ///
+  /// In de, this message translates to:
+  /// **'Karten- und Ortsdaten © OpenStreetMap-Mitwirkende, lizenziert unter der Open Database License (ODbL).'**
+  String get legalOsmAttribution;
+
   /// Temporary notice used before final legal documents are published.
   ///
   /// In de, this message translates to:
@@ -1741,6 +1753,1044 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Aus Favoriten entfernen'**
   String get favoriteRemoveAction;
+
+  /// Title of the catalog-first Sell step.
+  ///
+  /// In de, this message translates to:
+  /// **'Was möchtest du verkaufen?'**
+  String get sellCatalogTitle;
+
+  /// Explains catalog templates and free-form entry.
+  ///
+  /// In de, this message translates to:
+  /// **'Suche zuerst nach einem ähnlichen Artikel oder starte ohne Vorlage.'**
+  String get sellCatalogBody;
+
+  /// Hint for catalog template search.
+  ///
+  /// In de, this message translates to:
+  /// **'Katalog durchsuchen'**
+  String get sellCatalogSearchHint;
+
+  /// Action to apply a catalog template.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorlage verwenden'**
+  String get sellCatalogUseTemplate;
+
+  /// Action to begin a listing without a template.
+  ///
+  /// In de, this message translates to:
+  /// **'Ohne Vorlage starten'**
+  String get sellFreeForm;
+
+  /// Empty-state title when catalog search has no match.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine passende Vorlage'**
+  String get sellNoTemplatesTitle;
+
+  /// Empty-state body offering free-form listing entry.
+  ///
+  /// In de, this message translates to:
+  /// **'Du kannst dein Angebot frei eingeben.'**
+  String get sellNoTemplatesBody;
+
+  /// Title of the listing details step.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebotsdetails'**
+  String get sellDetailsTitle;
+
+  /// Label for private or business seller kind.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäuferart'**
+  String get sellSellerKindLabel;
+
+  /// Private seller option.
+  ///
+  /// In de, this message translates to:
+  /// **'Privat'**
+  String get sellSellerPrivate;
+
+  /// Business seller option.
+  ///
+  /// In de, this message translates to:
+  /// **'Gewerblich'**
+  String get sellSellerBusiness;
+
+  /// Label for the seller display name.
+  ///
+  /// In de, this message translates to:
+  /// **'Anzeigename'**
+  String get sellSellerNameLabel;
+
+  /// Label for the listing title.
+  ///
+  /// In de, this message translates to:
+  /// **'Titel'**
+  String get sellListingTitleLabel;
+
+  /// Label for listing price in euros.
+  ///
+  /// In de, this message translates to:
+  /// **'Preis in Euro'**
+  String get sellPriceLabel;
+
+  /// Label for the German listing city.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt'**
+  String get sellCityLabel;
+
+  /// Label for listing category.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie'**
+  String get sellCategoryLabel;
+
+  /// Label for listing condition.
+  ///
+  /// In de, this message translates to:
+  /// **'Zustand'**
+  String get sellConditionLabel;
+
+  /// Label for listing description.
+  ///
+  /// In de, this message translates to:
+  /// **'Beschreibung'**
+  String get sellDescriptionLabel;
+
+  /// Title of the listing photo step.
+  ///
+  /// In de, this message translates to:
+  /// **'Fotos'**
+  String get sellPhotosTitle;
+
+  /// Explains listing photo count and compression.
+  ///
+  /// In de, this message translates to:
+  /// **'Füge 1 bis 10 Fotos hinzu. Bilder werden vor dem Upload komprimiert.'**
+  String get sellPhotosBody;
+
+  /// Action to choose listing photos from the library.
+  ///
+  /// In de, this message translates to:
+  /// **'Fotos auswählen'**
+  String get sellPickPhotos;
+
+  /// Action to capture a listing photo.
+  ///
+  /// In de, this message translates to:
+  /// **'Foto aufnehmen'**
+  String get sellTakePhoto;
+
+  /// Maximum listing photo count message.
+  ///
+  /// In de, this message translates to:
+  /// **'Maximal 10 Fotos'**
+  String get sellPhotoLimit;
+
+  /// Error when a listing photo cannot be processed.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Foto konnte nicht verarbeitet werden.'**
+  String get sellPhotoFailed;
+
+  /// Title of the listing review step.
+  ///
+  /// In de, this message translates to:
+  /// **'Prüfen und senden'**
+  String get sellReviewTitle;
+
+  /// Action that submits a listing for moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Zur Prüfung einreichen'**
+  String get sellSubmit;
+
+  /// Required listing field validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieses Feld ist erforderlich.'**
+  String get sellValidationRequired;
+
+  /// Invalid listing price validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Gib einen gültigen Preis größer als 0 ein.'**
+  String get sellValidationPrice;
+
+  /// Invalid listing description validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Beschreibung muss mindestens 10 Zeichen haben.'**
+  String get sellValidationDescription;
+
+  /// Missing listing photo validation error.
+  ///
+  /// In de, this message translates to:
+  /// **'Füge mindestens ein Foto hinzu.'**
+  String get sellValidationPhotos;
+
+  /// Title after a listing enters pending review.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebot wird geprüft'**
+  String get sellConfirmationTitle;
+
+  /// Explains that a submitted listing is not public yet.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Angebot wurde eingereicht und ist noch nicht öffentlich. Wir benachrichtigen dich nach der Prüfung.'**
+  String get sellConfirmationBody;
+
+  /// Action to open the current user's listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Meine Angebote anzeigen'**
+  String get sellViewMyListings;
+
+  /// Action to reset and create another listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiteres Angebot erstellen'**
+  String get sellCreateAnother;
+
+  /// Confirmation that a catalog template was applied.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorlage übernommen. Prüfe alle Angaben vor dem Senden.'**
+  String get sellTemplateImported;
+
+  /// Title of the authenticated user's listing status screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Meine Angebote'**
+  String get myListingsTitle;
+
+  /// Empty-state title for My Listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Angebote'**
+  String get myListingsEmptyTitle;
+
+  /// Empty-state body for My Listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine eingereichten Angebote und ihr Prüfstatus erscheinen hier.'**
+  String get myListingsEmptyBody;
+
+  /// Public label for pending_review listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Wird geprüft'**
+  String get listingStatusPending;
+
+  /// Public label for active listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Veröffentlicht'**
+  String get listingStatusActive;
+
+  /// Public label for rejected listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Abgelehnt'**
+  String get listingStatusRejected;
+
+  /// Public label for draft listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Entwurf'**
+  String get listingStatusDraft;
+
+  /// Public label for sold listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkauft'**
+  String get listingStatusSold;
+
+  /// Public label for blocked listing status.
+  ///
+  /// In de, this message translates to:
+  /// **'Gesperrt'**
+  String get listingStatusBlocked;
+
+  /// Label for a listing moderation reason.
+  ///
+  /// In de, this message translates to:
+  /// **'Grund'**
+  String get listingModerationReason;
+
+  /// Account menu action for My Listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Meine Angebote'**
+  String get accountMyListings;
+
+  /// Account menu action for admin moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Moderation'**
+  String get accountModeration;
+
+  /// Title of the admin listing moderation queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote prüfen'**
+  String get moderationTitle;
+
+  /// Label for pending moderation count.
+  ///
+  /// In de, this message translates to:
+  /// **'Offen'**
+  String get moderationPending;
+
+  /// Label for listings approved today count.
+  ///
+  /// In de, this message translates to:
+  /// **'Heute freigegeben'**
+  String get moderationApprovedToday;
+
+  /// Label for listings rejected today count.
+  ///
+  /// In de, this message translates to:
+  /// **'Heute abgelehnt'**
+  String get moderationRejectedToday;
+
+  /// Empty-state title for the moderation queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine offenen Angebote'**
+  String get moderationEmptyTitle;
+
+  /// Empty-state body for the moderation queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Neue Einreichungen erscheinen automatisch hier.'**
+  String get moderationEmptyBody;
+
+  /// Admin action to approve a listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Freigeben'**
+  String get moderationApprove;
+
+  /// Admin action to reject a listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Ablehnen'**
+  String get moderationReject;
+
+  /// Label for optional listing rejection feedback.
+  ///
+  /// In de, this message translates to:
+  /// **'Grund (optional)'**
+  String get moderationReasonLabel;
+
+  /// Hint for optional listing rejection feedback.
+  ///
+  /// In de, this message translates to:
+  /// **'Kurze Rückmeldung an den Verkäufer'**
+  String get moderationReasonHint;
+
+  /// Confirmation after an admin approves a listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Angebot ist jetzt öffentlich.'**
+  String get moderationApproveSuccess;
+
+  /// Confirmation after an admin rejects a listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Angebot wurde abgelehnt.'**
+  String get moderationRejectSuccess;
+
+  /// Title when a non-admin opens moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Nur für Administratoren'**
+  String get moderationForbiddenTitle;
+
+  /// Body when a non-admin opens moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Du hast keinen Zugriff auf die Moderationswarteschlange.'**
+  String get moderationForbiddenBody;
+
+  /// Label for listing submission date in moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Eingereicht'**
+  String get moderationSubmittedLabel;
+
+  /// Label for seller identity in moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäufer'**
+  String get moderationSellerLabel;
+
+  /// Label for category in moderation.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie'**
+  String get moderationCategoryLabel;
+
+  /// Error when an admin decision cannot be saved.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Entscheidung konnte nicht gespeichert werden.'**
+  String get moderationDecisionFailed;
+
+  /// Title when a public profile does not exist.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil nicht gefunden'**
+  String get profileNotFoundTitle;
+
+  /// Body when a public profile does not exist.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieses Profil ist nicht verfügbar.'**
+  String get profileNotFoundBody;
+
+  /// Fallback display name when a profile has none.
+  ///
+  /// In de, this message translates to:
+  /// **'Zêrîn-Mitglied'**
+  String get profileFallbackName;
+
+  /// Number of active listings on a profile.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine Angebote} =1{1 Angebot} other{{count} Angebote}}'**
+  String profileListingCount({required int count});
+
+  /// Heading for a profile bio section.
+  ///
+  /// In de, this message translates to:
+  /// **'Über mich'**
+  String get profileAboutTitle;
+
+  /// Placeholder when a profile has no bio.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Beschreibung.'**
+  String get profileNoBio;
+
+  /// Heading for a profile's active listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktive Angebote'**
+  String get profileListingsTitle;
+
+  /// Empty state for a profile with no active listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Zurzeit keine aktiven Angebote.'**
+  String get profileNoListings;
+
+  /// CTA to message a profile through chat.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachricht senden'**
+  String get profileSendMessage;
+
+  /// Title of the edit profile screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil bearbeiten'**
+  String get editProfileTitle;
+
+  /// Button to change the profile photo.
+  ///
+  /// In de, this message translates to:
+  /// **'Profilbild ändern'**
+  String get profileEditAvatar;
+
+  /// Pick avatar from the photo library.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus Galerie wählen'**
+  String get profileAvatarFromGallery;
+
+  /// Capture avatar from the camera.
+  ///
+  /// In de, this message translates to:
+  /// **'Foto aufnehmen'**
+  String get profileAvatarFromCamera;
+
+  /// Remove the current profile photo.
+  ///
+  /// In de, this message translates to:
+  /// **'Profilbild entfernen'**
+  String get profileAvatarRemove;
+
+  /// Error when avatar upload or removal fails.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Profilbild konnte nicht gespeichert werden.'**
+  String get profileAvatarError;
+
+  /// Label for the display name field.
+  ///
+  /// In de, this message translates to:
+  /// **'Anzeigename'**
+  String get profileDisplayNameLabel;
+
+  /// Validation error for the display name.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte gib einen Namen mit 1 bis 80 Zeichen ein.'**
+  String get profileDisplayNameInvalid;
+
+  /// Label for the username field.
+  ///
+  /// In de, this message translates to:
+  /// **'Benutzername'**
+  String get profileUsernameLabel;
+
+  /// Helper text describing username rules.
+  ///
+  /// In de, this message translates to:
+  /// **'3–30 Zeichen: Kleinbuchstaben, Ziffern und Unterstriche.'**
+  String get profileUsernameHelper;
+
+  /// Username conflict error.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieser Benutzername ist bereits vergeben.'**
+  String get profileUsernameTaken;
+
+  /// Reserved username error.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieser Benutzername ist reserviert.'**
+  String get profileUsernameReserved;
+
+  /// Invalid username error.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieser Benutzername ist ungültig.'**
+  String get profileUsernameInvalid;
+
+  /// Label for the profile city dropdown.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt'**
+  String get profileCityLabel;
+
+  /// Error when no city is selected.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte wähle eine Stadt aus.'**
+  String get profileCityRequired;
+
+  /// Error for an unsupported city.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte wähle eine unterstützte deutsche Stadt.'**
+  String get profileCityInvalid;
+
+  /// Label for the bio field.
+  ///
+  /// In de, this message translates to:
+  /// **'Über mich'**
+  String get profileBioLabel;
+
+  /// Hint for the bio field.
+  ///
+  /// In de, this message translates to:
+  /// **'Erzähl kurz etwas über dich.'**
+  String get profileBioHint;
+
+  /// Error when the bio exceeds the limit.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Beschreibung darf höchstens 500 Zeichen enthalten.'**
+  String get profileBioTooLong;
+
+  /// Save the profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil speichern'**
+  String get profileSave;
+
+  /// Success message after saving the profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil gespeichert.'**
+  String get profileSaved;
+
+  /// Title of the favorites screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Favoriten'**
+  String get favoritesTitle;
+
+  /// Empty favorites title.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Favoriten'**
+  String get favoritesEmptyTitle;
+
+  /// Empty favorites body.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote, die du speicherst, erscheinen hier.'**
+  String get favoritesEmptyBody;
+
+  /// Title of the recently viewed screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Zuletzt angesehen'**
+  String get recentlyViewedTitle;
+
+  /// Empty recently viewed title.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch nichts angesehen'**
+  String get recentlyViewedEmptyTitle;
+
+  /// Empty recently viewed body.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote, die du ansiehst, erscheinen hier.'**
+  String get recentlyViewedEmptyBody;
+
+  /// Account action to edit the profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil bearbeiten'**
+  String get accountEditProfile;
+
+  /// Account action to view the public profile.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffentliches Profil'**
+  String get accountViewPublicProfile;
+
+  /// Subtitle when the signed-in user has no username yet.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil vervollständigen'**
+  String get accountProfileIncomplete;
+
+  /// Title of the marketplace map screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Karte'**
+  String get mapTitle;
+
+  /// Tooltip for actions that open the map.
+  ///
+  /// In de, this message translates to:
+  /// **'Karte öffnen'**
+  String get mapOpenTooltip;
+
+  /// Action to center the map on the viewer's transient location.
+  ///
+  /// In de, this message translates to:
+  /// **'Meinen Standort verwenden'**
+  String get mapUseMyLocation;
+
+  /// Action to retry the foreground location request.
+  ///
+  /// In de, this message translates to:
+  /// **'Standort erneut versuchen'**
+  String get mapRetryLocation;
+
+  /// Privacy explanation for viewer location.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Standort wird nur zum Zentrieren der Karte verwendet und nicht gespeichert.'**
+  String get mapLocationPrivacy;
+
+  /// Fallback when foreground location permission is denied.
+  ///
+  /// In de, this message translates to:
+  /// **'Standortzugriff abgelehnt. Wähle stattdessen eine Stadt.'**
+  String get mapLocationDenied;
+
+  /// Fallback when location permission is permanently denied.
+  ///
+  /// In de, this message translates to:
+  /// **'Standortzugriff ist deaktiviert. Wähle eine Stadt oder ändere die Berechtigung in den Einstellungen.'**
+  String get mapLocationDeniedForever;
+
+  /// Fallback when device location services are disabled.
+  ///
+  /// In de, this message translates to:
+  /// **'Ortungsdienste sind ausgeschaltet. Wähle stattdessen eine Stadt.'**
+  String get mapLocationServiceDisabled;
+
+  /// Fallback when a foreground position cannot be obtained.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Standort ist gerade nicht verfügbar. Wähle stattdessen eine Stadt.'**
+  String get mapLocationUnavailable;
+
+  /// Action to choose a manual map center city.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt wählen'**
+  String get mapChooseCity;
+
+  /// Search hint in the manual city picker.
+  ///
+  /// In de, this message translates to:
+  /// **'Stadt suchen'**
+  String get mapCitySearchHint;
+
+  /// Label when the map uses the viewer's location.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktueller Standort'**
+  String get mapCenterCurrent;
+
+  /// Label for a manually selected map center.
+  ///
+  /// In de, this message translates to:
+  /// **'Zentrum: {city}'**
+  String mapCenterCity({required String city});
+
+  /// Label for map radius controls.
+  ///
+  /// In de, this message translates to:
+  /// **'Umkreis'**
+  String get mapRadiusLabel;
+
+  /// Radius option with no distance limit.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get mapRadiusAll;
+
+  /// Title of the shared map filter sheet.
+  ///
+  /// In de, this message translates to:
+  /// **'Kartenfilter'**
+  String get mapFiltersTitle;
+
+  /// Tooltip for the map filter action.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote filtern'**
+  String get mapFiltersTooltip;
+
+  /// Category field in the map filter sheet.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie'**
+  String get mapCategoryLabel;
+
+  /// Map filter option with no category restriction.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle Kategorien'**
+  String get mapCategoryAll;
+
+  /// Map filter option with no condition restriction.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle Zustände'**
+  String get mapConditionAll;
+
+  /// Minimum price field in euros.
+  ///
+  /// In de, this message translates to:
+  /// **'Mindestpreis (€)'**
+  String get mapPriceMin;
+
+  /// Maximum price field in euros.
+  ///
+  /// In de, this message translates to:
+  /// **'Höchstpreis (€)'**
+  String get mapPriceMax;
+
+  /// Validation error for map price filters.
+  ///
+  /// In de, this message translates to:
+  /// **'Gib gültige Preise ein; der Mindestpreis darf nicht höher sein.'**
+  String get mapPriceInvalid;
+
+  /// Visible listing count on the map.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine Angebote auf der Karte} =1{1 Angebot auf der Karte} other{{count} Angebote auf der Karte}}'**
+  String mapListingsCount({required int count});
+
+  /// Map empty-state title.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine Angebote in diesem Umkreis'**
+  String get mapEmptyTitle;
+
+  /// Map empty-state body.
+  ///
+  /// In de, this message translates to:
+  /// **'Vergrößere den Umkreis, verschiebe das Zentrum oder passe die Filter an.'**
+  String get mapEmptyBody;
+
+  /// Map marker loading message.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote in der Nähe werden geladen …'**
+  String get mapLoading;
+
+  /// Accessible label for one map pin.
+  ///
+  /// In de, this message translates to:
+  /// **'{title}, {city}'**
+  String mapPinSemantic({required String title, required String city});
+
+  /// Accessible label for a marker cluster.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =1{1 Angebot} other{{count} Angebote}}'**
+  String mapClusterSemantic({required int count});
+
+  /// Privacy label for a city-jittered listing pin.
+  ///
+  /// In de, this message translates to:
+  /// **'Ungefährer Standort zum Schutz privater Verkäufer'**
+  String get mapApproximateLocation;
+
+  /// Label for a verified opted-in business pin.
+  ///
+  /// In de, this message translates to:
+  /// **'Genauer Standort eines verifizierten Geschäfts'**
+  String get mapPreciseStoreLocation;
+
+  /// Action to open external directions for a verified store.
+  ///
+  /// In de, this message translates to:
+  /// **'Route berechnen'**
+  String get mapDirections;
+
+  /// Error when external directions cannot be opened.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Route konnte nicht geöffnet werden.'**
+  String get mapDirectionsFailed;
+
+  /// Action from a map preview to the existing listing detail.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebot öffnen'**
+  String get mapOpenListing;
+
+  /// Error when the moderation overview fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Moderation konnte nicht geladen werden.'**
+  String get moderationLoadFailed;
+
+  /// Shown when a non-admin user reaches the moderation screen.
+  ///
+  /// In de, this message translates to:
+  /// **'Administratorzugriff erforderlich.'**
+  String get moderationAdminRequired;
+
+  /// Tab label for the admin overview.
+  ///
+  /// In de, this message translates to:
+  /// **'Übersicht'**
+  String get moderationTabOverview;
+
+  /// Tab label for the listings moderation queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote'**
+  String get moderationTabListings;
+
+  /// Tab label for the seller verification queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäuferprüfung'**
+  String get moderationTabVerification;
+
+  /// Tab label for the reports queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Meldungen'**
+  String get moderationTabReports;
+
+  /// Overview card title for pending listings count.
+  ///
+  /// In de, this message translates to:
+  /// **'Offene Angebote'**
+  String get moderationOverviewPendingListings;
+
+  /// Overview card title for pending seller documents count.
+  ///
+  /// In de, this message translates to:
+  /// **'Offene Verkäuferdokumente'**
+  String get moderationOverviewPendingDocuments;
+
+  /// Overview card title for open reports count.
+  ///
+  /// In de, this message translates to:
+  /// **'Offene Meldungen'**
+  String get moderationOverviewOpenReports;
+
+  /// Error when the listings queue fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebote konnten nicht geladen werden.'**
+  String get moderationListingsLoadFailed;
+
+  /// Empty state for the listings moderation queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine offenen Angebote.'**
+  String get moderationListingsEmpty;
+
+  /// Error when the seller verification queue fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäuferdokumente konnten nicht geladen werden.'**
+  String get moderationDocumentsLoadFailed;
+
+  /// Empty state for the seller verification queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine offenen Verkäuferdokumente.'**
+  String get moderationDocumentsEmpty;
+
+  /// Action to open a seller document.
+  ///
+  /// In de, this message translates to:
+  /// **'Dokument öffnen'**
+  String get moderationOpenDocument;
+
+  /// Label for a doctor's approved professional verification document.
+  ///
+  /// In de, this message translates to:
+  /// **'Approbation / Kammernachweis'**
+  String get moderationDocumentKindMedicalProfessionalRegistration;
+
+  /// Seller label in a report card.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkäufer: {shopName}'**
+  String moderationReportSeller({required String shopName});
+
+  /// Action to dismiss a report without action.
+  ///
+  /// In de, this message translates to:
+  /// **'Verwerfen'**
+  String get moderationReportDismiss;
+
+  /// Action to block a reported listing.
+  ///
+  /// In de, this message translates to:
+  /// **'Angebot sperren'**
+  String get moderationReportBlock;
+
+  /// Title of the block-listing confirmation dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Dieses Angebot sperren?'**
+  String get moderationBlockConfirmTitle;
+
+  /// Body of the block-listing confirmation dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Dies sperrt {title} und löst diese Meldung.'**
+  String moderationBlockConfirmBody({required String title});
+
+  /// Confirm action in the block-listing dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Sperren'**
+  String get moderationBlockConfirmAction;
+
+  /// Title of the rejection reason dialog.
+  ///
+  /// In de, this message translates to:
+  /// **'Ablehnungsgrund'**
+  String get moderationRejectionReasonTitle;
+
+  /// Fallback title when a reported listing title is unavailable.
+  ///
+  /// In de, this message translates to:
+  /// **'das gemeldete Angebot'**
+  String get moderationReportFallbackTarget;
+
+  /// Confirmation after a document moderation decision is saved.
+  ///
+  /// In de, this message translates to:
+  /// **'Dokumententscheidung gespeichert.'**
+  String get moderationDocumentSaved;
+
+  /// Error when a document moderation decision fails.
+  ///
+  /// In de, this message translates to:
+  /// **'Entscheidung fehlgeschlagen.'**
+  String get moderationDocumentFailed;
+
+  /// Confirmation after a report is resolved.
+  ///
+  /// In de, this message translates to:
+  /// **'Meldung bearbeitet.'**
+  String get moderationReportResolved;
+
+  /// Error when a report action fails.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktion fehlgeschlagen.'**
+  String get moderationReportActionFailed;
+
+  /// Fallback when a report target has no title.
+  ///
+  /// In de, this message translates to:
+  /// **'Gemeldetes Ziel nicht verfügbar'**
+  String get moderationReportTargetUnavailable;
+
+  /// Error when the reports queue fails to load.
+  ///
+  /// In de, this message translates to:
+  /// **'Meldungen konnten nicht geladen werden.'**
+  String get moderationReportsLoadFailed;
+
+  /// Error when a signed document URL cannot be opened.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Dokument konnte nicht geöffnet werden.'**
+  String get moderationDocumentOpenFailed;
+
+  /// Empty state for the reports queue.
+  ///
+  /// In de, this message translates to:
+  /// **'Keine offenen Meldungen.'**
+  String get moderationReportsEmpty;
+
+  /// Label for the optional compare-at price field.
+  ///
+  /// In de, this message translates to:
+  /// **'Originalpreis in Euro (optional)'**
+  String get sellCompareAtPriceLabel;
+
+  /// Hint for the optional compare-at price field.
+  ///
+  /// In de, this message translates to:
+  /// **'Durchgestrichener Preis neben deinem Preis'**
+  String get sellCompareAtPriceHint;
+
+  /// Validation error when compare-at price is not greater than price.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Originalpreis muss höher als dein Preis sein.'**
+  String get sellValidationCompareAtPrice;
+
+  /// Visible OpenStreetMap tile attribution.
+  ///
+  /// In de, this message translates to:
+  /// **'© OpenStreetMap-Mitwirkende'**
+  String get mapOsmAttribution;
 }
 
 class _AppLocalizationsDelegate

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:zerin_marketplace/app/router/app_router.dart';
+import 'package:zerin_marketplace/core/constants/german_cities.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/categories/domain/category_products_repository.dart';
@@ -9,31 +10,6 @@ import 'package:zerin_marketplace/features/categories/presentation/controllers/c
 import 'package:zerin_marketplace/features/home/domain/home_feed.dart';
 import 'package:zerin_marketplace/features/home/presentation/home_formatters.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
-
-/// German marketplace cities. Germany-only is a hard product requirement; the
-/// catalog is intentionally local so no non-German location can be selected.
-const germanMarketplaceCities = <String>[
-  'Berlin',
-  'Hamburg',
-  'München',
-  'Köln',
-  'Frankfurt am Main',
-  'Stuttgart',
-  'Düsseldorf',
-  'Leipzig',
-  'Dortmund',
-  'Essen',
-  'Bremen',
-  'Dresden',
-  'Hannover',
-  'Nürnberg',
-  'Bonn',
-  'Halle (Saale)',
-  'Magdeburg',
-  'Karlsruhe',
-  'Mannheim',
-  'Augsburg',
-];
 
 class CategoryProductsScreen extends ConsumerStatefulWidget {
   const CategoryProductsScreen({required this.categoryId, super.key});
@@ -45,7 +21,8 @@ class CategoryProductsScreen extends ConsumerStatefulWidget {
       _CategoryProductsScreenState();
 }
 
-class _CategoryProductsScreenState extends ConsumerState<CategoryProductsScreen> {
+class _CategoryProductsScreenState
+    extends ConsumerState<CategoryProductsScreen> {
   final _searchController = TextEditingController();
   final _searchFocus = FocusNode();
 
@@ -68,7 +45,19 @@ class _CategoryProductsScreenState extends ConsumerState<CategoryProductsScreen>
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(appBarTitle)),
+      appBar: AppBar(
+        title: Text(appBarTitle),
+        actions: <Widget>[
+          IconButton(
+            key: const ValueKey('category-results-map-action'),
+            tooltip: l10n.mapOpenTooltip,
+            onPressed: () =>
+                MapRoute(categoryId: widget.categoryId).push<void>(context),
+            icon: const Icon(Icons.map_outlined),
+          ),
+          const SizedBox(width: AppSpacing.xs),
+        ],
+      ),
       body: Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
@@ -76,7 +65,9 @@ class _CategoryProductsScreenState extends ConsumerState<CategoryProductsScreen>
           child: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(categoryProductsProvider(widget.categoryId));
-              await ref.read(categoryProductsProvider(widget.categoryId).future);
+              await ref.read(
+                categoryProductsProvider(widget.categoryId).future,
+              );
             },
             child: CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -212,8 +203,9 @@ class _FilterBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final filter = ref.watch(categoryProductsFilterProvider(categoryId));
-    final filterNotifier =
-        ref.read(categoryProductsFilterProvider(categoryId).notifier);
+    final filterNotifier = ref.read(
+      categoryProductsFilterProvider(categoryId).notifier,
+    );
 
     final conditionOptions = <(CategoryProductConditionFilter, String)>[
       (CategoryProductConditionFilter.all, l10n.filterConditionAll),
@@ -268,7 +260,8 @@ class _FilterBar extends ConsumerWidget {
                       children: <Widget>[
                         _FilterChip(
                           key: const ValueKey('seller-kind-chip'),
-                          label: filter.sellerKind ==
+                          label:
+                              filter.sellerKind ==
                                   CategoryProductSellerKindFilter.all
                               ? l10n.filterSellerKindAll
                               : switch (filter.sellerKind) {
@@ -282,19 +275,15 @@ class _FilterBar extends ConsumerWidget {
                           selected:
                               filter.sellerKind !=
                               CategoryProductSellerKindFilter.all,
-                          onTap: () => _showSellerKindSheet(
-                            context,
-                            ref,
-                            categoryId,
-                          ),
+                          onTap: () =>
+                              _showSellerKindSheet(context, ref, categoryId),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         _FilterChip(
                           key: const ValueKey('city-chip'),
                           label: filter.city ?? l10n.filterCityAll,
                           selected: filter.city != null,
-                          onTap: () =>
-                              _showCitySheet(context, ref, categoryId),
+                          onTap: () => _showCitySheet(context, ref, categoryId),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         _SortMenu(
@@ -336,23 +325,21 @@ class _FilterBar extends ConsumerWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            for (final (value, label) in <(
-              CategoryProductSellerKindFilter,
-              String
-            )>[
-              (
-                CategoryProductSellerKindFilter.all,
-                l10n.filterSellerKindAll
-              ),
-              (
-                CategoryProductSellerKindFilter.private,
-                l10n.filterSellerKindPrivate
-              ),
-              (
-                CategoryProductSellerKindFilter.business,
-                l10n.filterSellerKindBusiness
-              ),
-            ])
+            for (final (value, label)
+                in <(CategoryProductSellerKindFilter, String)>[
+                  (
+                    CategoryProductSellerKindFilter.all,
+                    l10n.filterSellerKindAll,
+                  ),
+                  (
+                    CategoryProductSellerKindFilter.private,
+                    l10n.filterSellerKindPrivate,
+                  ),
+                  (
+                    CategoryProductSellerKindFilter.business,
+                    l10n.filterSellerKindBusiness,
+                  ),
+                ])
               RadioGroup<CategoryProductSellerKindFilter>(
                 groupValue: filter.sellerKind,
                 onChanged: (selected) {
@@ -364,16 +351,12 @@ class _FilterBar extends ConsumerWidget {
                   Navigator.of(context).pop();
                 },
                 child: ListTile(
-                  leading: Radio<CategoryProductSellerKindFilter>(
-                    value: value,
-                  ),
+                  leading: Radio<CategoryProductSellerKindFilter>(value: value),
                   title: Text(label),
                   onTap: () {
                     ref
                         .read(
-                          categoryProductsFilterProvider(
-                            categoryId,
-                          ).notifier,
+                          categoryProductsFilterProvider(categoryId).notifier,
                         )
                         .setSellerKind(value);
                     Navigator.of(context).pop();
@@ -387,11 +370,7 @@ class _FilterBar extends ConsumerWidget {
     );
   }
 
-  void _showCitySheet(
-    BuildContext context,
-    WidgetRef ref,
-    String categoryId,
-  ) {
+  void _showCitySheet(BuildContext context, WidgetRef ref, String categoryId) {
     final l10n = context.l10n;
     final filter = ref.read(categoryProductsFilterProvider(categoryId));
     showModalBottomSheet<void>(
@@ -418,7 +397,9 @@ class _FilterBar extends ConsumerWidget {
                   groupValue: filter.city,
                   onChanged: (selected) {
                     ref
-                        .read(categoryProductsFilterProvider(categoryId).notifier)
+                        .read(
+                          categoryProductsFilterProvider(categoryId).notifier,
+                        )
                         .setCity(selected);
                     Navigator.of(context).pop();
                   },
@@ -428,9 +409,7 @@ class _FilterBar extends ConsumerWidget {
                     onTap: () {
                       ref
                           .read(
-                            categoryProductsFilterProvider(
-                              categoryId,
-                            ).notifier,
+                            categoryProductsFilterProvider(categoryId).notifier,
                           )
                           .setCity(null);
                       Navigator.of(context).pop();
@@ -447,9 +426,7 @@ class _FilterBar extends ConsumerWidget {
                     onChanged: (selected) {
                       ref
                           .read(
-                            categoryProductsFilterProvider(
-                              categoryId,
-                            ).notifier,
+                            categoryProductsFilterProvider(categoryId).notifier,
                           )
                           .setCity(selected);
                       Navigator.of(context).pop();
@@ -613,9 +590,9 @@ class _SortMenu extends StatelessWidget {
             const SizedBox(width: AppSpacing.xs),
             Text(
               sortLabel,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -688,11 +665,10 @@ class _LoadMoreSection extends ConsumerWidget {
 
     return SliverToBoxAdapter(
       child: switch (products) {
-        AsyncLoading<List<HomeProduct>>() when data != null =>
-          const Padding(
-            padding: EdgeInsets.all(AppSpacing.md),
-            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-          ),
+        AsyncLoading<List<HomeProduct>>() when data != null => const Padding(
+          padding: EdgeInsets.all(AppSpacing.md),
+          child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+        ),
         AsyncData<List<HomeProduct>>(:final value) when value.isNotEmpty =>
           notifier.hasMore
               ? Padding(
@@ -746,10 +722,7 @@ class _ProductGrid extends ConsumerWidget {
             ),
             itemBuilder: (context, index) {
               final product = products[index];
-              return _CategoryProductCard(
-                product: product,
-                grid: true,
-              );
+              return _CategoryProductCard(product: product, grid: true);
             },
           );
         },

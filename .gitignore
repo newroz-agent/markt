@@ -8,3 +8,6 @@ build/
 dart_defines.json
 supabase/.branches/
 supabase/.temp/
+
+# OSM Overpass snapshots (ODbL data, reproducible via tools/osm/fetch_berlin_food.dart)
+tools/osm/snapshots/
