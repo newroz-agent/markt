@@ -102,12 +102,12 @@ final moderationReportsQueueProvider =
 // ignore: unused_element
 typedef ModerationReportsQueueRef =
     AutoDisposeFutureProviderRef<ModerationReportsQueue>;
-String _$moderationActionHash() => r'faf8b2a33d750acb8f1ce9ea844a46836d16b93b';
+String _$moderationActionHash() => r'cc93c778ffd6acf0de74218bf931c2c83c87f395';
 
 /// See also [ModerationAction].
 @ProviderFor(ModerationAction)
 final moderationActionProvider =
-    AutoDisposeAsyncNotifierProvider<ModerationAction, void>.internal(
+    AsyncNotifierProvider<ModerationAction, void>.internal(
       ModerationAction.new,
       name: r'moderationActionProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -117,6 +117,6 @@ final moderationActionProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$ModerationAction = AutoDisposeAsyncNotifier<void>;
+typedef _$ModerationAction = AsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

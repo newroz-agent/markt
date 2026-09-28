@@ -8,7 +8,7 @@
     },
     {
       "name": "step_b_free_form_details",
-      "bytes": 344090,
+      "bytes": 343695,
       "width": 1206,
       "height": 2622
     },
@@ -20,13 +20,13 @@
     },
     {
       "name": "step_b_pending_confirmation",
-      "bytes": 338878,
+      "bytes": 338446,
       "width": 1206,
       "height": 2622
     },
     {
       "name": "step_b_public_before_approval",
-      "bytes": 273212,
+      "bytes": 272928,
       "width": 1206,
       "height": 2622
     },
@@ -35,13 +35,19 @@
       "bytes": 250914,
       "width": 1206,
       "height": 2622
+    },
+    {
+      "name": "step_b_public_after_approval",
+      "bytes": 770699,
+      "width": 1206,
+      "height": 2622
     }
   ],
   "cleanup": {
     "deleted_listings": 1,
     "removed_objects": 1,
     "removed_paths": [
-      "8bfc114f-0b44-45dc-9a1f-0e767eb8575d/104966ea-1f8c-4e90-bf9b-b9f0df9ad53b/1790548321177166-0.webp"
+      "8bfc114f-0b44-45dc-9a1f-0e767eb8575d/b4a3bb97-f089-425c-a6e4-2e0aabb180b4/1790606291410387-0.webp"
     ]
   },
   "counts": {
@@ -57,15 +63,17 @@
     },
     "matched": true
   },
+  "cleanup_error": null,
   "checks": {
     "catalog_template_search": "PASS",
     "free_form_details": "PASS",
     "photo_upload": "PASS",
     "pending_confirmation": "PASS",
     "public_before_approval": "PASS",
-    "moderation_queue": "PASS"
+    "moderation_queue": "PASS",
+    "public_after_approval": "PASS"
   },
   "tests": {
-    "real iOS unified Sell and moderation publication flow": "FAIL"
+    "real iOS unified Sell and moderation publication flow": "PASS"
   }
 }

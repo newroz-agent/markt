@@ -180,9 +180,15 @@ select pg_temp.expect_error(format(
 -- broadening table RLS or returning any private profile fields.
 reset role;
 set local request.jwt.claims = '{}';
-update public.profiles set display_name = 'Buyer Display',
-  avatar_path = 'f1000000-0000-0000-0000-000000000001/avatar.jpg', phone = 'private-phone'
+update public.profiles
+set display_name = 'Buyer Display',
+    avatar_key = 'f5000000-0000-0000-0000-000000000001',
+    avatar_path = 'f5000000-0000-0000-0000-000000000001/f6000000-0000-0000-0000-000000000001.webp',
+    phone = 'private-phone'
 where id = 'f1000000-0000-0000-0000-000000000001';
+update public.profiles
+set display_name = 'Phase One', username = 'phase_one'
+where id = 'f1000000-0000-0000-0000-000000000002';
 update public.sellers set avatar_url = 'https://example.invalid/shop.jpg', status = 'suspended'
 where id = 'f2000000-0000-0000-0000-000000000001';
 update public.products set status = 'sold'
@@ -204,9 +210,17 @@ begin
   assert jsonb_array_length(inbox) = 1, 'Single-chat inbox returns an array';
   assert not exists (select 1 from public.profiles where id = 'f1000000-0000-0000-0000-000000000001'), 'Buyer profile table remains private';
   assert item->>'buyer_name' = 'Buyer Display', 'Seller sees buyer display name';
-  assert item->>'buyer_avatar_url' = 'f1000000-0000-0000-0000-000000000001/avatar.jpg', 'Buyer avatar reference';
+  assert item->>'buyer_avatar_url' =
+    'f5000000-0000-0000-0000-000000000001/f6000000-0000-0000-0000-000000000001.webp',
+    'Buyer receives only the Step C opaque avatar reference';
+  assert item->>'buyer_avatar_url' not like
+    '%f1000000-0000-0000-0000-000000000001%',
+    'Buyer avatar reference never exposes the auth user id';
   assert item->>'seller_user_id' = auth.uid()::text;
-  assert item->>'shop_name' = 'Phase One' and item->>'shop_slug' = 'phase1-sql-test';
+  assert item->>'shop_name' = 'Phase One'
+    and item->>'shop_slug' = 'phase1-sql-test'
+    and item->>'shop_profile_username' = 'phase_one',
+    'Private seller inbox identity comes from the Step C profile';
   assert item->>'shop_avatar_url' = 'https://example.invalid/shop.jpg';
   assert item->'product' = jsonb_build_object('id', 'f4000000-0000-0000-0000-000000000001',
     'title', 'Phase One Product', 'price_cents', 1200, 'currency', 'EUR',
@@ -216,7 +230,7 @@ begin
   assert (select array_agg(key order by key) from jsonb_object_keys(item) as key) = array[
     'buyer_avatar_url', 'buyer_id', 'buyer_name', 'created_at', 'id', 'last_message_at',
     'last_message_preview', 'product', 'seller_id', 'seller_user_id', 'shop_avatar_url',
-    'shop_name', 'shop_slug', 'unread_count'], 'Only whitelisted fields returned';
+    'shop_name', 'shop_profile_username', 'shop_slug', 'unread_count'], 'Only whitelisted fields returned';
   assert (select sum((entry->>'unread_count')::integer) = 1
     from jsonb_array_elements(public.get_chat_inbox()) as entry), 'Only new incoming card counts';
 end;

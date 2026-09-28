@@ -27,20 +27,24 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - ✅ The exact unreferenced Step B object listed below was deleted once through the local
   Storage service with the local service role; post-check: 0 objects, 0 image rows,
   0 listings at that path.
-- 🟡 The one approved Step B iPhone rerun proved cleanup count parity (`33` listings,
-  `32` image rows, `2` Storage objects both before and after; one listing/object removed)
-  and produced six PASS screenshots under `docs/evidence/step-b/`. The functional test
-  stopped before approval/publication because an obsolete viewport assertion required
-  the approve-button center below 800 px but measured 818 px. The harness now checks
-  actual hit-testability instead; no second live run was made under the one-run limit.
+- ✅ Moderation mutation lifecycle: `ModerationAction` is now a keep-alive shared
+  `AsyncNotifier`, so delayed listing, seller-document, and report RPCs cannot complete
+  into an auto-disposed provider or lose the shared single-flight guard. The new delayed
+  fake-repository regression failed 4/4 before the fix with `Future already completed`
+  and passes 4/4 after it, including retained delayed errors rather than swallowed ones.
+- ✅ The repaired Step B iPhone rerun passed all seven checkpoints, including
+  `step_b_public_after_approval`, plus its one integration test. Crash-safe teardown uses
+  a separate plain Supabase client and restored exact global counts: `33` listings,
+  `32` image rows, and `2` Storage objects both before and after; one run listing and one
+  uploaded object were removed. Evidence is in `docs/evidence/step-b/`.
 - ✅ Final integrated Flutter gate: `flutter analyze --no-pub` — `No issues found!`
-  (4.4s); `flutter test --no-pub` — `00:41 +293: All tests passed!` (293/293).
-- 🟡 Twelve current transaction-scoped SQL suites were each run once across this pass;
-  10 passed to `ROLLBACK`. `chat_phase1.sql` has a stale raw buyer-avatar expectation
-  that conflicts with Step C's opaque-avatar projection. `phase3_country_moderation.sql`
-  still attempts a direct authenticated product insert that Step B intentionally
-  revoked. The legacy `phase3_country_upgrade.sql` is a pre-008, migration-applying
-  probe without `ROLLBACK` and was correctly excluded from the live current-schema gate.
+  (4.6s); `flutter test --no-pub` — `00:27 +297: All tests passed!` (297/297).
+- ✅ The two stale SQL regressions are current and pass through `ROLLBACK`:
+  `chat_phase1.sql` now asserts Step C opaque avatar/profile identity, and
+  `phase3_country_moderation.sql` creates its new owner listing through the protected
+  prepare/upload/`submit_listing` contract while retaining country-rule assertions.
+  The historical non-rollback pre-008 probe is isolated under `supabase/tests/legacy/`
+  with an explicit current-schema warning.
 
 ## Rating decision (2026-09-27)
 
@@ -96,15 +100,12 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - ✅ Harness cleanup (`integration_test/support/harness_cleanup.dart`), pass or fail:
   E2 removes what it uploaded — re-run 9/9 PASS, 1 upload removed, 0 files left, hours
   screenshot refreshed. The E2 seed refuses to orphan uploaded files.
-- 🟡 Step B: the harness itself was out of date (the details list is lazily built since the
-  compare-at field; `/moderation` opens on the overview tab since the admin expansion) —
-  both fixed. Cleanup now removes photos before deleting the listing and records global
-  before/after counts for listings, image rows, and Storage objects. The one approved
-  iPhone rerun restored all three counts exactly (`33/32/2` before and after; one listing
-  and one object removed), but stopped after six PASS screenshots because the approve
-  button center was 818 px while an old assertion required less than 800 px. That
-  arbitrary coordinate assertion is now a hit-testability check, but it was not rerun
-  under the one-run approval. Partial evidence is in `docs/evidence/step-b/`.
+- ✅ Step B harness repairs are closed: lazy Sell details and the expanded moderation
+  hub are handled, the approve action uses hit-testability rather than a fixed screen
+  coordinate, and teardown is independent of `WidgetTester`. The real iPhone rerun
+  passed 7/7 screenshots and 1/1 test; cleanup removed one listing/object and restored
+  `33/32/2` listings/image rows/Storage objects exactly. Persistent evidence is in
+  `docs/evidence/step-b/`.
 - ✅ The pre-existing unreferenced Step B object
   `8bfc114f-0b44-45dc-9a1f-0e767eb8575d/2ace6666-b043-45b0-b90f-ea9fb8b35c0d/1790545861569718-0.webp`
   was deleted exactly once through the local Storage service with the local service role;

@@ -58,7 +58,7 @@ Future<ModerationReportsQueue> moderationReportsQueue(
   return ref.watch(moderationRepositoryProvider).fetchReportsQueue();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ModerationAction extends _$ModerationAction {
   @override
   FutureOr<void> build() {}
@@ -83,18 +83,38 @@ class ModerationAction extends _$ModerationAction {
     return !state.hasError;
   }
 
-  Future<bool> decideDocument({required String documentId, required SellerDocumentDecision decision, String? note}) async {
+  Future<bool> decideDocument({
+    required String documentId,
+    required SellerDocumentDecision decision,
+    String? note,
+  }) async {
     if (state.isLoading) return false;
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => ref.read(moderationRepositoryProvider).moderateSellerDocument(documentId: documentId, decision: decision, note: note));
+    state = await AsyncValue.guard(
+      () => ref
+          .read(moderationRepositoryProvider)
+          .moderateSellerDocument(
+            documentId: documentId,
+            decision: decision,
+            note: note,
+          ),
+    );
     if (!state.hasError) ref.invalidate(sellerVerificationQueueProvider);
     return !state.hasError;
   }
 
-  Future<bool> decideReport({required String reportId, required ReportAction action, String? reason}) async {
+  Future<bool> decideReport({
+    required String reportId,
+    required ReportAction action,
+    String? reason,
+  }) async {
     if (state.isLoading) return false;
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => ref.read(moderationRepositoryProvider).resolveReport(reportId: reportId, action: action, reason: reason));
+    state = await AsyncValue.guard(
+      () => ref
+          .read(moderationRepositoryProvider)
+          .resolveReport(reportId: reportId, action: action, reason: reason),
+    );
     if (!state.hasError) {
       ref.invalidate(moderationReportsQueueProvider);
       ref.invalidate(homeFeedProvider);

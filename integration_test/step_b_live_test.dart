@@ -69,20 +69,24 @@ void main() {
   AppLocalizations labels(WidgetTester tester) =>
       tester.element(find.byType(Scaffold).first).l10n;
 
-  Future<void> signIn(String email) async {
-    await client.auth.signOut();
-    final response = await client.auth.signInWithPassword(
+  Future<void> signInClient(SupabaseClient targetClient, String email) async {
+    await targetClient.auth.signOut();
+    final response = await targetClient.auth.signInWithPassword(
       email: email,
       password: _password,
     );
-    expect(response.session, isNotNull);
+    if (response.session == null) {
+      throw StateError('Step B sign-in returned no session for $email.');
+    }
   }
 
-  Future<Map<String, int>> captureCounts() async {
-    final listings = await client.from('products').select('id');
-    final imageRows = await client.from('product_images').select('id');
+  Future<void> signIn(String email) => signInClient(client, email);
+
+  Future<Map<String, int>> captureCounts(SupabaseClient targetClient) async {
+    final listings = await targetClient.from('products').select('id');
+    final imageRows = await targetClient.from('product_images').select('id');
     final storageObjects = await countStorageObjects(
-      client,
+      targetClient,
       bucket: _imagesBucket,
     );
     return <String, int>{
@@ -116,68 +120,111 @@ void main() {
     listingTitle = 'Zêrîn Prüfangebot ${DateTime.now().millisecondsSinceEpoch}';
 
     await signIn(_adminEmail);
-    beforeCounts = await captureCounts();
+    beforeCounts = await captureCounts(client);
   });
 
   tearDownAll(() async {
-    // Runs whether the test passed or failed: the run's listing (unique title)
-    // and every photo it uploaded are removed, so nothing accumulates.
-    if (runStarted) {
-      await signIn(_adminEmail);
-      final rows = await client
-          .from('products')
-          .select('id, images:product_images(storage_path)')
-          .eq('title', listingTitle);
-      final ids = [for (final row in rows) row['id']! as String];
-      final paths = <String>[
-        for (final row in rows)
-          for (final image in row['images']! as List)
-            (image as Map)['storage_path']! as String,
-      ];
-      // Photos first: product-images objects are only visible (and therefore
-      // removable) while their listing row exists, even for admins.
-      final removed = await removeUploadedObjects(
-        client,
-        bucket: _imagesBucket,
-        paths: paths,
-      );
-      if (ids.isNotEmpty) {
-        await client.from('products').delete().inFilter('id', ids);
-      }
-      cleanup = <String, Object?>{
-        'deleted_listings': ids.length,
-        'removed_objects': removed.length,
-        'removed_paths': removed,
-      };
-    } else {
-      await signIn(_adminEmail);
-    }
+    Object? cleanupFailure;
+    StackTrace? cleanupStack;
+    Object? disposalFailure;
+    StackTrace? disposalStack;
+    SupabaseClient? cleanupClient;
 
-    afterCounts = await captureCounts();
-    final countsMatch =
-        beforeCounts.length == afterCounts!.length &&
-        beforeCounts.entries.every(
-          (entry) => afterCounts![entry.key] == entry.value,
+    try {
+      // A dedicated client keeps teardown independent from the crashed widget
+      // tree, ProviderScope, pending frames, and Flutter test guards.
+      cleanupClient = SupabaseClient(
+        AppEnvironment.supabaseUrl,
+        AppEnvironment.supabaseAnonKey,
+        authOptions: const AuthClientOptions(
+          authFlowType: AuthFlowType.implicit,
+          autoRefreshToken: false,
+        ),
+      );
+      await signInClient(cleanupClient, _adminEmail);
+
+      if (runStarted) {
+        final rows = await cleanupClient
+            .from('products')
+            .select('id, images:product_images(storage_path)')
+            .eq('title', listingTitle);
+        final ids = [for (final row in rows) row['id']! as String];
+        final paths = <String>[
+          for (final row in rows)
+            for (final image in row['images']! as List)
+              (image as Map)['storage_path']! as String,
+        ];
+        // Photos first: product-images objects are only visible (and therefore
+        // removable) while their listing row exists, even for admins.
+        final removed = await removeUploadedObjects(
+          cleanupClient,
+          bucket: _imagesBucket,
+          paths: paths,
         );
-    binding.reportData ??= <String, dynamic>{};
-    binding.reportData!['cleanup'] = cleanup;
-    binding.reportData!['counts'] = <String, Object?>{
-      'before': beforeCounts,
-      'after': afterCounts,
-      'matched': countsMatch,
-    };
-    binding.reportData!['checks'] = checks;
-    binding.reportData!['tests'] = <String, String>{
-      for (final entry in binding.results.entries)
-        entry.key: entry.value == 'success' ? 'PASS' : 'FAIL',
-    };
-    await client.auth.signOut();
-    await client.dispose();
-    expect(
-      countsMatch,
-      isTrue,
-      reason: 'Step B listing, image-row, and Storage counts must be restored',
-    );
+        if (ids.isNotEmpty) {
+          await cleanupClient.from('products').delete().inFilter('id', ids);
+        }
+        cleanup = <String, Object?>{
+          'deleted_listings': ids.length,
+          'removed_objects': removed.length,
+          'removed_paths': removed,
+        };
+      }
+
+      afterCounts = await captureCounts(cleanupClient);
+    } on Object catch (error, stack) {
+      cleanupFailure = error;
+      cleanupStack = stack;
+    } finally {
+      final measuredAfter = afterCounts;
+      final countsMatch =
+          measuredAfter != null &&
+          beforeCounts.length == measuredAfter.length &&
+          beforeCounts.entries.every(
+            (entry) => measuredAfter[entry.key] == entry.value,
+          );
+      binding.reportData ??= <String, dynamic>{};
+      binding.reportData!['cleanup'] = cleanup;
+      binding.reportData!['counts'] = <String, Object?>{
+        'before': beforeCounts,
+        'after': measuredAfter,
+        'matched': countsMatch,
+      };
+      binding.reportData!['cleanup_error'] = cleanupFailure?.toString();
+      binding.reportData!['checks'] = checks;
+      binding.reportData!['tests'] = <String, String>{
+        for (final entry in binding.results.entries)
+          entry.key: entry.value == 'success' ? 'PASS' : 'FAIL',
+      };
+
+      try {
+        await cleanupClient?.auth.signOut();
+        await cleanupClient?.dispose();
+        await client.auth.signOut();
+        await client.dispose();
+      } on Object catch (error, stack) {
+        disposalFailure = error;
+        disposalStack = stack;
+      }
+
+      final failure = cleanupFailure;
+      if (failure != null) {
+        Error.throwWithStackTrace(failure, cleanupStack ?? StackTrace.current);
+      }
+      final disposeError = disposalFailure;
+      if (disposeError != null) {
+        Error.throwWithStackTrace(
+          disposeError,
+          disposalStack ?? StackTrace.current,
+        );
+      }
+      if (!countsMatch) {
+        throw StateError(
+          'Step B listing, image-row, and Storage counts were not restored: '
+          'before=$beforeCounts after=$measuredAfter',
+        );
+      }
+    }
   });
 
   testWidgets('real iOS unified Sell and moderation publication flow', (
