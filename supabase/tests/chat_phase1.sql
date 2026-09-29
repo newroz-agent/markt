@@ -217,6 +217,14 @@ begin
     '%f1000000-0000-0000-0000-000000000001%',
     'Buyer avatar reference never exposes the auth user id';
   assert item->>'seller_user_id' = auth.uid()::text;
+  assert item->>'viewer_role' = 'seller'
+    and item->>'viewer_identity_type' = 'person'
+    and item->>'viewer_seller_id' = 'f2000000-0000-0000-0000-000000000001'
+    and item->>'seller_kind' = 'private',
+    'Seller-side inbox metadata stays bound to the exact chat seller identity';
+  assert item->>'seller_identity_name' = 'Phase One'
+    and item->>'viewer_identity_name' = 'Phase One',
+    'Private seller labels come from the server-side profile overlay';
   assert item->>'shop_name' = 'Phase One'
     and item->>'shop_slug' = 'phase1-sql-test'
     and item->>'shop_profile_username' = 'phase_one',
@@ -229,8 +237,11 @@ begin
   assert (public.get_chat_inbox()->0->>'id') = current_setting('test.phase1_chat_id'), 'Most recent activity first';
   assert (select array_agg(key order by key) from jsonb_object_keys(item) as key) = array[
     'buyer_avatar_url', 'buyer_id', 'buyer_name', 'created_at', 'id', 'last_message_at',
-    'last_message_preview', 'product', 'seller_id', 'seller_user_id', 'shop_avatar_url',
-    'shop_name', 'shop_profile_username', 'shop_slug', 'unread_count'], 'Only whitelisted fields returned';
+    'last_message_preview', 'product', 'seller_id', 'seller_identity_avatar_url',
+    'seller_identity_name', 'seller_kind', 'seller_user_id', 'shop_avatar_url',
+    'shop_name', 'shop_profile_username', 'shop_slug', 'unread_count',
+    'viewer_identity_avatar_url', 'viewer_identity_name', 'viewer_identity_type',
+    'viewer_role', 'viewer_seller_id'], 'Only whitelisted fields returned';
   assert (select sum((entry->>'unread_count')::integer) = 1
     from jsonb_array_elements(public.get_chat_inbox()) as entry), 'Only new incoming card counts';
 end;
