@@ -10,6 +10,7 @@ import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_co
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat_repository.dart';
 import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 
 class _Auth extends Mock implements AuthRepository {}
 
@@ -349,6 +350,25 @@ void main() {
     await changeUser(other);
     expect((await container.read(details.future))?.chatId, 'detail');
     expect(repository.details, ['detail', 'detail']);
+  });
+
+  test('identity catalog revision refetches inbox and chat details', () async {
+    final inbox = container.listen(chatInboxProvider, (_, _) {});
+    final detailsProvider = chatDetailsProvider(chatId: 'detail');
+    final details = container.listen(detailsProvider, (_, _) {});
+    await Future<void>.delayed(Duration.zero);
+    expect(repository.inboxes, hasLength(1));
+    expect(repository.details, ['detail']);
+
+    container.read(identityCatalogRevisionProvider.notifier).bump();
+    await container.pump();
+    await Future<void>.delayed(Duration.zero);
+
+    expect(repository.inboxCancelled, 1);
+    expect(repository.inboxes, hasLength(2));
+    expect(repository.details, ['detail', 'detail']);
+    inbox.close();
+    details.close();
   });
 
   for (final fail in [false, true]) {

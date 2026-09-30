@@ -760,6 +760,11 @@ class AppLocalizationsKu extends AppLocalizations {
   String get productContactSeller => 'Bi firoşkar re bikeve têkiliyê';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return 'Wek $name';
+  }
+
+  @override
   String get chatInboxTitle => 'Peyam';
 
   @override
@@ -933,6 +938,31 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Ji bijarteyan derxe';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Profîla firotinê hilbijêre';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Hilbijêre ka ev îlan bi taybetî an wek karsazî were weşandin.';
+
+  @override
+  String get sellAsPerson => 'Wek kesê taybet';
+
+  @override
+  String get sellAsBusiness => 'Wek karsazî';
+
+  @override
+  String get sellChangeIdentity => 'Profîla firotinê biguherîne';
+
+  @override
+  String get myListingsPrivateSection => 'Taybet';
+
+  @override
+  String get myListingsBusinessSection => 'Karsazî';
+
+  @override
+  String get myListingsSectionEmpty => 'Hîn li vê beşê tu îlan tune.';
 
   @override
   String get sellCatalogTitle => 'Tu dixwazî çi bifiroşî?';

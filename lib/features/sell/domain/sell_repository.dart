@@ -1,14 +1,13 @@
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_models.dart';
 
 abstract interface class SellRepository {
-  Future<SellerIdentity?> fetchSellerIdentity();
-
   Future<List<ListingTemplate>> searchTemplates(String query);
 
   Future<MyListing> submitListing(SellListingDraft draft);
 
-  Future<List<MyListing>> fetchMyListings();
+  Future<List<MyListing>> fetchMyListings(IdentityCatalog catalog);
 }
 
 class UnconfiguredSellRepository implements SellRepository {
@@ -16,9 +15,6 @@ class UnconfiguredSellRepository implements SellRepository {
 
   Never _unconfigured() =>
       throw const AppException(AppFailureCode.backendNotConfigured);
-
-  @override
-  Future<SellerIdentity?> fetchSellerIdentity() async => null;
 
   @override
   Future<List<ListingTemplate>> searchTemplates(String query) async =>
@@ -29,5 +25,6 @@ class UnconfiguredSellRepository implements SellRepository {
       _unconfigured();
 
   @override
-  Future<List<MyListing>> fetchMyListings() async => _unconfigured();
+  Future<List<MyListing>> fetchMyListings(IdentityCatalog catalog) async =>
+      _unconfigured();
 }

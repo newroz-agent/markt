@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
 
 enum SellSellerKind {
   private('private'),
@@ -126,8 +127,7 @@ class PreparedListingSubmission {
 @immutable
 class SellListingDraft {
   const SellListingDraft({
-    required this.sellerKind,
-    required this.sellerName,
+    required this.identity,
     required this.title,
     required this.priceCents,
     this.compareAtPriceCents,
@@ -139,10 +139,13 @@ class SellListingDraft {
     this.specifications = const <String, dynamic>{},
   });
 
-  final SellSellerKind sellerKind;
-  final String sellerName;
+  final MarketplaceIdentity identity;
+  SellSellerKind get sellerKind =>
+      identity.isBusiness ? SellSellerKind.business : SellSellerKind.private;
+  String get sellerName => identity.label;
   final String title;
   final int priceCents;
+
   /// Optional crossed-out original price. When set, the server requires it
   /// to be strictly greater than [priceCents]; null means no deal flag.
   final int? compareAtPriceCents;
@@ -157,6 +160,7 @@ class SellListingDraft {
 @immutable
 class MyListing {
   const MyListing({
+    required this.identity,
     required this.id,
     required this.title,
     required this.priceCents,
@@ -169,7 +173,10 @@ class MyListing {
     this.moderationReason,
   });
 
-  factory MyListing.fromJson(Map<String, dynamic> json) {
+  factory MyListing.fromJson(
+    Map<String, dynamic> json, {
+    required MarketplaceIdentity identity,
+  }) {
     final imageRows =
         (json['images'] as List? ?? const <Object>[])
             .whereType<Map<Object?, Object?>>()
@@ -181,6 +188,7 @@ class MyListing {
             ),
           );
     return MyListing(
+      identity: identity,
       id: json['id']! as String,
       title: json['title']! as String,
       priceCents: json['price_cents']! as int,
@@ -199,6 +207,7 @@ class MyListing {
     );
   }
 
+  final MarketplaceIdentity identity;
   final String id;
   final String title;
   final int priceCents;

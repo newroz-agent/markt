@@ -962,6 +962,15 @@
   "@productContactSeller": {
     "description": "Button that opens a conversation with the seller."
   },
+  "chatIdentityContext": "Als {name}",
+  "@chatIdentityContext": {
+    "description": "Identity owned by the viewer and immutably bound to this chat.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "chatInboxTitle": "Nachrichten",
   "@chatInboxTitle": {
     "description": "Title of the conversations inbox."
@@ -1203,6 +1212,38 @@
   "favoriteRemoveAction": "Aus Favoriten entfernen",
   "@favoriteRemoveAction": {
     "description": "Action label to remove this listing from favorites, not a success confirmation."
+  },
+  "sellIdentityChoiceTitle": "Verkaufsprofil wählen",
+  "@sellIdentityChoiceTitle": {
+    "description": "Title shown before the Sell form when both identities exist."
+  },
+  "sellIdentityChoiceBody": "Wähle, ob dieses Angebot privat oder geschäftlich veröffentlicht wird.",
+  "@sellIdentityChoiceBody": {
+    "description": "Explains that one identity must be bound to the whole listing draft."
+  },
+  "sellAsPerson": "Als Privatperson",
+  "@sellAsPerson": {
+    "description": "Sell choice and bound-draft label for the person identity."
+  },
+  "sellAsBusiness": "Als Geschäft",
+  "@sellAsBusiness": {
+    "description": "Sell choice and bound-draft label for the business identity."
+  },
+  "sellChangeIdentity": "Verkaufsprofil wechseln",
+  "@sellChangeIdentity": {
+    "description": "Tooltip that returns to identity choice and resets the current draft."
+  },
+  "myListingsPrivateSection": "Privat",
+  "@myListingsPrivateSection": {
+    "description": "Heading for listings owned by the person's private seller identity."
+  },
+  "myListingsBusinessSection": "Geschäft",
+  "@myListingsBusinessSection": {
+    "description": "Heading for listings owned by the business seller identity."
+  },
+  "myListingsSectionEmpty": "Noch keine Angebote in diesem Bereich.",
+  "@myListingsSectionEmpty": {
+    "description": "Empty message inside one identity section of My Listings."
   },
   "sellCatalogTitle": "Was möchtest du verkaufen?",
   "sellCatalogBody": "Suche zuerst nach einem ähnlichen Artikel oder starte ohne Vorlage.",

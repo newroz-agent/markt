@@ -1,6 +1,6 @@
 # Zêrîn Project Status
 
-Updated: 2026-09-30 — Step F2b identity switching and business scoping complete
+Updated: 2026-09-30 — Step F2c identity-aware selling, listings, chat and iOS evidence complete
 Canonical product contract: `docs/SCOPE.md`
 
 > Step D evidence note (2026-09-22). The migration
@@ -128,7 +128,7 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   create/delete/type changes run the unverified wipe. The migration remains absent from
   `supabase_migrations.schema_migrations` under the direct-psql ledger caveat.
 
-## Step F — account switching (F2b complete; F2c approval required)
+## Step F — account switching (F2c complete; legacy-overload cleanup approval required)
 
 - ✅ `20260928000100_step_f2a_multi_identity.sql` replaces global seller/user uniqueness
   with `UNIQUE(user_id, kind)`, revokes authenticated direct seller inserts, adds the safe
@@ -150,9 +150,9 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   exactly once each through `ROLLBACK`; zero F2a fixture rows remained. Flutter
   compatibility also passed: `flutter analyze --no-pub` clean and `flutter test --no-pub`
   297/297. Evidence: `docs/evidence/step-f/f2a-database-closeout.md`.
-- ⚠️ Compatibility contract: the legacy no-ID RPC overloads are temporary. Once F2c
-  ships and the Flutter client no longer calls them, remove those overloads in a
-  follow-up migration.
+- ⚠️ Compatibility contract: F2c no longer calls the legacy no-ID RPC overloads.
+  Removing those temporary overloads is the next small follow-up and requires explicit
+  approval before any migration work starts.
 - ✅ F2b shared identity lifecycle: `get_my_identity_catalog` is parsed into a safe
   person-plus-optional-business catalog; active selection is stored under
   `identity.active.v1.<auth UID>`, exposed only after a fresh server fetch, repaired by
@@ -175,10 +175,39 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   `flutter analyze --no-pub` is clean and the full `flutter test --no-pub` suite passes
   316/316. All three new strings are present in de/en/ar/tr/ku; Account Arabic RTL and
   Kurdish LTR are covered. Evidence: `docs/evidence/step-f/f2b-client-closeout.md`.
-- ✅ F2c-owned Sell, My Listings and inbox production files are unchanged. The retained
-  E2 live harness was updated to the explicit routes/RPC but not executed because F2b
-  did not authorize a write-capable live evidence run.
-- ⏸️ F2c is not started and requires explicit approval.
+- ✅ F2c Sell: dual users must confirm “Als Privatperson / Als Geschäft” before the
+  form, preselected from active identity; person-only users sell privately. The chosen
+  catalog identity is bound to the entire draft, changing it clears every form/template/
+  photo/submission field, and preparation always uses the UUID-first four-key RPC with
+  explicit nullable `p_seller_id` for lazy private creation.
+- ✅ F2c My Listings remains one screen and now shows Privat/Geschäft sections. Every
+  row carries its exact server-catalog seller identity; fetching uses the complete
+  explicit seller-ID set and never filters from the active switcher.
+- ✅ F2c inbox remains unified with one account-wide unread count. Seller-side rows show
+  the exact person/business identity bound to `chat.seller_id`; buyer-side rows stay the
+  person. Inbox and conversation header share the server-projected localized “Als …”
+  label and never relabel from active identity.
+- ✅ Identity-aware invalidation uses the catalog revision after lazy private creation or
+  profile/business changes; My Listings, inbox and chat details refresh from server data.
+  Active selection itself is not an authorization or chat-cache dependency.
+- ✅ F2c client gate: focused identity/Sell/chat tests 92/92, final
+  `flutter analyze --no-pub` clean, full `flutter test --no-pub` 326/326. On a fresh
+  faithful clone, `step_f2a.sql` plus all 12 non-legacy SQL suites passed as separate
+  commands; slowest was E1.5 at 1.14s. Seed proof:
+  `docs/evidence/step-f/f2c-seed-dryrun.txt`.
+- ✅ The deterministic local F2c seed was applied once after approval. Retained fixtures:
+  `step-f2c-dual@example.invalid`, `step-f2c-buyer@example.invalid`, and
+  `step-f2c-other@example.invalid`; 3 sellers, 2 identity-bound listings, 3 chats and
+  3 unread incoming messages. They remain local test accounts like the E2 fixtures.
+- ✅ One authorized iPhone 17 Pro / iOS 26.1 harness run passed 4/4 checkpoints and 1/1
+  integration test. Four inspected 1206×2622 PNGs plus `results.json` are under
+  `docs/evidence/step-f/ios/`: dual switcher, Sell choice, two My Listings sections,
+  and three inbox identity labels. Harness created 0 rows/objects, restored device
+  preferences, and before/after fixture counts matched. It did not open a conversation;
+  exact post-run audit found no `read_at` changes (all 3 incoming messages remain unread),
+  so the optional restoration seed rerun was not used.
+- ⏸️ Next step: remove the temporary legacy no-ID overloads in a small follow-up
+  migration, only after explicit approval.
 
 ## Step E1.5 — OpenStreetMap restaurant/café import (server side)
 

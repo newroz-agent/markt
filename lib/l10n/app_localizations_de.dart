@@ -763,6 +763,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get productContactSeller => 'Verkäufer kontaktieren';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return 'Als $name';
+  }
+
+  @override
   String get chatInboxTitle => 'Nachrichten';
 
   @override
@@ -938,6 +943,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Aus Favoriten entfernen';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Verkaufsprofil wählen';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Wähle, ob dieses Angebot privat oder geschäftlich veröffentlicht wird.';
+
+  @override
+  String get sellAsPerson => 'Als Privatperson';
+
+  @override
+  String get sellAsBusiness => 'Als Geschäft';
+
+  @override
+  String get sellChangeIdentity => 'Verkaufsprofil wechseln';
+
+  @override
+  String get myListingsPrivateSection => 'Privat';
+
+  @override
+  String get myListingsBusinessSection => 'Geschäft';
+
+  @override
+  String get myListingsSectionEmpty => 'Noch keine Angebote in diesem Bereich.';
 
   @override
   String get sellCatalogTitle => 'Was möchtest du verkaufen?';

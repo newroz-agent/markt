@@ -40,24 +40,6 @@ final sellImageServiceProvider = Provider<SellImageService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SellImageServiceRef = ProviderRef<SellImageService>;
-String _$sellerIdentityHash() => r'f3e184cde4bafa45b42022319f0389ae5f46759a';
-
-/// See also [sellerIdentity].
-@ProviderFor(sellerIdentity)
-final sellerIdentityProvider =
-    AutoDisposeFutureProvider<SellerIdentity?>.internal(
-      sellerIdentity,
-      name: r'sellerIdentityProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$sellerIdentityHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SellerIdentityRef = AutoDisposeFutureProviderRef<SellerIdentity?>;
 String _$listingTemplatesHash() => r'37586c5e5a073a4949ad7d34a235917e545d6e0b';
 
 /// Copied from Dart SDK
@@ -202,7 +184,7 @@ class _ListingTemplatesProviderElement
   String get query => (origin as ListingTemplatesProvider).query;
 }
 
-String _$myListingsHash() => r'b490eaefb812748fee67705983f04875494001ce';
+String _$myListingsHash() => r'ce0e6376c2480b2758bf07302059241a246536d4';
 
 /// See also [myListings].
 @ProviderFor(myListings)
@@ -220,7 +202,7 @@ final myListingsProvider = AutoDisposeFutureProvider<List<MyListing>>.internal(
 // ignore: unused_element
 typedef MyListingsRef = AutoDisposeFutureProviderRef<List<MyListing>>;
 String _$sellSubmissionControllerHash() =>
-    r'cc3b8360a5cd4a598a761ba352d40585d736e3bf';
+    r'ba8f74ab3b7091cae4c097b7f8e0e20fec1a99e6';
 
 /// See also [SellSubmissionController].
 @ProviderFor(SellSubmissionController)

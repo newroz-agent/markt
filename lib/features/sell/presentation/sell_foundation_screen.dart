@@ -7,8 +7,9 @@ import 'package:zerin_marketplace/app/router/app_router.dart';
 import 'package:zerin_marketplace/core/constants/german_cities.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
-import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/categories/presentation/controllers/category_controller.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_models.dart';
 import 'package:zerin_marketplace/features/sell/presentation/controllers/sell_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -24,27 +25,27 @@ class SellFoundationScreen extends ConsumerStatefulWidget {
 class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
   final _detailsKey = GlobalKey<FormState>();
   final _searchController = TextEditingController();
-  final _sellerNameController = TextEditingController();
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _compareAtPriceController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   int _step = 0;
+  int _draftGeneration = 0;
   String _catalogQuery = '';
-  SellSellerKind _sellerKind = SellSellerKind.private;
+  String? _pendingIdentityKey;
+  String? _boundIdentityKey;
+  bool _identityConfirmed = false;
   SellCondition _condition = SellCondition.used;
   String? _city;
   String? _categoryId;
   Map<String, dynamic> _specifications = const <String, dynamic>{};
   final List<SellPhoto> _photos = <SellPhoto>[];
   bool _photoBusy = false;
-  bool _identityApplied = false;
 
   @override
   void dispose() {
     _searchController.dispose();
-    _sellerNameController.dispose();
     _titleController.dispose();
     _priceController.dispose();
     _compareAtPriceController.dispose();
@@ -54,32 +55,145 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(sellerIdentityProvider, (_, next) {
-      next.whenData((identity) {
-        if (_identityApplied || identity == null || !mounted) return;
-        setState(() {
-          _identityApplied = true;
-          _sellerKind = identity.kind;
-          _sellerNameController.text = identity.name;
-        });
-      });
-    });
-    if (!_identityApplied && _sellerNameController.text.isEmpty) {
-      final displayName = ref
-          .read(authRepositoryProvider)
-          .currentUser
-          ?.displayName;
-      if (displayName != null && displayName.trim().isNotEmpty) {
-        _sellerNameController.text = displayName.trim();
-      }
-    }
-
+    final identities = ref.watch(activeIdentityControllerProvider);
     final submission = ref.watch(sellSubmissionControllerProvider);
-    final completed = submission.asData?.value;
-    if (completed != null) {
-      return _SubmissionConfirmation(listing: completed, onReset: _reset);
-    }
+    return identities.when(
+      loading: () => Scaffold(
+        appBar: AppBar(title: Text(context.l10n.sellCatalogTitle)),
+        body: const Center(child: CircularProgressIndicator()),
+      ),
+      error: (_, _) => Scaffold(
+        appBar: AppBar(title: Text(context.l10n.sellCatalogTitle)),
+        body: AppErrorState(
+          title: context.l10n.stateErrorTitle,
+          message: context.l10n.stateErrorMessage,
+          retryLabel: context.l10n.actionRetry,
+          onRetry: () =>
+              ref.read(activeIdentityControllerProvider.notifier).refresh(),
+        ),
+      ),
+      data: (identitySession) {
+        final person = identitySession?.catalog.person;
+        if (identitySession == null || person == null) {
+          return Scaffold(
+            appBar: AppBar(title: Text(context.l10n.sellCatalogTitle)),
+            body: AppEmptyState(
+              title: context.l10n.authRequiredTitle,
+              message: context.l10n.authRequiredMessage,
+            ),
+          );
+        }
+        final business = identitySession.catalog.business;
+        final dualIdentity = business != null;
+        final selected =
+            identitySession.catalog.identityForSelectionKey(
+              _pendingIdentityKey,
+            ) ??
+            identitySession.activeIdentity ??
+            person;
+        final boundIdentity = dualIdentity
+            ? identitySession.catalog.identityForSelectionKey(_boundIdentityKey)
+            : person;
 
+        if (dualIdentity && (!_identityConfirmed || boundIdentity == null)) {
+          return _identityChoice(
+            person: person,
+            business: business,
+            selected: selected,
+          );
+        }
+
+        final identity = boundIdentity ?? person;
+        final completed = submission.asData?.value;
+        if (completed != null) {
+          return _SubmissionConfirmation(listing: completed, onReset: _reset);
+        }
+        return _listingForm(
+          identity: identity,
+          dualIdentity: dualIdentity,
+          submission: submission,
+        );
+      },
+    );
+  }
+
+  Widget _identityChoice({
+    required MarketplaceIdentity person,
+    required MarketplaceIdentity business,
+    required MarketplaceIdentity selected,
+  }) {
+    final l10n = context.l10n;
+    Widget choice(
+      MarketplaceIdentity identity,
+      String label,
+      IconData icon,
+      Key key,
+    ) => Card(
+      child: ListTile(
+        key: key,
+        selected: selected.selectionKey == identity.selectionKey,
+        leading: Icon(icon),
+        title: Text(label),
+        subtitle: Text(identity.label),
+        trailing: selected.selectionKey == identity.selectionKey
+            ? const Icon(Icons.check_circle_rounded)
+            : null,
+        onTap: () =>
+            setState(() => _pendingIdentityKey = identity.selectionKey),
+      ),
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.sellIdentityChoiceTitle),
+        actions: <Widget>[
+          IconButton(
+            tooltip: l10n.myListingsTitle,
+            onPressed: () => const MyListingsRoute().push<void>(context),
+            icon: const Icon(Icons.inventory_2_outlined),
+          ),
+        ],
+      ),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
+          child: ListView(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            children: <Widget>[
+              Text(l10n.sellIdentityChoiceBody),
+              const SizedBox(height: AppSpacing.md),
+              choice(
+                person,
+                l10n.sellAsPerson,
+                Icons.person_outline_rounded,
+                const ValueKey('sell-identity-person'),
+              ),
+              choice(
+                business,
+                l10n.sellAsBusiness,
+                Icons.storefront_outlined,
+                const ValueKey('sell-identity-business'),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppButton.primary(
+                key: const ValueKey('sell-identity-confirm'),
+                label: l10n.actionContinue,
+                expand: true,
+                onPressed: () => _bindIdentity(selected),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _listingForm({
+    required MarketplaceIdentity identity,
+    required bool dualIdentity,
+    required AsyncValue<MyListing?> submission,
+  }) {
     final titles = <String>[
       context.l10n.sellCatalogTitle,
       context.l10n.sellDetailsTitle,
@@ -99,6 +213,15 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
                 icon: const Icon(Icons.arrow_back_rounded),
               ),
         actions: <Widget>[
+          if (dualIdentity)
+            IconButton(
+              key: const ValueKey('sell-change-identity'),
+              tooltip: context.l10n.sellChangeIdentity,
+              onPressed: submission.isLoading || _photoBusy
+                  ? null
+                  : () => _changeIdentity(identity),
+              icon: const Icon(Icons.switch_account_outlined),
+            ),
           IconButton(
             tooltip: context.l10n.myListingsTitle,
             onPressed: () => const MyListingsRoute().push<void>(context),
@@ -116,9 +239,9 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
               Expanded(
                 child: switch (_step) {
                   0 => _catalogStep(),
-                  1 => _detailsStep(),
+                  1 => _detailsStep(identity),
                   2 => _photosStep(),
-                  _ => _reviewStep(submission),
+                  _ => _reviewStep(submission, identity),
                 },
               ),
             ],
@@ -126,6 +249,24 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
         ),
       ),
     );
+  }
+
+  void _bindIdentity(MarketplaceIdentity identity) {
+    _clearDraft();
+    setState(() {
+      _pendingIdentityKey = identity.selectionKey;
+      _boundIdentityKey = identity.selectionKey;
+      _identityConfirmed = true;
+    });
+  }
+
+  void _changeIdentity(MarketplaceIdentity identity) {
+    _clearDraft();
+    setState(() {
+      _pendingIdentityKey = identity.selectionKey;
+      _boundIdentityKey = null;
+      _identityConfirmed = false;
+    });
   }
 
   Widget _catalogStep() {
@@ -204,10 +345,9 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
     );
   }
 
-  Widget _detailsStep() {
+  Widget _detailsStep(MarketplaceIdentity identity) {
     final l10n = context.l10n;
     final categories = ref.watch(activeCategoriesProvider);
-    final existingSeller = ref.watch(sellerIdentityProvider).valueOrNull;
     return Form(
       key: _detailsKey,
       child: ListView(
@@ -219,34 +359,19 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
           AppSpacing.xxl,
         ),
         children: <Widget>[
-          DropdownButtonFormField<SellSellerKind>(
-            key: ValueKey('seller-kind-${_sellerKind.name}'),
-            initialValue: _sellerKind,
-            decoration: InputDecoration(labelText: l10n.sellSellerKindLabel),
-            items: <DropdownMenuItem<SellSellerKind>>[
-              DropdownMenuItem(
-                value: SellSellerKind.private,
-                child: Text(l10n.sellSellerPrivate),
+          Card(
+            child: ListTile(
+              key: const ValueKey('sell-bound-identity'),
+              leading: Icon(
+                identity.isBusiness
+                    ? Icons.storefront_outlined
+                    : Icons.person_outline_rounded,
               ),
-              DropdownMenuItem(
-                value: SellSellerKind.business,
-                child: Text(l10n.sellSellerBusiness),
+              title: Text(identity.label),
+              subtitle: Text(
+                identity.isBusiness ? l10n.sellAsBusiness : l10n.sellAsPerson,
               ),
-            ],
-            onChanged: existingSeller == null
-                ? (value) => setState(
-                    () => _sellerKind = value ?? SellSellerKind.private,
-                  )
-                : null,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          AppTextField(
-            controller: _sellerNameController,
-            label: l10n.sellSellerNameLabel,
-            enabled: existingSeller == null,
-            textCapitalization: TextCapitalization.words,
-            maxLength: 100,
-            validator: _required,
+            ),
           ),
           const SizedBox(height: AppSpacing.md),
           AppTextField(
@@ -477,7 +602,10 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
     );
   }
 
-  Widget _reviewStep(AsyncValue<MyListing?> submission) {
+  Widget _reviewStep(
+    AsyncValue<MyListing?> submission,
+    MarketplaceIdentity identity,
+  ) {
     final l10n = context.l10n;
     final categories = ref.watch(activeCategoriesProvider).valueOrNull;
     final category = categories
@@ -521,6 +649,12 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
                 const SizedBox(height: AppSpacing.sm),
                 Text('${_priceController.text.trim()} €'),
                 const Divider(),
+                _ReviewRow(
+                  label: l10n.sellSellerKindLabel,
+                  value: identity.isBusiness
+                      ? l10n.sellAsBusiness
+                      : l10n.sellAsPerson,
+                ),
                 _ReviewRow(label: l10n.sellCityLabel, value: _city ?? ''),
                 _ReviewRow(
                   label: l10n.sellCategoryLabel,
@@ -555,7 +689,7 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
           label: l10n.sellSubmit,
           leading: const Icon(Icons.send_rounded),
           loading: submission.isLoading,
-          onPressed: submission.isLoading ? null : _submit,
+          onPressed: submission.isLoading ? null : () => _submit(identity),
           expand: true,
         ),
       ],
@@ -580,6 +714,7 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
   }
 
   Future<void> _applyTemplate(ListingTemplate template) async {
+    final generation = _draftGeneration;
     setState(() {
       _titleController.text = template.title;
       _categoryId = template.categoryId;
@@ -593,9 +728,11 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
         final photo = await ref
             .read(sellImageServiceProvider)
             .importTemplateImage(imageUrl);
-        if (photo != null && mounted) setState(() => _photos.add(photo));
+        if (photo != null && mounted && generation == _draftGeneration) {
+          setState(() => _photos.add(photo));
+        }
       } on Object {
-        if (mounted) {
+        if (mounted && generation == _draftGeneration) {
           AppSnackBar.show(
             context,
             message: context.l10n.sellPhotoFailed,
@@ -604,7 +741,7 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
         }
       }
     }
-    if (mounted) {
+    if (mounted && generation == _draftGeneration) {
       AppSnackBar.show(context, message: context.l10n.sellTemplateImported);
     }
   }
@@ -653,7 +790,7 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
     }
   }
 
-  Future<void> _submit() async {
+  Future<void> _submit(MarketplaceIdentity identity) async {
     final price = _priceCents(_priceController.text);
     if (price == null ||
         _city == null ||
@@ -662,16 +799,13 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
       return;
     }
     final compareAtText = _compareAtPriceController.text.trim();
-    final compareAt = compareAtText.isEmpty
-        ? null
-        : _priceCents(compareAtText);
+    final compareAt = compareAtText.isEmpty ? null : _priceCents(compareAtText);
     if (compareAt != null && compareAt <= price) return;
     await ref
         .read(sellSubmissionControllerProvider.notifier)
         .submit(
           SellListingDraft(
-            sellerKind: _sellerKind,
-            sellerName: _sellerNameController.text.trim(),
+            identity: identity,
             title: _titleController.text.trim(),
             priceCents: price,
             compareAtPriceCents: compareAt,
@@ -685,8 +819,10 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
         );
   }
 
-  void _reset() {
+  void _clearDraft() {
     ref.read(sellSubmissionControllerProvider.notifier).reset();
+    _detailsKey.currentState?.reset();
+    _draftGeneration++;
     setState(() {
       _step = 0;
       _catalogQuery = '';
@@ -700,6 +836,16 @@ class _SellFoundationScreenState extends ConsumerState<SellFoundationScreen> {
       _condition = SellCondition.used;
       _specifications = const <String, dynamic>{};
       _photos.clear();
+      _photoBusy = false;
+    });
+  }
+
+  void _reset() {
+    _clearDraft();
+    setState(() {
+      _pendingIdentityKey = null;
+      _boundIdentityKey = null;
+      _identityConfirmed = false;
     });
   }
 }

@@ -36,6 +36,16 @@ class MarketplaceIdentity {
   /// lazily-created private seller ID changes from null to a UUID.
   String get selectionKey =>
       isPerson ? personSelectionKey : 'business:${sellerId ?? ''}';
+
+  MarketplaceIdentity withSellerId(String value) => MarketplaceIdentity(
+    type: type,
+    sellerId: value,
+    sellerKind: sellerKind,
+    sellerStatus: sellerStatus,
+    label: label,
+    avatarUrl: avatarUrl,
+    username: username,
+  );
 }
 
 @immutable

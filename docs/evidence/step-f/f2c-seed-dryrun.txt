@@ -1,0 +1,70 @@
+STEP F2C DUAL-IDENTITY SEED — ISOLATED DRY-RUN
+Date: 2026-09-30
+Docker context: desktop-linux (Docker Desktop)
+Source database: postgres (not written)
+Disposable database: f2c_dryrun_20260930_01
+Seed: supabase/snippets/step_f2c_local_seed.sql
+Seed SHA-256: c00d760fc7d7de57261f81a119b3f3c0b8e1847f58eb1bf39fa877ac9b9ccfab
+
+PRECONDITIONS
+- A fresh clone was created from template0.
+- A full pg_dump -Fc of the effective local database was restored with original owners/ACLs using pg_restore --single-transaction.
+- Before seed dry-run, step_f2a.sql and all 12 non-legacy SQL suites passed on the clone as 13 separate commands. Slowest suite: step_e1_5_osm_import.sql, 1.14 seconds.
+- Clone/source baseline fingerprints matched exactly.
+
+BASELINE (SOURCE AND CLONE)
+{"users":5,"profiles":5,"sellers":7,"documents":8,"products":33,"price_history":33,"chats":1,"messages":1,"notifications":4,"outbox":4,"f2c_users":0,"f2c_sellers":0,"f2c_products":0,"f2c_chats":0,"product_seller_hash":"a79f54f8a13e6ce15e516d78a8dc84b5"}
+
+FIRST CLONE-ONLY APPLICATION
+- Transaction reached COMMIT and printed: STEP F2C LOCAL SEED: done
+- Duration: 0.21 seconds
+- Seed-internal catalog/listing/inbox/unread assertions passed.
+
+POST-SEED COUNTS
+{"users":8,"profiles":8,"sellers":10,"documents":10,"products":35,"price_history":35,"chats":4,"messages":7,"notifications":7,"outbox":7,"f2c_users":3,"f2c_sellers":3,"f2c_products":2,"f2c_chats":3,"f2c_messages":3,"existing_product_seller_hash":"a79f54f8a13e6ce15e516d78a8dc84b5"}
+
+EXACT DATA DELTA
+- auth.users: +3
+- public.profiles: +3
+- public.sellers: +3 (dual private + dual business + counterpart business)
+- public.seller_documents: +2 (approved dual-business proofs)
+- public.products: +2 (one private, one business)
+- public.product_price_history: +2 (normal insert trigger history)
+- public.chats: +3
+- public.messages: +6 (three normal seeded incoming messages + three normal chat bootstrap system messages)
+- public.notifications: +3 (normal incoming-message notifications)
+- public.notification_outbox: +3
+- Existing products(id,seller_id): unchanged; hash remained a79f54f8a13e6ce15e516d78a8dc84b5.
+
+DUAL IDENTITY CATALOG
+person  | f2c20000-0000-4000-8000-000000000001 | Rojin Demir   | approved
+business| f2c20000-0000-4000-8000-000000000002 | Rojin Atelier | approved
+
+LISTING ATTACHMENTS
+f2c30000-0000-4000-8000-000000000001 | f2c20000-0000-4000-8000-000000000001 | Private Vintage Kamera     | pending_review
+f2c30000-0000-4000-8000-000000000002 | f2c20000-0000-4000-8000-000000000002 | Geschäftliche Keramikserie | pending_review
+
+THREE-CONTEXT INBOX FOR THE DUAL OWNER
+f2c40000-0000-4000-8000-000000000001 | seller | person   | f2c20000-0000-4000-8000-000000000001 | Rojin Demir   | unread 1
+f2c40000-0000-4000-8000-000000000002 | seller | business | f2c20000-0000-4000-8000-000000000002 | Rojin Atelier | unread 1
+f2c40000-0000-4000-8000-000000000003 | buyer  | person   | null                                 | Rojin Demir   | unread 1
+Unified get_unread_chat_count(): 3
+
+IDEMPOTENCE
+- The same seed was executed a second time against the clone.
+- Transaction reached COMMIT and printed: STEP F2C LOCAL SEED: done
+- Duration: 0.28 seconds
+- Seed reset exactly 3 seed-owned notifications and 3 seed-owned chats, then recreated the intended matrix.
+- All post-seed global and fixture counts were identical to the first application.
+- f2c_unread remained 3.
+- Existing product-seller hash remained a79f54f8a13e6ce15e516d78a8dc84b5.
+
+CLEANUP AND SOURCE ISOLATION
+- Disposable database f2c_dryrun_20260930_01 was dropped.
+- Post-drop clone_exists: false.
+- Effective source still has 0 F2c users, sellers, products, chats and messages.
+- Effective source remains: sellers=7, products=33, chats=1, messages=1.
+- Effective source product-seller hash remains a79f54f8a13e6ce15e516d78a8dc84b5.
+
+RESULT: PASS
+The seed is proven only in isolation. It has NOT been applied to the effective local database. Explicit approval is required before seed application and live iOS evidence execution.

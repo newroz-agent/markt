@@ -42,6 +42,26 @@ final _identitySessionProvider = AutoDisposeProvider<_IdentitySession>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef _IdentitySessionRef = AutoDisposeProviderRef<_IdentitySession>;
+String _$validatedIdentitySessionHash() =>
+    r'f9a8804536417ce805b19320f1621bc8b849d89b';
+
+/// See also [validatedIdentitySession].
+@ProviderFor(validatedIdentitySession)
+final validatedIdentitySessionProvider =
+    AutoDisposeFutureProvider<IdentitySessionState?>.internal(
+      validatedIdentitySession,
+      name: r'validatedIdentitySessionProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$validatedIdentitySessionHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ValidatedIdentitySessionRef =
+    AutoDisposeFutureProviderRef<IdentitySessionState?>;
 String _$identityCatalogRevisionHash() =>
     r'94f760e30104126021d0482b05ae9480ec5f42a4';
 

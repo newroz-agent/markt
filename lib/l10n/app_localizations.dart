@@ -1442,6 +1442,12 @@ abstract class AppLocalizations {
   /// **'Verkäufer kontaktieren'**
   String get productContactSeller;
 
+  /// Identity owned by the viewer and immutably bound to this chat.
+  ///
+  /// In de, this message translates to:
+  /// **'Als {name}'**
+  String chatIdentityContext({required String name});
+
   /// Title of the conversations inbox.
   ///
   /// In de, this message translates to:
@@ -1777,6 +1783,54 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Aus Favoriten entfernen'**
   String get favoriteRemoveAction;
+
+  /// Title shown before the Sell form when both identities exist.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkaufsprofil wählen'**
+  String get sellIdentityChoiceTitle;
+
+  /// Explains that one identity must be bound to the whole listing draft.
+  ///
+  /// In de, this message translates to:
+  /// **'Wähle, ob dieses Angebot privat oder geschäftlich veröffentlicht wird.'**
+  String get sellIdentityChoiceBody;
+
+  /// Sell choice and bound-draft label for the person identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Als Privatperson'**
+  String get sellAsPerson;
+
+  /// Sell choice and bound-draft label for the business identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Als Geschäft'**
+  String get sellAsBusiness;
+
+  /// Tooltip that returns to identity choice and resets the current draft.
+  ///
+  /// In de, this message translates to:
+  /// **'Verkaufsprofil wechseln'**
+  String get sellChangeIdentity;
+
+  /// Heading for listings owned by the person's private seller identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Privat'**
+  String get myListingsPrivateSection;
+
+  /// Heading for listings owned by the business seller identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Geschäft'**
+  String get myListingsBusinessSection;
+
+  /// Empty message inside one identity section of My Listings.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Angebote in diesem Bereich.'**
+  String get myListingsSectionEmpty;
 
   /// Title of the catalog-first Sell step.
   ///

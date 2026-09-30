@@ -102,6 +102,8 @@ void main() {
         'shop_profile_username': 'alice_name',
         'shop_avatar_url': 'key/object.webp',
         'buyer_avatar_url': 'buyer-key/b.webp',
+        'viewer_identity_avatar_url': 'viewer-key/v.webp',
+        'seller_identity_avatar_url': 'seller-key/s.webp',
         'unread_count': 0,
       },
     ];
@@ -116,6 +118,14 @@ void main() {
       conversation.buyerAvatarUrl,
       contains('/storage/v1/object/public/avatars/buyer-key/b.webp'),
     );
+    expect(
+      conversation.viewerIdentityAvatarUrl,
+      contains('/storage/v1/object/public/avatars/viewer-key/v.webp'),
+    );
+    expect(
+      conversation.sellerIdentityAvatarUrl,
+      contains('/storage/v1/object/public/avatars/seller-key/s.webp'),
+    );
   });
 
   test(
@@ -128,11 +138,22 @@ void main() {
           'shop_name': 'Trusted Store',
           'shop_profile_username': null,
           'shop_avatar_url': 'https://cdn.example/store.png',
+          'viewer_identity_avatar_url': 'https://cdn.example/viewer.png',
+          'seller_identity_avatar_url':
+              'https://cdn.example/store-identity.png',
           'unread_count': 0,
         },
       ];
       final conversation = (await repository.fetchConversations()).single;
       expect(conversation.shopAvatarUrl, 'https://cdn.example/store.png');
+      expect(
+        conversation.viewerIdentityAvatarUrl,
+        'https://cdn.example/viewer.png',
+      );
+      expect(
+        conversation.sellerIdentityAvatarUrl,
+        'https://cdn.example/store-identity.png',
+      );
       expect(conversation.shopProfileUsername, isNull);
     },
   );

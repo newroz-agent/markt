@@ -5,8 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:zerin_marketplace/core/theme/theme.dart';
+import 'package:zerin_marketplace/features/auth/domain/auth_repository.dart';
+import 'package:zerin_marketplace/features/auth/domain/auth_user.dart';
+import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/categories/domain/marketplace_category.dart';
 import 'package:zerin_marketplace/features/categories/presentation/controllers/category_controller.dart';
+import 'package:zerin_marketplace/features/identity/data/active_identity_store.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity_repository.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_image_service.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_models.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_repository.dart';
@@ -36,19 +43,33 @@ final _photo = SellPhoto(
   name: 'listing.webp',
 );
 
+const _user = AuthUser(id: 'sell-user', email: 'sell@example.invalid');
+const _person = MarketplaceIdentity(
+  type: MarketplaceIdentityType.person,
+  sellerId: null,
+  sellerKind: 'private',
+  sellerStatus: null,
+  label: 'Test Verkäufer',
+  avatarUrl: null,
+  username: 'test',
+);
+const _business = MarketplaceIdentity(
+  type: MarketplaceIdentityType.business,
+  sellerId: '22222222-2222-4222-8222-222222222222',
+  sellerKind: 'business',
+  sellerStatus: 'approved',
+  label: 'Test Geschäft',
+  avatarUrl: null,
+  username: null,
+);
+
 class _FakeSellRepository implements SellRepository {
   final queries = <String>[];
   SellListingDraft? submittedDraft;
 
   @override
-  Future<SellerIdentity?> fetchSellerIdentity() async => const SellerIdentity(
-    id: 'seller-id',
-    kind: SellSellerKind.private,
-    name: 'Test Verkäufer',
-  );
-
-  @override
-  Future<List<MyListing>> fetchMyListings() async => const <MyListing>[];
+  Future<List<MyListing>> fetchMyListings(IdentityCatalog catalog) async =>
+      const <MyListing>[];
 
   @override
   Future<List<ListingTemplate>> searchTemplates(String query) async {
@@ -69,6 +90,7 @@ class _FakeSellRepository implements SellRepository {
   Future<MyListing> submitListing(SellListingDraft draft) async {
     submittedDraft = draft;
     return MyListing(
+      identity: draft.identity,
       id: 'listing-id',
       title: draft.title,
       priceCents: draft.priceCents,
@@ -82,6 +104,43 @@ class _FakeSellRepository implements SellRepository {
   }
 }
 
+class _AuthRepository implements AuthRepository {
+  @override
+  AuthUser? get currentUser => _user;
+
+  @override
+  Stream<AuthUser?> get authStateChanges => Stream.value(_user);
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) =>
+      throw UnimplementedError('${invocation.memberName}');
+}
+
+class _IdentityRepository implements IdentityCatalogRepository {
+  const _IdentityRepository(this.catalog);
+
+  final IdentityCatalog catalog;
+
+  @override
+  Future<IdentityCatalog> fetchMyIdentityCatalog() async => catalog;
+}
+
+class _IdentityStore implements ActiveIdentityStore {
+  _IdentityStore(this.selection);
+
+  String? selection;
+
+  @override
+  String? read(String userId) => selection;
+
+  @override
+  Future<void> remove(String userId) async => selection = null;
+
+  @override
+  Future<void> write(String userId, String selectionKey) async =>
+      selection = selectionKey;
+}
+
 class _FakeImageService implements SellImageService {
   @override
   Future<SellPhoto?> importTemplateImage(String imageUrl) async => _photo;
@@ -93,23 +152,35 @@ class _FakeImageService implements SellImageService {
   Future<SellPhoto?> takePhoto() async => _photo;
 }
 
-Widget _app(_FakeSellRepository repository) => ProviderScope(
-  overrides: <Override>[
-    sellRepositoryProvider.overrideWithValue(repository),
-    sellImageServiceProvider.overrideWithValue(_FakeImageService()),
-    sellerIdentityProvider.overrideWith(
-      (ref) async => repository.fetchSellerIdentity(),
+Widget _app(
+  _FakeSellRepository repository, {
+  IdentityCatalog? catalog,
+  String? activeSelection,
+}) {
+  final identities = catalog ?? IdentityCatalog(<MarketplaceIdentity>[_person]);
+  return ProviderScope(
+    overrides: <Override>[
+      authRepositoryProvider.overrideWithValue(_AuthRepository()),
+      authStateProvider.overrideWith((ref) => Stream.value(_user)),
+      identityCatalogRepositoryProvider.overrideWithValue(
+        _IdentityRepository(identities),
+      ),
+      activeIdentityStoreProvider.overrideWithValue(
+        _IdentityStore(activeSelection),
+      ),
+      sellRepositoryProvider.overrideWithValue(repository),
+      sellImageServiceProvider.overrideWithValue(_FakeImageService()),
+      activeCategoriesProvider.overrideWith((ref) async => const [_category]),
+    ],
+    child: MaterialApp(
+      locale: const Locale('de'),
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      theme: AppTheme.light,
+      home: const SellFoundationScreen(),
     ),
-    activeCategoriesProvider.overrideWith((ref) async => const [_category]),
-  ],
-  child: MaterialApp(
-    locale: const Locale('de'),
-    supportedLocales: AppLocalizations.supportedLocales,
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    theme: AppTheme.light,
-    home: const SellFoundationScreen(),
-  ),
-);
+  );
+}
 
 Future<void> _settle(WidgetTester tester) async {
   await tester.pump();
@@ -125,6 +196,85 @@ Future<void> _tapVisible(WidgetTester tester, Finder finder) async {
 
 void main() {
   setUp(() => TestWidgetsFlutterBinding.ensureInitialized());
+
+  testWidgets(
+    'dual identities require confirmation and preselect active business',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1000, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final repository = _FakeSellRepository();
+      await tester.pumpWidget(
+        _app(
+          repository,
+          catalog: IdentityCatalog(<MarketplaceIdentity>[_person, _business]),
+          activeSelection: _business.selectionKey,
+        ),
+      );
+      await _settle(tester);
+
+      expect(find.text('Als Privatperson'), findsOneWidget);
+      expect(find.text('Als Geschäft'), findsOneWidget);
+      expect(find.byKey(const ValueKey('sell-catalog-step')), findsNothing);
+      expect(
+        tester
+            .widget<ListTile>(
+              find.byKey(const ValueKey('sell-identity-business')),
+            )
+            .selected,
+        isTrue,
+      );
+
+      await tester.tap(find.byKey(const ValueKey('sell-identity-confirm')));
+      await _settle(tester);
+      expect(find.byKey(const ValueKey('sell-catalog-step')), findsOneWidget);
+    },
+  );
+
+  testWidgets('switching a confirmed identity resets the entire draft', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final repository = _FakeSellRepository();
+    await tester.pumpWidget(
+      _app(
+        repository,
+        catalog: IdentityCatalog(<MarketplaceIdentity>[_person, _business]),
+        activeSelection: _person.selectionKey,
+      ),
+    );
+    await _settle(tester);
+    await tester.tap(find.byKey(const ValueKey('sell-identity-confirm')));
+    await _settle(tester);
+    await tester.tap(find.byKey(const ValueKey('sell-free-form')));
+    await _settle(tester);
+    await tester.enterText(
+      find.descendant(
+        of: find.byKey(const ValueKey('sell-title-field')),
+        matching: find.byType(EditableText),
+      ),
+      'Must be cleared',
+    );
+
+    await tester.tap(find.byKey(const ValueKey('sell-change-identity')));
+    await _settle(tester);
+    await tester.tap(find.byKey(const ValueKey('sell-identity-business')));
+    await _settle(tester);
+    await tester.tap(find.byKey(const ValueKey('sell-identity-confirm')));
+    await _settle(tester);
+    expect(find.byKey(const ValueKey('sell-catalog-step')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('sell-free-form')));
+    await _settle(tester);
+
+    final title = tester.widget<EditableText>(
+      find.descendant(
+        of: find.byKey(const ValueKey('sell-title-field')),
+        matching: find.byType(EditableText),
+      ),
+    );
+    expect(title.controller.text, isEmpty);
+    expect(find.text('Test Geschäft'), findsOneWidget);
+  });
 
   testWidgets('catalog search applies a template in the unified flow', (
     tester,
@@ -223,6 +373,8 @@ void main() {
       expect(find.text('Angebot wird geprüft'), findsOneWidget);
       expect(repository.submittedDraft, isNotNull);
       expect(repository.submittedDraft!.sellerKind, SellSellerKind.private);
+      expect(repository.submittedDraft!.identity.sellerId, isNull);
+      expect(repository.submittedDraft!.identity.selectionKey, 'person');
       expect(repository.submittedDraft!.priceCents, 14999);
       expect(repository.submittedDraft!.photos, hasLength(1));
       expect(repository.submittedDraft!.city, 'Berlin');
@@ -351,10 +503,7 @@ void main() {
     await tester.tap(find.text('Elektronik').last);
     await _settle(tester);
 
-    await _tapVisible(
-      tester,
-      find.byKey(const ValueKey('sell-details-next')),
-    );
+    await _tapVisible(tester, find.byKey(const ValueKey('sell-details-next')));
 
     expect(
       find.text('Der Originalpreis muss höher als dein Preis sein.'),

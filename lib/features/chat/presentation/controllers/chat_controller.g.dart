@@ -23,7 +23,7 @@ final chatRepositoryProvider = Provider<ChatRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ChatRepositoryRef = ProviderRef<ChatRepository>;
-String _$chatInboxHash() => r'be42ea46a93150b9f18764ffa878d9a7058f9a39';
+String _$chatInboxHash() => r'd3315dd4cecd7c018150b4ab7817caf8a0e869ff';
 
 /// See also [chatInbox].
 @ProviderFor(chatInbox)
@@ -58,7 +58,7 @@ final unreadChatCountProvider = AutoDisposeFutureProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef UnreadChatCountRef = AutoDisposeFutureProviderRef<int>;
-String _$chatDetailsHash() => r'7e1fd4433d8580233f2f07ba5065b3f168d9605f';
+String _$chatDetailsHash() => r'5e52c969654489bafb1f1d802c8d2c3837a0270f';
 
 /// Copied from Dart SDK
 class _SystemHash {

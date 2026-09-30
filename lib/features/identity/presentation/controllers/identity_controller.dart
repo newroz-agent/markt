@@ -49,6 +49,15 @@ _IdentitySession _identitySession(_IdentitySessionRef ref) {
   return _IdentitySession(userId);
 }
 
+@riverpod
+Future<IdentitySessionState?> validatedIdentitySession(
+  ValidatedIdentitySessionRef ref,
+) {
+  final session = ref.watch(_identitySessionProvider);
+  if (session.userId == null) return Future<IdentitySessionState?>.value();
+  return ref.watch(_accountIdentityControllerProvider(session: session).future);
+}
+
 /// Synchronous facade that never retains one account's value while another
 /// account's freshly server-validated catalog is loading.
 @riverpod

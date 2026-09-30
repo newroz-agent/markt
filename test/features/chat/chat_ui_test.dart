@@ -24,15 +24,26 @@ import 'package:zerin_marketplace/l10n/app_localizations.dart';
 const _buyer = AuthUser(id: 'buyer', email: 'buyer@example.test');
 const _seller = AuthUser(id: 'seller-user', email: 'seller@example.test');
 
-ChatConversation _conversation({bool product = false}) => ChatConversation(
-  chatId: 'real-chat-id',
+ChatConversation _conversation({
+  String chatId = 'real-chat-id',
+  String sellerId = 'seller',
+  String shopName = 'Test shop',
+  String buyerName = 'Buyer name',
+  int unreadCount = 3,
+  bool product = false,
+  ChatViewerRole viewerRole = ChatViewerRole.buyer,
+  ChatIdentityType viewerIdentityType = ChatIdentityType.person,
+  String viewerIdentityName = 'Buyer identity',
+  String sellerKind = 'business',
+}) => ChatConversation(
+  chatId: chatId,
   buyerId: _buyer.id,
-  sellerId: 'seller',
+  sellerId: sellerId,
   sellerUserId: _seller.id,
-  shopName: 'Test shop',
+  shopName: shopName,
   shopSlug: 'test-shop',
   shopAvatarUrl: null,
-  buyerName: 'Buyer name',
+  buyerName: buyerName,
   productId: product ? 'product' : null,
   productTitle: product ? 'Pinned product' : null,
   productImageUrl: null,
@@ -40,7 +51,13 @@ ChatConversation _conversation({bool product = false}) => ChatConversation(
   productCurrency: 'EUR',
   lastMessageAt: null,
   lastMessagePreview: 'Latest preview',
-  unreadCount: 3,
+  unreadCount: unreadCount,
+  viewerRole: viewerRole,
+  viewerIdentityType: viewerIdentityType,
+  viewerSellerId: viewerRole == ChatViewerRole.seller ? sellerId : null,
+  viewerIdentityName: viewerIdentityName,
+  sellerKind: sellerKind,
+  sellerIdentityName: shopName,
 );
 
 ChatMessage _message(
@@ -446,13 +463,22 @@ void main() {
   testWidgets(
     'seller inbox names buyer, shows badge and opens typed conversation',
     (tester) async {
+      final repository = _ChatRepository()
+        ..inbox = <ChatConversation>[
+          _conversation(
+            viewerRole: ChatViewerRole.seller,
+            viewerIdentityType: ChatIdentityType.business,
+            viewerIdentityName: 'Test seller identity',
+          ),
+        ];
       await _pump(
         tester,
-        _ChatRepository(),
+        repository,
         home: const ChatInboxScreen(),
         auth: _AuthRepository(_seller),
       );
       expect(find.text('Buyer name'), findsOneWidget);
+      expect(find.text('As Test seller identity'), findsOneWidget);
       expect(find.text('3'), findsOneWidget);
       expect(find.text('Test shop'), findsNothing);
       await tester.tap(find.text('Buyer name'));
@@ -460,6 +486,71 @@ void main() {
       expect(find.text('Opened real-chat-id'), findsOneWidget);
     },
   );
+
+  testWidgets('unified inbox keeps person, private and business bindings', (
+    tester,
+  ) async {
+    final repository = _ChatRepository()
+      ..inbox = <ChatConversation>[
+        _conversation(
+          chatId: 'private-chat',
+          sellerId: 'private-seller',
+          buyerName: 'Private buyer',
+          sellerKind: 'private',
+          viewerRole: ChatViewerRole.seller,
+          viewerIdentityName: 'Owner Person',
+          unreadCount: 2,
+        ),
+        _conversation(
+          chatId: 'business-chat',
+          sellerId: 'business-seller',
+          buyerName: 'Business buyer',
+          viewerRole: ChatViewerRole.seller,
+          viewerIdentityType: ChatIdentityType.business,
+          viewerIdentityName: 'Owner Business',
+        ),
+        _conversation(
+          chatId: 'buyer-chat',
+          sellerId: 'other-business',
+          shopName: 'Other Store',
+          viewerIdentityName: 'Owner Person',
+          unreadCount: 4,
+        ),
+      ];
+
+    await _pump(
+      tester,
+      repository,
+      home: const ChatInboxScreen(),
+      auth: _AuthRepository(_seller),
+    );
+
+    expect(find.text('As Owner Person'), findsNWidgets(2));
+    expect(find.text('As Owner Business'), findsOneWidget);
+    expect(find.text('Private buyer'), findsOneWidget);
+    expect(find.text('Business buyer'), findsOneWidget);
+    expect(find.text('Other Store'), findsOneWidget);
+    expect(find.text('2'), findsOneWidget);
+    expect(find.text('3'), findsOneWidget);
+    expect(find.text('4'), findsOneWidget);
+  });
+
+  testWidgets('conversation header reuses the exact inbox identity label', (
+    tester,
+  ) async {
+    final repository = _ChatRepository()
+      ..details = _conversation(
+        buyerName: 'Business buyer',
+        viewerRole: ChatViewerRole.seller,
+        viewerIdentityType: ChatIdentityType.business,
+        viewerIdentityName: 'Owner Business',
+      );
+
+    await _pump(tester, repository, auth: _AuthRepository(_seller));
+
+    expect(find.text('Business buyer'), findsOneWidget);
+    expect(find.text('As Owner Business'), findsOneWidget);
+  });
 
   testWidgets('account exposes inbox entry with unread badge', (tester) async {
     await _pump(tester, _ChatRepository(), home: const AccountScreen());

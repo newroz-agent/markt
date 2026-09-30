@@ -754,6 +754,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productContactSeller => 'Contact seller';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return 'As $name';
+  }
+
+  @override
   String get chatInboxTitle => 'Messages';
 
   @override
@@ -929,6 +934,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Remove from favorites';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Choose a selling profile';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Choose whether this listing is published privately or as a business.';
+
+  @override
+  String get sellAsPerson => 'As a private person';
+
+  @override
+  String get sellAsBusiness => 'As a business';
+
+  @override
+  String get sellChangeIdentity => 'Change selling profile';
+
+  @override
+  String get myListingsPrivateSection => 'Private';
+
+  @override
+  String get myListingsBusinessSection => 'Business';
+
+  @override
+  String get myListingsSectionEmpty => 'No listings in this section yet.';
 
   @override
   String get sellCatalogTitle => 'What would you like to sell?';

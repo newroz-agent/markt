@@ -39,6 +39,12 @@ class SupabaseChatRepository implements ChatRepository {
       map['buyer_avatar_url'] = _avatarUrls.resolve(
         map['buyer_avatar_url'] as String?,
       );
+      map['viewer_identity_avatar_url'] = _avatarUrls.resolve(
+        map['viewer_identity_avatar_url'] as String?,
+      );
+      map['seller_identity_avatar_url'] = _avatarUrls.resolve(
+        map['seller_identity_avatar_url'] as String?,
+      );
       return ChatConversation.fromJson(map);
     }).toList();
   }

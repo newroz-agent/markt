@@ -2,6 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
 import 'package:zerin_marketplace/core/storage/product_image_url_resolver.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_models.dart';
 import 'package:zerin_marketplace/features/sell/domain/sell_repository.dart';
 
@@ -12,7 +13,7 @@ class SupabaseSellRepository implements SellRepository {
       'id, title, category_id, condition, specifications, '
       'images:product_images(image_url, storage_path, sort_order)';
   static const _myListingColumns =
-      'id, title, price_cents, currency, city, condition, status, '
+      'id, seller_id, title, price_cents, currency, city, condition, status, '
       'moderation_reason, created_at, '
       'images:product_images(image_url, storage_path, sort_order)';
 
@@ -20,22 +21,6 @@ class SupabaseSellRepository implements SellRepository {
   late final ProductImageUrlResolver _imageUrls = ProductImageUrlResolver(
     _client,
   );
-
-  @override
-  Future<SellerIdentity?> fetchSellerIdentity() async {
-    final userId = _requireUser();
-    try {
-      final row = await _client
-          .from('sellers')
-          .select('id, kind, shop_name')
-          .eq('user_id', userId)
-          .maybeSingle();
-      if (row == null) return null;
-      return _sellerFromJson(row);
-    } on PostgrestException catch (error, stackTrace) {
-      _throwBackend(error, stackTrace);
-    }
-  }
 
   @override
   Future<List<ListingTemplate>> searchTemplates(String query) async {
@@ -67,12 +52,19 @@ class SupabaseSellRepository implements SellRepository {
       final preparedJson = await _client.rpc<Map<String, dynamic>>(
         'prepare_listing_submission',
         params: <String, dynamic>{
+          'p_seller_id': draft.identity.sellerId,
           'p_seller_kind': draft.sellerKind.databaseValue,
-          'p_seller_name': draft.sellerName.trim(),
+          'p_seller_name': draft.sellerName,
           'p_city': draft.city,
         },
       );
       final prepared = PreparedListingSubmission.fromJson(preparedJson);
+      if (prepared.seller.kind != draft.sellerKind ||
+          (draft.identity.sellerId != null &&
+              prepared.seller.id != draft.identity.sellerId)) {
+        throw const AppException(AppFailureCode.unknown);
+      }
+      final listingIdentity = draft.identity.withSellerId(prepared.seller.id);
 
       for (final (index, photo) in draft.photos.indexed) {
         final timestamp = DateTime.now().microsecondsSinceEpoch;
@@ -104,7 +96,7 @@ class SupabaseSellRepository implements SellRepository {
           'p_specifications': draft.specifications,
         },
       );
-      return _fetchMyListing(prepared.productId);
+      return _fetchMyListing(prepared.productId, listingIdentity);
     } on AppException {
       await _removeStaged(uploadedPaths);
       rethrow;
@@ -118,38 +110,43 @@ class SupabaseSellRepository implements SellRepository {
   }
 
   @override
-  Future<List<MyListing>> fetchMyListings() async {
-    final seller = await fetchSellerIdentity();
-    if (seller == null) return const <MyListing>[];
+  Future<List<MyListing>> fetchMyListings(IdentityCatalog catalog) async {
+    _requireUser();
+    final identitiesBySellerId = <String, MarketplaceIdentity>{
+      for (final identity in catalog.identities) ?identity.sellerId: identity,
+    };
+    if (identitiesBySellerId.isEmpty) return const <MyListing>[];
     try {
       final rows = await _client
           .from('products')
           .select(_myListingColumns)
-          .eq('seller_id', seller.id)
+          .inFilter('seller_id', identitiesBySellerId.keys.toList())
           .order('created_at', ascending: false);
       final resolved = await _imageUrls.resolveRows(rows);
-      return resolved.map(MyListing.fromJson).toList(growable: false);
+      return <MyListing>[
+        for (final row in resolved)
+          if (identitiesBySellerId[row['seller_id']] case final identity?)
+            MyListing.fromJson(row, identity: identity),
+      ];
     } on PostgrestException catch (error, stackTrace) {
       _throwBackend(error, stackTrace);
     }
   }
 
-  Future<MyListing> _fetchMyListing(String productId) async {
+  Future<MyListing> _fetchMyListing(
+    String productId,
+    MarketplaceIdentity identity,
+  ) async {
     final row = await _client
         .from('products')
         .select(_myListingColumns)
         .eq('id', productId)
         .single();
-    return MyListing.fromJson(await _imageUrls.resolveRow(row));
+    return MyListing.fromJson(
+      await _imageUrls.resolveRow(row),
+      identity: identity,
+    );
   }
-
-  SellerIdentity _sellerFromJson(Map<String, dynamic> row) => SellerIdentity(
-    id: row['id']! as String,
-    kind: row['kind'] == 'business'
-        ? SellSellerKind.business
-        : SellSellerKind.private,
-    name: row['shop_name']! as String,
-  );
 
   String _requireUser() {
     final user = _client.auth.currentUser;

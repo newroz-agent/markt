@@ -753,6 +753,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get productContactSeller => 'Satıcıyla iletişime geç';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return '$name olarak';
+  }
+
+  @override
   String get chatInboxTitle => 'Mesajlar';
 
   @override
@@ -927,6 +932,31 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Favorilerden çıkar';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Satış profilini seç';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Bu ilanın bireysel mi yoksa işletme olarak mı yayınlanacağını seç.';
+
+  @override
+  String get sellAsPerson => 'Bireysel olarak';
+
+  @override
+  String get sellAsBusiness => 'İşletme olarak';
+
+  @override
+  String get sellChangeIdentity => 'Satış profilini değiştir';
+
+  @override
+  String get myListingsPrivateSection => 'Bireysel';
+
+  @override
+  String get myListingsBusinessSection => 'İşletme';
+
+  @override
+  String get myListingsSectionEmpty => 'Bu bölümde henüz ilan yok.';
 
   @override
   String get sellCatalogTitle => 'Ne satmak istiyorsun?';

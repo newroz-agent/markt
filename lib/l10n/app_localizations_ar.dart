@@ -751,6 +751,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get productContactSeller => 'تواصل مع البائع';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return 'بصفتك $name';
+  }
+
+  @override
   String get chatInboxTitle => 'الرسائل';
 
   @override
@@ -921,6 +926,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'إزالة من المفضلة';
+
+  @override
+  String get sellIdentityChoiceTitle => 'اختر ملف البيع';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'اختر ما إذا كنت تريد نشر هذا الإعلان بصفتك فردًا أو نشاطًا تجاريًا.';
+
+  @override
+  String get sellAsPerson => 'كفرد';
+
+  @override
+  String get sellAsBusiness => 'كنشاط تجاري';
+
+  @override
+  String get sellChangeIdentity => 'تغيير ملف البيع';
+
+  @override
+  String get myListingsPrivateSection => 'خاص';
+
+  @override
+  String get myListingsBusinessSection => 'نشاط تجاري';
+
+  @override
+  String get myListingsSectionEmpty => 'لا توجد إعلانات في هذا القسم بعد.';
 
   @override
   String get sellCatalogTitle => 'ماذا تريد أن تبيع؟';
