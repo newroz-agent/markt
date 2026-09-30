@@ -386,6 +386,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get accountTitle => 'Profil';
 
   @override
+  String get accountSellingProfilesTitle => 'Deine Verkaufsprofile';
+
+  @override
+  String get accountPersonalIdentity => 'Privatperson';
+
+  @override
+  String get accountRegisterBusiness => 'Geschäft registrieren';
+
+  @override
   String get accountProfile => 'Persönliche Daten';
 
   @override

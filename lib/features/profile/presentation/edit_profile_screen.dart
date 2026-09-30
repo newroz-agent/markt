@@ -181,7 +181,6 @@ class _EditProfileFormState extends ConsumerState<_EditProfileForm> {
                       ProfileAvatar(
                         avatarUrl: avatarUrl,
                         radius: AppSizes.homeStoreAvatar,
-                        isBusiness: widget.profile.seller?.isBusiness ?? false,
                         semanticLabel: widget.profile.displayName,
                       ),
                       if (state.avatarBusy)

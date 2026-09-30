@@ -288,47 +288,70 @@ class RecentlyViewedRoute extends GoRouteData {
       const RecentlyViewedScreen();
 }
 
-@TypedGoRoute<BusinessHubRoute>(path: '/business')
+@TypedGoRoute<BusinessStartRoute>(path: '/business/start')
+class BusinessStartRoute extends GoRouteData {
+  const BusinessStartRoute({required this.existingPrivateSellerId});
+
+  final String? existingPrivateSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessStartScreen(existingPrivateSellerId: existingPrivateSellerId);
+}
+
+@TypedGoRoute<BusinessHubRoute>(path: '/business/:businessSellerId/overview')
 class BusinessHubRoute extends GoRouteData {
-  const BusinessHubRoute();
+  const BusinessHubRoute({required this.businessSellerId});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const BusinessHubScreen();
+      BusinessHubScreen(businessSellerId: businessSellerId);
 }
 
-@TypedGoRoute<BusinessDocumentsRoute>(path: '/business/documents')
+@TypedGoRoute<BusinessDocumentsRoute>(
+  path: '/business/:businessSellerId/documents',
+)
 class BusinessDocumentsRoute extends GoRouteData {
-  const BusinessDocumentsRoute();
+  const BusinessDocumentsRoute({required this.businessSellerId});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const BusinessDocumentsScreen();
+      BusinessDocumentsScreen(businessSellerId: businessSellerId);
 }
 
-@TypedGoRoute<BusinessProfileRoute>(path: '/business/profile')
+@TypedGoRoute<BusinessProfileRoute>(path: '/business/:businessSellerId/profile')
 class BusinessProfileRoute extends GoRouteData {
-  const BusinessProfileRoute();
+  const BusinessProfileRoute({required this.businessSellerId});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const BusinessProfileEditorScreen();
+      BusinessProfileEditorScreen(businessSellerId: businessSellerId);
 }
 
-@TypedGoRoute<BusinessHoursRoute>(path: '/business/hours')
+@TypedGoRoute<BusinessHoursRoute>(path: '/business/:businessSellerId/hours')
 class BusinessHoursRoute extends GoRouteData {
-  const BusinessHoursRoute();
+  const BusinessHoursRoute({required this.businessSellerId});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const BusinessHoursEditorScreen();
+      BusinessHoursEditorScreen(businessSellerId: businessSellerId);
 }
 
-@TypedGoRoute<BusinessMenuRoute>(path: '/business/menu')
+@TypedGoRoute<BusinessMenuRoute>(path: '/business/:businessSellerId/menu')
 class BusinessMenuRoute extends GoRouteData {
-  const BusinessMenuRoute();
+  const BusinessMenuRoute({required this.businessSellerId});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const BusinessMenuEditorScreen();
+      BusinessMenuEditorScreen(businessSellerId: businessSellerId);
 }

@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:zerin_marketplace/app/router/app_router.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
 
 import 'business_test_support.dart';
 
 void main() {
-  group('hub', () {
-    testWidgets('a user without a seller picks the type first, then name '
-        'and city, and lands on the documents for that type', (tester) async {
+  group('hub and start', () {
+    testWidgets('person without a private seller creates a scoped business', (
+      tester,
+    ) async {
       final repository = FakeBusinessRepository(onboarding());
-      await pumpBusiness(tester, repository, location: '/business');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessStartRoute(
+          existingPrivateSellerId: null,
+        ).location,
+      );
 
-      expect(find.text('Unternehmen eintragen'), findsOneWidget);
-      await tester.tap(find.text('Arztpraxis'));
+      expect(find.text('Unternehmen eintragen'), findsWidgets);
+      await tester.tap(find.text('Arztpraxis').last);
       await tester.enterText(find.byType(TextField).first, 'Praxis Dr. Test');
       await tester.tap(find.byType(DropdownButtonFormField<String>));
       await tester.pumpAndSettle();
@@ -23,9 +31,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(repository.calls, ['create']);
+      expect(repository.startedPrivateSellerId, isNull);
       expect(repository.startedType, DirectoryType.doctor);
       expect(repository.startedName, 'Praxis Dr. Test');
       expect(repository.startedCity, 'Berlin');
+      expect(repository.fetchedSellerId, testSellerId);
       expect(find.text('Personalausweis oder Reisepass'), findsOneWidget);
       expect(find.text('Approbation / Kammernachweis'), findsOneWidget);
       expect(
@@ -35,13 +45,45 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
+    testWidgets('private-only account forwards its private seller id', (
+      tester,
+    ) async {
+      const privateSellerId = '22222222-2222-4222-8222-222222222222';
+      final repository = FakeBusinessRepository(onboarding());
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessStartRoute(
+          existingPrivateSellerId: privateSellerId,
+        ).location,
+      );
+
+      await tester.tap(find.text('Café').last);
+      await tester.enterText(find.byType(TextField).first, 'Café Botan');
+      await tester.tap(find.byType(DropdownButtonFormField<String>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Berlin').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Weiter zu den Nachweisen'));
+      await tester.pumpAndSettle();
+
+      expect(repository.startedPrivateSellerId, privateSellerId);
+      expect(repository.fetchedSellerId, testSellerId);
+    });
+
     testWidgets('an existing business seller only declares its type', (
       tester,
     ) async {
       final repository = FakeBusinessRepository(
         onboarding(seller: businessSeller(type: null)),
       );
-      await pumpBusiness(tester, repository, location: '/business');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessHubRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(find.text('Name des Unternehmens'), findsNothing);
       await tester.tap(find.text('Café'));
@@ -49,18 +91,8 @@ void main() {
       await tester.tap(find.text('Weiter zu den Nachweisen'));
       await tester.pumpAndSettle();
       expect(repository.calls, ['setType']);
+      expect(repository.setTypeSellerId, testSellerId);
       expect(repository.startedType, DirectoryType.cafe);
-    });
-
-    testWidgets('private sellers are told the directory needs a business '
-        'account', (tester) async {
-      final repository = FakeBusinessRepository(
-        onboarding(seller: businessSeller(type: null, kind: 'private')),
-      );
-      await pumpBusiness(tester, repository, location: '/business');
-
-      expect(find.text('Privates Verkaufskonto'), findsOneWidget);
-      expect(find.text('Weiter zu den Nachweisen'), findsNothing);
     });
 
     testWidgets('publishing is disabled until verified', (tester) async {
@@ -77,8 +109,15 @@ void main() {
           ],
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessHubRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
+      expect(repository.fetchedSellerId, testSellerId);
       expect(find.text('In Prüfung'), findsOneWidget);
       expect(find.text('0 von 2 freigegeben'), findsOneWidget);
       expect(
@@ -91,7 +130,9 @@ void main() {
       expect(toggle.onChanged, isNull);
     });
 
-    testWidgets('a verified owner publishes from the hub', (tester) async {
+    testWidgets('a verified owner publishes with the route seller id', (
+      tester,
+    ) async {
       final repository = FakeBusinessRepository(
         onboarding(
           seller: businessSeller(),
@@ -99,11 +140,18 @@ void main() {
           profile: restaurantProfile,
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessHubRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(find.text('Verifiziert'), findsOneWidget);
       await tester.tap(find.byType(SwitchListTile));
       await tester.pumpAndSettle();
+      expect(repository.savedProfileCall?.sellerId, testSellerId);
       expect(repository.savedProfile?.isPublished, isTrue);
       expect(
         repository.savedProfile?.description,
@@ -131,7 +179,13 @@ void main() {
           ],
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business/documents');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessDocumentsRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(find.text('Freigegeben'), findsOneWidget);
       expect(find.text('Abgelehnt'), findsOneWidget);
@@ -147,6 +201,7 @@ void main() {
       await tester.tap(find.text('PDF auswählen'));
       await tester.pumpAndSettle();
 
+      expect(repository.uploaded?.sellerId, testSellerId);
       expect(
         repository.uploaded?.kind,
         SellerDocumentKind.medicalProfessionalRegistration,
@@ -168,7 +223,13 @@ void main() {
           ],
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business/documents');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessDocumentsRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(
         find.text('Gewerbeanmeldung oder Handelsregisterauszug'),
@@ -178,14 +239,21 @@ void main() {
       expect(find.text('Fehlt'), findsOneWidget);
       await tester.tap(find.text('Zurückziehen'));
       await tester.pumpAndSettle();
-      expect(repository.withdrawn?.kind, SellerDocumentKind.identity);
+      expect(repository.withdrawn?.sellerId, testSellerId);
+      expect(repository.withdrawn?.document.kind, SellerDocumentKind.identity);
     });
 
     testWidgets('the type is fixed once a profile exists', (tester) async {
       final repository = FakeBusinessRepository(
         onboarding(seller: businessSeller(), profile: restaurantProfile),
       );
-      await pumpBusiness(tester, repository, location: '/business/documents');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessDocumentsRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(
         find.text('Die Art kannst du jetzt nur noch im Profil ändern.'),
@@ -207,7 +275,9 @@ void main() {
       await pumpBusiness(
         tester,
         repository,
-        location: '/business/profile',
+        location: const BusinessProfileRoute(
+          businessSellerId: testSellerId,
+        ).location,
         logicalHeight: 2400,
       );
 
@@ -241,6 +311,7 @@ void main() {
       await tester.tap(find.text('Speichern'));
       await tester.pumpAndSettle();
 
+      expect(repository.savedProfileCall?.sellerId, testSellerId);
       final saved = repository.savedProfile!;
       expect(saved.type, DirectoryType.doctor);
       expect(saved.specialty, DoctorSpecialty.generalMedicine);
@@ -265,7 +336,13 @@ void main() {
           ],
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business/hours');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessHoursRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(find.text('18:00 – 02:00 (nächster Tag)'), findsOneWidget);
       final overnight = tester.renderObject<RenderParagraph>(
@@ -296,6 +373,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
+      expect(repository.savedHoursCall?.sellerId, testSellerId);
       final saved = repository.savedHours!;
       expect(saved, hasLength(1));
       expect(saved.single.weekday, 1, reason: 'Monday slot kept');
@@ -317,7 +395,13 @@ void main() {
           ],
         ),
       );
-      await pumpBusiness(tester, repository, location: '/business/menu');
+      await pumpBusiness(
+        tester,
+        repository,
+        location: const BusinessMenuRoute(
+          businessSellerId: testSellerId,
+        ).location,
+      );
 
       expect(find.text('Grill'), findsOneWidget);
       expect(find.textContaining('14,50'), findsOneWidget);
@@ -335,12 +419,52 @@ void main() {
 
       await tester.tap(find.text('Speichern').first);
       await tester.pumpAndSettle();
+      expect(repository.savedMenuCall?.sellerId, testSellerId);
       final items = repository.savedMenu!.single.items;
       expect(items.first.isAvailable, isFalse);
       expect(items.last.name, 'Dolma');
       expect(items.last.priceCents, 990);
       expect(items.last.isVegan, isTrue);
       expect(items.last.isVegetarian, isTrue);
+    });
+  });
+
+  group('business identity scope', () {
+    testWidgets(
+      'legacy owner routes without a seller id make no repository call',
+      (tester) async {
+        final repository = FakeBusinessRepository(
+          onboarding(seller: businessSeller(), profile: restaurantProfile),
+        );
+        await pumpBusiness(tester, repository, location: '/business');
+
+        expect(repository.fetchedSellerId, isNull);
+        expect(repository.calls, isEmpty);
+      },
+    );
+
+    testWidgets('every owner screen rejects a malformed seller id locally', (
+      tester,
+    ) async {
+      final repository = FakeBusinessRepository(
+        onboarding(seller: businessSeller(), profile: restaurantProfile),
+      );
+      for (final location in <String>[
+        '/business/not-a-uuid/overview',
+        '/business/not-a-uuid/documents',
+        '/business/not-a-uuid/profile',
+        '/business/not-a-uuid/hours',
+        '/business/not-a-uuid/menu',
+      ]) {
+        repository.fetchedSellerId = null;
+        await pumpBusiness(tester, repository, location: location);
+        expect(
+          repository.fetchedSellerId,
+          isNull,
+          reason: '$location must fail before a repository fetch',
+        );
+        expect(find.text('Das hat nicht geklappt'), findsOneWidget);
+      }
     });
   });
 }

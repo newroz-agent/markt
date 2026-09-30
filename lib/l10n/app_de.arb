@@ -480,6 +480,18 @@
   "@accountTitle": {
     "description": "Title of the account screen."
   },
+  "accountSellingProfilesTitle": "Deine Verkaufsprofile",
+  "@accountSellingProfilesTitle": {
+    "description": "Heading above the private and business identity switcher in Account."
+  },
+  "accountPersonalIdentity": "Privatperson",
+  "@accountPersonalIdentity": {
+    "description": "Label for the permanent personal identity in the Account switcher."
+  },
+  "accountRegisterBusiness": "Geschäft registrieren",
+  "@accountRegisterBusiness": {
+    "description": "Account action that starts registration of the one business identity."
+  },
   "accountProfile": "Persönliche Daten",
   "@accountProfile": {
     "description": "Account menu item for profile details."

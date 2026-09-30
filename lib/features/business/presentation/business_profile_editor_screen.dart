@@ -5,40 +5,53 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
+import 'package:zerin_marketplace/features/business/domain/business_seller_id.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_hub_screen.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_labels.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_scope_error.dart';
 import 'package:zerin_marketplace/features/business/presentation/controllers/business_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
 /// Type-aware directory profile editor. Saving never changes the publish
 /// state; publishing lives on the hub.
 class BusinessProfileEditorScreen extends ConsumerWidget {
-  const BusinessProfileEditorScreen({super.key});
+  const BusinessProfileEditorScreen({
+    required this.businessSellerId,
+    super.key,
+  });
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final onboarding = ref.watch(directoryOnboardingProvider);
+    if (!BusinessSellerId.isValid(businessSellerId)) {
+      return BusinessScopeErrorScreen(title: l10n.businessProfileTile);
+    }
+    final provider = directoryOnboardingProvider(businessSellerId);
+    final onboarding = ref.watch(provider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.businessProfileTile)),
       body: switch (onboarding) {
         AsyncData(:final value)
-            when value.seller != null && value.directoryType != null =>
+            when value.seller?.id == businessSellerId &&
+                value.seller?.kind == 'business' &&
+                value.directoryType != null =>
           _ProfileForm(
-            sellerId: value.seller!.id,
+            sellerId: businessSellerId,
             type: value.directoryType!,
             profile: value.profile,
           ),
         AsyncData() => AppEmptyState(
-          title: l10n.businessStartTitle,
-          message: l10n.businessStartBody,
+          title: l10n.stateErrorTitle,
+          message: l10n.stateErrorMessage,
           icon: Icons.storefront_outlined,
         ),
         AsyncError() => AppErrorState(
           title: l10n.stateErrorTitle,
           message: l10n.stateErrorMessage,
           retryLabel: l10n.actionRetry,
-          onRetry: () => ref.invalidate(directoryOnboardingProvider),
+          onRetry: () => ref.invalidate(provider),
         ),
         _ => const Center(child: CircularProgressIndicator()),
       },
@@ -154,7 +167,8 @@ class _ProfileFormState extends ConsumerState<_ProfileForm> {
       await ref
           .read(businessRepositoryProvider)
           .saveProfile(
-            DirectoryProfile(
+            sellerId: widget.sellerId,
+            profile: DirectoryProfile(
               type: _type,
               description: _description.text,
               phone: _phone.text,
@@ -171,7 +185,7 @@ class _ProfileFormState extends ConsumerState<_ProfileForm> {
               isPublished: widget.profile?.isPublished ?? false,
             ),
           );
-      ref.invalidate(directoryOnboardingProvider);
+      ref.invalidate(directoryOnboardingProvider(widget.sellerId));
       if (mounted) {
         AppSnackBar.show(
           context,

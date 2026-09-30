@@ -7,6 +7,8 @@ import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/auth/domain/auth_user.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/features/legal/domain/legal_document.dart';
 import 'package:zerin_marketplace/features/moderation/presentation/controllers/moderation_controller.dart';
 import 'package:zerin_marketplace/features/profile/presentation/controllers/profile_controller.dart';
@@ -29,10 +31,10 @@ class AccountScreen extends ConsumerWidget {
     final isAdmin =
         user != null &&
         ref.watch(currentUserIsAdminProvider).asData?.value == true;
-    // The directory needs a business seller; private sellers cannot join.
-    final isPrivateSeller =
-        user != null &&
-        ref.watch(myProfileProvider).asData?.value?.seller?.isBusiness == false;
+    final identityState = user == null
+        ? null
+        : ref.watch(activeIdentityControllerProvider);
+    final businessIdentity = identityState?.valueOrNull?.catalog.business;
     final settings =
         ref.watch(appSettingsControllerProvider).asData?.value ??
         const AppSettings();
@@ -60,6 +62,10 @@ class AccountScreen extends ConsumerWidget {
                   message: l10n.stateErrorMessage,
                 ),
               ),
+              if (identityState != null) ...<Widget>[
+                const SizedBox(height: AppSpacing.lg),
+                _IdentitySwitcherCard(state: identityState),
+              ],
               const SizedBox(height: AppSpacing.lg),
               Card(
                 child: ListTile(
@@ -86,14 +92,15 @@ class AccountScreen extends ConsumerWidget {
                 Card(
                   child: Column(
                     children: <Widget>[
-                      if (!isPrivateSeller) ...<Widget>[
+                      if (businessIdentity != null) ...<Widget>[
                         ListTile(
                           leading: const Icon(Icons.storefront_outlined),
                           title: Text(l10n.businessHubTitle),
                           subtitle: Text(l10n.businessAccountEntrySubtitle),
                           trailing: const Icon(Icons.chevron_right_rounded),
-                          onTap: () =>
-                              const BusinessHubRoute().push<void>(context),
+                          onTap: () => BusinessHubRoute(
+                            businessSellerId: businessIdentity.sellerId!,
+                          ).push<void>(context),
                         ),
                         const Divider(),
                       ],
@@ -300,6 +307,197 @@ class AccountScreen extends ConsumerWidget {
   }
 }
 
+class _IdentitySwitcherCard extends ConsumerWidget {
+  const _IdentitySwitcherCard({required this.state});
+
+  final AsyncValue<IdentitySessionState?> state;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          l10n.accountSellingProfilesTitle,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        state.when(
+          loading: () => const Card(
+            child: Padding(
+              padding: AppSpacing.card,
+              child: AppSkeletonBox(height: AppSizes.controlLarge),
+            ),
+          ),
+          error: (_, _) => Card(
+            child: ListTile(
+              key: const ValueKey('account-identity-error'),
+              leading: const Icon(Icons.error_outline_rounded),
+              title: Text(l10n.stateErrorTitle),
+              subtitle: Text(l10n.stateErrorMessage),
+              trailing: IconButton(
+                tooltip: l10n.actionRetry,
+                onPressed: () => ref
+                    .read(activeIdentityControllerProvider.notifier)
+                    .refresh(),
+                icon: const Icon(Icons.refresh_rounded),
+              ),
+            ),
+          ),
+          data: (session) {
+            final person = session?.catalog.person;
+            if (session == null || person == null) {
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.error_outline_rounded),
+                  title: Text(l10n.stateErrorTitle),
+                  subtitle: Text(l10n.stateErrorMessage),
+                ),
+              );
+            }
+            final business = session.catalog.business;
+            final (
+              businessStatus,
+              businessStatusIcon,
+            ) = switch (business?.sellerStatus) {
+              'approved' => (
+                l10n.businessStatusVerified,
+                Icons.verified_rounded,
+              ),
+              'rejected' => (l10n.listingStatusRejected, Icons.cancel_rounded),
+              'suspended' => (l10n.listingStatusBlocked, Icons.block_rounded),
+              _ => (l10n.businessStatusInReview, Icons.hourglass_top_rounded),
+            };
+            Future<void> select(MarketplaceIdentity identity) async {
+              try {
+                await ref
+                    .read(activeIdentityControllerProvider.notifier)
+                    .select(identity);
+              } on Object {
+                if (context.mounted) {
+                  AppSnackBar.show(
+                    context,
+                    message: l10n.stateErrorMessage,
+                    variant: AppSnackBarVariant.error,
+                  );
+                }
+              }
+            }
+
+            return Card(
+              child: Column(
+                children: <Widget>[
+                  _IdentityRow(
+                    key: const ValueKey('account-person-identity'),
+                    identity: person,
+                    subtitle: l10n.accountPersonalIdentity,
+                    isActive: session.isActive(person),
+                    onTap: () => select(person),
+                  ),
+                  if (business != null) ...<Widget>[
+                    const Divider(),
+                    _IdentityRow(
+                      key: const ValueKey('account-business-identity'),
+                      identity: business,
+                      subtitle: businessStatus,
+                      subtitleIcon: businessStatusIcon,
+                      isActive: session.isActive(business),
+                      onTap: () => select(business),
+                    ),
+                  ] else ...<Widget>[
+                    const Divider(),
+                    ListTile(
+                      key: const ValueKey('account-register-business'),
+                      leading: const Icon(Icons.add_business_rounded),
+                      title: Text(l10n.accountRegisterBusiness),
+                      subtitle: Text(l10n.businessAccountEntrySubtitle),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () => BusinessStartRoute(
+                        existingPrivateSellerId: person.sellerId,
+                      ).push<void>(context),
+                    ),
+                  ],
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _IdentityRow extends StatelessWidget {
+  const _IdentityRow({
+    required this.identity,
+    required this.subtitle,
+    required this.isActive,
+    required this.onTap,
+    this.subtitleIcon,
+    super.key,
+  });
+
+  final MarketplaceIdentity identity;
+  final String subtitle;
+  final IconData? subtitleIcon;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final subtitleStyle = Theme.of(
+      context,
+    ).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant);
+    return Semantics(
+      button: true,
+      selected: isActive,
+      child: AnimatedContainer(
+        duration: AppDurations.quick,
+        decoration: BoxDecoration(
+          color: isActive ? scheme.primaryContainer : Colors.transparent,
+          borderRadius: AppRadius.medium,
+          border: Border.all(
+            color: isActive ? scheme.primary : Colors.transparent,
+          ),
+        ),
+        child: Material(
+          type: MaterialType.transparency,
+          child: ListTile(
+            selected: isActive,
+            leading: ProfileAvatar(
+              avatarUrl: identity.avatarUrl,
+              radius: AppSizes.avatarSmall / 2,
+              isBusiness: identity.isBusiness,
+              semanticLabel: identity.label,
+            ),
+            title: Text(identity.label),
+            subtitle: subtitleIcon == null
+                ? Text(subtitle, style: subtitleStyle)
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(
+                        subtitleIcon,
+                        size: AppSizes.iconSmall,
+                        color: scheme.onSurfaceVariant,
+                      ),
+                      const SizedBox(width: AppSpacing.xxs),
+                      Flexible(child: Text(subtitle, style: subtitleStyle)),
+                    ],
+                  ),
+            trailing: isActive
+                ? Icon(Icons.check_circle_rounded, color: scheme.primary)
+                : null,
+            onTap: onTap,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _AccountHeader extends ConsumerWidget {
   const _AccountHeader({required this.user});
 
@@ -347,7 +545,6 @@ class _AccountHeader extends ConsumerWidget {
                   ProfileAvatar(
                     avatarUrl: profile?.avatarUrl,
                     radius: AppSizes.stateIllustration / 2,
-                    isBusiness: profile?.seller?.isBusiness ?? false,
                     semanticLabel: displayName,
                   ),
                 const SizedBox(width: AppSpacing.md),

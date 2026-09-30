@@ -8,12 +8,23 @@ import 'package:zerin_marketplace/features/auth/domain/auth_repository.dart';
 import 'package:zerin_marketplace/features/auth/domain/auth_user.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
+import 'package:zerin_marketplace/features/identity/data/active_identity_store.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity.dart';
+import 'package:zerin_marketplace/features/identity/domain/identity_repository.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/features/moderation/presentation/controllers/moderation_controller.dart';
 import 'package:zerin_marketplace/features/profile/domain/profile.dart';
 import 'package:zerin_marketplace/features/profile/presentation/controllers/profile_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
-const _user = AuthUser(id: 'owner', email: 'private@example.invalid');
+const _user = AuthUser(
+  id: 'account-user',
+  email: 'private@example.invalid',
+  displayName: 'Auth Name',
+);
+const _privateSellerId = '11111111-1111-4111-8111-111111111111';
+const _businessSellerId = '22222222-2222-4222-8222-222222222222';
+
 const _profile = MyProfile(
   displayName: 'Alice Public',
   username: 'alice_name',
@@ -23,6 +34,27 @@ const _profile = MyProfile(
   listingCount: 4,
   seller: null,
 );
+
+MarketplaceIdentity _person({String? sellerId}) => MarketplaceIdentity(
+  type: MarketplaceIdentityType.person,
+  sellerId: sellerId,
+  sellerKind: 'private',
+  sellerStatus: sellerId == null ? null : 'approved',
+  label: 'Alice Person',
+  avatarUrl: null,
+  username: 'alice_name',
+);
+
+MarketplaceIdentity _business({bool verified = false, String? status}) =>
+    MarketplaceIdentity(
+      type: MarketplaceIdentityType.business,
+      sellerId: _businessSellerId,
+      sellerKind: 'business',
+      sellerStatus: status ?? (verified ? 'approved' : 'pending'),
+      label: 'Zagros Store',
+      avatarUrl: null,
+      username: null,
+    );
 
 class _AuthRepository implements AuthRepository {
   const _AuthRepository();
@@ -38,12 +70,26 @@ class _AuthRepository implements AuthRepository {
       throw UnimplementedError('${invocation.memberName}');
 }
 
-Future<void> _pumpAccount(
+class _IdentityRepository implements IdentityCatalogRepository {
+  const _IdentityRepository(this.catalog);
+
+  final IdentityCatalog catalog;
+
+  @override
+  Future<IdentityCatalog> fetchMyIdentityCatalog() async => catalog;
+}
+
+Future<SharedPreferences> _pumpAccount(
   WidgetTester tester,
   Locale locale, {
   MyProfile profile = _profile,
+  required IdentityCatalog catalog,
+  String? storedSelection,
 }) async {
-  SharedPreferences.setMockInitialValues(<String, Object>{});
+  SharedPreferences.setMockInitialValues(<String, Object>{
+    '${SharedPreferencesActiveIdentityStore.keyPrefix}${_user.id}':
+        ?storedSelection,
+  });
   final preferences = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
@@ -51,6 +97,9 @@ Future<void> _pumpAccount(
         sharedPreferencesProvider.overrideWithValue(preferences),
         authRepositoryProvider.overrideWithValue(const _AuthRepository()),
         authStateProvider.overrideWith((ref) => Stream.value(_user)),
+        identityCatalogRepositoryProvider.overrideWithValue(
+          _IdentityRepository(catalog),
+        ),
         myProfileProvider.overrideWith((ref) async => profile),
         unreadChatCountProvider.overrideWith((ref) async => 2),
         currentUserIsAdminProvider.overrideWith((ref) async => false),
@@ -64,15 +113,27 @@ Future<void> _pumpAccount(
     ),
   );
   await tester.pumpAndSettle();
+  return preferences;
 }
+
+Semantics _semanticsWithin(WidgetTester tester, Key key) =>
+    tester.widget<Semantics>(
+      find
+          .descendant(of: find.byKey(key), matching: find.byType(Semantics))
+          .first,
+    );
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('own profile header uses public identity and never email', (
+  testWidgets('own profile header stays personal and never shows email', (
     tester,
   ) async {
-    await _pumpAccount(tester, const Locale('en'));
+    await _pumpAccount(
+      tester,
+      const Locale('en'),
+      catalog: IdentityCatalog(<MarketplaceIdentity>[_person()]),
+    );
 
     expect(find.text('Alice Public'), findsOneWidget);
     expect(find.text('@alice_name'), findsOneWidget);
@@ -82,7 +143,15 @@ void main() {
     expect(find.textContaining('private@example'), findsNothing);
     expect(find.text('Edit profile'), findsOneWidget);
     expect(find.text('Public profile'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Messages'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('Messages'), findsOneWidget);
+    expect(find.text('Your selling profiles'), findsOneWidget);
+    expect(find.text('Private person'), findsOneWidget);
+    expect(find.text('Register a business'), findsOneWidget);
 
     await tester.scrollUntilVisible(
       find.text('Recently viewed'),
@@ -98,7 +167,11 @@ void main() {
   testWidgets('legal area shows the OpenStreetMap ODbL attribution', (
     tester,
   ) async {
-    await _pumpAccount(tester, const Locale('de'));
+    await _pumpAccount(
+      tester,
+      const Locale('de'),
+      catalog: IdentityCatalog(<MarketplaceIdentity>[_person()]),
+    );
 
     await tester.scrollUntilVisible(
       find.text('Datenquellen'),
@@ -112,17 +185,11 @@ void main() {
       ),
       findsOneWidget,
     );
-    expect(tester.takeException(), isNull);
   });
 
-  testWidgets('business entry is offered to users without a seller', (
+  testWidgets('private-only user always sees business registration', (
     tester,
   ) async {
-    await _pumpAccount(tester, const Locale('de'));
-    expect(find.text('Mein Unternehmen'), findsOneWidget);
-  });
-
-  testWidgets('business entry is hidden for private sellers', (tester) async {
     await _pumpAccount(
       tester,
       const Locale('de'),
@@ -133,9 +200,131 @@ void main() {
         bio: null,
         avatarUrl: null,
         listingCount: 1,
-        seller: ProfileSeller(id: 's1', kind: 'private', verified: false),
+        seller: ProfileSeller(
+          id: _privateSellerId,
+          kind: 'private',
+          verified: false,
+        ),
       ),
+      catalog: IdentityCatalog(<MarketplaceIdentity>[
+        _person(sellerId: _privateSellerId),
+      ]),
     );
-    expect(find.text('Mein Unternehmen'), findsNothing);
+
+    expect(
+      find.byKey(const ValueKey('account-person-identity')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('account-register-business')),
+      findsOneWidget,
+    );
+    expect(find.text('Geschäft registrieren'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('account-business-identity')),
+      findsNothing,
+    );
+  });
+
+  testWidgets(
+    'dual user sees both identities, status and active highlighting',
+    (tester) async {
+      final person = _person(sellerId: _privateSellerId);
+      final business = _business();
+      final preferences = await _pumpAccount(
+        tester,
+        const Locale('de'),
+        catalog: IdentityCatalog(<MarketplaceIdentity>[person, business]),
+      );
+
+      expect(find.text('Alice Person'), findsOneWidget);
+      expect(find.text('Zagros Store'), findsOneWidget);
+      expect(find.text('In Prüfung'), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('account-register-business')),
+        findsNothing,
+      );
+      expect(
+        _semanticsWithin(
+          tester,
+          const ValueKey('account-person-identity'),
+        ).properties.selected,
+        isTrue,
+      );
+
+      await tester.tap(find.byKey(const ValueKey('account-business-identity')));
+      await tester.pumpAndSettle();
+
+      expect(
+        _semanticsWithin(
+          tester,
+          const ValueKey('account-business-identity'),
+        ).properties.selected,
+        isTrue,
+      );
+      expect(
+        preferences.getString(
+          '${SharedPreferencesActiveIdentityStore.keyPrefix}${_user.id}',
+        ),
+        business.selectionKey,
+      );
+      await tester.scrollUntilVisible(
+        find.text('Mein Unternehmen'),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(find.text('Mein Unternehmen'), findsOneWidget);
+    },
+  );
+
+  testWidgets('approved business is labeled verified', (tester) async {
+    await _pumpAccount(
+      tester,
+      const Locale('de'),
+      catalog: IdentityCatalog(<MarketplaceIdentity>[
+        _person(),
+        _business(verified: true),
+      ]),
+      storedSelection: _business(verified: true).selectionKey,
+    );
+
+    expect(find.text('Verifiziert'), findsOneWidget);
+  });
+
+  testWidgets('restricted businesses are not mislabeled as in review', (
+    tester,
+  ) async {
+    for (final entry in <String, String>{
+      'rejected': 'Abgelehnt',
+      'suspended': 'Gesperrt',
+    }.entries) {
+      await _pumpAccount(
+        tester,
+        const Locale('de'),
+        catalog: IdentityCatalog(<MarketplaceIdentity>[
+          _person(),
+          _business(status: entry.key),
+        ]),
+      );
+      expect(find.text(entry.value), findsOneWidget);
+      expect(find.text('In Prüfung'), findsNothing);
+    }
+  });
+
+  testWidgets('Arabic Account switcher is RTL and uses Arabic copy', (
+    tester,
+  ) async {
+    await _pumpAccount(
+      tester,
+      const Locale('ar'),
+      catalog: IdentityCatalog(<MarketplaceIdentity>[_person(), _business()]),
+    );
+
+    final context = tester.element(find.byType(AccountScreen));
+    expect(Directionality.of(context), TextDirection.rtl);
+    expect(find.text('ملفات البيع الخاصة بك'), findsOneWidget);
+    expect(find.text('فرد'), findsOneWidget);
+    expect(find.text('قيد المراجعة'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

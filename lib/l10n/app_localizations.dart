@@ -788,6 +788,24 @@ abstract class AppLocalizations {
   /// **'Profil'**
   String get accountTitle;
 
+  /// Heading above the private and business identity switcher in Account.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Verkaufsprofile'**
+  String get accountSellingProfilesTitle;
+
+  /// Label for the permanent personal identity in the Account switcher.
+  ///
+  /// In de, this message translates to:
+  /// **'Privatperson'**
+  String get accountPersonalIdentity;
+
+  /// Account action that starts registration of the one business identity.
+  ///
+  /// In de, this message translates to:
+  /// **'Geschäft registrieren'**
+  String get accountRegisterBusiness;
+
   /// Account menu item for profile details.
   ///
   /// In de, this message translates to:

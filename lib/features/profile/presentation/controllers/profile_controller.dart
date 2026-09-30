@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/features/profile/data/flutter_avatar_image_service.dart';
 import 'package:zerin_marketplace/features/profile/data/supabase_profile_repository.dart';
 import 'package:zerin_marketplace/features/profile/data/unconfigured_profile_repository.dart';
@@ -155,6 +156,7 @@ class EditProfileController extends _$EditProfileController {
       }
       await _repository.uploadAvatar(bytes);
       ref.invalidate(myProfileProvider);
+      ref.read(identityCatalogRevisionProvider.notifier).bump();
       state = state.copyWith(avatarBusy: false);
     } on ProfileException catch (error) {
       state = state.copyWith(avatarBusy: false, error: error.reason);
@@ -172,6 +174,7 @@ class EditProfileController extends _$EditProfileController {
     try {
       await _repository.clearAvatar();
       ref.invalidate(myProfileProvider);
+      ref.read(identityCatalogRevisionProvider.notifier).bump();
       state = state.copyWith(avatarBusy: false);
     } on ProfileException catch (error) {
       state = state.copyWith(avatarBusy: false, error: error.reason);
@@ -201,6 +204,7 @@ class EditProfileController extends _$EditProfileController {
         bio: bio,
       );
       ref.invalidate(myProfileProvider);
+      ref.read(identityCatalogRevisionProvider.notifier).bump();
       state = state.copyWith(saving: false, saved: true);
       return true;
     } on ProfileException catch (error) {

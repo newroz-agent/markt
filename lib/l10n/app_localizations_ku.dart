@@ -384,6 +384,15 @@ class AppLocalizationsKu extends AppLocalizations {
   String get accountTitle => 'Profîl';
 
   @override
+  String get accountSellingProfilesTitle => 'Profîlên te yên firotinê';
+
+  @override
+  String get accountPersonalIdentity => 'Kesê taybet';
+
+  @override
+  String get accountRegisterBusiness => 'Karsaziyek tomar bike';
+
+  @override
   String get accountProfile => 'Agahiyên kesane';
 
   @override

@@ -6,96 +6,64 @@ import 'package:zerin_marketplace/core/constants/german_cities.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
+import 'package:zerin_marketplace/features/business/domain/business_repository.dart';
+import 'package:zerin_marketplace/features/business/domain/business_seller_id.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_labels.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_scope_error.dart';
 import 'package:zerin_marketplace/features/business/presentation/controllers/business_controller.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
-/// "Mein Unternehmen": start a directory entry, then verification documents,
-/// profile, opening hours, menu and publishing.
-class BusinessHubScreen extends ConsumerWidget {
-  const BusinessHubScreen({super.key});
+/// Pre-business onboarding. The required nullable private ID distinguishes a
+/// person without a private seller row from a private seller adding a business.
+class BusinessStartScreen extends ConsumerWidget {
+  const BusinessStartScreen({required this.existingPrivateSellerId, super.key});
+
+  final String? existingPrivateSellerId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final onboarding = ref.watch(directoryOnboardingProvider);
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.businessHubTitle)),
-      body: switch (onboarding) {
-        AsyncData(:final value) => _HubBody(onboarding: value),
-        AsyncError() => AppErrorState(
-          title: l10n.stateErrorTitle,
-          message: l10n.stateErrorMessage,
-          retryLabel: l10n.actionRetry,
-          onRetry: () => ref.invalidate(directoryOnboardingProvider),
-        ),
-        _ => const Center(child: CircularProgressIndicator()),
-      },
-    );
-  }
-}
-
-class _HubBody extends StatelessWidget {
-  const _HubBody({required this.onboarding});
-
-  final DirectoryOnboarding onboarding;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    if (onboarding.isPrivateSeller) {
-      return AppEmptyState(
-        title: l10n.businessPrivateSellerTitle,
-        message: l10n.businessPrivateSellerBody,
-        icon: Icons.person_outline_rounded,
-      );
+    if (existingPrivateSellerId != null &&
+        !BusinessSellerId.isValid(existingPrivateSellerId)) {
+      return BusinessScopeErrorScreen(title: l10n.businessStartTitle);
     }
-    final seller = onboarding.seller;
-    final type = onboarding.directoryType;
-    return Align(
-      alignment: Alignment.topCenter,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.md,
-            AppSpacing.md,
-            AppSpacing.md,
-            AppSpacing.xxl,
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.businessStartTitle)),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.md,
+              AppSpacing.md,
+              AppSpacing.xxl,
+            ),
+            children: <Widget>[
+              _CreateBusinessCard(
+                existingPrivateSellerId: existingPrivateSellerId,
+              ),
+            ],
           ),
-          children: seller == null || type == null
-              ? <Widget>[_StartCard(hasSeller: seller != null)]
-              : <Widget>[
-                  _StatusHeader(onboarding: onboarding, type: type),
-                  const SizedBox(height: AppSpacing.md),
-                  _SectionsCard(onboarding: onboarding, type: type),
-                  const SizedBox(height: AppSpacing.md),
-                  _PublishCard(onboarding: onboarding),
-                  if (!onboarding.isVerified) ...<Widget>[
-                    const SizedBox(height: AppSpacing.md),
-                    Text(
-                      l10n.businessDraftNote,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                ],
         ),
       ),
     );
   }
 }
 
-/// First step: choose the type (and, without a seller, name and city).
-class _StartCard extends ConsumerStatefulWidget {
-  const _StartCard({required this.hasSeller});
+class _CreateBusinessCard extends ConsumerStatefulWidget {
+  const _CreateBusinessCard({required this.existingPrivateSellerId});
 
-  final bool hasSeller;
+  final String? existingPrivateSellerId;
 
   @override
-  ConsumerState<_StartCard> createState() => _StartCardState();
+  ConsumerState<_CreateBusinessCard> createState() =>
+      _CreateBusinessCardState();
 }
 
-class _StartCardState extends ConsumerState<_StartCard> {
+class _CreateBusinessCardState extends ConsumerState<_CreateBusinessCard> {
   final _name = TextEditingController();
   DirectoryType? _type;
   String? _city;
@@ -111,39 +79,44 @@ class _StartCardState extends ConsumerState<_StartCard> {
     final l10n = context.l10n;
     final type = _type;
     if (type == null) return;
-    if (!widget.hasSeller) {
-      final name = _name.text.trim();
-      if (name.length < 2 || name.length > 100) {
-        AppSnackBar.show(
-          context,
-          message: l10n.businessErrorName,
-          variant: AppSnackBarVariant.error,
-        );
-        return;
-      }
-      if (_city == null) {
-        AppSnackBar.show(
-          context,
-          message: l10n.businessErrorCity,
-          variant: AppSnackBarVariant.error,
-        );
-        return;
-      }
+    final name = _name.text.trim();
+    if (name.length < 2 || name.length > 100) {
+      AppSnackBar.show(
+        context,
+        message: l10n.businessErrorName,
+        variant: AppSnackBarVariant.error,
+      );
+      return;
     }
+    if (_city == null) {
+      AppSnackBar.show(
+        context,
+        message: l10n.businessErrorCity,
+        variant: AppSnackBarVariant.error,
+      );
+      return;
+    }
+
     setState(() => _busy = true);
     try {
-      final repository = ref.read(businessRepositoryProvider);
-      if (widget.hasSeller) {
-        await repository.setDirectoryType(type);
-      } else {
-        await repository.createBusiness(
-          type: type,
-          shopName: _name.text,
-          city: _city!,
-        );
+      final onboarding = await ref
+          .read(businessRepositoryProvider)
+          .createBusiness(
+            existingPrivateSellerId: widget.existingPrivateSellerId,
+            type: type,
+            shopName: name,
+            city: _city!,
+          );
+      final businessSellerId = onboarding.seller?.id;
+      if (businessSellerId == null ||
+          onboarding.seller?.kind != 'business' ||
+          !BusinessSellerId.isValid(businessSellerId)) {
+        throw const BusinessException(BusinessFailureReason.invalidInput);
       }
-      ref.invalidate(directoryOnboardingProvider);
-      if (mounted) await const BusinessDocumentsRoute().push<void>(context);
+      ref.read(identityCatalogRevisionProvider.notifier).bump();
+      if (mounted) {
+        BusinessDocumentsRoute(businessSellerId: businessSellerId).go(context);
+      }
     } on Exception catch (error) {
       if (mounted) {
         AppSnackBar.show(
@@ -177,25 +150,23 @@ class _StartCardState extends ConsumerState<_StartCard> {
               selected: _type,
               onSelected: (type) => setState(() => _type = type),
             ),
-            if (!widget.hasSeller) ...<Widget>[
-              const SizedBox(height: AppSpacing.md),
-              AppTextField(
-                controller: _name,
-                label: l10n.businessNameLabel,
-                textCapitalization: TextCapitalization.words,
-                maxLength: 100,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              DropdownButtonFormField<String>(
-                initialValue: _city,
-                decoration: InputDecoration(labelText: l10n.profileCityLabel),
-                items: <DropdownMenuItem<String>>[
-                  for (final city in germanMarketplaceCities)
-                    DropdownMenuItem<String>(value: city, child: Text(city)),
-                ],
-                onChanged: (value) => setState(() => _city = value),
-              ),
-            ],
+            const SizedBox(height: AppSpacing.md),
+            AppTextField(
+              controller: _name,
+              label: l10n.businessNameLabel,
+              textCapitalization: TextCapitalization.words,
+              maxLength: 100,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            DropdownButtonFormField<String>(
+              initialValue: _city,
+              decoration: InputDecoration(labelText: l10n.profileCityLabel),
+              items: <DropdownMenuItem<String>>[
+                for (final city in germanMarketplaceCities)
+                  DropdownMenuItem<String>(value: city, child: Text(city)),
+              ],
+              onChanged: (value) => setState(() => _city = value),
+            ),
             const SizedBox(height: AppSpacing.lg),
             AppButton.primary(
               label: l10n.businessStartAction,
@@ -210,8 +181,173 @@ class _StartCardState extends ConsumerState<_StartCard> {
   }
 }
 
-/// Selectable directory types, shared by the start card, the documents
-/// screen and the profile editor.
+/// "Mein Unternehmen" for one explicit owned business identity.
+class BusinessHubScreen extends ConsumerWidget {
+  const BusinessHubScreen({required this.businessSellerId, super.key});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    if (!BusinessSellerId.isValid(businessSellerId)) {
+      return BusinessScopeErrorScreen(title: l10n.businessHubTitle);
+    }
+    final provider = directoryOnboardingProvider(businessSellerId);
+    final onboarding = ref.watch(provider);
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.businessHubTitle)),
+      body: switch (onboarding) {
+        AsyncData(:final value) => _HubBody(
+          businessSellerId: businessSellerId,
+          onboarding: value,
+        ),
+        AsyncError() => AppErrorState(
+          title: l10n.stateErrorTitle,
+          message: l10n.stateErrorMessage,
+          retryLabel: l10n.actionRetry,
+          onRetry: () => ref.invalidate(provider),
+        ),
+        _ => const Center(child: CircularProgressIndicator()),
+      },
+    );
+  }
+}
+
+class _HubBody extends StatelessWidget {
+  const _HubBody({required this.businessSellerId, required this.onboarding});
+
+  final String businessSellerId;
+  final DirectoryOnboarding onboarding;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final seller = onboarding.seller;
+    if (seller == null ||
+        seller.id != businessSellerId ||
+        seller.kind != 'business') {
+      return AppErrorState(
+        title: l10n.stateErrorTitle,
+        message: l10n.stateErrorMessage,
+      );
+    }
+    final type = onboarding.directoryType;
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.md,
+            AppSpacing.md,
+            AppSpacing.md,
+            AppSpacing.xxl,
+          ),
+          children: type == null
+              ? <Widget>[_DeclareTypeCard(businessSellerId: businessSellerId)]
+              : <Widget>[
+                  _StatusHeader(onboarding: onboarding, type: type),
+                  const SizedBox(height: AppSpacing.md),
+                  _SectionsCard(
+                    businessSellerId: businessSellerId,
+                    onboarding: onboarding,
+                    type: type,
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                  _PublishCard(
+                    businessSellerId: businessSellerId,
+                    onboarding: onboarding,
+                  ),
+                  if (!onboarding.isVerified) ...<Widget>[
+                    const SizedBox(height: AppSpacing.md),
+                    Text(
+                      l10n.businessDraftNote,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DeclareTypeCard extends ConsumerStatefulWidget {
+  const _DeclareTypeCard({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  ConsumerState<_DeclareTypeCard> createState() => _DeclareTypeCardState();
+}
+
+class _DeclareTypeCardState extends ConsumerState<_DeclareTypeCard> {
+  DirectoryType? _type;
+  bool _busy = false;
+
+  Future<void> _submit() async {
+    final type = _type;
+    if (type == null) return;
+    setState(() => _busy = true);
+    try {
+      await ref
+          .read(businessRepositoryProvider)
+          .setDirectoryType(sellerId: widget.businessSellerId, type: type);
+      ref.invalidate(directoryOnboardingProvider(widget.businessSellerId));
+      if (mounted) {
+        BusinessDocumentsRoute(
+          businessSellerId: widget.businessSellerId,
+        ).go(context);
+      }
+    } on Exception catch (error) {
+      if (mounted) {
+        AppSnackBar.show(
+          context,
+          message: businessFailureMessage(context.l10n, error),
+          variant: AppSnackBarVariant.error,
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
+        padding: AppSpacing.card,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(l10n.businessStartTitle, style: theme.textTheme.titleLarge),
+            const SizedBox(height: AppSpacing.xs),
+            Text(l10n.businessStartBody),
+            const SizedBox(height: AppSpacing.md),
+            Text(l10n.businessTypeLabel, style: theme.textTheme.titleSmall),
+            const SizedBox(height: AppSpacing.xs),
+            DirectoryTypeChoice(
+              selected: _type,
+              onSelected: (type) => setState(() => _type = type),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            AppButton.primary(
+              label: l10n.businessStartAction,
+              loading: _busy,
+              expand: true,
+              onPressed: _type == null || _busy ? null : _submit,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Selectable directory types, shared by onboarding, documents and profile.
 class DirectoryTypeChoice extends StatelessWidget {
   const DirectoryTypeChoice({
     required this.selected,
@@ -233,7 +369,6 @@ class DirectoryTypeChoice extends StatelessWidget {
       children: <Widget>[
         for (final type in DirectoryType.values)
           ChoiceChip(
-            // The type icon stays visible; the selected colour marks the choice.
             showCheckmark: false,
             avatar: Icon(type.icon, size: AppSizes.iconMedium),
             label: Text(type.label(l10n)),
@@ -309,8 +444,13 @@ class _StatusHeader extends StatelessWidget {
 }
 
 class _SectionsCard extends StatelessWidget {
-  const _SectionsCard({required this.onboarding, required this.type});
+  const _SectionsCard({
+    required this.businessSellerId,
+    required this.onboarding,
+    required this.type,
+  });
 
+  final String businessSellerId;
   final DirectoryOnboarding onboarding;
   final DirectoryType type;
 
@@ -335,7 +475,9 @@ class _SectionsCard extends StatelessWidget {
               ),
             ),
             trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => const BusinessDocumentsRoute().push<void>(context),
+            onTap: () => BusinessDocumentsRoute(
+              businessSellerId: businessSellerId,
+            ).push<void>(context),
           ),
           const Divider(),
           ListTile(
@@ -349,7 +491,9 @@ class _SectionsCard extends StatelessWidget {
                   : l10n.businessProfileDraft,
             ),
             trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => const BusinessProfileRoute().push<void>(context),
+            onTap: () => BusinessProfileRoute(
+              businessSellerId: businessSellerId,
+            ).push<void>(context),
           ),
           const Divider(),
           ListTile(
@@ -364,7 +508,9 @@ class _SectionsCard extends StatelessWidget {
                   : l10n.businessHoursSummary(count: onboarding.hours.length),
             ),
             trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => const BusinessHoursRoute().push<void>(context),
+            onTap: () => BusinessHoursRoute(
+              businessSellerId: businessSellerId,
+            ).push<void>(context),
           ),
           if (type.isFood) ...<Widget>[
             const Divider(),
@@ -381,7 +527,9 @@ class _SectionsCard extends StatelessWidget {
                       ),
               ),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => const BusinessMenuRoute().push<void>(context),
+              onTap: () => BusinessMenuRoute(
+                businessSellerId: businessSellerId,
+              ).push<void>(context),
             ),
           ],
         ],
@@ -391,8 +539,12 @@ class _SectionsCard extends StatelessWidget {
 }
 
 class _PublishCard extends ConsumerStatefulWidget {
-  const _PublishCard({required this.onboarding});
+  const _PublishCard({
+    required this.businessSellerId,
+    required this.onboarding,
+  });
 
+  final String businessSellerId;
   final DirectoryOnboarding onboarding;
 
   @override
@@ -409,8 +561,11 @@ class _PublishCardState extends ConsumerState<_PublishCard> {
     try {
       await ref
           .read(businessRepositoryProvider)
-          .saveProfile(profile.copyWith(isPublished: published));
-      ref.invalidate(directoryOnboardingProvider);
+          .saveProfile(
+            sellerId: widget.businessSellerId,
+            profile: profile.copyWith(isPublished: published),
+          );
+      ref.invalidate(directoryOnboardingProvider(widget.businessSellerId));
     } on Exception catch (error) {
       if (mounted) {
         AppSnackBar.show(
@@ -429,7 +584,6 @@ class _PublishCardState extends ConsumerState<_PublishCard> {
     final l10n = context.l10n;
     final profile = widget.onboarding.profile;
     final published = profile?.isPublished ?? false;
-    // Unpublishing is always allowed; publishing needs a verified profile.
     final canToggle =
         !_busy &&
         profile != null &&

@@ -30,6 +30,8 @@ const _doctor = 'step-e2-ios-doctor@example.invalid';
 const _restaurant = 'step-e2-ios-restaurant@example.invalid';
 const _adminEmail = 'step-b-ios-admin@example.invalid';
 const _adminPassword = 'ZerinStepB!2026';
+const _doctorSellerId = 'e2e30000-0000-4000-8000-000000000002';
+const _restaurantSellerId = 'e2e30000-0000-4000-8000-000000000003';
 const _documentsBucket = 'seller-documents';
 // Seeded doctor seller (supabase/snippets/step_e2_local_seed.sql).
 const _doctorFolder =
@@ -205,7 +207,7 @@ void main() {
     router = container.read(appRouterProvider);
 
     // 1. A user without a seller picks the type first.
-    router.go(const BusinessHubRoute().location);
+    router.go(const BusinessStartRoute(existingPrivateSellerId: null).location);
     await until(
       tester,
       () => shows('Unternehmen eintragen') && shows('Arztpraxis'),
@@ -217,7 +219,9 @@ void main() {
 
     // 2. Doctor: identity approved, medical proof rejected with a note.
     await signIn(_doctor, _ownerPassword);
-    router.go(const BusinessDocumentsRoute().location);
+    router.go(
+      const BusinessDocumentsRoute(businessSellerId: _doctorSellerId).location,
+    );
     await until(
       tester,
       () =>
@@ -240,7 +244,10 @@ void main() {
       'The uploaded medical proof is now in review',
     );
     final onboarding = DirectoryOnboarding.fromJson(
-      await client.rpc<Map<String, dynamic>>('get_my_directory_onboarding'),
+      await client.rpc<Map<String, dynamic>>(
+        'get_my_directory_onboarding',
+        params: const <String, dynamic>{'p_seller_id': _doctorSellerId},
+      ),
     );
     final uploaded = onboarding.latestDocument(
       SellerDocumentKind.medicalProfessionalRegistration,
@@ -291,7 +298,9 @@ void main() {
 
     // 5. Verified restaurant: hub and the three editors.
     await signIn(_restaurant, _ownerPassword);
-    router.go(const BusinessHubRoute().location);
+    router.go(
+      const BusinessHubRoute(businessSellerId: _restaurantSellerId).location,
+    );
     await until(
       tester,
       () => shows('Zagros Grill') && shows('Verifiziert'),
@@ -299,7 +308,11 @@ void main() {
     );
     await screenshot(tester, 'hub');
 
-    router.go(const BusinessProfileRoute().location);
+    router.go(
+      const BusinessProfileRoute(
+        businessSellerId: _restaurantSellerId,
+      ).location,
+    );
     await until(
       tester,
       () => shows('Kurdische Grillküche') && shows('Titelbild'),
@@ -323,7 +336,9 @@ void main() {
     );
     await screenshot(tester, 'profile_fields');
 
-    router.go(const BusinessHoursRoute().location);
+    router.go(
+      const BusinessHoursRoute(businessSellerId: _restaurantSellerId).location,
+    );
     await until(
       tester,
       () => shows('Samstag') && shows('(nächster Tag)'),
@@ -331,7 +346,9 @@ void main() {
     );
     await screenshot(tester, 'hours');
 
-    router.go(const BusinessMenuRoute().location);
+    router.go(
+      const BusinessMenuRoute(businessSellerId: _restaurantSellerId).location,
+    );
     await until(
       tester,
       () => shows('Kebab Duhok') && shows('Nicht verfügbar'),

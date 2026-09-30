@@ -6,6 +6,7 @@ import 'package:zerin_marketplace/features/auth/data/supabase_auth_repository.da
 import 'package:zerin_marketplace/features/auth/data/unconfigured_auth_repository.dart';
 import 'package:zerin_marketplace/features/auth/domain/auth_repository.dart';
 import 'package:zerin_marketplace/features/auth/domain/auth_user.dart';
+import 'package:zerin_marketplace/features/identity/data/active_identity_store.dart';
 
 part 'auth_controller.g.dart';
 
@@ -23,6 +24,8 @@ Stream<AuthUser?> authState(AuthStateRef ref) =>
 
 @riverpod
 class AuthController extends _$AuthController {
+  final Set<String> _pendingIdentityCleanupUserIds = <String>{};
+
   @override
   FutureOr<void> build() {}
 
@@ -53,9 +56,38 @@ class AuthController extends _$AuthController {
 
   Future<void> signOut() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-      () => ref.read(authRepositoryProvider).signOut(),
-    );
+    final auth = ref.read(authRepositoryProvider);
+    final userId = auth.currentUser?.id;
+    try {
+      await auth.signOut();
+    } catch (error, stackTrace) {
+      // A failed auth sign-out keeps the per-user identity preference.
+      state = AsyncError(error, stackTrace);
+      return;
+    }
+
+    if (userId != null) _pendingIdentityCleanupUserIds.add(userId);
+    await _retryIdentityCleanup();
+  }
+
+  /// Retries local cleanup without repeating the already-successful remote
+  /// sign-out. The captured UID remains available until deletion succeeds.
+  Future<void> retryIdentityCleanup() async {
+    if (_pendingIdentityCleanupUserIds.isEmpty) return;
+    state = const AsyncLoading();
+    await _retryIdentityCleanup();
+  }
+
+  Future<void> _retryIdentityCleanup() async {
+    try {
+      for (final userId in _pendingIdentityCleanupUserIds.toList()) {
+        await ref.read(activeIdentityStoreProvider).remove(userId);
+        _pendingIdentityCleanupUserIds.remove(userId);
+      }
+      state = const AsyncData(null);
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+    }
   }
 
   Future<bool> _run(Future<Object?> Function() action) async {

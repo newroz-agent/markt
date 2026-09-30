@@ -7,7 +7,7 @@ enum BusinessFailureReason {
   backendNotConfigured,
   notAuthenticated,
 
-  /// Private (non-business) seller accounts cannot join the directory.
+  /// Retained for translating responses from the temporary legacy RPCs.
   privateSeller,
   invalidBusinessName,
   unsupportedCity,
@@ -19,7 +19,7 @@ enum BusinessFailureReason {
   documentAlreadyPending,
   fileTooLarge,
 
-  /// The server rejected the submitted values.
+  /// The server rejected the submitted values or seller identity scope.
   invalidInput,
   unknown,
 }
@@ -35,19 +35,23 @@ class BusinessException implements Exception {
 }
 
 abstract interface class BusinessRepository {
-  Future<DirectoryOnboarding> fetchOnboarding();
+  Future<DirectoryOnboarding> fetchOnboarding({required String sellerId});
 
-  /// Creates a pending business seller (no listing) for a user without any
-  /// seller. Private sellers are refused.
+  /// Creates the one business identity. [existingPrivateSellerId] is null for
+  /// a person without a private seller row and explicit for a private seller.
   Future<DirectoryOnboarding> createBusiness({
+    required String? existingPrivateSellerId,
     required DirectoryType type,
     required String shopName,
     required String city,
   });
 
-  /// Changes the declared type of the caller's business seller. Never changes
-  /// its status; fixed once a directory profile exists.
-  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type);
+  /// Changes the declared type of this exact owned business seller. Never
+  /// changes status; fixed once a directory profile exists.
+  Future<DirectoryOnboarding> setDirectoryType({
+    required String sellerId,
+    required DirectoryType type,
+  });
 
   /// Uploads into the private `seller-documents` bucket and records the
   /// document for the admin verification queue.
@@ -57,10 +61,16 @@ abstract interface class BusinessRepository {
     required PickedDocumentFile file,
   });
 
-  /// Withdraws a pending document (row and stored file).
-  Future<void> withdrawDocument(SellerDocument document);
+  /// Withdraws a pending document from this exact business seller.
+  Future<void> withdrawDocument({
+    required String sellerId,
+    required SellerDocument document,
+  });
 
-  Future<void> saveProfile(DirectoryProfile profile);
+  Future<void> saveProfile({
+    required String sellerId,
+    required DirectoryProfile profile,
+  });
 
   /// Uploads a cover image and returns its storage path.
   Future<String> uploadCover({
@@ -70,9 +80,15 @@ abstract interface class BusinessRepository {
 
   String? coverUrl(String? storagePath);
 
-  Future<void> saveHours(List<OpeningInterval> intervals);
+  Future<void> saveHours({
+    required String sellerId,
+    required List<OpeningInterval> intervals,
+  });
 
-  Future<void> saveMenu(List<MenuSectionDraft> sections);
+  Future<void> saveMenu({
+    required String sellerId,
+    required List<MenuSectionDraft> sections,
+  });
 }
 
 /// Picks identity/registration documents (photo or PDF) and cover images.
@@ -92,19 +108,23 @@ class UnconfiguredBusinessRepository implements BusinessRepository {
       throw const BusinessException(BusinessFailureReason.backendNotConfigured);
 
   @override
-  Future<DirectoryOnboarding> fetchOnboarding() async =>
-      DirectoryOnboarding.empty;
+  Future<DirectoryOnboarding> fetchOnboarding({
+    required String sellerId,
+  }) async => _unconfigured();
 
   @override
   Future<DirectoryOnboarding> createBusiness({
+    required String? existingPrivateSellerId,
     required DirectoryType type,
     required String shopName,
     required String city,
   }) async => _unconfigured();
 
   @override
-  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type) async =>
-      _unconfigured();
+  Future<DirectoryOnboarding> setDirectoryType({
+    required String sellerId,
+    required DirectoryType type,
+  }) async => _unconfigured();
 
   @override
   Future<void> uploadDocument({
@@ -114,11 +134,16 @@ class UnconfiguredBusinessRepository implements BusinessRepository {
   }) async => _unconfigured();
 
   @override
-  Future<void> withdrawDocument(SellerDocument document) async =>
-      _unconfigured();
+  Future<void> withdrawDocument({
+    required String sellerId,
+    required SellerDocument document,
+  }) async => _unconfigured();
 
   @override
-  Future<void> saveProfile(DirectoryProfile profile) async => _unconfigured();
+  Future<void> saveProfile({
+    required String sellerId,
+    required DirectoryProfile profile,
+  }) async => _unconfigured();
 
   @override
   Future<String> uploadCover({
@@ -130,12 +155,16 @@ class UnconfiguredBusinessRepository implements BusinessRepository {
   String? coverUrl(String? storagePath) => null;
 
   @override
-  Future<void> saveHours(List<OpeningInterval> intervals) async =>
-      _unconfigured();
+  Future<void> saveHours({
+    required String sellerId,
+    required List<OpeningInterval> intervals,
+  }) async => _unconfigured();
 
   @override
-  Future<void> saveMenu(List<MenuSectionDraft> sections) async =>
-      _unconfigured();
+  Future<void> saveMenu({
+    required String sellerId,
+    required List<MenuSectionDraft> sections,
+  }) async => _unconfigured();
 }
 
 class UnavailableDocumentFileService implements DocumentFileService {

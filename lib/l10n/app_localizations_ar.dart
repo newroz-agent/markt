@@ -380,6 +380,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accountTitle => 'الملف الشخصي';
 
   @override
+  String get accountSellingProfilesTitle => 'ملفات البيع الخاصة بك';
+
+  @override
+  String get accountPersonalIdentity => 'فرد';
+
+  @override
+  String get accountRegisterBusiness => 'تسجيل نشاط تجاري';
+
+  @override
   String get accountProfile => 'البيانات الشخصية';
 
   @override

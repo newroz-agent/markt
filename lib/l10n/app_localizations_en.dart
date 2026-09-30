@@ -380,6 +380,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountTitle => 'Profile';
 
   @override
+  String get accountSellingProfilesTitle => 'Your selling profiles';
+
+  @override
+  String get accountPersonalIdentity => 'Private person';
+
+  @override
+  String get accountRegisterBusiness => 'Register a business';
+
+  @override
   String get accountProfile => 'Personal details';
 
   @override

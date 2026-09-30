@@ -379,6 +379,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get accountTitle => 'Profil';
 
   @override
+  String get accountSellingProfilesTitle => 'Satış profillerin';
+
+  @override
+  String get accountPersonalIdentity => 'Bireysel';
+
+  @override
+  String get accountRegisterBusiness => 'İşletme kaydet';
+
+  @override
   String get accountProfile => 'Kişisel bilgiler';
 
   @override

@@ -1,6 +1,6 @@
 # Zêrîn Project Status
 
-Updated: 2026-09-29 — Step F2a database applied and fully accepted locally
+Updated: 2026-09-30 — Step F2b identity switching and business scoping complete
 Canonical product contract: `docs/SCOPE.md`
 
 > Step D evidence note (2026-09-22). The migration
@@ -128,7 +128,7 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   create/delete/type changes run the unverified wipe. The migration remains absent from
   `supabase_migrations.schema_migrations` under the direct-psql ledger caveat.
 
-## Step F — account switching (F2a complete; F2b approval required)
+## Step F — account switching (F2b complete; F2c approval required)
 
 - ✅ `20260928000100_step_f2a_multi_identity.sql` replaces global seller/user uniqueness
   with `UNIQUE(user_id, kind)`, revokes authenticated direct seller inserts, adds the safe
@@ -153,7 +153,32 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
 - ⚠️ Compatibility contract: the legacy no-ID RPC overloads are temporary. Once F2c
   ships and the Flutter client no longer calls them, remove those overloads in a
   follow-up migration.
-- ⏸️ F2b and F2c are not started; either requires explicit approval.
+- ✅ F2b shared identity lifecycle: `get_my_identity_catalog` is parsed into a safe
+  person-plus-optional-business catalog; active selection is stored under
+  `identity.active.v1.<auth UID>`, exposed only after a fresh server fetch, repaired by
+  person → business → none fallback, and isolated by auth-session identity so account A
+  data is never retained for account B. The selection is display/default-context data
+  only and is never an authorization source.
+- ✅ Successful sign-out clears only the captured user's identity preference after the
+  auth repository succeeds; failed auth sign-out keeps it. Local cleanup failures retain
+  the captured UID for retry without repeating the successful remote sign-out. Business
+  creation and person profile/avatar writes refresh the same-session server catalog.
+- ✅ Account always shows the person identity, shows the optional business identity with
+  pending/verified/rejected/suspended status and accessible active highlighting, and
+  always offers “Geschäft registrieren” when no business exists, including private-only
+  users. Edit Profile remains person-only.
+- ✅ Business start sends the UUID-first overload key even when its private source is
+  null. Hub, documents, profile, hours and menu routes require an explicit business
+  seller UUID; every repository call sends `p_seller_id`, validates the returned seller,
+  and fails closed on missing/malformed scope without consulting active identity.
+- ✅ F2b client gate: 78/78 affected identity/profile/business tests passed after review;
+  `flutter analyze --no-pub` is clean and the full `flutter test --no-pub` suite passes
+  316/316. All three new strings are present in de/en/ar/tr/ku; Account Arabic RTL and
+  Kurdish LTR are covered. Evidence: `docs/evidence/step-f/f2b-client-closeout.md`.
+- ✅ F2c-owned Sell, My Listings and inbox production files are unchanged. The retained
+  E2 live harness was updated to the explicit routes/RPC but not executed because F2b
+  did not authorize a write-capable live evidence run.
+- ⏸️ F2c is not started and requires explicit approval.
 
 ## Step E1.5 — OpenStreetMap restaurant/café import (server side)
 

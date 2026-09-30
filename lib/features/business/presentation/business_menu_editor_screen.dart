@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
+import 'package:zerin_marketplace/features/business/domain/business_seller_id.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_labels.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_scope_error.dart';
 import 'package:zerin_marketplace/features/business/presentation/controllers/business_controller.dart';
 import 'package:zerin_marketplace/features/home/presentation/home_formatters.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -12,16 +14,25 @@ import 'package:zerin_marketplace/l10n/l10n.dart';
 /// Structured menu for restaurants, cafés and fast food: sections with dishes
 /// (create, edit, reorder, delete, availability). Saved as one replacement.
 class BusinessMenuEditorScreen extends ConsumerWidget {
-  const BusinessMenuEditorScreen({super.key});
+  const BusinessMenuEditorScreen({required this.businessSellerId, super.key});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final onboarding = ref.watch(directoryOnboardingProvider);
+    if (!BusinessSellerId.isValid(businessSellerId)) {
+      return BusinessScopeErrorScreen(title: l10n.businessMenuTile);
+    }
+    final provider = directoryOnboardingProvider(businessSellerId);
+    final onboarding = ref.watch(provider);
     return switch (onboarding) {
       AsyncData(:final value)
-          when value.profile != null && value.profile!.type.isFood =>
-        _MenuForm(initial: value.menu),
+          when value.seller?.id == businessSellerId &&
+              value.seller?.kind == 'business' &&
+              value.profile != null &&
+              value.profile!.type.isFood =>
+        _MenuForm(businessSellerId: businessSellerId, initial: value.menu),
       AsyncData() => Scaffold(
         appBar: AppBar(title: Text(l10n.businessMenuTile)),
         body: AppEmptyState(
@@ -36,7 +47,7 @@ class BusinessMenuEditorScreen extends ConsumerWidget {
           title: l10n.stateErrorTitle,
           message: l10n.stateErrorMessage,
           retryLabel: l10n.actionRetry,
-          onRetry: () => ref.invalidate(directoryOnboardingProvider),
+          onRetry: () => ref.invalidate(provider),
         ),
       ),
       _ => Scaffold(
@@ -48,8 +59,9 @@ class BusinessMenuEditorScreen extends ConsumerWidget {
 }
 
 class _MenuForm extends ConsumerStatefulWidget {
-  const _MenuForm({required this.initial});
+  const _MenuForm({required this.businessSellerId, required this.initial});
 
+  final String businessSellerId;
   final List<MenuSectionDraft> initial;
 
   @override
@@ -132,8 +144,10 @@ class _MenuFormState extends ConsumerState<_MenuForm> {
     final l10n = context.l10n;
     setState(() => _saving = true);
     try {
-      await ref.read(businessRepositoryProvider).saveMenu(_sections);
-      ref.invalidate(directoryOnboardingProvider);
+      await ref
+          .read(businessRepositoryProvider)
+          .saveMenu(sellerId: widget.businessSellerId, sections: _sections);
+      ref.invalidate(directoryOnboardingProvider(widget.businessSellerId));
       if (mounted) {
         AppSnackBar.show(
           context,

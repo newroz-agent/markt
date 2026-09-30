@@ -5,36 +5,46 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/business/domain/business_models.dart';
 import 'package:zerin_marketplace/features/business/domain/business_repository.dart';
+import 'package:zerin_marketplace/features/business/domain/business_seller_id.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_hub_screen.dart';
 import 'package:zerin_marketplace/features/business/presentation/business_labels.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_scope_error.dart';
 import 'package:zerin_marketplace/features/business/presentation/controllers/business_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
 /// Verification documents: the type decides exactly which documents are
 /// needed; each shows its review status and any rejection note.
 class BusinessDocumentsScreen extends ConsumerWidget {
-  const BusinessDocumentsScreen({super.key});
+  const BusinessDocumentsScreen({required this.businessSellerId, super.key});
+
+  final String businessSellerId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final onboarding = ref.watch(directoryOnboardingProvider);
+    if (!BusinessSellerId.isValid(businessSellerId)) {
+      return BusinessScopeErrorScreen(title: l10n.businessDocumentsTile);
+    }
+    final provider = directoryOnboardingProvider(businessSellerId);
+    final onboarding = ref.watch(provider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.businessDocumentsTile)),
       body: switch (onboarding) {
         AsyncData(:final value)
-            when value.seller != null && value.directoryType != null =>
-          _DocumentsBody(onboarding: value),
+            when value.seller?.id == businessSellerId &&
+                value.seller?.kind == 'business' &&
+                value.directoryType != null =>
+          _DocumentsBody(businessSellerId: businessSellerId, onboarding: value),
         AsyncData() => AppEmptyState(
-          title: l10n.businessStartTitle,
-          message: l10n.businessStartBody,
+          title: l10n.stateErrorTitle,
+          message: l10n.stateErrorMessage,
           icon: Icons.storefront_outlined,
         ),
         AsyncError() => AppErrorState(
           title: l10n.stateErrorTitle,
           message: l10n.stateErrorMessage,
           retryLabel: l10n.actionRetry,
-          onRetry: () => ref.invalidate(directoryOnboardingProvider),
+          onRetry: () => ref.invalidate(provider),
         ),
         _ => const Center(child: CircularProgressIndicator()),
       },
@@ -43,8 +53,12 @@ class BusinessDocumentsScreen extends ConsumerWidget {
 }
 
 class _DocumentsBody extends ConsumerStatefulWidget {
-  const _DocumentsBody({required this.onboarding});
+  const _DocumentsBody({
+    required this.businessSellerId,
+    required this.onboarding,
+  });
 
+  final String businessSellerId;
   final DirectoryOnboarding onboarding;
 
   @override
@@ -58,8 +72,10 @@ class _DocumentsBodyState extends ConsumerState<_DocumentsBody> {
     if (type == widget.onboarding.directoryType) return;
     setState(() => _changingType = true);
     try {
-      await ref.read(businessRepositoryProvider).setDirectoryType(type);
-      ref.invalidate(directoryOnboardingProvider);
+      await ref
+          .read(businessRepositoryProvider)
+          .setDirectoryType(sellerId: widget.businessSellerId, type: type);
+      ref.invalidate(directoryOnboardingProvider(widget.businessSellerId));
     } on Exception catch (error) {
       if (mounted) {
         AppSnackBar.show(
@@ -85,7 +101,9 @@ class _DocumentsBodyState extends ConsumerState<_DocumentsBody> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
         child: RefreshIndicator(
-          onRefresh: () => ref.refresh(directoryOnboardingProvider.future),
+          onRefresh: () => ref.refresh(
+            directoryOnboardingProvider(widget.businessSellerId).future,
+          ),
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.md,
@@ -118,7 +136,7 @@ class _DocumentsBodyState extends ConsumerState<_DocumentsBody> {
               const SizedBox(height: AppSpacing.md),
               for (final kind in onboarding.requiredDocumentKinds) ...<Widget>[
                 _DocumentCard(
-                  sellerId: onboarding.seller!.id,
+                  sellerId: widget.businessSellerId,
                   kind: kind,
                   document: onboarding.latestDocument(kind),
                 ),
@@ -205,7 +223,7 @@ class _DocumentCardState extends ConsumerState<_DocumentCard> {
             kind: widget.kind,
             file: file,
           );
-      ref.invalidate(directoryOnboardingProvider);
+      ref.invalidate(directoryOnboardingProvider(widget.sellerId));
       if (mounted) {
         AppSnackBar.show(
           context,
@@ -230,8 +248,10 @@ class _DocumentCardState extends ConsumerState<_DocumentCard> {
     final l10n = context.l10n;
     setState(() => _busy = true);
     try {
-      await ref.read(businessRepositoryProvider).withdrawDocument(document);
-      ref.invalidate(directoryOnboardingProvider);
+      await ref
+          .read(businessRepositoryProvider)
+          .withdrawDocument(sellerId: widget.sellerId, document: document);
+      ref.invalidate(directoryOnboardingProvider(widget.sellerId));
       if (mounted) {
         AppSnackBar.show(context, message: l10n.documentWithdrawn);
       }

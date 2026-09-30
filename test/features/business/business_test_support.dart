@@ -86,25 +86,40 @@ class FakeBusinessRepository implements BusinessRepository {
 
   DirectoryOnboarding state;
   final calls = <String>[];
+  String? fetchedSellerId;
+  String? startedPrivateSellerId;
   DirectoryType? startedType;
   String? startedName;
   String? startedCity;
-  ({SellerDocumentKind kind, PickedDocumentFile file})? uploaded;
-  SellerDocument? withdrawn;
-  DirectoryProfile? savedProfile;
-  List<OpeningInterval>? savedHours;
-  List<MenuSectionDraft>? savedMenu;
+  String? setTypeSellerId;
+  ({String sellerId, SellerDocumentKind kind, PickedDocumentFile file})?
+  uploaded;
+  ({String sellerId, SellerDocument document})? withdrawn;
+  ({String sellerId, DirectoryProfile profile})? savedProfileCall;
+  ({String sellerId, List<OpeningInterval> intervals})? savedHoursCall;
+  ({String sellerId, List<MenuSectionDraft> sections})? savedMenuCall;
+
+  DirectoryProfile? get savedProfile => savedProfileCall?.profile;
+  List<OpeningInterval>? get savedHours => savedHoursCall?.intervals;
+  List<MenuSectionDraft>? get savedMenu => savedMenuCall?.sections;
 
   @override
-  Future<DirectoryOnboarding> fetchOnboarding() async => state;
+  Future<DirectoryOnboarding> fetchOnboarding({
+    required String sellerId,
+  }) async {
+    fetchedSellerId = sellerId;
+    return state;
+  }
 
   @override
   Future<DirectoryOnboarding> createBusiness({
+    required String? existingPrivateSellerId,
     required DirectoryType type,
     required String shopName,
     required String city,
   }) async {
     calls.add('create');
+    startedPrivateSellerId = existingPrivateSellerId;
     startedType = type;
     startedName = shopName;
     startedCity = city;
@@ -113,8 +128,12 @@ class FakeBusinessRepository implements BusinessRepository {
   }
 
   @override
-  Future<DirectoryOnboarding> setDirectoryType(DirectoryType type) async {
+  Future<DirectoryOnboarding> setDirectoryType({
+    required String sellerId,
+    required DirectoryType type,
+  }) async {
     calls.add('setType');
+    setTypeSellerId = sellerId;
     startedType = type;
     state = onboarding(seller: businessSeller(type: type));
     return state;
@@ -127,19 +146,25 @@ class FakeBusinessRepository implements BusinessRepository {
     required PickedDocumentFile file,
   }) async {
     calls.add('upload');
-    uploaded = (kind: kind, file: file);
+    uploaded = (sellerId: sellerId, kind: kind, file: file);
   }
 
   @override
-  Future<void> withdrawDocument(SellerDocument document) async {
+  Future<void> withdrawDocument({
+    required String sellerId,
+    required SellerDocument document,
+  }) async {
     calls.add('withdraw');
-    withdrawn = document;
+    withdrawn = (sellerId: sellerId, document: document);
   }
 
   @override
-  Future<void> saveProfile(DirectoryProfile profile) async {
+  Future<void> saveProfile({
+    required String sellerId,
+    required DirectoryProfile profile,
+  }) async {
     calls.add('profile');
-    savedProfile = profile;
+    savedProfileCall = (sellerId: sellerId, profile: profile);
   }
 
   @override
@@ -152,15 +177,21 @@ class FakeBusinessRepository implements BusinessRepository {
   String? coverUrl(String? storagePath) => null;
 
   @override
-  Future<void> saveHours(List<OpeningInterval> intervals) async {
+  Future<void> saveHours({
+    required String sellerId,
+    required List<OpeningInterval> intervals,
+  }) async {
     calls.add('hours');
-    savedHours = intervals;
+    savedHoursCall = (sellerId: sellerId, intervals: intervals);
   }
 
   @override
-  Future<void> saveMenu(List<MenuSectionDraft> sections) async {
+  Future<void> saveMenu({
+    required String sellerId,
+    required List<MenuSectionDraft> sections,
+  }) async {
     calls.add('menu');
-    savedMenu = sections;
+    savedMenuCall = (sellerId: sellerId, sections: sections);
   }
 }
 

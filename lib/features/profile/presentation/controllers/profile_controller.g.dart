@@ -222,7 +222,7 @@ class _PublicProfileProviderElement
 }
 
 String _$editProfileControllerHash() =>
-    r'58895469b553bcdca44f9666c36e6296cfb799c6';
+    r'c5261dc1d7372221f31aab2477b602bec32fd331';
 
 /// See also [EditProfileController].
 @ProviderFor(EditProfileController)

@@ -25,10 +25,15 @@ DocumentFileService documentFileService(DocumentFileServiceRef ref) {
   return FlutterDocumentFileService();
 }
 
-/// The signed-in owner's directory onboarding. Rebuilds on account changes and
-/// never keeps a previous account's data.
+/// This exact signed-in business seller's directory onboarding. Rebuilds on
+/// account changes and never keeps another identity's data.
 @riverpod
-Future<DirectoryOnboarding> directoryOnboarding(DirectoryOnboardingRef ref) {
+Future<DirectoryOnboarding> directoryOnboarding(
+  DirectoryOnboardingRef ref,
+  String businessSellerId,
+) {
   ref.watch(authStateProvider.select((state) => state.valueOrNull?.id));
-  return ref.watch(businessRepositoryProvider).fetchOnboarding();
+  return ref
+      .watch(businessRepositoryProvider)
+      .fetchOnboarding(sellerId: businessSellerId);
 }

@@ -25,6 +25,7 @@ List<RouteBase> get $appRoutes => [
   $editProfileRoute,
   $favoritesRoute,
   $recentlyViewedRoute,
+  $businessStartRoute,
   $businessHubRoute,
   $businessDocumentsRoute,
   $businessProfileRoute,
@@ -473,17 +474,51 @@ extension $RecentlyViewedRouteExtension on RecentlyViewedRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $businessStartRoute => GoRouteData.$route(
+  path: '/business/start',
+
+  factory: $BusinessStartRouteExtension._fromState,
+);
+
+extension $BusinessStartRouteExtension on BusinessStartRoute {
+  static BusinessStartRoute _fromState(GoRouterState state) =>
+      BusinessStartRoute(
+        existingPrivateSellerId:
+            state.uri.queryParameters['existing-private-seller-id'],
+      );
+
+  String get location => GoRouteData.$location(
+    '/business/start',
+    queryParams: {
+      if (existingPrivateSellerId != null)
+        'existing-private-seller-id': existingPrivateSellerId,
+    },
+  );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $businessHubRoute => GoRouteData.$route(
-  path: '/business',
+  path: '/business/:businessSellerId/overview',
 
   factory: $BusinessHubRouteExtension._fromState,
 );
 
 extension $BusinessHubRouteExtension on BusinessHubRoute {
-  static BusinessHubRoute _fromState(GoRouterState state) =>
-      const BusinessHubRoute();
+  static BusinessHubRoute _fromState(GoRouterState state) => BusinessHubRoute(
+    businessSellerId: state.pathParameters['businessSellerId']!,
+  );
 
-  String get location => GoRouteData.$location('/business');
+  String get location => GoRouteData.$location(
+    '/business/${Uri.encodeComponent(businessSellerId)}/overview',
+  );
 
   void go(BuildContext context) => context.go(location);
 
@@ -496,16 +531,20 @@ extension $BusinessHubRouteExtension on BusinessHubRoute {
 }
 
 RouteBase get $businessDocumentsRoute => GoRouteData.$route(
-  path: '/business/documents',
+  path: '/business/:businessSellerId/documents',
 
   factory: $BusinessDocumentsRouteExtension._fromState,
 );
 
 extension $BusinessDocumentsRouteExtension on BusinessDocumentsRoute {
   static BusinessDocumentsRoute _fromState(GoRouterState state) =>
-      const BusinessDocumentsRoute();
+      BusinessDocumentsRoute(
+        businessSellerId: state.pathParameters['businessSellerId']!,
+      );
 
-  String get location => GoRouteData.$location('/business/documents');
+  String get location => GoRouteData.$location(
+    '/business/${Uri.encodeComponent(businessSellerId)}/documents',
+  );
 
   void go(BuildContext context) => context.go(location);
 
@@ -518,16 +557,20 @@ extension $BusinessDocumentsRouteExtension on BusinessDocumentsRoute {
 }
 
 RouteBase get $businessProfileRoute => GoRouteData.$route(
-  path: '/business/profile',
+  path: '/business/:businessSellerId/profile',
 
   factory: $BusinessProfileRouteExtension._fromState,
 );
 
 extension $BusinessProfileRouteExtension on BusinessProfileRoute {
   static BusinessProfileRoute _fromState(GoRouterState state) =>
-      const BusinessProfileRoute();
+      BusinessProfileRoute(
+        businessSellerId: state.pathParameters['businessSellerId']!,
+      );
 
-  String get location => GoRouteData.$location('/business/profile');
+  String get location => GoRouteData.$location(
+    '/business/${Uri.encodeComponent(businessSellerId)}/profile',
+  );
 
   void go(BuildContext context) => context.go(location);
 
@@ -540,16 +583,20 @@ extension $BusinessProfileRouteExtension on BusinessProfileRoute {
 }
 
 RouteBase get $businessHoursRoute => GoRouteData.$route(
-  path: '/business/hours',
+  path: '/business/:businessSellerId/hours',
 
   factory: $BusinessHoursRouteExtension._fromState,
 );
 
 extension $BusinessHoursRouteExtension on BusinessHoursRoute {
   static BusinessHoursRoute _fromState(GoRouterState state) =>
-      const BusinessHoursRoute();
+      BusinessHoursRoute(
+        businessSellerId: state.pathParameters['businessSellerId']!,
+      );
 
-  String get location => GoRouteData.$location('/business/hours');
+  String get location => GoRouteData.$location(
+    '/business/${Uri.encodeComponent(businessSellerId)}/hours',
+  );
 
   void go(BuildContext context) => context.go(location);
 
@@ -562,16 +609,19 @@ extension $BusinessHoursRouteExtension on BusinessHoursRoute {
 }
 
 RouteBase get $businessMenuRoute => GoRouteData.$route(
-  path: '/business/menu',
+  path: '/business/:businessSellerId/menu',
 
   factory: $BusinessMenuRouteExtension._fromState,
 );
 
 extension $BusinessMenuRouteExtension on BusinessMenuRoute {
-  static BusinessMenuRoute _fromState(GoRouterState state) =>
-      const BusinessMenuRoute();
+  static BusinessMenuRoute _fromState(GoRouterState state) => BusinessMenuRoute(
+    businessSellerId: state.pathParameters['businessSellerId']!,
+  );
 
-  String get location => GoRouteData.$location('/business/menu');
+  String get location => GoRouteData.$location(
+    '/business/${Uri.encodeComponent(businessSellerId)}/menu',
+  );
 
   void go(BuildContext context) => context.go(location);
 
