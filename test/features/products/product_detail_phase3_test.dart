@@ -34,6 +34,7 @@ void main() {
     when(() => auth.currentUser).thenAnswer((_) => currentUser);
     when(() => auth.authStateChanges).thenAnswer((_) => authChanges.stream);
     when(() => home.fetchFavoriteState('p1')).thenAnswer((_) async => false);
+    when(() => home.recordProductView(any())).thenAnswer((_) async {});
     when(
       () => home.setFavorite(
         productId: 'p1',
@@ -323,19 +324,30 @@ void main() {
     },
   );
 
-  test('failed initial favorite read can retry without claiming a save', () async {
-    when(() => home.fetchFavoriteState('p1')).thenThrow(
-      const AppException(AppFailureCode.network),
-    );
-    listen();
-    await expectLater(container.read(provider.future), throwsA(isA<AppException>()));
-    expect(container.read(provider).hasError, isTrue);
-    when(() => home.fetchFavoriteState('p1')).thenAnswer((_) async => true);
-    container.read(provider.notifier).retry();
-    await container.pump();
-    expect(await container.read(provider.future), isTrue);
-    verifyNever(() => home.setFavorite(productId: 'p1', favorite: any(named: 'favorite')));
-  });
+  test(
+    'failed initial favorite read can retry without claiming a save',
+    () async {
+      when(
+        () => home.fetchFavoriteState('p1'),
+      ).thenThrow(const AppException(AppFailureCode.network));
+      listen();
+      await expectLater(
+        container.read(provider.future),
+        throwsA(isA<AppException>()),
+      );
+      expect(container.read(provider).hasError, isTrue);
+      when(() => home.fetchFavoriteState('p1')).thenAnswer((_) async => true);
+      container.read(provider.notifier).retry();
+      await container.pump();
+      expect(await container.read(provider.future), isTrue);
+      verifyNever(
+        () => home.setFavorite(
+          productId: 'p1',
+          favorite: any(named: 'favorite'),
+        ),
+      );
+    },
+  );
 
   test('seller provider forwards paging and exclusion unchanged', () async {
     when(

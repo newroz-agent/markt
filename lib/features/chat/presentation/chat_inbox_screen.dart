@@ -6,6 +6,7 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
+import 'package:zerin_marketplace/features/chat/presentation/chat_identity_label.dart';
 import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
@@ -72,49 +73,65 @@ class ChatInboxScreen extends ConsumerWidget {
   }
 }
 
-class _ConversationTile extends ConsumerWidget {
+class _ConversationTile extends StatelessWidget {
   const _ConversationTile({required this.conversation});
 
   final ChatConversation conversation;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final isSeller =
-        ref.watch(authRepositoryProvider).currentUser?.id ==
-        conversation.sellerUserId;
-    final avatarUrl = isSeller
-        ? conversation.buyerAvatarUrl
-        : conversation.shopAvatarUrl;
-    final title = isSeller
-        ? conversation.buyerName ?? context.l10n.chatTitle
-        : conversation.shopName;
-    final subtitle =
+    final avatarUrl = conversation.counterpartAvatarUrl;
+    final title = chatCounterpartName(context, conversation);
+    final identityLabel = chatOwnedIdentityLabel(context, conversation);
+    final preview =
         conversation.lastMessagePreview ?? context.l10n.chatNoMessagesYet;
+    final previewStyle = TextStyle(
+      color: conversation.unreadCount > 0
+          ? scheme.onSurface
+          : scheme.onSurfaceVariant,
+      fontWeight: conversation.unreadCount > 0
+          ? FontWeight.w600
+          : FontWeight.w400,
+    );
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: scheme.primaryContainer,
         backgroundImage: avatarUrl == null ? null : NetworkImage(avatarUrl),
         child: avatarUrl == null
             ? Icon(
-                isSeller ? Icons.person_outline : Icons.storefront_rounded,
+                conversation.isSellerViewer ||
+                        conversation.sellerKind != 'business'
+                    ? Icons.person_outline
+                    : Icons.storefront_rounded,
                 color: scheme.onPrimaryContainer,
               )
             : null,
       ),
       title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(
-        subtitle,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          color: conversation.unreadCount > 0
-              ? scheme.onSurface
-              : scheme.onSurfaceVariant,
-          fontWeight: conversation.unreadCount > 0
-              ? FontWeight.w600
-              : FontWeight.w400,
-        ),
+      isThreeLine: identityLabel != null,
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if (identityLabel != null)
+            Text(
+              identityLabel,
+              key: ValueKey('chat-identity-${conversation.chatId}'),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: scheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          Text(
+            preview,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: previewStyle,
+          ),
+        ],
       ),
       trailing: conversation.unreadCount > 0
           ? Badge(

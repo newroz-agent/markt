@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,14 +18,41 @@ import 'package:zerin_marketplace/features/products/presentation/controllers/pro
 import 'package:zerin_marketplace/features/products/presentation/product_rail.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
 
-class ProductDetailScreen extends ConsumerWidget {
+class ProductDetailScreen extends ConsumerStatefulWidget {
   const ProductDetailScreen({required this.productId, this.heroTag, super.key});
 
   final String productId;
   final String? heroTag;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Record the view exactly once per explicit detail open. Preview cards
+    // never mount this screen, so they never record a view. Anonymous users
+    // and RPC failures are silently ignored.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (ref.read(authRepositoryProvider).currentUser == null) return;
+      unawaited(
+        ref
+            .read(homeRepositoryProvider)
+            .recordProductView(widget.productId)
+            .catchError((_) {}),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final productId = widget.productId;
+    final heroTag = widget.heroTag;
+    final ref = this.ref;
     final product = ref.watch(homeProductProvider(productId: productId));
     return Scaffold(
       appBar: AppBar(
@@ -328,7 +357,9 @@ class _FavoriteButton extends ConsumerWidget {
     final favorite = ref.watch(productFavoriteProvider(productId: productId));
     final isFavorite = favorite.asData?.value ?? false;
     return IconButton(
-      tooltip: favorite.hasError ? context.l10n.actionRetry : isFavorite
+      tooltip: favorite.hasError
+          ? context.l10n.actionRetry
+          : isFavorite
           ? context.l10n.favoriteRemove
           : context.l10n.favoriteAdd,
       icon: Icon(
@@ -344,7 +375,9 @@ class _FavoriteButton extends ConsumerWidget {
           return;
         }
         if (favorite.hasError) {
-          ref.read(productFavoriteProvider(productId: productId).notifier).retry();
+          ref
+              .read(productFavoriteProvider(productId: productId).notifier)
+              .retry();
           return;
         }
         if (favorite.isLoading) return;
@@ -580,7 +613,17 @@ class _SellerCard extends ConsumerWidget {
       button: true,
       child: InkWell(
         borderRadius: AppRadius.large,
-        onTap: () => SellerProfileRoute(sellerId: store.id).push<void>(context),
+        onTap: () {
+          // Private sellers with a public @username navigate to the person
+          // profile; business stores keep their distinct seller profile.
+          if (seller.hasPublicProfile) {
+            PublicProfileRoute(
+              username: seller.profileUsername!,
+            ).push<void>(context);
+          } else {
+            SellerProfileRoute(sellerId: store.id).push<void>(context);
+          }
+        },
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: context.semanticColors.surfaceRaised,

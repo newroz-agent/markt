@@ -6,6 +6,7 @@ import 'package:zerin_marketplace/features/chat/data/supabase_chat_repository.da
 import 'package:zerin_marketplace/features/chat/data/unconfigured_chat_repository.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat_repository.dart';
+import 'package:zerin_marketplace/features/identity/presentation/controllers/identity_controller.dart';
 
 part 'chat_controller.g.dart';
 
@@ -20,6 +21,7 @@ ChatRepository chatRepository(ChatRepositoryRef ref) {
 @riverpod
 Stream<List<ChatConversation>> chatInbox(ChatInboxRef ref) {
   ref.watch(authStateProvider.select((state) => state.valueOrNull?.id));
+  ref.watch(identityCatalogRevisionProvider);
   ref.state = const AsyncData([]);
   if (ref.read(authRepositoryProvider).currentUser == null) {
     return Stream.value([]);
@@ -39,6 +41,7 @@ Future<ChatConversation?> chatDetails(
   required String chatId,
 }) {
   ref.watch(authStateProvider.select((state) => state.valueOrNull?.id));
+  ref.watch(identityCatalogRevisionProvider);
   ref.state = const AsyncData(null);
   if (ref.read(authRepositoryProvider).currentUser == null) {
     throw const AppException(AppFailureCode.notAuthenticated);

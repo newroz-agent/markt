@@ -1,0 +1,8 @@
+OSM Overpass snapshot used for the Step E1.5 import
+file: tools/osm/snapshots/berlin-food-2026-09-27.json (not committed; ignored via .gitignore)
+fetched: 2026-09-27 (UTC date in filename; one request via tools/osm/fetch_berlin_food.dart)
+osm_base: 2026-09-27T14:41:56Z
+elements: 6915
+bytes: 4142079
+sha256: 6cfdb2abd8135386cb85735f602d0c437b209909fbed6e08cfa83d6bed339ee0
+license: ODbL 1.0 — © OpenStreetMap-Mitwirkende

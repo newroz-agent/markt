@@ -1,0 +1,6 @@
+== seller-documents objects of the E2 test doctor, with the document row that references each (read-only)
+storage_path|bytes|mime|created_at|document_id|document_status|state
+e2e30000-0000-4000-8000-000000000002/medical_professional_registration/1790544446008819.pdf|193|application/pdf|2026-09-27 21:27:26.135225+00|||orphan: no row references it
+e2e30000-0000-4000-8000-000000000002/medical_professional_registration/1790544600030029.pdf|193|application/pdf|2026-09-27 21:30:00.271926+00|||orphan: no row references it
+e2e30000-0000-4000-8000-000000000002/medical_professional_registration/1790544754590375.pdf|193|application/pdf|2026-09-27 21:32:34.6522+00|00e7c93c-1b7c-4690-ba6a-37be96adfc83|pending|referenced by a pending document
+(3 rows)

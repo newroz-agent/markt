@@ -386,6 +386,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get accountTitle => 'Profil';
 
   @override
+  String get accountSellingProfilesTitle => 'Deine Verkaufsprofile';
+
+  @override
+  String get accountPersonalIdentity => 'Privatperson';
+
+  @override
+  String get accountRegisterBusiness => 'Geschäft registrieren';
+
+  @override
   String get accountProfile => 'Persönliche Daten';
 
   @override
@@ -507,6 +516,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get legalWithdrawal => 'Widerrufsbelehrung';
+
+  @override
+  String get legalDataSources => 'Datenquellen';
+
+  @override
+  String get legalOsmAttribution =>
+      'Karten- und Ortsdaten © OpenStreetMap-Mitwirkende, lizenziert unter der Open Database License (ODbL).';
+
+  @override
+  String get directoryUnverifiedOsmNote =>
+      'Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende';
 
   @override
   String get legalComingSoonBody =>
@@ -743,6 +763,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get productContactSeller => 'Verkäufer kontaktieren';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return 'Als $name';
+  }
+
+  @override
   String get chatInboxTitle => 'Nachrichten';
 
   @override
@@ -918,4 +943,1114 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Aus Favoriten entfernen';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Verkaufsprofil wählen';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Wähle, ob dieses Angebot privat oder geschäftlich veröffentlicht wird.';
+
+  @override
+  String get sellAsPerson => 'Als Privatperson';
+
+  @override
+  String get sellAsBusiness => 'Als Geschäft';
+
+  @override
+  String get sellChangeIdentity => 'Verkaufsprofil wechseln';
+
+  @override
+  String get myListingsPrivateSection => 'Privat';
+
+  @override
+  String get myListingsBusinessSection => 'Geschäft';
+
+  @override
+  String get myListingsSectionEmpty => 'Noch keine Angebote in diesem Bereich.';
+
+  @override
+  String get sellCatalogTitle => 'Was möchtest du verkaufen?';
+
+  @override
+  String get sellCatalogBody =>
+      'Suche zuerst nach einem ähnlichen Artikel oder starte ohne Vorlage.';
+
+  @override
+  String get sellCatalogSearchHint => 'Katalog durchsuchen';
+
+  @override
+  String get sellCatalogUseTemplate => 'Vorlage verwenden';
+
+  @override
+  String get sellFreeForm => 'Ohne Vorlage starten';
+
+  @override
+  String get sellNoTemplatesTitle => 'Keine passende Vorlage';
+
+  @override
+  String get sellNoTemplatesBody => 'Du kannst dein Angebot frei eingeben.';
+
+  @override
+  String get sellDetailsTitle => 'Angebotsdetails';
+
+  @override
+  String get sellSellerKindLabel => 'Verkäuferart';
+
+  @override
+  String get sellSellerPrivate => 'Privat';
+
+  @override
+  String get sellSellerBusiness => 'Gewerblich';
+
+  @override
+  String get sellSellerNameLabel => 'Anzeigename';
+
+  @override
+  String get sellListingTitleLabel => 'Titel';
+
+  @override
+  String get sellPriceLabel => 'Preis in Euro';
+
+  @override
+  String get sellCityLabel => 'Stadt';
+
+  @override
+  String get sellCategoryLabel => 'Kategorie';
+
+  @override
+  String get sellConditionLabel => 'Zustand';
+
+  @override
+  String get sellDescriptionLabel => 'Beschreibung';
+
+  @override
+  String get sellPhotosTitle => 'Fotos';
+
+  @override
+  String get sellPhotosBody =>
+      'Füge 1 bis 10 Fotos hinzu. Bilder werden vor dem Upload komprimiert.';
+
+  @override
+  String get sellPickPhotos => 'Fotos auswählen';
+
+  @override
+  String get sellTakePhoto => 'Foto aufnehmen';
+
+  @override
+  String get sellPhotoLimit => 'Maximal 10 Fotos';
+
+  @override
+  String get sellPhotoFailed => 'Das Foto konnte nicht verarbeitet werden.';
+
+  @override
+  String get sellReviewTitle => 'Prüfen und senden';
+
+  @override
+  String get sellSubmit => 'Zur Prüfung einreichen';
+
+  @override
+  String get sellValidationRequired => 'Dieses Feld ist erforderlich.';
+
+  @override
+  String get sellValidationPrice =>
+      'Gib einen gültigen Preis größer als 0 ein.';
+
+  @override
+  String get sellValidationDescription =>
+      'Die Beschreibung muss mindestens 10 Zeichen haben.';
+
+  @override
+  String get sellValidationPhotos => 'Füge mindestens ein Foto hinzu.';
+
+  @override
+  String get sellConfirmationTitle => 'Angebot wird geprüft';
+
+  @override
+  String get sellConfirmationBody =>
+      'Dein Angebot wurde eingereicht und ist noch nicht öffentlich. Wir benachrichtigen dich nach der Prüfung.';
+
+  @override
+  String get sellViewMyListings => 'Meine Angebote anzeigen';
+
+  @override
+  String get sellCreateAnother => 'Weiteres Angebot erstellen';
+
+  @override
+  String get sellTemplateImported =>
+      'Vorlage übernommen. Prüfe alle Angaben vor dem Senden.';
+
+  @override
+  String get myListingsTitle => 'Meine Angebote';
+
+  @override
+  String get myListingsEmptyTitle => 'Noch keine Angebote';
+
+  @override
+  String get myListingsEmptyBody =>
+      'Deine eingereichten Angebote und ihr Prüfstatus erscheinen hier.';
+
+  @override
+  String get listingStatusPending => 'Wird geprüft';
+
+  @override
+  String get listingStatusActive => 'Veröffentlicht';
+
+  @override
+  String get listingStatusRejected => 'Abgelehnt';
+
+  @override
+  String get listingStatusDraft => 'Entwurf';
+
+  @override
+  String get listingStatusSold => 'Verkauft';
+
+  @override
+  String get listingStatusBlocked => 'Gesperrt';
+
+  @override
+  String get listingModerationReason => 'Grund';
+
+  @override
+  String get accountMyListings => 'Meine Angebote';
+
+  @override
+  String get accountModeration => 'Moderation';
+
+  @override
+  String get moderationTitle => 'Angebote prüfen';
+
+  @override
+  String get moderationPending => 'Offen';
+
+  @override
+  String get moderationApprovedToday => 'Heute freigegeben';
+
+  @override
+  String get moderationRejectedToday => 'Heute abgelehnt';
+
+  @override
+  String get moderationEmptyTitle => 'Keine offenen Angebote';
+
+  @override
+  String get moderationEmptyBody =>
+      'Neue Einreichungen erscheinen automatisch hier.';
+
+  @override
+  String get moderationApprove => 'Freigeben';
+
+  @override
+  String get moderationReject => 'Ablehnen';
+
+  @override
+  String get moderationReasonLabel => 'Grund (optional)';
+
+  @override
+  String get moderationReasonHint => 'Kurze Rückmeldung an den Verkäufer';
+
+  @override
+  String get moderationApproveSuccess => 'Das Angebot ist jetzt öffentlich.';
+
+  @override
+  String get moderationRejectSuccess => 'Das Angebot wurde abgelehnt.';
+
+  @override
+  String get moderationForbiddenTitle => 'Nur für Administratoren';
+
+  @override
+  String get moderationForbiddenBody =>
+      'Du hast keinen Zugriff auf die Moderationswarteschlange.';
+
+  @override
+  String get moderationSubmittedLabel => 'Eingereicht';
+
+  @override
+  String get moderationSellerLabel => 'Verkäufer';
+
+  @override
+  String get moderationCategoryLabel => 'Kategorie';
+
+  @override
+  String get moderationDecisionFailed =>
+      'Die Entscheidung konnte nicht gespeichert werden.';
+
+  @override
+  String get profileNotFoundTitle => 'Profil nicht gefunden';
+
+  @override
+  String get profileNotFoundBody => 'Dieses Profil ist nicht verfügbar.';
+
+  @override
+  String get profileFallbackName => 'Zêrîn-Mitglied';
+
+  @override
+  String profileListingCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Angebote',
+      one: '1 Angebot',
+      zero: 'Keine Angebote',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileAboutTitle => 'Über mich';
+
+  @override
+  String get profileNoBio => 'Noch keine Beschreibung.';
+
+  @override
+  String get profileListingsTitle => 'Aktive Angebote';
+
+  @override
+  String get profileNoListings => 'Zurzeit keine aktiven Angebote.';
+
+  @override
+  String get profileSendMessage => 'Nachricht senden';
+
+  @override
+  String get editProfileTitle => 'Profil bearbeiten';
+
+  @override
+  String get profileEditAvatar => 'Profilbild ändern';
+
+  @override
+  String get profileAvatarFromGallery => 'Aus Galerie wählen';
+
+  @override
+  String get profileAvatarFromCamera => 'Foto aufnehmen';
+
+  @override
+  String get profileAvatarRemove => 'Profilbild entfernen';
+
+  @override
+  String get profileAvatarError =>
+      'Das Profilbild konnte nicht gespeichert werden.';
+
+  @override
+  String get profileDisplayNameLabel => 'Anzeigename';
+
+  @override
+  String get profileDisplayNameInvalid =>
+      'Bitte gib einen Namen mit 1 bis 80 Zeichen ein.';
+
+  @override
+  String get profileUsernameLabel => 'Benutzername';
+
+  @override
+  String get profileUsernameHelper =>
+      '3–30 Zeichen: Kleinbuchstaben, Ziffern und Unterstriche.';
+
+  @override
+  String get profileUsernameTaken =>
+      'Dieser Benutzername ist bereits vergeben.';
+
+  @override
+  String get profileUsernameReserved => 'Dieser Benutzername ist reserviert.';
+
+  @override
+  String get profileUsernameInvalid => 'Dieser Benutzername ist ungültig.';
+
+  @override
+  String get profileCityLabel => 'Stadt';
+
+  @override
+  String get profileCityRequired => 'Bitte wähle eine Stadt aus.';
+
+  @override
+  String get profileCityInvalid =>
+      'Bitte wähle eine unterstützte deutsche Stadt.';
+
+  @override
+  String get profileBioLabel => 'Über mich';
+
+  @override
+  String get profileBioHint => 'Erzähl kurz etwas über dich.';
+
+  @override
+  String get profileBioTooLong =>
+      'Die Beschreibung darf höchstens 500 Zeichen enthalten.';
+
+  @override
+  String get profileSave => 'Profil speichern';
+
+  @override
+  String get profileSaved => 'Profil gespeichert.';
+
+  @override
+  String get favoritesTitle => 'Favoriten';
+
+  @override
+  String get favoritesEmptyTitle => 'Noch keine Favoriten';
+
+  @override
+  String get favoritesEmptyBody =>
+      'Angebote, die du speicherst, erscheinen hier.';
+
+  @override
+  String get recentlyViewedTitle => 'Zuletzt angesehen';
+
+  @override
+  String get recentlyViewedEmptyTitle => 'Noch nichts angesehen';
+
+  @override
+  String get recentlyViewedEmptyBody =>
+      'Angebote, die du ansiehst, erscheinen hier.';
+
+  @override
+  String get accountEditProfile => 'Profil bearbeiten';
+
+  @override
+  String get accountViewPublicProfile => 'Öffentliches Profil';
+
+  @override
+  String get accountProfileIncomplete => 'Profil vervollständigen';
+
+  @override
+  String get mapTitle => 'Karte';
+
+  @override
+  String get mapOpenTooltip => 'Karte öffnen';
+
+  @override
+  String get mapUseMyLocation => 'Meinen Standort verwenden';
+
+  @override
+  String get mapRetryLocation => 'Standort erneut versuchen';
+
+  @override
+  String get mapLocationPrivacy =>
+      'Dein Standort wird nur zum Zentrieren der Karte verwendet und nicht gespeichert.';
+
+  @override
+  String get mapLocationDenied =>
+      'Standortzugriff abgelehnt. Wähle stattdessen eine Stadt.';
+
+  @override
+  String get mapLocationDeniedForever =>
+      'Standortzugriff ist deaktiviert. Wähle eine Stadt oder ändere die Berechtigung in den Einstellungen.';
+
+  @override
+  String get mapLocationServiceDisabled =>
+      'Ortungsdienste sind ausgeschaltet. Wähle stattdessen eine Stadt.';
+
+  @override
+  String get mapLocationUnavailable =>
+      'Dein Standort ist gerade nicht verfügbar. Wähle stattdessen eine Stadt.';
+
+  @override
+  String get mapChooseCity => 'Stadt wählen';
+
+  @override
+  String get mapCitySearchHint => 'Stadt suchen';
+
+  @override
+  String get mapCenterCurrent => 'Aktueller Standort';
+
+  @override
+  String mapCenterCity({required String city}) {
+    return 'Zentrum: $city';
+  }
+
+  @override
+  String get mapRadiusLabel => 'Umkreis';
+
+  @override
+  String get mapRadiusAll => 'Alle';
+
+  @override
+  String get mapFiltersTitle => 'Kartenfilter';
+
+  @override
+  String get mapFiltersTooltip => 'Angebote filtern';
+
+  @override
+  String get mapCategoryLabel => 'Kategorie';
+
+  @override
+  String get mapCategoryAll => 'Alle Kategorien';
+
+  @override
+  String get mapConditionAll => 'Alle Zustände';
+
+  @override
+  String get mapPriceMin => 'Mindestpreis (€)';
+
+  @override
+  String get mapPriceMax => 'Höchstpreis (€)';
+
+  @override
+  String get mapPriceInvalid =>
+      'Gib gültige Preise ein; der Mindestpreis darf nicht höher sein.';
+
+  @override
+  String mapListingsCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Angebote auf der Karte',
+      one: '1 Angebot auf der Karte',
+      zero: 'Keine Angebote auf der Karte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapEmptyTitle => 'Keine Angebote in diesem Umkreis';
+
+  @override
+  String get mapEmptyBody =>
+      'Vergrößere den Umkreis, verschiebe das Zentrum oder passe die Filter an.';
+
+  @override
+  String get mapLoading => 'Angebote in der Nähe werden geladen …';
+
+  @override
+  String mapPinSemantic({required String title, required String city}) {
+    return '$title, $city';
+  }
+
+  @override
+  String mapClusterSemantic({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Angebote',
+      one: '1 Angebot',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapApproximateLocation =>
+      'Ungefährer Standort zum Schutz privater Verkäufer';
+
+  @override
+  String get mapPreciseStoreLocation =>
+      'Genauer Standort eines verifizierten Geschäfts';
+
+  @override
+  String get mapDirections => 'Route berechnen';
+
+  @override
+  String get mapDirectionsFailed => 'Die Route konnte nicht geöffnet werden.';
+
+  @override
+  String get mapOpenListing => 'Angebot öffnen';
+
+  @override
+  String get moderationLoadFailed => 'Moderation konnte nicht geladen werden.';
+
+  @override
+  String get moderationAdminRequired => 'Administratorzugriff erforderlich.';
+
+  @override
+  String get moderationTabOverview => 'Übersicht';
+
+  @override
+  String get moderationTabListings => 'Angebote';
+
+  @override
+  String get moderationTabVerification => 'Verkäuferprüfung';
+
+  @override
+  String get moderationTabReports => 'Meldungen';
+
+  @override
+  String get moderationOverviewPendingListings => 'Offene Angebote';
+
+  @override
+  String get moderationOverviewPendingDocuments => 'Offene Verkäuferdokumente';
+
+  @override
+  String get moderationOverviewOpenReports => 'Offene Meldungen';
+
+  @override
+  String get moderationListingsLoadFailed =>
+      'Angebote konnten nicht geladen werden.';
+
+  @override
+  String get moderationListingsEmpty => 'Keine offenen Angebote.';
+
+  @override
+  String get moderationDocumentsLoadFailed =>
+      'Verkäuferdokumente konnten nicht geladen werden.';
+
+  @override
+  String get moderationDocumentsEmpty => 'Keine offenen Verkäuferdokumente.';
+
+  @override
+  String get moderationOpenDocument => 'Dokument öffnen';
+
+  @override
+  String get moderationDocumentKindMedicalProfessionalRegistration =>
+      'Approbation / Kammernachweis';
+
+  @override
+  String moderationReportSeller({required String shopName}) {
+    return 'Verkäufer: $shopName';
+  }
+
+  @override
+  String get moderationReportDismiss => 'Verwerfen';
+
+  @override
+  String get moderationReportBlock => 'Angebot sperren';
+
+  @override
+  String get moderationBlockConfirmTitle => 'Dieses Angebot sperren?';
+
+  @override
+  String moderationBlockConfirmBody({required String title}) {
+    return 'Dies sperrt $title und löst diese Meldung.';
+  }
+
+  @override
+  String get moderationBlockConfirmAction => 'Sperren';
+
+  @override
+  String get moderationRejectionReasonTitle => 'Ablehnungsgrund';
+
+  @override
+  String get moderationReportFallbackTarget => 'das gemeldete Angebot';
+
+  @override
+  String get moderationDocumentSaved => 'Dokumententscheidung gespeichert.';
+
+  @override
+  String get moderationDocumentFailed => 'Entscheidung fehlgeschlagen.';
+
+  @override
+  String get moderationReportResolved => 'Meldung bearbeitet.';
+
+  @override
+  String get moderationReportActionFailed => 'Aktion fehlgeschlagen.';
+
+  @override
+  String get moderationReportTargetUnavailable =>
+      'Gemeldetes Ziel nicht verfügbar';
+
+  @override
+  String get moderationReportsLoadFailed =>
+      'Meldungen konnten nicht geladen werden.';
+
+  @override
+  String get moderationDocumentOpenFailed =>
+      'Das Dokument konnte nicht geöffnet werden.';
+
+  @override
+  String get moderationReportsEmpty => 'Keine offenen Meldungen.';
+
+  @override
+  String get sellCompareAtPriceLabel => 'Originalpreis in Euro (optional)';
+
+  @override
+  String get sellCompareAtPriceHint =>
+      'Durchgestrichener Preis neben deinem Preis';
+
+  @override
+  String get sellValidationCompareAtPrice =>
+      'Der Originalpreis muss höher als dein Preis sein.';
+
+  @override
+  String get mapOsmAttribution => '© OpenStreetMap-Mitwirkende';
+
+  @override
+  String get businessHubTitle => 'Mein Unternehmen';
+
+  @override
+  String get businessAccountEntrySubtitle =>
+      'Restaurant, Café, Imbiss oder Arztpraxis eintragen';
+
+  @override
+  String get businessStartTitle => 'Unternehmen eintragen';
+
+  @override
+  String get businessStartBody =>
+      'Wähle zuerst die Art deines Eintrags. Danach siehst du genau, welche Nachweise wir dafür brauchen.';
+
+  @override
+  String get businessTypeLabel => 'Art des Eintrags';
+
+  @override
+  String get businessNameLabel => 'Name des Unternehmens';
+
+  @override
+  String get businessStartAction => 'Weiter zu den Nachweisen';
+
+  @override
+  String get businessPrivateSellerTitle => 'Privates Verkaufskonto';
+
+  @override
+  String get businessPrivateSellerBody =>
+      'Dein Konto verkauft als Privatperson. Einträge im Verzeichnis sind nur mit einem Geschäftskonto möglich. Bitte wende dich an den Support.';
+
+  @override
+  String get businessStatusVerified => 'Verifiziert';
+
+  @override
+  String get businessStatusInReview => 'In Prüfung';
+
+  @override
+  String get businessStatusDocumentsMissing => 'Nachweise fehlen';
+
+  @override
+  String get businessDocumentsTile => 'Nachweise';
+
+  @override
+  String businessDocumentsProgress({
+    required int approved,
+    required int total,
+  }) {
+    return '$approved von $total freigegeben';
+  }
+
+  @override
+  String get businessProfileTile => 'Profil';
+
+  @override
+  String get businessProfileMissing => 'Noch nicht angelegt';
+
+  @override
+  String get businessProfileDraft => 'Entwurf – nicht öffentlich';
+
+  @override
+  String get businessProfilePublished => 'Veröffentlicht';
+
+  @override
+  String get businessHoursTile => 'Öffnungszeiten';
+
+  @override
+  String businessHoursSummary({required int count}) {
+    return '$count Zeitfenster';
+  }
+
+  @override
+  String get businessMenuTile => 'Speisekarte';
+
+  @override
+  String businessMenuSummary({required int sections, required int items}) {
+    return '$sections Bereiche · $items Gerichte';
+  }
+
+  @override
+  String get businessNeedsProfileFirst => 'Lege zuerst dein Profil an.';
+
+  @override
+  String get businessPublishTitle => 'Im Verzeichnis anzeigen';
+
+  @override
+  String get businessPublishHintUnverified =>
+      'Veröffentlichen ist möglich, sobald deine Nachweise freigegeben sind.';
+
+  @override
+  String get businessPublishOn => 'Dein Eintrag ist öffentlich sichtbar.';
+
+  @override
+  String get businessPublishOff => 'Dein Eintrag ist nur für dich sichtbar.';
+
+  @override
+  String get businessDraftNote =>
+      'Profil, Öffnungszeiten und Speisekarte kannst du schon als Entwurf vorbereiten.';
+
+  @override
+  String get directoryTypeRestaurant => 'Restaurant';
+
+  @override
+  String get directoryTypeCafe => 'Café';
+
+  @override
+  String get directoryTypeFastFood => 'Imbiss';
+
+  @override
+  String get directoryTypeDoctor => 'Arztpraxis';
+
+  @override
+  String businessDocumentsIntro({required String type}) {
+    return 'Für einen Eintrag als $type brauchen wir diese Nachweise. Nur das Zêrîn-Team sieht deine Dokumente.';
+  }
+
+  @override
+  String get businessDocumentsFormats => 'Foto oder PDF, höchstens 15 MB.';
+
+  @override
+  String get businessTypeLockedHint =>
+      'Die Art kannst du jetzt nur noch im Profil ändern.';
+
+  @override
+  String get documentKindIdentity => 'Personalausweis oder Reisepass';
+
+  @override
+  String get documentKindIdentityHint => 'Gut lesbar, alle Ecken sichtbar.';
+
+  @override
+  String get documentKindBusinessRegistration =>
+      'Gewerbeanmeldung oder Handelsregisterauszug';
+
+  @override
+  String get documentKindBusinessRegistrationHint =>
+      'Auf den Namen deines Unternehmens.';
+
+  @override
+  String get documentKindMedicalHint =>
+      'Approbationsurkunde oder Nachweis der Ärztekammer.';
+
+  @override
+  String get documentStatusMissing => 'Fehlt';
+
+  @override
+  String get documentStatusPending => 'In Prüfung';
+
+  @override
+  String get documentStatusApproved => 'Freigegeben';
+
+  @override
+  String get documentStatusRejected => 'Abgelehnt';
+
+  @override
+  String documentRejectionNote({required String note}) {
+    return 'Hinweis des Teams: $note';
+  }
+
+  @override
+  String get documentUploadAction => 'Hochladen';
+
+  @override
+  String get documentReuploadAction => 'Neu hochladen';
+
+  @override
+  String get documentWithdrawAction => 'Zurückziehen';
+
+  @override
+  String get documentSourceCamera => 'Foto aufnehmen';
+
+  @override
+  String get documentSourceGallery => 'Foto aus der Galerie';
+
+  @override
+  String get documentSourcePdf => 'PDF auswählen';
+
+  @override
+  String get documentUploaded => 'Hochgeladen. Wir prüfen den Nachweis.';
+
+  @override
+  String get documentWithdrawn => 'Nachweis zurückgezogen.';
+
+  @override
+  String documentUploadedAt({required String date}) {
+    return 'Hochgeladen am $date';
+  }
+
+  @override
+  String get businessErrorName => 'Der Name muss 2 bis 100 Zeichen lang sein.';
+
+  @override
+  String get businessErrorCity => 'Bitte wähle eine Stadt aus der Liste.';
+
+  @override
+  String get businessErrorDocumentPending =>
+      'Für diesen Nachweis wartet schon ein Dokument auf die Prüfung.';
+
+  @override
+  String get businessErrorFileTooLarge => 'Die Datei ist größer als 15 MB.';
+
+  @override
+  String get businessErrorInvalid => 'Bitte prüfe deine Angaben.';
+
+  @override
+  String get businessCoverLabel => 'Titelbild';
+
+  @override
+  String get businessCoverAction => 'Titelbild wählen';
+
+  @override
+  String get businessDescriptionLabel => 'Beschreibung';
+
+  @override
+  String get businessDescriptionHelper => '20 bis 3000 Zeichen';
+
+  @override
+  String get businessPhoneLabel => 'Telefon';
+
+  @override
+  String get businessWebsiteLabel => 'Website (optional)';
+
+  @override
+  String get businessWebsiteHelper => 'Beginnt mit https://';
+
+  @override
+  String get businessLanguagesLabel => 'Gesprochene Sprachen';
+
+  @override
+  String get businessCuisinesLabel => 'Küche';
+
+  @override
+  String get businessPriceLevelLabel => 'Preisniveau';
+
+  @override
+  String get businessDietLabel => 'Ernährung';
+
+  @override
+  String get businessHalal => 'Halal';
+
+  @override
+  String get businessVegetarian => 'Vegetarische Gerichte';
+
+  @override
+  String get businessVegan => 'Vegane Gerichte';
+
+  @override
+  String get businessSpecialtyLabel => 'Fachrichtung';
+
+  @override
+  String get businessInsuranceLabel => 'Versicherung';
+
+  @override
+  String get insuranceStatutory => 'Gesetzlich';
+
+  @override
+  String get insurancePrivate => 'Privat';
+
+  @override
+  String get insuranceBoth => 'Gesetzlich und privat';
+
+  @override
+  String get businessSaved => 'Gespeichert.';
+
+  @override
+  String get businessDescriptionInvalid =>
+      'Die Beschreibung muss 20 bis 3000 Zeichen lang sein.';
+
+  @override
+  String get businessPhoneInvalid =>
+      'Bitte gib eine Telefonnummer mit 5 bis 40 Zeichen an.';
+
+  @override
+  String get businessWebsiteInvalid =>
+      'Die Website muss mit https:// beginnen.';
+
+  @override
+  String get businessLanguagesRequired => 'Wähle mindestens eine Sprache.';
+
+  @override
+  String get businessCuisinesRequired => 'Wähle mindestens eine Küche.';
+
+  @override
+  String get businessPriceRequired => 'Wähle ein Preisniveau.';
+
+  @override
+  String get businessSpecialtyRequired => 'Wähle eine Fachrichtung.';
+
+  @override
+  String get businessInsuranceRequired =>
+      'Wähle, welche Versicherung du annimmst.';
+
+  @override
+  String get cuisineKurdish => 'Kurdisch';
+
+  @override
+  String get cuisineSyrian => 'Syrisch';
+
+  @override
+  String get cuisineTurkish => 'Türkisch';
+
+  @override
+  String get cuisineArabic => 'Arabisch';
+
+  @override
+  String get cuisinePersian => 'Persisch';
+
+  @override
+  String get cuisineLebanese => 'Libanesisch';
+
+  @override
+  String get cuisineIraqi => 'Irakisch';
+
+  @override
+  String get cuisineMiddleEastern => 'Orientalisch';
+
+  @override
+  String get cuisineKebab => 'Kebab & Döner';
+
+  @override
+  String get cuisineFalafel => 'Falafel';
+
+  @override
+  String get cuisineGerman => 'Deutsch';
+
+  @override
+  String get cuisineItalian => 'Italienisch';
+
+  @override
+  String get cuisineMediterranean => 'Mediterran';
+
+  @override
+  String get cuisineIndian => 'Indisch';
+
+  @override
+  String get cuisineAsian => 'Asiatisch';
+
+  @override
+  String get cuisineInternational => 'International';
+
+  @override
+  String get specialtyGeneralMedicine => 'Allgemeinmedizin';
+
+  @override
+  String get specialtyInternalMedicine => 'Innere Medizin';
+
+  @override
+  String get specialtyPediatrics => 'Kinderheilkunde';
+
+  @override
+  String get specialtyGynecology => 'Frauenheilkunde';
+
+  @override
+  String get specialtyDermatology => 'Hautheilkunde';
+
+  @override
+  String get specialtyOrthopedics => 'Orthopädie';
+
+  @override
+  String get specialtyNeurology => 'Neurologie';
+
+  @override
+  String get specialtyPsychiatry => 'Psychiatrie';
+
+  @override
+  String get specialtyOphthalmology => 'Augenheilkunde';
+
+  @override
+  String get specialtyEnt => 'HNO';
+
+  @override
+  String get specialtyDentistry => 'Zahnmedizin';
+
+  @override
+  String get specialtyCardiology => 'Kardiologie';
+
+  @override
+  String get specialtyUrology => 'Urologie';
+
+  @override
+  String get specialtyOther => 'Andere';
+
+  @override
+  String get businessHoursClosed => 'Geschlossen';
+
+  @override
+  String get businessHoursAdd => 'Zeitfenster hinzufügen';
+
+  @override
+  String businessHoursInterval({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes';
+  }
+
+  @override
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes (nächster Tag)';
+  }
+
+  @override
+  String get businessHoursPickOpen => 'Öffnet um';
+
+  @override
+  String get businessHoursPickClose => 'Schließt um';
+
+  @override
+  String get businessHoursHint =>
+      'Schließt ihr nach Mitternacht, wähle einfach die Uhrzeit am nächsten Morgen.';
+
+  @override
+  String get businessHoursSameTime =>
+      'Öffnungs- und Schließzeit dürfen nicht gleich sein.';
+
+  @override
+  String get businessHoursTooMany => 'Höchstens 6 Zeitfenster pro Tag.';
+
+  @override
+  String get businessHoursRemove => 'Zeitfenster entfernen';
+
+  @override
+  String get weekdayMonday => 'Montag';
+
+  @override
+  String get weekdayTuesday => 'Dienstag';
+
+  @override
+  String get weekdayWednesday => 'Mittwoch';
+
+  @override
+  String get weekdayThursday => 'Donnerstag';
+
+  @override
+  String get weekdayFriday => 'Freitag';
+
+  @override
+  String get weekdaySaturday => 'Samstag';
+
+  @override
+  String get weekdaySunday => 'Sonntag';
+
+  @override
+  String get businessMenuEmpty =>
+      'Noch keine Bereiche. Lege zum Beispiel „Vorspeisen“ oder „Getränke“ an.';
+
+  @override
+  String get businessMenuAddSection => 'Bereich hinzufügen';
+
+  @override
+  String get businessMenuSectionName => 'Name des Bereichs';
+
+  @override
+  String get businessMenuAddItem => 'Gericht hinzufügen';
+
+  @override
+  String get businessMenuEditItem => 'Gericht bearbeiten';
+
+  @override
+  String get businessMenuItemName => 'Name';
+
+  @override
+  String get businessMenuItemDescription => 'Beschreibung (optional)';
+
+  @override
+  String get businessMenuItemPrice => 'Preis in €';
+
+  @override
+  String get businessMenuItemAvailable => 'Verfügbar';
+
+  @override
+  String get businessMenuItemUnavailable => 'Nicht verfügbar';
+
+  @override
+  String get businessMenuMoveUp => 'Nach oben';
+
+  @override
+  String get businessMenuMoveDown => 'Nach unten';
+
+  @override
+  String get businessMenuPriceInvalid => 'Bitte gib einen gültigen Preis an.';
+
+  @override
+  String get businessMenuNameRequired => 'Bitte gib einen Namen an.';
+
+  @override
+  String businessMenuDeleteSection({required String name}) {
+    return 'Bereich „$name“ mit allen Gerichten löschen?';
+  }
+
+  @override
+  String get menuFlagVegetarian => 'Vegetarisch';
+
+  @override
+  String get menuFlagVegan => 'Vegan';
 }

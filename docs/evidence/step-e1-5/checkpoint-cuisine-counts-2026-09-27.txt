@@ -1,0 +1,45 @@
+Snapshot elements: 6915
+In scope (named, focus cuisine): 1022
+  multi-valued cuisine tag: 245
+  with OSM email: 52
+
+Per amenity:
+  restaurant   201
+  fast_food    789
+  cafe         32
+
+Per focus cuisine (an element counts once per matched cuisine):
+  kebab           664
+  turkish         268
+  lebanese        60
+  falafel         39
+  persian         27
+  syrian          16
+  middle_eastern  9
+  kurdish         2
+  arabic          1
+  iraqi           1
+
+Per amenity × cuisine:
+  cafe/lebanese              1
+  cafe/middle_eastern        1
+  cafe/persian               1
+  cafe/turkish               29
+  fast_food/falafel          34
+  fast_food/kebab            626
+  fast_food/kurdish          1
+  fast_food/lebanese         28
+  fast_food/middle_eastern   3
+  fast_food/persian          1
+  fast_food/syrian           2
+  fast_food/turkish          141
+  restaurant/arabic          1
+  restaurant/falafel         5
+  restaurant/iraqi           1
+  restaurant/kebab           38
+  restaurant/kurdish         1
+  restaurant/lebanese        31
+  restaurant/middle_eastern  5
+  restaurant/persian         25
+  restaurant/syrian          14
+  restaurant/turkish         98

@@ -35,6 +35,12 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Zêrîn benötigt die Kamera, damit du Fotos zu deinem Angebot hinzufügen kannst.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Zêrîn benötigt Zugriff auf deine Fotos, damit du Bilder für dein Angebot auswählen kannst.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Zêrîn verwendet deinen Standort nur einmalig, um Angebote in deiner Nähe anzuzeigen. Dein Standort wird nicht gespeichert.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

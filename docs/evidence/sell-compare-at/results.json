@@ -1,0 +1,24 @@
+{
+  "screenshots": [
+    {
+      "name": "sell_compare_at_sell_originalpreis_field",
+      "bytes": 300529,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "sell_originalpreis_field": "PASS"
+  },
+  "tests": {
+    "real iOS Sell flow exposes the Originalpreis field": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro / iOS 26.1 / CFF133B6-F73A-4335-A497-5244B15D1C39"
+  },
+  "evidence": {
+    "compare_at_products": 19
+  }
+}

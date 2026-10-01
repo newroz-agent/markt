@@ -16,7 +16,18 @@ class CategoriesFoundationScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final categories = ref.watch(rootCategoriesProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.categoriesTitle)),
+      appBar: AppBar(
+        title: Text(l10n.categoriesTitle),
+        actions: <Widget>[
+          IconButton(
+            key: const ValueKey('categories-map-action'),
+            tooltip: l10n.mapOpenTooltip,
+            onPressed: () => const MapRoute().push<void>(context),
+            icon: const Icon(Icons.map_outlined),
+          ),
+          const SizedBox(width: AppSpacing.xs),
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
           ref.invalidate(activeCategoriesProvider);

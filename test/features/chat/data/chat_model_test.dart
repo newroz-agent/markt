@@ -17,6 +17,14 @@ void main() {
         'shop_avatar_url': 'shop.png',
         'buyer_name': 'Buyer',
         'buyer_avatar_url': 'buyer.png',
+        'viewer_role': 'seller',
+        'viewer_identity_type': 'person',
+        'viewer_seller_id': 'seller',
+        'viewer_identity_name': 'My private identity',
+        'viewer_identity_avatar_url': 'mine.png',
+        'seller_kind': 'private',
+        'seller_identity_name': 'Seller person',
+        'seller_identity_avatar_url': 'seller.png',
         'last_message_at': '2026-09-07T12:00:00Z',
         'last_message_preview': 'Hello',
         'unread_count': 3.0,
@@ -38,6 +46,16 @@ void main() {
       expect(chat.shopAvatarUrl, 'shop.png');
       expect(chat.buyerName, 'Buyer');
       expect(chat.buyerAvatarUrl, 'buyer.png');
+      expect(chat.viewerRole, ChatViewerRole.seller);
+      expect(chat.viewerIdentityType, ChatIdentityType.person);
+      expect(chat.viewerSellerId, 'seller');
+      expect(chat.ownedIdentityName, 'My private identity');
+      expect(chat.isSellerViewer, isTrue);
+      expect(chat.counterpartName, 'Buyer');
+      expect(chat.counterpartAvatarUrl, 'buyer.png');
+      expect(chat.sellerKind, 'private');
+      expect(chat.sellerIdentityName, 'Seller person');
+      expect(chat.sellerIdentityAvatarUrl, 'seller.png');
       expect(chat.lastMessageAt, DateTime.utc(2026, 9, 7, 12));
       expect(chat.lastMessagePreview, 'Hello');
       expect(chat.unreadCount, 3);
@@ -77,6 +95,44 @@ void main() {
       expect(message.readAt, DateTime.utc(2026, 9, 7, 12, 1));
     });
   }
+
+  test(
+    'buyer-side context is always the person and keeps seller counterpart',
+    () {
+      final chat = ChatConversation.fromJson({
+        'id': 'buyer-chat',
+        'seller_id': 'business-seller',
+        'shop_name': 'Legacy shop',
+        'viewer_role': 'buyer',
+        'viewer_identity_type': 'person',
+        'viewer_seller_id': null,
+        'viewer_identity_name': 'My person',
+        'seller_kind': 'business',
+        'seller_identity_name': 'Exact business',
+        'seller_identity_avatar_url': 'business.png',
+      });
+
+      expect(chat.isBuyerViewer, isTrue);
+      expect(chat.isSellerViewer, isFalse);
+      expect(chat.ownedIdentityName, 'My person');
+      expect(chat.counterpartName, 'Exact business');
+      expect(chat.counterpartAvatarUrl, 'business.png');
+    },
+  );
+
+  test('mismatched seller-side projection fails closed', () {
+    final chat = ChatConversation.fromJson({
+      'id': 'chat',
+      'seller_id': 'seller-a',
+      'viewer_role': 'seller',
+      'viewer_identity_type': 'business',
+      'viewer_seller_id': 'seller-b',
+      'viewer_identity_name': 'Wrong business',
+    });
+
+    expect(chat.isSellerViewer, isFalse);
+    expect(chat.ownedIdentityName, isNull);
+  });
 
   test('missing optional conversation data has safe defaults', () {
     final chat = ChatConversation.fromJson({

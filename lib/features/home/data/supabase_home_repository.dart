@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
+import 'package:zerin_marketplace/core/storage/product_image_url_resolver.dart';
 import 'package:zerin_marketplace/features/home/domain/home_feed.dart';
 import 'package:zerin_marketplace/features/home/domain/home_repository.dart';
 
@@ -25,6 +26,9 @@ class SupabaseHomeRepository implements HomeRepository {
       'images:product_images(image_url, storage_path, sort_order)';
 
   final SupabaseClient _client;
+  late final ProductImageUrlResolver _imageUrls = ProductImageUrlResolver(
+    _client,
+  );
 
   @override
   Future<HomeFeed> fetchHomeFeed({int limit = 10}) async {
@@ -51,10 +55,12 @@ class SupabaseHomeRepository implements HomeRepository {
         storesFuture,
       ]);
 
+      final newestRows = await _imageUrls.resolveRows(rows[1]);
+      final dealRows = await _imageUrls.resolveRows(rows[2]);
       return HomeFeed(
         campaigns: _mapRows(rows[0], AdCampaign.fromJson),
-        newArrivals: _mapRows(rows[1], HomeProduct.fromJson),
-        deals: _mapRows(rows[2], HomeProduct.fromJson),
+        newArrivals: _mapRows(newestRows, HomeProduct.fromJson),
+        deals: _mapRows(dealRows, HomeProduct.fromJson),
         popularStores: _mapRows(rows[3], MarketplaceStore.fromJson),
       );
     } on PostgrestException catch (error, stackTrace) {
@@ -70,7 +76,7 @@ class SupabaseHomeRepository implements HomeRepository {
     try {
       final row = await _publicProducts().eq('id', productId).maybeSingle();
       if (row == null) return null;
-      return HomeProduct.fromJson(row);
+      return HomeProduct.fromJson(await _imageUrls.resolveRow(row));
     } on PostgrestException catch (error, stackTrace) {
       Error.throwWithStackTrace(
         AppException(AppFailureCode.unknown, cause: error),
@@ -125,7 +131,7 @@ class SupabaseHomeRepository implements HomeRepository {
         limit: limit,
         excludeProductId: excludeProductId,
       );
-      return _mapRows(rows, HomeProduct.fromJson);
+      return _mapRows(await _imageUrls.resolveRows(rows), HomeProduct.fromJson);
     } on PostgrestException catch (error, stackTrace) {
       Error.throwWithStackTrace(
         AppException(AppFailureCode.unknown, cause: error),
@@ -145,7 +151,7 @@ class SupabaseHomeRepository implements HomeRepository {
         excludeProductId: productId,
         limit: 8,
       );
-      return _mapRows(rows, HomeProduct.fromJson);
+      return _mapRows(await _imageUrls.resolveRows(rows), HomeProduct.fromJson);
     } on PostgrestException catch (error, stackTrace) {
       Error.throwWithStackTrace(
         AppException(AppFailureCode.unknown, cause: error),
@@ -171,6 +177,85 @@ class SupabaseHomeRepository implements HomeRepository {
         stackTrace,
       );
     }
+  }
+
+  @override
+  Future<List<HomeProduct>> fetchFavoriteProducts() async {
+    final userId = _requireUser();
+    try {
+      final favorites = await _client
+          .from('favorites')
+          .select('product_id, created_at')
+          .eq('user_id', userId)
+          .order('created_at', ascending: false);
+      return _productsByIds(
+        favorites
+            .map((row) => row['product_id'] as String?)
+            .whereType<String>()
+            .toList(growable: false),
+      );
+    } on PostgrestException catch (error, stackTrace) {
+      Error.throwWithStackTrace(
+        AppException(AppFailureCode.unknown, cause: error),
+        stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<List<HomeProduct>> fetchRecentlyViewedProducts() async {
+    final userId = _requireUser();
+    try {
+      final views = await _client
+          .from('recent_product_views')
+          .select('product_id, last_viewed_at')
+          .eq('user_id', userId)
+          .order('last_viewed_at', ascending: false)
+          .limit(50);
+      return _productsByIds(
+        views
+            .map((row) => row['product_id'] as String?)
+            .whereType<String>()
+            .toList(growable: false),
+      );
+    } on PostgrestException catch (error, stackTrace) {
+      Error.throwWithStackTrace(
+        AppException(AppFailureCode.unknown, cause: error),
+        stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<void> recordProductView(String productId) async {
+    _requireUser();
+    try {
+      await _client.rpc<void>(
+        'record_product_view',
+        params: {'p_product_id': productId},
+      );
+    } on PostgrestException catch (error, stackTrace) {
+      Error.throwWithStackTrace(
+        AppException(AppFailureCode.unknown, cause: error),
+        stackTrace,
+      );
+    }
+  }
+
+  // Resolves public listings for the given ids and preserves the caller's
+  // order (favorites/recent activity), dropping any no-longer-public listing.
+  Future<List<HomeProduct>> _productsByIds(List<String> ids) async {
+    if (ids.isEmpty) return const <HomeProduct>[];
+    final rows = await _publicProducts().inFilter('id', ids);
+    final resolved = await _imageUrls.resolveRows(rows);
+    final byId = <String, HomeProduct>{
+      for (final product in _mapRows(resolved, HomeProduct.fromJson))
+        product.id: product,
+    };
+    return <HomeProduct>[
+      for (final id in ids)
+        if (byId[id] != null) byId[id]!,
+    ];
   }
 
   @override

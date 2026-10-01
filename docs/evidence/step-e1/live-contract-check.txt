@@ -1,0 +1,33 @@
+             enumlabel             
+-----------------------------------
+ identity
+ business_registration
+ vat_certificate
+ bank_account
+ other
+ medical_professional_registration
+(6 rows)
+
+            tablename             | rowsecurity 
+----------------------------------+-------------
+ business_directory_hours         | t
+ business_directory_menu_items    | t
+ business_directory_menu_sections | t
+ business_directory_profiles      | t
+(4 rows)
+
+ directory_profiles 
+--------------------
+                  0
+(1 row)
+
+ directory_reviews 
+-------------------
+                 0
+(1 row)
+
+        id        | public | file_size_limit |        allowed_mime_types         
+------------------+--------+-----------------+-----------------------------------
+ directory-covers | t      |         8388608 | {image/webp,image/jpeg,image/png}
+(1 row)
+

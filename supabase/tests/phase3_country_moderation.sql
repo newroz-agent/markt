@@ -69,15 +69,58 @@ do $$ begin
 end $$;
 
 set local request.jwt.claims = '{"sub":"d1000000-0000-0000-0000-000000000002","role":"authenticated"}';
-insert into public.sellers (id, user_id, kind, shop_name, slug)
-values ('d2000000-0000-0000-0000-000000000002', auth.uid(), 'business', 'New Country Seller', 'country-guard-new');
-insert into public.products (id, seller_id, category_id, title, slug, description, condition, price_cents)
-values ('d4000000-0000-0000-0000-000000000002', 'd2000000-0000-0000-0000-000000000002',
-  'd3000000-0000-0000-0000-000000000001', 'New Country Product', 'country-guard-new',
-  'New product still requires normal moderation', 'used', 1200);
-do $$ begin
-  assert (select country_code = 'DE' and status = 'pending' from public.sellers where id = 'd2000000-0000-0000-0000-000000000002'), 'New owner seller defaults DE but remains pending';
-  assert (select country_code = 'DE' and status = 'pending_review' from public.products where id = 'd4000000-0000-0000-0000-000000000002'), 'New owner product defaults DE but remains pending review';
+do $$
+declare
+  onboarding jsonb;
+  prepared jsonb;
+  seller_id uuid;
+  submitted_product_id uuid;
+  image_path text;
+  submitted jsonb;
+begin
+  onboarding := public.owner_start_directory(
+    null::uuid, 'restaurant', 'New Country Seller', 'Berlin'
+  );
+  seller_id := (onboarding -> 'seller' ->> 'id')::uuid;
+  prepared := public.prepare_listing_submission(
+    seller_id, 'business', 'New Country Seller', 'Berlin'
+  );
+  assert prepared ->> 'seller_id' = seller_id::text,
+    'Explicit preparation stays bound to the new German business';
+  submitted_product_id := (prepared ->> 'product_id')::uuid;
+  image_path := seller_id || '/' || submitted_product_id || '/country-test.webp';
+
+  assert (select country_code = 'DE' and status = 'pending'
+    from public.sellers where id = seller_id),
+    'New owner seller defaults DE but remains pending';
+
+  insert into storage.objects (bucket_id, name, owner, metadata)
+  values (
+    'product-images', image_path, auth.uid(),
+    '{"mimetype":"image/webp"}'::jsonb
+  );
+
+  submitted := public.submit_listing(
+    submitted_product_id,
+    seller_id,
+    'd3000000-0000-0000-0000-000000000001',
+    'New Country Product',
+    'New product still requires normal moderation.',
+    'used',
+    1200,
+    'Berlin',
+    array[image_path],
+    '{}'::jsonb
+  );
+
+  assert submitted ->> 'status' = 'pending_review',
+    'Submission contract returns pending_review';
+  assert (select country_code = 'DE' and status = 'pending_review'
+    from public.products where id = submitted_product_id),
+    'Submitted owner listing defaults DE and remains pending review';
+  assert (select count(*) = 1 from public.product_images
+    where product_images.product_id = submitted_product_id),
+    'Submitted owner listing uses the protected image contract';
 end $$;
 
 rollback;

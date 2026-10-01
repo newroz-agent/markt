@@ -9,6 +9,7 @@ import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/core/widgets/widgets.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:zerin_marketplace/features/chat/domain/chat.dart';
+import 'package:zerin_marketplace/features/chat/presentation/chat_identity_label.dart';
 import 'package:zerin_marketplace/features/chat/presentation/controllers/chat_controller.dart';
 import 'package:zerin_marketplace/features/home/presentation/home_formatters.dart';
 import 'package:zerin_marketplace/l10n/l10n.dart';
@@ -188,9 +189,31 @@ class _ChatConversationScreenState extends ConsumerState<ChatConversationScreen>
       }
     });
     final product = details.asData?.value;
+    final headerIdentity = product == null
+        ? null
+        : chatOwnedIdentityLabel(context, product);
+    final headerTitle = product == null
+        ? context.l10n.chatTitle
+        : chatCounterpartName(context, product);
 
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.chatTitle)),
+      appBar: AppBar(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(headerTitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+            if (headerIdentity != null)
+              Text(
+                headerIdentity,
+                key: const ValueKey('chat-conversation-identity'),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+          ],
+        ),
+      ),
       body: switch (messages) {
         AsyncData(:final value) => Column(
           children: <Widget>[

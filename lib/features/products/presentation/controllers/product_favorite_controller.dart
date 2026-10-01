@@ -59,7 +59,9 @@ class ProductFavorite extends _$ProductFavorite {
 
   void retry() {
     final session = ref.read(_favoriteSessionProvider);
-    ref.invalidate(_accountFavoriteProvider(productId: productId, session: session));
+    ref.invalidate(
+      _accountFavoriteProvider(productId: productId, session: session),
+    );
   }
 }
 

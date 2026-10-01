@@ -1,0 +1,108 @@
+{
+  "screenshots": [
+    {
+      "name": "step_f_identity_switcher",
+      "bytes": 350456,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_f_sell_identity_choice",
+      "bytes": 302034,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_f_my_listings_sections",
+      "bytes": 269787,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_f_inbox_identity_labels",
+      "bytes": 262098,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "identity_switcher": "PASS",
+    "sell_identity_choice": "PASS",
+    "my_listings_sections": "PASS",
+    "inbox_identity_labels": "PASS"
+  },
+  "evidence": {
+    "switcher": {
+      "person": "f2c20000-0000-4000-8000-000000000001",
+      "business": "f2c20000-0000-4000-8000-000000000002",
+      "active": "business"
+    },
+    "sell_choice": {
+      "person_present": true,
+      "business_present": true,
+      "active_preselected": "business"
+    },
+    "my_listings": {
+      "private_listing": "f2c30000-0000-4000-8000-000000000001",
+      "business_listing": "f2c30000-0000-4000-8000-000000000002"
+    },
+    "inbox": {
+      "chat_count": 3,
+      "unread_total": 3,
+      "bindings": [
+        {
+          "chat_id": "f2c40000-0000-4000-8000-000000000003",
+          "viewer_role": "buyer",
+          "viewer_identity_type": "person",
+          "viewer_seller_id": null,
+          "viewer_identity_name": "Rojin Demir"
+        },
+        {
+          "chat_id": "f2c40000-0000-4000-8000-000000000002",
+          "viewer_role": "seller",
+          "viewer_identity_type": "business",
+          "viewer_seller_id": "f2c20000-0000-4000-8000-000000000002",
+          "viewer_identity_name": "Rojin Atelier"
+        },
+        {
+          "chat_id": "f2c40000-0000-4000-8000-000000000001",
+          "viewer_role": "seller",
+          "viewer_identity_type": "person",
+          "viewer_seller_id": "f2c20000-0000-4000-8000-000000000001",
+          "viewer_identity_name": "Rojin Demir"
+        }
+      ]
+    }
+  },
+  "counts": {
+    "before": {
+      "sellers": 3,
+      "products": 2,
+      "chats": 3,
+      "messages": 3,
+      "unread_seed_messages": 3
+    },
+    "after": {
+      "sellers": 3,
+      "products": 2,
+      "chats": 3,
+      "messages": 3,
+      "unread_seed_messages": 3
+    }
+  },
+  "cleanup": {
+    "created_rows": 0,
+    "uploaded_objects": 0,
+    "before_after_match": true,
+    "preferences_restored": true,
+    "error": null
+  },
+  "tests": {
+    "real iOS Step F identity surfaces": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)",
+    "device": "iPhone 17 Pro (iOS 26.1)"
+  }
+}

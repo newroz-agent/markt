@@ -1,0 +1,72 @@
+== counts per type
+    type    | count 
+------------+-------
+ fast_food  |   837
+ restaurant |   250
+ cafe       |    36
+(3 rows)
+
+== counts per cuisine (a place counts once per cuisine)
+    cuisine     | count 
+----------------+-------
+ kebab          |   677
+ turkish        |   268
+ arabic         |    87
+ lebanese       |    60
+ middle_eastern |    47
+ falafel        |    39
+ persian        |    28
+ syrian         |    16
+ kurdish        |     2
+ iraqi          |     1
+(10 rows)
+
+== coverage
+ places | with_hours | with_phone | with_website | with_osm_email | halal_true 
+--------+------------+------------+--------------+----------------+------------
+   1123 |        472 |        217 |          221 |             66 |         61
+(1 row)
+
+== 5 sample rows (emails masked)
+      osm       |        name         |    type    |            cuisines             |      osm_cuisine      |                address                |      phone       |                            website                            |         email_masked         | hour_rows 
+----------------+---------------------+------------+---------------------------------+-----------------------+---------------------------------------+------------------+---------------------------------------------------------------+------------------------------+-----------
+ way/90679508   | Restaurant Seehaase | restaurant | {turkish}                       | international;turkish | Am Großen Wannsee 58-60, 14109 Berlin | +49 30 804 96474 | https://www.restaurant-seehaase.de/                           | ko***@restaurant-seehaase.de |         0
+ way/112571703  | Heimaten Restaurant | restaurant | {middle_eastern,persian,arabic} | oriental;persian;arab |                                       | +49 30 513010008 | https://giz.berlin/projects/restaurant-heimaten-catering.html | he***@giz.berlin             |         3
+ way/181471184  | Adda                | restaurant | {turkish}                       | turkish               | Scharfe Lanke 131, 13595 Berlin       | +493024538807    | https://adda-cafe.eatbu.com/                                  | na***@icloud.com             |         7
+ way/185852622  | King's Snack        | fast_food  | {turkish}                       | turkish               | Ludolfingerplatz 1A                   | +49 30 40107794  | https://kings-snack.eatbu.com/?lang=de                        | h.***@gmx.de                 |         7
+ node/352924669 | Hisar               | fast_food  | {kebab}                         | kebab                 | Yorckstraße 49, 10965 Berlin          | +49 30 2165125   | https://www.hisarfreshfood.de/                                | po***@hisarfreshfood.de      |         7
+(5 rows)
+
+== anon cannot read outreach
+BEGIN
+SET
+ERROR:  permission denied for table directory_outreach_contacts
+HINT:  Grant the required privileges to the current role with: GRANT SELECT ON public.directory_outreach_contacts TO anon;
+ROLLBACK
+== authenticated (non-admin) cannot read outreach
+BEGIN
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"00000000-0000-0000-0000-0000000000aa","role":"authenticated"}
+(1 row)
+
+ERROR:  permission denied for table directory_outreach_contacts
+HINT:  Grant the required privileges to the current role with: GRANT SELECT ON public.directory_outreach_contacts TO authenticated;
+ROLLBACK
+== anon search: 3 nearest to Kottbusser Tor, no email keys
+BEGIN
+SET
+          name           |    type    | source | is_claimed |  km  | has_email_key 
+-------------------------+------------+--------+------------+------+---------------
+ 7days Finest Fresh Food | fast_food  | osm    | false      | 0.07 | f
+ Babaleison              | restaurant | osm    | false      | 0.07 | f
+ Tadim                   | fast_food  | osm    | false      | 0.07 | f
+(3 rows)
+
+ search_page_contains_at_sign 
+------------------------------
+ f
+(1 row)
+
+ROLLBACK

@@ -2,6 +2,10 @@ import 'package:flutter/foundation.dart';
 
 enum MessageKind { text, image, product, system }
 
+enum ChatViewerRole { buyer, seller }
+
+enum ChatIdentityType { person, business }
+
 @immutable
 class ChatConversation {
   const ChatConversation({
@@ -20,8 +24,17 @@ class ChatConversation {
     required this.lastMessageAt,
     required this.lastMessagePreview,
     required this.unreadCount,
+    this.shopProfileUsername,
     this.buyerName,
     this.buyerAvatarUrl,
+    this.viewerRole,
+    this.viewerIdentityType,
+    this.viewerSellerId,
+    this.viewerIdentityName,
+    this.viewerIdentityAvatarUrl,
+    this.sellerKind,
+    this.sellerIdentityName,
+    this.sellerIdentityAvatarUrl,
   });
 
   factory ChatConversation.fromJson(Map<String, dynamic> json) {
@@ -34,6 +47,7 @@ class ChatConversation {
       shopName: json['shop_name'] as String? ?? 'Seller',
       shopSlug: json['shop_slug'] as String? ?? '',
       shopAvatarUrl: json['shop_avatar_url'] as String?,
+      shopProfileUsername: json['shop_profile_username'] as String?,
       productId: product != null ? product['id'] as String? : null,
       productTitle: product != null ? product['title'] as String? : null,
       productImageUrl: product != null
@@ -48,6 +62,16 @@ class ChatConversation {
       unreadCount: (json['unread_count'] as num?)?.toInt() ?? 0,
       buyerName: json['buyer_name'] as String?,
       buyerAvatarUrl: json['buyer_avatar_url'] as String?,
+      viewerRole: _viewerRole(json['viewer_role'] as String?),
+      viewerIdentityType: _identityType(
+        json['viewer_identity_type'] as String?,
+      ),
+      viewerSellerId: json['viewer_seller_id'] as String?,
+      viewerIdentityName: json['viewer_identity_name'] as String?,
+      viewerIdentityAvatarUrl: json['viewer_identity_avatar_url'] as String?,
+      sellerKind: json['seller_kind'] as String?,
+      sellerIdentityName: json['seller_identity_name'] as String?,
+      sellerIdentityAvatarUrl: json['seller_identity_avatar_url'] as String?,
     );
   }
 
@@ -58,6 +82,10 @@ class ChatConversation {
   final String shopName;
   final String shopSlug;
   final String? shopAvatarUrl;
+
+  /// Public @username of a private seller's person profile, when the inbox RPC
+  /// projects it. Null for business sellers (distinct store identity).
+  final String? shopProfileUsername;
   final String? productId;
   final String? productTitle;
   final String? productImageUrl;
@@ -68,6 +96,46 @@ class ChatConversation {
   final int unreadCount;
   final String? buyerName;
   final String? buyerAvatarUrl;
+  final ChatViewerRole? viewerRole;
+  final ChatIdentityType? viewerIdentityType;
+  final String? viewerSellerId;
+  final String? viewerIdentityName;
+  final String? viewerIdentityAvatarUrl;
+  final String? sellerKind;
+  final String? sellerIdentityName;
+  final String? sellerIdentityAvatarUrl;
+
+  /// Seller-side context is valid only when it is bound to this exact chat.
+  bool get isSellerViewer =>
+      viewerRole == ChatViewerRole.seller && viewerSellerId == sellerId;
+
+  /// Buyer-side participation is always the person's account identity.
+  bool get isBuyerViewer =>
+      viewerRole == ChatViewerRole.buyer &&
+      viewerIdentityType == ChatIdentityType.person &&
+      viewerSellerId == null;
+
+  String? get ownedIdentityName =>
+      isSellerViewer || isBuyerViewer ? viewerIdentityName : null;
+
+  String get counterpartName =>
+      isSellerViewer ? buyerName ?? '' : sellerIdentityName ?? shopName;
+
+  String? get counterpartAvatarUrl => isSellerViewer
+      ? buyerAvatarUrl
+      : sellerIdentityAvatarUrl ?? shopAvatarUrl;
+
+  static ChatViewerRole? _viewerRole(String? value) => switch (value) {
+    'buyer' => ChatViewerRole.buyer,
+    'seller' => ChatViewerRole.seller,
+    _ => null,
+  };
+
+  static ChatIdentityType? _identityType(String? value) => switch (value) {
+    'person' => ChatIdentityType.person,
+    'business' => ChatIdentityType.business,
+    _ => null,
+  };
 }
 
 @immutable

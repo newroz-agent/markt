@@ -1,0 +1,81 @@
+BEGIN
+CREATE FUNCTION
+DO
+INSERT 0 4
+INSERT 0 3
+INSERT 0 5
+INSERT 0 3
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+DO
+UPDATE 1
+DO
+UPDATE 1
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000004","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+INSERT 0 1
+DO
+                                                               upsert_directory_review                                                               
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "a7f46c3b-7089-4e00-bc8e-3bea6a26e0d3", "body": "Excellent food and service", "rating": 5, "updated_at": "2026-09-27T14:01:18.945964+00:00"}
+(1 row)
+
+                                                              upsert_directory_review                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "a7f46c3b-7089-4e00-bc8e-3bea6a26e0d3", "body": "Updated directory review", "rating": 4, "updated_at": "2026-09-27T14:01:18.945964+00:00"}
+(1 row)
+
+INSERT 0 1
+DO
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000001","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+SET
+DO
+RESET
+DO
+ROLLBACK

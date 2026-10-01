@@ -379,6 +379,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get accountTitle => 'Profil';
 
   @override
+  String get accountSellingProfilesTitle => 'Satış profillerin';
+
+  @override
+  String get accountPersonalIdentity => 'Bireysel';
+
+  @override
+  String get accountRegisterBusiness => 'İşletme kaydet';
+
+  @override
   String get accountProfile => 'Kişisel bilgiler';
 
   @override
@@ -500,6 +509,17 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get legalWithdrawal => 'Cayma hakkı bilgilendirmesi';
+
+  @override
+  String get legalDataSources => 'Veri kaynakları';
+
+  @override
+  String get legalOsmAttribution =>
+      'Harita ve mekân verileri © OpenStreetMap katkıda bulunanlar, Open Database License (ODbL) kapsamında lisanslıdır.';
+
+  @override
+  String get directoryUnverifiedOsmNote =>
+      'Doğrulanmadı · Veriler © OpenStreetMap katkıda bulunanlar';
 
   @override
   String get legalComingSoonBody =>
@@ -733,6 +753,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get productContactSeller => 'Satıcıyla iletişime geç';
 
   @override
+  String chatIdentityContext({required String name}) {
+    return '$name olarak';
+  }
+
+  @override
   String get chatInboxTitle => 'Mesajlar';
 
   @override
@@ -907,4 +932,1095 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get favoriteRemoveAction => 'Favorilerden çıkar';
+
+  @override
+  String get sellIdentityChoiceTitle => 'Satış profilini seç';
+
+  @override
+  String get sellIdentityChoiceBody =>
+      'Bu ilanın bireysel mi yoksa işletme olarak mı yayınlanacağını seç.';
+
+  @override
+  String get sellAsPerson => 'Bireysel olarak';
+
+  @override
+  String get sellAsBusiness => 'İşletme olarak';
+
+  @override
+  String get sellChangeIdentity => 'Satış profilini değiştir';
+
+  @override
+  String get myListingsPrivateSection => 'Bireysel';
+
+  @override
+  String get myListingsBusinessSection => 'İşletme';
+
+  @override
+  String get myListingsSectionEmpty => 'Bu bölümde henüz ilan yok.';
+
+  @override
+  String get sellCatalogTitle => 'Ne satmak istiyorsun?';
+
+  @override
+  String get sellCatalogBody =>
+      'Önce benzer bir ürün ara veya şablonsuz başla.';
+
+  @override
+  String get sellCatalogSearchHint => 'Katalogda ara';
+
+  @override
+  String get sellCatalogUseTemplate => 'Şablonu kullan';
+
+  @override
+  String get sellFreeForm => 'Şablonsuz başla';
+
+  @override
+  String get sellNoTemplatesTitle => 'Uygun şablon yok';
+
+  @override
+  String get sellNoTemplatesBody => 'İlanını sıfırdan girebilirsin.';
+
+  @override
+  String get sellDetailsTitle => 'İlan ayrıntıları';
+
+  @override
+  String get sellSellerKindLabel => 'Satıcı türü';
+
+  @override
+  String get sellSellerPrivate => 'Bireysel';
+
+  @override
+  String get sellSellerBusiness => 'Ticari';
+
+  @override
+  String get sellSellerNameLabel => 'Görünen ad';
+
+  @override
+  String get sellListingTitleLabel => 'Başlık';
+
+  @override
+  String get sellPriceLabel => 'Euro cinsinden fiyat';
+
+  @override
+  String get sellCityLabel => 'Şehir';
+
+  @override
+  String get sellCategoryLabel => 'Kategori';
+
+  @override
+  String get sellConditionLabel => 'Durum';
+
+  @override
+  String get sellDescriptionLabel => 'Açıklama';
+
+  @override
+  String get sellPhotosTitle => 'Fotoğraflar';
+
+  @override
+  String get sellPhotosBody =>
+      '1 ile 10 fotoğraf ekle. Görseller yüklemeden önce sıkıştırılır.';
+
+  @override
+  String get sellPickPhotos => 'Fotoğraf seç';
+
+  @override
+  String get sellTakePhoto => 'Fotoğraf çek';
+
+  @override
+  String get sellPhotoLimit => 'En fazla 10 fotoğraf';
+
+  @override
+  String get sellPhotoFailed => 'Fotoğraf işlenemedi.';
+
+  @override
+  String get sellReviewTitle => 'Kontrol et ve gönder';
+
+  @override
+  String get sellSubmit => 'İncelemeye gönder';
+
+  @override
+  String get sellValidationRequired => 'Bu alan zorunludur.';
+
+  @override
+  String get sellValidationPrice => 'Sıfırdan büyük geçerli bir fiyat gir.';
+
+  @override
+  String get sellValidationDescription =>
+      'Açıklama en az 10 karakter olmalıdır.';
+
+  @override
+  String get sellValidationPhotos => 'En az bir fotoğraf ekle.';
+
+  @override
+  String get sellConfirmationTitle => 'İlan inceleniyor';
+
+  @override
+  String get sellConfirmationBody =>
+      'İlanın gönderildi ve henüz herkese açık değil. İncelemeden sonra seni bilgilendireceğiz.';
+
+  @override
+  String get sellViewMyListings => 'İlanlarımı görüntüle';
+
+  @override
+  String get sellCreateAnother => 'Başka ilan oluştur';
+
+  @override
+  String get sellTemplateImported =>
+      'Şablon uygulandı. Göndermeden önce tüm bilgileri kontrol et.';
+
+  @override
+  String get myListingsTitle => 'İlanlarım';
+
+  @override
+  String get myListingsEmptyTitle => 'Henüz ilan yok';
+
+  @override
+  String get myListingsEmptyBody =>
+      'Gönderdiğin ilanlar ve inceleme durumları burada görünür.';
+
+  @override
+  String get listingStatusPending => 'İnceleniyor';
+
+  @override
+  String get listingStatusActive => 'Yayında';
+
+  @override
+  String get listingStatusRejected => 'Reddedildi';
+
+  @override
+  String get listingStatusDraft => 'Taslak';
+
+  @override
+  String get listingStatusSold => 'Satıldı';
+
+  @override
+  String get listingStatusBlocked => 'Engellendi';
+
+  @override
+  String get listingModerationReason => 'Neden';
+
+  @override
+  String get accountMyListings => 'İlanlarım';
+
+  @override
+  String get accountModeration => 'Moderasyon';
+
+  @override
+  String get moderationTitle => 'İlanları incele';
+
+  @override
+  String get moderationPending => 'Bekleyen';
+
+  @override
+  String get moderationApprovedToday => 'Bugün onaylanan';
+
+  @override
+  String get moderationRejectedToday => 'Bugün reddedilen';
+
+  @override
+  String get moderationEmptyTitle => 'Bekleyen ilan yok';
+
+  @override
+  String get moderationEmptyBody => 'Yeni gönderimler burada otomatik görünür.';
+
+  @override
+  String get moderationApprove => 'Onayla';
+
+  @override
+  String get moderationReject => 'Reddet';
+
+  @override
+  String get moderationReasonLabel => 'Neden (isteğe bağlı)';
+
+  @override
+  String get moderationReasonHint => 'Satıcıya kısa geri bildirim';
+
+  @override
+  String get moderationApproveSuccess => 'İlan artık herkese açık.';
+
+  @override
+  String get moderationRejectSuccess => 'İlan reddedildi.';
+
+  @override
+  String get moderationForbiddenTitle => 'Yalnızca yöneticiler';
+
+  @override
+  String get moderationForbiddenBody => 'Moderasyon kuyruğuna erişemezsin.';
+
+  @override
+  String get moderationSubmittedLabel => 'Gönderildi';
+
+  @override
+  String get moderationSellerLabel => 'Satıcı';
+
+  @override
+  String get moderationCategoryLabel => 'Kategori';
+
+  @override
+  String get moderationDecisionFailed => 'Karar kaydedilemedi.';
+
+  @override
+  String get profileNotFoundTitle => 'Profil bulunamadı';
+
+  @override
+  String get profileNotFoundBody => 'Bu profil kullanılamıyor.';
+
+  @override
+  String get profileFallbackName => 'Zêrîn üyesi';
+
+  @override
+  String profileListingCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ilan',
+      one: '1 ilan',
+      zero: 'İlan yok',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileAboutTitle => 'Hakkında';
+
+  @override
+  String get profileNoBio => 'Henüz açıklama yok.';
+
+  @override
+  String get profileListingsTitle => 'Aktif ilanlar';
+
+  @override
+  String get profileNoListings => 'Şu anda aktif ilan yok.';
+
+  @override
+  String get profileSendMessage => 'Mesaj gönder';
+
+  @override
+  String get editProfileTitle => 'Profili düzenle';
+
+  @override
+  String get profileEditAvatar => 'Fotoğrafı değiştir';
+
+  @override
+  String get profileAvatarFromGallery => 'Galeriden seç';
+
+  @override
+  String get profileAvatarFromCamera => 'Fotoğraf çek';
+
+  @override
+  String get profileAvatarRemove => 'Fotoğrafı kaldır';
+
+  @override
+  String get profileAvatarError => 'Profil fotoğrafı kaydedilemedi.';
+
+  @override
+  String get profileDisplayNameLabel => 'Görünen ad';
+
+  @override
+  String get profileDisplayNameInvalid =>
+      'Lütfen 1 ila 80 karakterlik bir ad girin.';
+
+  @override
+  String get profileUsernameLabel => 'Kullanıcı adı';
+
+  @override
+  String get profileUsernameHelper =>
+      '3–30 karakter: küçük harfler, rakamlar ve alt çizgi.';
+
+  @override
+  String get profileUsernameTaken => 'Bu kullanıcı adı zaten alınmış.';
+
+  @override
+  String get profileUsernameReserved => 'Bu kullanıcı adı ayrılmış.';
+
+  @override
+  String get profileUsernameInvalid => 'Bu kullanıcı adı geçersiz.';
+
+  @override
+  String get profileCityLabel => 'Şehir';
+
+  @override
+  String get profileCityRequired => 'Lütfen bir şehir seçin.';
+
+  @override
+  String get profileCityInvalid => 'Lütfen desteklenen bir Alman şehri seçin.';
+
+  @override
+  String get profileBioLabel => 'Hakkımda';
+
+  @override
+  String get profileBioHint => 'Kendinden kısaca bahset.';
+
+  @override
+  String get profileBioTooLong => 'Açıklama en fazla 500 karakter içerebilir.';
+
+  @override
+  String get profileSave => 'Profili kaydet';
+
+  @override
+  String get profileSaved => 'Profil kaydedildi.';
+
+  @override
+  String get favoritesTitle => 'Favoriler';
+
+  @override
+  String get favoritesEmptyTitle => 'Henüz favori yok';
+
+  @override
+  String get favoritesEmptyBody => 'Kaydettiğin ilanlar burada görünür.';
+
+  @override
+  String get recentlyViewedTitle => 'Son görüntülenenler';
+
+  @override
+  String get recentlyViewedEmptyTitle => 'Henüz bir şey görüntülenmedi';
+
+  @override
+  String get recentlyViewedEmptyBody =>
+      'Görüntülediğin ilanlar burada görünür.';
+
+  @override
+  String get accountEditProfile => 'Profili düzenle';
+
+  @override
+  String get accountViewPublicProfile => 'Herkese açık profil';
+
+  @override
+  String get accountProfileIncomplete => 'Profilini tamamla';
+
+  @override
+  String get mapTitle => 'Harita';
+
+  @override
+  String get mapOpenTooltip => 'Haritayı aç';
+
+  @override
+  String get mapUseMyLocation => 'Konumumu kullan';
+
+  @override
+  String get mapRetryLocation => 'Konumu tekrar dene';
+
+  @override
+  String get mapLocationPrivacy =>
+      'Konumun yalnızca haritayı ortalamak için kullanılır ve kaydedilmez.';
+
+  @override
+  String get mapLocationDenied =>
+      'Konum erişimi reddedildi. Bunun yerine bir şehir seç.';
+
+  @override
+  String get mapLocationDeniedForever =>
+      'Konum erişimi kapalı. Bir şehir seç veya Ayarlar\'dan izni değiştir.';
+
+  @override
+  String get mapLocationServiceDisabled =>
+      'Konum hizmetleri kapalı. Bunun yerine bir şehir seç.';
+
+  @override
+  String get mapLocationUnavailable =>
+      'Konumun şu anda kullanılamıyor. Bunun yerine bir şehir seç.';
+
+  @override
+  String get mapChooseCity => 'Şehir seç';
+
+  @override
+  String get mapCitySearchHint => 'Şehir ara';
+
+  @override
+  String get mapCenterCurrent => 'Geçerli konum';
+
+  @override
+  String mapCenterCity({required String city}) {
+    return 'Merkez: $city';
+  }
+
+  @override
+  String get mapRadiusLabel => 'Yarıçap';
+
+  @override
+  String get mapRadiusAll => 'Tümü';
+
+  @override
+  String get mapFiltersTitle => 'Harita filtreleri';
+
+  @override
+  String get mapFiltersTooltip => 'İlanları filtrele';
+
+  @override
+  String get mapCategoryLabel => 'Kategori';
+
+  @override
+  String get mapCategoryAll => 'Tüm kategoriler';
+
+  @override
+  String get mapConditionAll => 'Tüm durumlar';
+
+  @override
+  String get mapPriceMin => 'En düşük fiyat (€)';
+
+  @override
+  String get mapPriceMax => 'En yüksek fiyat (€)';
+
+  @override
+  String get mapPriceInvalid =>
+      'Geçerli fiyatlar gir; en düşük fiyat daha yüksek olamaz.';
+
+  @override
+  String mapListingsCount({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Haritada $count ilan',
+      one: 'Haritada 1 ilan',
+      zero: 'Haritada ilan yok',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapEmptyTitle => 'Bu yarıçapta ilan yok';
+
+  @override
+  String get mapEmptyBody =>
+      'Yarıçapı büyüt, merkezi değiştir veya filtreleri düzenle.';
+
+  @override
+  String get mapLoading => 'Yakındaki ilanlar yükleniyor …';
+
+  @override
+  String mapPinSemantic({required String title, required String city}) {
+    return '$title, $city';
+  }
+
+  @override
+  String mapClusterSemantic({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ilan',
+      one: '1 ilan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mapApproximateLocation => 'Özel satıcıları koruyan yaklaşık konum';
+
+  @override
+  String get mapPreciseStoreLocation => 'Doğrulanmış işletmenin kesin konumu';
+
+  @override
+  String get mapDirections => 'Yol tarifi al';
+
+  @override
+  String get mapDirectionsFailed => 'Yol tarifi açılamadı.';
+
+  @override
+  String get mapOpenListing => 'İlanı aç';
+
+  @override
+  String get moderationLoadFailed => 'Denetim yüklenemedi.';
+
+  @override
+  String get moderationAdminRequired => 'Yönetici erişimi gerekli.';
+
+  @override
+  String get moderationTabOverview => 'Genel bakış';
+
+  @override
+  String get moderationTabListings => 'İlanlar';
+
+  @override
+  String get moderationTabVerification => 'Satıcı doğrulama';
+
+  @override
+  String get moderationTabReports => 'Bildirimler';
+
+  @override
+  String get moderationOverviewPendingListings => 'Bekleyen ilanlar';
+
+  @override
+  String get moderationOverviewPendingDocuments => 'Bekleyen satıcı belgeleri';
+
+  @override
+  String get moderationOverviewOpenReports => 'Açık bildirimler';
+
+  @override
+  String get moderationListingsLoadFailed => 'İlanlar yüklenemedi.';
+
+  @override
+  String get moderationListingsEmpty => 'Bekleyen ilan yok.';
+
+  @override
+  String get moderationDocumentsLoadFailed => 'Satıcı belgeleri yüklenemedi.';
+
+  @override
+  String get moderationDocumentsEmpty => 'Bekleyen satıcı belgesi yok.';
+
+  @override
+  String get moderationOpenDocument => 'Belgeyi aç';
+
+  @override
+  String get moderationDocumentKindMedicalProfessionalRegistration =>
+      'Hekimlik ruhsatı / Oda kaydı';
+
+  @override
+  String moderationReportSeller({required String shopName}) {
+    return 'Satıcı: $shopName';
+  }
+
+  @override
+  String get moderationReportDismiss => 'Reddet';
+
+  @override
+  String get moderationReportBlock => 'İlanı engelle';
+
+  @override
+  String get moderationBlockConfirmTitle => 'Bu ilan engellensin mi?';
+
+  @override
+  String moderationBlockConfirmBody({required String title}) {
+    return 'Bu $title engelleyecek ve bu bildirimi çözecek.';
+  }
+
+  @override
+  String get moderationBlockConfirmAction => 'Engelle';
+
+  @override
+  String get moderationRejectionReasonTitle => 'Red nedeni';
+
+  @override
+  String get moderationReportFallbackTarget => 'bildirilen ilan';
+
+  @override
+  String get moderationDocumentSaved => 'Belge kararı kaydedildi.';
+
+  @override
+  String get moderationDocumentFailed => 'Karar başarısız oldu.';
+
+  @override
+  String get moderationReportResolved => 'Bildirim çözüldü.';
+
+  @override
+  String get moderationReportActionFailed => 'İşlem başarısız oldu.';
+
+  @override
+  String get moderationReportTargetUnavailable =>
+      'Bildirilen hedef kullanılamıyor';
+
+  @override
+  String get moderationReportsLoadFailed => 'Bildirimler yüklenemedi.';
+
+  @override
+  String get moderationDocumentOpenFailed => 'Belge açılamadı.';
+
+  @override
+  String get moderationReportsEmpty => 'Açık bildirim yok.';
+
+  @override
+  String get sellCompareAtPriceLabel =>
+      'Euro cinsinden orijinal fiyat (isteğe bağlı)';
+
+  @override
+  String get sellCompareAtPriceHint => 'Fiyatınızın yanında üstü çizili fiyat';
+
+  @override
+  String get sellValidationCompareAtPrice =>
+      'Orijinal fiyat, fiyatınızdan yüksek olmalıdır.';
+
+  @override
+  String get mapOsmAttribution => '© OpenStreetMap katkıda bulunanlar';
+
+  @override
+  String get businessHubTitle => 'İşletmem';
+
+  @override
+  String get businessAccountEntrySubtitle =>
+      'Restoran, kafe, büfe veya muayenehane ekle';
+
+  @override
+  String get businessStartTitle => 'İşletmeni ekle';
+
+  @override
+  String get businessStartBody =>
+      'Önce kayıt türünü seç. Ardından bunun için hangi belgelere ihtiyacımız olduğunu tam olarak göreceksin.';
+
+  @override
+  String get businessTypeLabel => 'Kayıt türü';
+
+  @override
+  String get businessNameLabel => 'İşletme adı';
+
+  @override
+  String get businessStartAction => 'Belgelere devam et';
+
+  @override
+  String get businessPrivateSellerTitle => 'Bireysel satıcı hesabı';
+
+  @override
+  String get businessPrivateSellerBody =>
+      'Hesabın bireysel olarak satış yapıyor. Rehberde kayıt yalnızca işletme hesabıyla mümkün. Lütfen destekle iletişime geç.';
+
+  @override
+  String get businessStatusVerified => 'Doğrulandı';
+
+  @override
+  String get businessStatusInReview => 'İncelemede';
+
+  @override
+  String get businessStatusDocumentsMissing => 'Belgeler eksik';
+
+  @override
+  String get businessDocumentsTile => 'Belgeler';
+
+  @override
+  String businessDocumentsProgress({
+    required int approved,
+    required int total,
+  }) {
+    return '$total belgeden $approved onaylandı';
+  }
+
+  @override
+  String get businessProfileTile => 'Profil';
+
+  @override
+  String get businessProfileMissing => 'Henüz oluşturulmadı';
+
+  @override
+  String get businessProfileDraft => 'Taslak – herkese açık değil';
+
+  @override
+  String get businessProfilePublished => 'Yayında';
+
+  @override
+  String get businessHoursTile => 'Çalışma saatleri';
+
+  @override
+  String businessHoursSummary({required int count}) {
+    return '$count zaman aralığı';
+  }
+
+  @override
+  String get businessMenuTile => 'Menü';
+
+  @override
+  String businessMenuSummary({required int sections, required int items}) {
+    return '$sections bölüm · $items yemek';
+  }
+
+  @override
+  String get businessNeedsProfileFirst => 'Önce profilini oluştur.';
+
+  @override
+  String get businessPublishTitle => 'Rehberde göster';
+
+  @override
+  String get businessPublishHintUnverified =>
+      'Belgelerin onaylandığında yayınlayabilirsin.';
+
+  @override
+  String get businessPublishOn => 'Kaydın herkese görünür.';
+
+  @override
+  String get businessPublishOff => 'Kaydını yalnızca sen görebilirsin.';
+
+  @override
+  String get businessDraftNote =>
+      'Profilini, çalışma saatlerini ve menünü şimdiden taslak olarak hazırlayabilirsin.';
+
+  @override
+  String get directoryTypeRestaurant => 'Restoran';
+
+  @override
+  String get directoryTypeCafe => 'Kafe';
+
+  @override
+  String get directoryTypeFastFood => 'Büfe';
+
+  @override
+  String get directoryTypeDoctor => 'Muayenehane';
+
+  @override
+  String businessDocumentsIntro({required String type}) {
+    return '$type olarak kayıt için bu belgelere ihtiyacımız var. Belgelerini yalnızca Zêrîn ekibi görür.';
+  }
+
+  @override
+  String get businessDocumentsFormats => 'Fotoğraf veya PDF, en fazla 15 MB.';
+
+  @override
+  String get businessTypeLockedHint =>
+      'Türü artık yalnızca profilinde değiştirebilirsin.';
+
+  @override
+  String get documentKindIdentity => 'Kimlik kartı veya pasaport';
+
+  @override
+  String get documentKindIdentityHint => 'Net okunur, tüm köşeleri görünür.';
+
+  @override
+  String get documentKindBusinessRegistration =>
+      'İşletme kaydı veya ticaret sicili özeti';
+
+  @override
+  String get documentKindBusinessRegistrationHint => 'İşletmenin adına.';
+
+  @override
+  String get documentKindMedicalHint =>
+      'Hekimlik ruhsatı veya tabip odası üyelik belgesi.';
+
+  @override
+  String get documentStatusMissing => 'Eksik';
+
+  @override
+  String get documentStatusPending => 'İncelemede';
+
+  @override
+  String get documentStatusApproved => 'Onaylandı';
+
+  @override
+  String get documentStatusRejected => 'Reddedildi';
+
+  @override
+  String documentRejectionNote({required String note}) {
+    return 'Ekibin notu: $note';
+  }
+
+  @override
+  String get documentUploadAction => 'Yükle';
+
+  @override
+  String get documentReuploadAction => 'Yeniden yükle';
+
+  @override
+  String get documentWithdrawAction => 'Geri çek';
+
+  @override
+  String get documentSourceCamera => 'Fotoğraf çek';
+
+  @override
+  String get documentSourceGallery => 'Galeriden fotoğraf';
+
+  @override
+  String get documentSourcePdf => 'PDF seç';
+
+  @override
+  String get documentUploaded => 'Yüklendi. Belgeyi inceleyeceğiz.';
+
+  @override
+  String get documentWithdrawn => 'Belge geri çekildi.';
+
+  @override
+  String documentUploadedAt({required String date}) {
+    return '$date tarihinde yüklendi';
+  }
+
+  @override
+  String get businessErrorName => 'Ad 2 ile 100 karakter arasında olmalı.';
+
+  @override
+  String get businessErrorCity => 'Lütfen listeden bir şehir seç.';
+
+  @override
+  String get businessErrorDocumentPending =>
+      'Bunun için incelemeyi bekleyen bir belge zaten var.';
+
+  @override
+  String get businessErrorFileTooLarge => 'Dosya 15 MB’tan büyük.';
+
+  @override
+  String get businessErrorInvalid => 'Lütfen bilgilerini kontrol et.';
+
+  @override
+  String get businessCoverLabel => 'Kapak görseli';
+
+  @override
+  String get businessCoverAction => 'Kapak görseli seç';
+
+  @override
+  String get businessDescriptionLabel => 'Açıklama';
+
+  @override
+  String get businessDescriptionHelper => '20 ile 3000 karakter';
+
+  @override
+  String get businessPhoneLabel => 'Telefon';
+
+  @override
+  String get businessWebsiteLabel => 'Web sitesi (isteğe bağlı)';
+
+  @override
+  String get businessWebsiteHelper => 'https:// ile başlar';
+
+  @override
+  String get businessLanguagesLabel => 'Konuşulan diller';
+
+  @override
+  String get businessCuisinesLabel => 'Mutfak';
+
+  @override
+  String get businessPriceLevelLabel => 'Fiyat seviyesi';
+
+  @override
+  String get businessDietLabel => 'Beslenme seçenekleri';
+
+  @override
+  String get businessHalal => 'Helal';
+
+  @override
+  String get businessVegetarian => 'Vejetaryen yemekler';
+
+  @override
+  String get businessVegan => 'Vegan yemekler';
+
+  @override
+  String get businessSpecialtyLabel => 'Uzmanlık alanı';
+
+  @override
+  String get businessInsuranceLabel => 'Sigorta';
+
+  @override
+  String get insuranceStatutory => 'Yasal';
+
+  @override
+  String get insurancePrivate => 'Özel';
+
+  @override
+  String get insuranceBoth => 'Yasal ve özel';
+
+  @override
+  String get businessSaved => 'Kaydedildi.';
+
+  @override
+  String get businessDescriptionInvalid =>
+      'Açıklama 20 ile 3000 karakter arasında olmalı.';
+
+  @override
+  String get businessPhoneInvalid =>
+      'Lütfen 5 ile 40 karakter arasında bir telefon numarası gir.';
+
+  @override
+  String get businessWebsiteInvalid => 'Web sitesi https:// ile başlamalı.';
+
+  @override
+  String get businessLanguagesRequired => 'En az bir dil seç.';
+
+  @override
+  String get businessCuisinesRequired => 'En az bir mutfak seç.';
+
+  @override
+  String get businessPriceRequired => 'Bir fiyat seviyesi seç.';
+
+  @override
+  String get businessSpecialtyRequired => 'Bir uzmanlık alanı seç.';
+
+  @override
+  String get businessInsuranceRequired => 'Hangi sigortayı kabul ettiğini seç.';
+
+  @override
+  String get cuisineKurdish => 'Kürt';
+
+  @override
+  String get cuisineSyrian => 'Suriye';
+
+  @override
+  String get cuisineTurkish => 'Türk';
+
+  @override
+  String get cuisineArabic => 'Arap';
+
+  @override
+  String get cuisinePersian => 'İran';
+
+  @override
+  String get cuisineLebanese => 'Lübnan';
+
+  @override
+  String get cuisineIraqi => 'Irak';
+
+  @override
+  String get cuisineMiddleEastern => 'Orta Doğu';
+
+  @override
+  String get cuisineKebab => 'Kebap ve döner';
+
+  @override
+  String get cuisineFalafel => 'Falafel';
+
+  @override
+  String get cuisineGerman => 'Alman';
+
+  @override
+  String get cuisineItalian => 'İtalyan';
+
+  @override
+  String get cuisineMediterranean => 'Akdeniz';
+
+  @override
+  String get cuisineIndian => 'Hint';
+
+  @override
+  String get cuisineAsian => 'Asya';
+
+  @override
+  String get cuisineInternational => 'Uluslararası';
+
+  @override
+  String get specialtyGeneralMedicine => 'Genel tıp';
+
+  @override
+  String get specialtyInternalMedicine => 'İç hastalıkları';
+
+  @override
+  String get specialtyPediatrics => 'Çocuk sağlığı';
+
+  @override
+  String get specialtyGynecology => 'Kadın hastalıkları';
+
+  @override
+  String get specialtyDermatology => 'Dermatoloji';
+
+  @override
+  String get specialtyOrthopedics => 'Ortopedi';
+
+  @override
+  String get specialtyNeurology => 'Nöroloji';
+
+  @override
+  String get specialtyPsychiatry => 'Psikiyatri';
+
+  @override
+  String get specialtyOphthalmology => 'Göz hastalıkları';
+
+  @override
+  String get specialtyEnt => 'KBB';
+
+  @override
+  String get specialtyDentistry => 'Diş hekimliği';
+
+  @override
+  String get specialtyCardiology => 'Kardiyoloji';
+
+  @override
+  String get specialtyUrology => 'Üroloji';
+
+  @override
+  String get specialtyOther => 'Diğer';
+
+  @override
+  String get businessHoursClosed => 'Kapalı';
+
+  @override
+  String get businessHoursAdd => 'Zaman aralığı ekle';
+
+  @override
+  String businessHoursInterval({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes';
+  }
+
+  @override
+  String businessHoursOvernight({
+    required String opens,
+    required String closes,
+  }) {
+    return '$opens – $closes (ertesi gün)';
+  }
+
+  @override
+  String get businessHoursPickOpen => 'Açılış saati';
+
+  @override
+  String get businessHoursPickClose => 'Kapanış saati';
+
+  @override
+  String get businessHoursHint =>
+      'Gece yarısından sonra kapatıyorsanız, ertesi sabahki saati seçin.';
+
+  @override
+  String get businessHoursSameTime => 'Açılış ve kapanış saati aynı olamaz.';
+
+  @override
+  String get businessHoursTooMany => 'Günde en fazla 6 zaman aralığı.';
+
+  @override
+  String get businessHoursRemove => 'Zaman aralığını kaldır';
+
+  @override
+  String get weekdayMonday => 'Pazartesi';
+
+  @override
+  String get weekdayTuesday => 'Salı';
+
+  @override
+  String get weekdayWednesday => 'Çarşamba';
+
+  @override
+  String get weekdayThursday => 'Perşembe';
+
+  @override
+  String get weekdayFriday => 'Cuma';
+
+  @override
+  String get weekdaySaturday => 'Cumartesi';
+
+  @override
+  String get weekdaySunday => 'Pazar';
+
+  @override
+  String get businessMenuEmpty =>
+      'Henüz bölüm yok. Örneğin “Başlangıçlar” veya “İçecekler” ekle.';
+
+  @override
+  String get businessMenuAddSection => 'Bölüm ekle';
+
+  @override
+  String get businessMenuSectionName => 'Bölüm adı';
+
+  @override
+  String get businessMenuAddItem => 'Yemek ekle';
+
+  @override
+  String get businessMenuEditItem => 'Yemeği düzenle';
+
+  @override
+  String get businessMenuItemName => 'Ad';
+
+  @override
+  String get businessMenuItemDescription => 'Açıklama (isteğe bağlı)';
+
+  @override
+  String get businessMenuItemPrice => 'Fiyat (€)';
+
+  @override
+  String get businessMenuItemAvailable => 'Mevcut';
+
+  @override
+  String get businessMenuItemUnavailable => 'Mevcut değil';
+
+  @override
+  String get businessMenuMoveUp => 'Yukarı taşı';
+
+  @override
+  String get businessMenuMoveDown => 'Aşağı taşı';
+
+  @override
+  String get businessMenuPriceInvalid => 'Lütfen geçerli bir fiyat gir.';
+
+  @override
+  String get businessMenuNameRequired => 'Lütfen bir ad gir.';
+
+  @override
+  String businessMenuDeleteSection({required String name}) {
+    return '“$name” bölümü tüm yemekleriyle silinsin mi?';
+  }
+
+  @override
+  String get menuFlagVegetarian => 'Vejetaryen';
+
+  @override
+  String get menuFlagVegan => 'Vegan';
 }

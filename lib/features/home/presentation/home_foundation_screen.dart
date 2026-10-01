@@ -35,6 +35,8 @@ class _HomeFoundationScreenState extends ConsumerState<HomeFoundationScreen> {
 
   void _openCategories() => const MarketplaceRoute(tab: 1).go(context);
 
+  void _openMap() => const MapRoute().push<void>(context);
+
   void _openProduct(HomeProduct product, String heroTag) => ProductDetailRoute(
     productId: product.id,
     heroTag: heroTag,
@@ -80,8 +82,10 @@ class _HomeFoundationScreenState extends ConsumerState<HomeFoundationScreen> {
                   _HomeHeader(
                     greeting: greeting,
                     searchHint: l10n.homeSearchHint,
+                    mapTooltip: l10n.mapOpenTooltip,
                     notificationTooltip: l10n.notificationsTitle,
                     onSearchPressed: _openCategories,
+                    onMapPressed: _openMap,
                     onNotificationsPressed: () =>
                         const NotificationSettingsRoute().push<void>(context),
                   ),
@@ -154,15 +158,19 @@ class _HomeHeader extends StatelessWidget {
   const _HomeHeader({
     required this.greeting,
     required this.searchHint,
+    required this.mapTooltip,
     required this.notificationTooltip,
     required this.onSearchPressed,
+    required this.onMapPressed,
     required this.onNotificationsPressed,
   });
 
   final String greeting;
   final String searchHint;
+  final String mapTooltip;
   final String notificationTooltip;
   final VoidCallback onSearchPressed;
+  final VoidCallback onMapPressed;
   final VoidCallback onNotificationsPressed;
 
   @override
@@ -225,7 +233,12 @@ class _HomeHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          _SearchSurface(hint: searchHint, onTap: onSearchPressed),
+          _SearchSurface(
+            hint: searchHint,
+            mapTooltip: mapTooltip,
+            onTap: onSearchPressed,
+            onMapTap: onMapPressed,
+          ),
         ],
       ),
     );
@@ -260,42 +273,72 @@ class _BrandMonogram extends StatelessWidget {
 }
 
 class _SearchSurface extends StatelessWidget {
-  const _SearchSurface({required this.hint, required this.onTap});
+  const _SearchSurface({
+    required this.hint,
+    required this.mapTooltip,
+    required this.onTap,
+    required this.onMapTap,
+  });
 
   final String hint;
+  final String mapTooltip;
   final VoidCallback onTap;
+  final VoidCallback onMapTap;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return PressScale(
-      onTap: onTap,
-      semanticLabel: hint,
-      child: Container(
-        height: AppSizes.controlLarge,
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-        decoration: BoxDecoration(
-          color: context.semanticColors.surfaceRaised,
-          borderRadius: AppRadius.medium,
-          border: Border.all(color: scheme.outlineVariant),
-        ),
-        child: Row(
-          children: <Widget>[
-            Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: Text(
-                hint,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  letterSpacing: 0,
+    return Container(
+      height: AppSizes.controlLarge,
+      decoration: BoxDecoration(
+        color: context.semanticColors.surfaceRaised,
+        borderRadius: AppRadius.medium,
+        border: Border.all(color: scheme.outlineVariant),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: PressScale(
+              onTap: onTap,
+              semanticLabel: hint,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: AppSpacing.md,
+                  end: AppSpacing.sm,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        hint,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          VerticalDivider(
+            width: AppStrokes.thin,
+            thickness: AppStrokes.thin,
+            color: scheme.outlineVariant,
+          ),
+          IconButton(
+            key: const ValueKey('home-map-action'),
+            tooltip: mapTooltip,
+            onPressed: onMapTap,
+            icon: const Icon(Icons.map_outlined),
+          ),
+          const SizedBox(width: AppSpacing.xxs),
+        ],
       ),
     );
   }

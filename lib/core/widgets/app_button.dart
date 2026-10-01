@@ -13,7 +13,6 @@ enum AppButtonVariant { primary, accent, secondary, ghost, destructive }
 
 enum AppButtonSize { small, medium, large }
 
-
 /// Tokenized button with four visual variants and a built-in loading state.
 class AppButton extends StatelessWidget {
   const AppButton({

@@ -23,7 +23,7 @@ final homeRepositoryProvider = Provider<HomeRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HomeRepositoryRef = ProviderRef<HomeRepository>;
-String _$homeFeedHash() => r'58e90a64e7e5dc394ff9de005652f96bc37a634e';
+String _$homeFeedHash() => r'6acbe0bb166030e912922a9f4e44bf8fd8181380';
 
 /// See also [homeFeed].
 @ProviderFor(homeFeed)
@@ -40,7 +40,7 @@ final homeFeedProvider = AutoDisposeFutureProvider<HomeFeed>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HomeFeedRef = AutoDisposeFutureProviderRef<HomeFeed>;
-String _$homeProductHash() => r'6711b896746e571f9dd0a513864f3e844b82b475';
+String _$homeProductHash() => r'53532d9a4e880966c593ef8f1d6f9c8c6653c974';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -180,7 +180,7 @@ class _HomeProductProviderElement
   String get productId => (origin as HomeProductProvider).productId;
 }
 
-String _$sellerProfileHash() => r'21ee56b755a76a2409a011a4c6d3a54d9a5bae8f';
+String _$sellerProfileHash() => r'd81a8121f692c91a9d4f6db6b647759b79e302bd';
 
 /// See also [sellerProfile].
 @ProviderFor(sellerProfile)
@@ -301,7 +301,7 @@ class _SellerProfileProviderElement
   String get sellerId => (origin as SellerProfileProvider).sellerId;
 }
 
-String _$sellerProductsHash() => r'3c9aa0fe95b86f65bdb1f2886bcc3f5c2814db43';
+String _$sellerProductsHash() => r'55d051c3f09ee4558bde81ec235b9f1798d307ca';
 
 /// See also [sellerProducts].
 @ProviderFor(sellerProducts)
@@ -482,7 +482,7 @@ class _SellerProductsProviderElement
       (origin as SellerProductsProvider).excludeProductId;
 }
 
-String _$similarProductsHash() => r'74dd3cb844f366ff0973557185538598305a7fe9';
+String _$similarProductsHash() => r'1eefd05a3bd9820a17450b95d80c0884a38b8869';
 
 /// See also [similarProducts].
 @ProviderFor(similarProducts)
@@ -627,5 +627,43 @@ class _SimilarProductsProviderElement
   String get categoryId => (origin as SimilarProductsProvider).categoryId;
 }
 
+String _$favoriteProductsHash() => r'251e2ce6717ddff08a915ab3c2e8eb349c5ae9cc';
+
+/// See also [favoriteProducts].
+@ProviderFor(favoriteProducts)
+final favoriteProductsProvider =
+    AutoDisposeFutureProvider<List<HomeProduct>>.internal(
+      favoriteProducts,
+      name: r'favoriteProductsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$favoriteProductsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FavoriteProductsRef = AutoDisposeFutureProviderRef<List<HomeProduct>>;
+String _$recentlyViewedProductsHash() =>
+    r'1488e3845b551bb10942c781ad4cd16e26a63139';
+
+/// See also [recentlyViewedProducts].
+@ProviderFor(recentlyViewedProducts)
+final recentlyViewedProductsProvider =
+    AutoDisposeFutureProvider<List<HomeProduct>>.internal(
+      recentlyViewedProducts,
+      name: r'recentlyViewedProductsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$recentlyViewedProductsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RecentlyViewedProductsRef =
+    AutoDisposeFutureProviderRef<List<HomeProduct>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -6,14 +6,26 @@ import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
 import 'package:zerin_marketplace/core/theme/theme.dart';
 import 'package:zerin_marketplace/features/auth/presentation/auth_screen.dart';
 import 'package:zerin_marketplace/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_documents_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_hours_editor_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_hub_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_menu_editor_screen.dart';
+import 'package:zerin_marketplace/features/business/presentation/business_profile_editor_screen.dart';
 import 'package:zerin_marketplace/features/categories/presentation/category_products_screen.dart';
 import 'package:zerin_marketplace/features/chat/presentation/chat_conversation_screen.dart';
 import 'package:zerin_marketplace/features/chat/presentation/chat_inbox_screen.dart';
 import 'package:zerin_marketplace/features/legal/presentation/legal_screen.dart';
+import 'package:zerin_marketplace/features/map/presentation/map_screen.dart';
+import 'package:zerin_marketplace/features/moderation/presentation/moderation_screen.dart';
 import 'package:zerin_marketplace/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/notification_settings_screen.dart';
 import 'package:zerin_marketplace/features/privacy/presentation/privacy_screen.dart';
 import 'package:zerin_marketplace/features/products/presentation/product_detail_screen.dart';
+import 'package:zerin_marketplace/features/profile/presentation/edit_profile_screen.dart';
+import 'package:zerin_marketplace/features/profile/presentation/favorites_screen.dart';
+import 'package:zerin_marketplace/features/profile/presentation/public_profile_screen.dart';
+import 'package:zerin_marketplace/features/profile/presentation/recently_viewed_screen.dart';
+import 'package:zerin_marketplace/features/sell/presentation/my_listings_screen.dart';
 import 'package:zerin_marketplace/features/sellers/presentation/seller_profile_screen.dart';
 import 'package:zerin_marketplace/features/settings/presentation/controllers/app_settings_controller.dart';
 import 'package:zerin_marketplace/features/shell/presentation/marketplace_shell.dart';
@@ -45,10 +57,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
       if (!isComplete && !isOnboarding) return '/onboarding';
       if (isComplete && isOnboarding) return '/';
-      final isChat =
+      final isProtected =
           state.matchedLocation == '/inbox' ||
-          state.matchedLocation.startsWith('/chat/');
-      if (isChat && ref.read(authRepositoryProvider).currentUser == null) {
+          state.matchedLocation.startsWith('/chat/') ||
+          state.matchedLocation == '/my-listings' ||
+          state.matchedLocation == '/edit-profile' ||
+          state.matchedLocation == '/favorites' ||
+          state.matchedLocation == '/recently-viewed' ||
+          state.matchedLocation == '/moderation' ||
+          state.matchedLocation == '/business' ||
+          state.matchedLocation.startsWith('/business/');
+      if (isProtected && ref.read(authRepositoryProvider).currentUser == null) {
         return AuthRoute(redirectTo: state.uri.toString()).location;
       }
       return null;
@@ -182,6 +201,17 @@ class CategoryProductsRoute extends GoRouteData {
       CategoryProductsScreen(categoryId: categoryId);
 }
 
+@TypedGoRoute<MapRoute>(path: '/map')
+class MapRoute extends GoRouteData {
+  const MapRoute({this.categoryId});
+
+  final String? categoryId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      MapScreen(initialCategoryId: categoryId);
+}
+
 @TypedGoRoute<ChatInboxRoute>(path: '/inbox')
 class ChatInboxRoute extends GoRouteData {
   const ChatInboxRoute();
@@ -200,4 +230,128 @@ class ChatConversationRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       ChatConversationScreen(chatId: chatId);
+}
+
+@TypedGoRoute<MyListingsRoute>(path: '/my-listings')
+class MyListingsRoute extends GoRouteData {
+  const MyListingsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const MyListingsScreen();
+}
+
+@TypedGoRoute<ModerationRoute>(path: '/moderation')
+class ModerationRoute extends GoRouteData {
+  const ModerationRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ModerationScreen();
+}
+
+@TypedGoRoute<PublicProfileRoute>(path: '/profile/:username')
+class PublicProfileRoute extends GoRouteData {
+  const PublicProfileRoute({required this.username});
+
+  final String username;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      PublicProfileScreen(username: username);
+}
+
+@TypedGoRoute<EditProfileRoute>(path: '/edit-profile')
+class EditProfileRoute extends GoRouteData {
+  const EditProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const EditProfileScreen();
+}
+
+@TypedGoRoute<FavoritesRoute>(path: '/favorites')
+class FavoritesRoute extends GoRouteData {
+  const FavoritesRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const FavoritesScreen();
+}
+
+@TypedGoRoute<RecentlyViewedRoute>(path: '/recently-viewed')
+class RecentlyViewedRoute extends GoRouteData {
+  const RecentlyViewedRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RecentlyViewedScreen();
+}
+
+@TypedGoRoute<BusinessStartRoute>(path: '/business/start')
+class BusinessStartRoute extends GoRouteData {
+  const BusinessStartRoute({required this.existingPrivateSellerId});
+
+  final String? existingPrivateSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessStartScreen(existingPrivateSellerId: existingPrivateSellerId);
+}
+
+@TypedGoRoute<BusinessHubRoute>(path: '/business/:businessSellerId/overview')
+class BusinessHubRoute extends GoRouteData {
+  const BusinessHubRoute({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessHubScreen(businessSellerId: businessSellerId);
+}
+
+@TypedGoRoute<BusinessDocumentsRoute>(
+  path: '/business/:businessSellerId/documents',
+)
+class BusinessDocumentsRoute extends GoRouteData {
+  const BusinessDocumentsRoute({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessDocumentsScreen(businessSellerId: businessSellerId);
+}
+
+@TypedGoRoute<BusinessProfileRoute>(path: '/business/:businessSellerId/profile')
+class BusinessProfileRoute extends GoRouteData {
+  const BusinessProfileRoute({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessProfileEditorScreen(businessSellerId: businessSellerId);
+}
+
+@TypedGoRoute<BusinessHoursRoute>(path: '/business/:businessSellerId/hours')
+class BusinessHoursRoute extends GoRouteData {
+  const BusinessHoursRoute({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessHoursEditorScreen(businessSellerId: businessSellerId);
+}
+
+@TypedGoRoute<BusinessMenuRoute>(path: '/business/:businessSellerId/menu')
+class BusinessMenuRoute extends GoRouteData {
+  const BusinessMenuRoute({required this.businessSellerId});
+
+  final String businessSellerId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      BusinessMenuEditorScreen(businessSellerId: businessSellerId);
 }

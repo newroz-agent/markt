@@ -22,6 +22,9 @@ class UnconfiguredChatRepository implements ChatRepository {
     required String productId,
   }) async => _unconfigured();
   @override
+  Future<ChatConversation> openChatWithSeller(String sellerId) async =>
+      _unconfigured();
+  @override
   Future<ChatMessage> sendTextMessage({
     required String chatId,
     required String body,

@@ -1,0 +1,7 @@
+step_e1_business_directory: exit=0 last=ROLLBACK
+step_e1_5_osm_import: exit=0 last=ROLLBACK
+step_b_sell_moderation: exit=0 last=ROLLBACK
+step_c_user_profiles: exit=0 last=ROLLBACK
+step_d_map: exit=0 last=ROLLBACK
+step_d_postal_code_hardening: exit=0 last=ROLLBACK
+20260924000100_admin_verification_reports: exit=0 last=ROLLBACK

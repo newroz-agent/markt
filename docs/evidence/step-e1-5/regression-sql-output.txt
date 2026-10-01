@@ -1,0 +1,286 @@
+== step_e1_business_directory (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+DO
+INSERT 0 4
+INSERT 0 3
+INSERT 0 5
+INSERT 0 3
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+DO
+UPDATE 1
+DO
+UPDATE 1
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000004","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+INSERT 0 1
+DO
+                                                               upsert_directory_review                                                               
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "c006bc6e-7a57-4e84-8d3f-77b465346f01", "body": "Excellent food and service", "rating": 5, "updated_at": "2026-09-27T20:38:25.646043+00:00"}
+(1 row)
+
+                                                              upsert_directory_review                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ {"id": "c006bc6e-7a57-4e84-8d3f-77b465346f01", "body": "Updated directory review", "rating": 4, "updated_at": "2026-09-27T20:38:25.646043+00:00"}
+(1 row)
+
+INSERT 0 1
+DO
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000001","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"e1000000-0000-0000-0000-000000000002","role":"authenticated"}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+SET
+DO
+RESET
+DO
+ROLLBACK
+
+== step_b_sell_moderation (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE TABLE
+GRANT
+GRANT
+INSERT 0 3
+INSERT 0 1
+SET
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+SET
+DO
+SET
+DO
+SET
+DO
+SET
+SET
+DO
+RESET
+DO
+ROLLBACK
+
+== step_c_user_profiles (exit 0)
+BEGIN
+CREATE FUNCTION
+CREATE TABLE
+GRANT
+GRANT
+INSERT 0 4
+INSERT 0 1
+INSERT 0 2
+INSERT 0 2
+INSERT 0 4
+SET
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+                                                                         update_my_profile                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"bio": "Käuferprofil", "city": "Hamburg", "seller": null, "username": "buyer_profile", "display_name": "Buyer Person", "avatar_object": null, "listing_count": 0}
+(1 row)
+
+DO
+SET
+SET
+DO
+SET
+SET
+UPDATE 1
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+UPDATE 1
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+DO
+RESET
+ROLLBACK
+
+== step_d_map (exit 0)
+BEGIN
+CREATE FUNCTION
+DO
+INSERT 0 1
+INSERT 0 2
+INSERT 0 2
+UPDATE 1
+INSERT 0 4
+DO
+SET
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"d1000000-0000-0000-0000-000000000001","role":"authenticated"}
+(1 row)
+
+DO
+RESET
+ set_config 
+------------
+ {}
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+DO
+UPDATE 1
+DO
+ROLLBACK
+
+== step_d_postal_code_hardening (exit 0)
+BEGIN
+DO
+DO
+DO
+ROLLBACK
+
+== 20260924000100_admin_verification_reports (exit 0)
+BEGIN
+INSERT 0 1
+SET
+              set_config              
+--------------------------------------
+ a1000000-0000-0000-0000-000000000001
+(1 row)
+
+                                              set_config                                               
+-------------------------------------------------------------------------------------------------------
+ {"sub":"a1000000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}
+(1 row)
+
+DO
+ROLLBACK
+

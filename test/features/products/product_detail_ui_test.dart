@@ -95,6 +95,7 @@ Future<void> _pump(
   );
   final home = repository ?? _Repository();
   when(() => home.fetchFavoriteState(any())).thenAnswer((_) async => false);
+  when(() => home.recordProductView(any())).thenAnswer((_) async {});
   final router = GoRouter(
     routes: [
       GoRoute(

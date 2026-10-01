@@ -82,69 +82,78 @@ void main() {
     requests = <http.Request>[];
   });
 
-  test('queries the subtree, applies German city and seller kind filters', () async {
-    givenResponses([_productRow('a', city: 'Halle (Saale)')]);
-    final client = _clientWithRecorder(requests);
-    repository = SupabaseCategoryProductsRepository(client);
+  test(
+    'queries the subtree, applies German city and seller kind filters',
+    () async {
+      givenResponses([_productRow('a', city: 'Halle (Saale)')]);
+      final client = _clientWithRecorder(requests);
+      repository = SupabaseCategoryProductsRepository(client);
 
-    final products = await repository.fetchCategoryProducts(
-      const CategoryProductsQuery(
-        categoryIds: ['root', 'child'],
-        condition: CategoryProductConditionFilter.isNew,
-        sellerKind: CategoryProductSellerKindFilter.private,
-        city: 'Halle (Saale)',
-      ),
-    );
+      final products = await repository.fetchCategoryProducts(
+        const CategoryProductsQuery(
+          categoryIds: ['root', 'child'],
+          condition: CategoryProductConditionFilter.isNew,
+          sellerKind: CategoryProductSellerKindFilter.private,
+          city: 'Halle (Saale)',
+        ),
+      );
 
-    expect(products, hasLength(1));
-    expect(products.single.id, 'a');
-    expect(products.single.city, 'Halle (Saale)');
-    final url = requests.single.url;
-    expect(url.queryParameters['category_id'], 'in.("root","child")');
-    expect(url.queryParameters['status'], 'eq.active');
-    expect(url.queryParameters['condition'], 'eq.new');
-    expect(url.queryParameters['seller.kind'], 'eq.private');
-    expect(url.queryParameters['city'], 'eq.Halle (Saale)');
-    expect(url.queryParameters['order'], contains('published_at'));
-  });
+      expect(products, hasLength(1));
+      expect(products.single.id, 'a');
+      expect(products.single.city, 'Halle (Saale)');
+      final url = requests.single.url;
+      expect(url.queryParameters['category_id'], 'in.("root","child")');
+      expect(url.queryParameters['status'], 'eq.active');
+      expect(url.queryParameters['condition'], 'eq.new');
+      expect(url.queryParameters['seller.kind'], 'eq.private');
+      expect(url.queryParameters['city'], 'eq.Halle (Saale)');
+      expect(url.queryParameters['order'], contains('published_at'));
+    },
+  );
 
-  test('in-category search narrows titles and pagination uses a range', () async {
-    givenResponses([_productRow('b')]);
-    final client = _clientWithRecorder(requests);
-    repository = SupabaseCategoryProductsRepository(client);
+  test(
+    'in-category search narrows titles and pagination uses a range',
+    () async {
+      givenResponses([_productRow('b')]);
+      final client = _clientWithRecorder(requests);
+      repository = SupabaseCategoryProductsRepository(client);
 
-    await repository.fetchCategoryProducts(
-      const CategoryProductsQuery(
-        categoryIds: ['root'],
-        query: '  fahrrad  ',
-        sort: CategoryProductSort.priceAscending,
-        offset: 48,
-      ),
-    );
+      await repository.fetchCategoryProducts(
+        const CategoryProductsQuery(
+          categoryIds: ['root'],
+          query: '  fahrrad  ',
+          sort: CategoryProductSort.priceAscending,
+          offset: 48,
+        ),
+      );
 
-    final url = requests.single.url;
-    expect(url.queryParameters['title'], 'ilike.%fahrrad%');
-    expect(url.queryParameters['order'], contains('price_cents.asc'));
-    expect(url.queryParameters['offset'], '48');
-    expect(url.queryParameters['limit'], '24');
-  });
+      final url = requests.single.url;
+      expect(url.queryParameters['title'], 'ilike.%fahrrad%');
+      expect(url.queryParameters['order'], contains('price_cents.asc'));
+      expect(url.queryParameters['offset'], '48');
+      expect(url.queryParameters['limit'], '24');
+    },
+  );
 
-  test('whitespace-only search is ignored and empty subtree skips the call', () async {
-    givenResponses(const []);
-    final client = _clientWithRecorder(requests);
-    repository = SupabaseCategoryProductsRepository(client);
+  test(
+    'whitespace-only search is ignored and empty subtree skips the call',
+    () async {
+      givenResponses(const []);
+      final client = _clientWithRecorder(requests);
+      repository = SupabaseCategoryProductsRepository(client);
 
-    await repository.fetchCategoryProducts(
-      const CategoryProductsQuery(categoryIds: ['root'], query: '   '),
-    );
-    expect(requests.single.url.queryParameters.containsKey('title'), isFalse);
+      await repository.fetchCategoryProducts(
+        const CategoryProductsQuery(categoryIds: ['root'], query: '   '),
+      );
+      expect(requests.single.url.queryParameters.containsKey('title'), isFalse);
 
-    final empty = await repository.fetchCategoryProducts(
-      const CategoryProductsQuery(categoryIds: []),
-    );
-    expect(empty, isEmpty);
-    expect(requests, hasLength(1));
-  });
+      final empty = await repository.fetchCategoryProducts(
+        const CategoryProductsQuery(categoryIds: []),
+      );
+      expect(empty, isEmpty);
+      expect(requests, hasLength(1));
+    },
+  );
 
   test('unconfigured repository returns an empty page', () async {
     final products = await const UnconfiguredCategoryProductsRepository()

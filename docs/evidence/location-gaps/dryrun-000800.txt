@@ -1,0 +1,17 @@
+000800 + precise_location_gaps: exit=0 last=ROLLBACK
+000800 + step_e2_owner_onboarding: exit=0 last=ROLLBACK
+000800 + step_e1_business_directory: exit=0 last=ROLLBACK
+000800 + step_e1_5_osm_import: exit=0 last=ROLLBACK
+000800 + step_b_sell_moderation: exit=0 last=ROLLBACK
+000800 + step_c_user_profiles: exit=0 last=ROLLBACK
+000800 + step_d_map: exit=0 last=ROLLBACK
+000800 + step_d_postal_code_hardening: exit=0 last=ROLLBACK
+000800 + 20260924000100_admin_verification_reports: exit=0 last=ROLLBACK
+== 000800 data impact at apply time (rolled back)
+sellers_changed
+0
+(1 row)
+== sellers with a public precise pin today (the new rules only act on a later status or profile change)
+shop_name|status|precise_location_opt_in|verified
+Atelier Lale|approved|t|t
+(1 row)

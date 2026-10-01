@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:zerin_marketplace/core/errors/app_exception.dart';
+import 'package:zerin_marketplace/core/storage/product_image_url_resolver.dart';
 import 'package:zerin_marketplace/features/categories/domain/category_products_repository.dart';
 import 'package:zerin_marketplace/features/home/domain/home_feed.dart';
 
@@ -11,13 +12,16 @@ class SupabaseCategoryProductsRepository implements CategoryProductsRepository {
       'id, slug, title, description, condition, price_cents, '
       'compare_at_price_cents, currency, vat_rate, price_includes_vat, '
       'free_shipping, shipping_cost_cents, rating_average, rating_count, '
-      'city, published_at, '
+      'city, country_code, published_at, '
       'seller:sellers!inner(id, slug, shop_name, bio, avatar_url, '
-      'banner_url, city, rating_average, rating_count, '
-      'response_time_minutes), '
+      'banner_url, city, country_code, rating_average, rating_count, '
+      'response_time_minutes, kind), '
       'images:product_images(image_url, storage_path, sort_order)';
 
   final SupabaseClient _client;
+  late final ProductImageUrlResolver _imageUrls = ProductImageUrlResolver(
+    _client,
+  );
 
   @override
   Future<List<HomeProduct>> fetchCategoryProducts(
@@ -76,14 +80,12 @@ class SupabaseCategoryProductsRepository implements CategoryProductsRepository {
         ),
       };
 
-      final rows = await sorted.range(query.offset, query.offset + query.limit - 1);
-      if (rows is! List) return const <HomeProduct>[];
-      return rows
-          .map(
-            (row) =>
-                HomeProduct.fromJson(Map<String, dynamic>.from(row as Map)),
-          )
-          .toList(growable: false);
+      final rows = await sorted.range(
+        query.offset,
+        query.offset + query.limit - 1,
+      );
+      final resolvedRows = await _imageUrls.resolveRows(rows);
+      return resolvedRows.map(HomeProduct.fromJson).toList(growable: false);
     } on PostgrestException catch (error, stackTrace) {
       Error.throwWithStackTrace(
         AppException(AppFailureCode.unknown, cause: error),

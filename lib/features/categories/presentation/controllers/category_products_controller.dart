@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:zerin_marketplace/core/providers/infrastructure_providers.dart';
+import 'package:zerin_marketplace/core/providers/product_realtime_provider.dart';
 import 'package:zerin_marketplace/features/categories/data/supabase_category_products_repository.dart';
 import 'package:zerin_marketplace/features/categories/domain/category_products_repository.dart';
 import 'package:zerin_marketplace/features/categories/domain/marketplace_category.dart';
 import 'package:zerin_marketplace/features/categories/presentation/controllers/category_controller.dart';
 import 'package:zerin_marketplace/features/home/domain/home_feed.dart';
+import 'package:zerin_marketplace/features/profile/presentation/controllers/profile_controller.dart';
 
 part 'category_products_controller.g.dart';
 
@@ -137,15 +139,17 @@ class CategoryProducts extends _$CategoryProducts {
 
   @override
   Future<List<HomeProduct>> build(String categoryId) async {
+    ref.watch(productRealtimeChangesProvider);
     final query = ref.watch(categoryProductsFilterProvider(categoryId));
-    final children = await ref.watch(categoryChildrenProvider(categoryId).future);
+    final children = await ref.watch(
+      categoryChildrenProvider(categoryId).future,
+    );
 
     // A selected subcategory narrows to itself; otherwise the whole subtree
     // (the category plus its children) is queried.
     final ids = switch (query.subcategoryId) {
-      final subcategoryId? when children.any(
-        (child) => child.id == subcategoryId,
-      ) =>
+      final subcategoryId?
+          when children.any((child) => child.id == subcategoryId) =>
         <String>[subcategoryId],
       _ => <String>[categoryId, for (final child in children) child.id],
     };
@@ -162,7 +166,8 @@ class CategoryProducts extends _$CategoryProducts {
             query: query.searchQuery,
             // Default page size (24) matches _pageSize used by hasMore.
           ),
-        );
+        )
+        .then(ref.watch(publicIdentityResolverProvider).overlayProducts);
   }
 
   bool get hasMore {
@@ -181,9 +186,8 @@ class CategoryProducts extends _$CategoryProducts {
         categoryChildrenProvider(categoryId).future,
       );
       final ids = switch (query.subcategoryId) {
-        final subcategoryId? when children.any(
-          (child) => child.id == subcategoryId,
-        ) =>
+        final subcategoryId?
+            when children.any((child) => child.id == subcategoryId) =>
           <String>[subcategoryId],
         _ => <String>[categoryId, for (final child in children) child.id],
       };
@@ -200,10 +204,9 @@ class CategoryProducts extends _$CategoryProducts {
               // Default page size (24) matches _pageSize used by hasMore.
               offset: current.length,
             ),
-          );
-      final known = {
-        for (final product in current) product.id,
-      };
+          )
+          .then(ref.read(publicIdentityResolverProvider).overlayProducts);
+      final known = {for (final product in current) product.id};
       return [
         ...current,
         // Live feeds can shift; never emit a duplicate row.

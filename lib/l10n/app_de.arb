@@ -480,6 +480,18 @@
   "@accountTitle": {
     "description": "Title of the account screen."
   },
+  "accountSellingProfilesTitle": "Deine Verkaufsprofile",
+  "@accountSellingProfilesTitle": {
+    "description": "Heading above the private and business identity switcher in Account."
+  },
+  "accountPersonalIdentity": "Privatperson",
+  "@accountPersonalIdentity": {
+    "description": "Label for the permanent personal identity in the Account switcher."
+  },
+  "accountRegisterBusiness": "Geschäft registrieren",
+  "@accountRegisterBusiness": {
+    "description": "Account action that starts registration of the one business identity."
+  },
   "accountProfile": "Persönliche Daten",
   "@accountProfile": {
     "description": "Account menu item for profile details."
@@ -635,6 +647,18 @@
   "legalWithdrawal": "Widerrufsbelehrung",
   "@legalWithdrawal": {
     "description": "Label for withdrawal-right information."
+  },
+  "legalDataSources": "Datenquellen",
+  "@legalDataSources": {
+    "description": "Account legal tile that lists third-party data sources and their licenses."
+  },
+  "legalOsmAttribution": "Karten- und Ortsdaten © OpenStreetMap-Mitwirkende, lizenziert unter der Open Database License (ODbL).",
+  "@legalOsmAttribution": {
+    "description": "ODbL attribution for OpenStreetMap map tiles and imported directory places. Keep 'OpenStreetMap' and 'Open Database License (ODbL)' untranslated."
+  },
+  "directoryUnverifiedOsmNote": "Nicht verifiziert · Daten © OpenStreetMap-Mitwirkende",
+  "@directoryUnverifiedOsmNote": {
+    "description": "Note on unclaimed directory entries imported from OpenStreetMap (E3 list/detail). Keep 'OpenStreetMap' untranslated."
   },
   "legalComingSoonBody": "Die vollständigen rechtlichen Inhalte werden vor der Veröffentlichung bereitgestellt.",
   "@legalComingSoonBody": {
@@ -938,6 +962,15 @@
   "@productContactSeller": {
     "description": "Button that opens a conversation with the seller."
   },
+  "chatIdentityContext": "Als {name}",
+  "@chatIdentityContext": {
+    "description": "Identity owned by the viewer and immutably bound to this chat.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "chatInboxTitle": "Nachrichten",
   "@chatInboxTitle": {
     "description": "Title of the conversations inbox."
@@ -1179,5 +1212,1428 @@
   "favoriteRemoveAction": "Aus Favoriten entfernen",
   "@favoriteRemoveAction": {
     "description": "Action label to remove this listing from favorites, not a success confirmation."
+  },
+  "sellIdentityChoiceTitle": "Verkaufsprofil wählen",
+  "@sellIdentityChoiceTitle": {
+    "description": "Title shown before the Sell form when both identities exist."
+  },
+  "sellIdentityChoiceBody": "Wähle, ob dieses Angebot privat oder geschäftlich veröffentlicht wird.",
+  "@sellIdentityChoiceBody": {
+    "description": "Explains that one identity must be bound to the whole listing draft."
+  },
+  "sellAsPerson": "Als Privatperson",
+  "@sellAsPerson": {
+    "description": "Sell choice and bound-draft label for the person identity."
+  },
+  "sellAsBusiness": "Als Geschäft",
+  "@sellAsBusiness": {
+    "description": "Sell choice and bound-draft label for the business identity."
+  },
+  "sellChangeIdentity": "Verkaufsprofil wechseln",
+  "@sellChangeIdentity": {
+    "description": "Tooltip that returns to identity choice and resets the current draft."
+  },
+  "myListingsPrivateSection": "Privat",
+  "@myListingsPrivateSection": {
+    "description": "Heading for listings owned by the person's private seller identity."
+  },
+  "myListingsBusinessSection": "Geschäft",
+  "@myListingsBusinessSection": {
+    "description": "Heading for listings owned by the business seller identity."
+  },
+  "myListingsSectionEmpty": "Noch keine Angebote in diesem Bereich.",
+  "@myListingsSectionEmpty": {
+    "description": "Empty message inside one identity section of My Listings."
+  },
+  "sellCatalogTitle": "Was möchtest du verkaufen?",
+  "sellCatalogBody": "Suche zuerst nach einem ähnlichen Artikel oder starte ohne Vorlage.",
+  "sellCatalogSearchHint": "Katalog durchsuchen",
+  "sellCatalogUseTemplate": "Vorlage verwenden",
+  "sellFreeForm": "Ohne Vorlage starten",
+  "sellNoTemplatesTitle": "Keine passende Vorlage",
+  "sellNoTemplatesBody": "Du kannst dein Angebot frei eingeben.",
+  "sellDetailsTitle": "Angebotsdetails",
+  "sellSellerKindLabel": "Verkäuferart",
+  "sellSellerPrivate": "Privat",
+  "sellSellerBusiness": "Gewerblich",
+  "sellSellerNameLabel": "Anzeigename",
+  "sellListingTitleLabel": "Titel",
+  "sellPriceLabel": "Preis in Euro",
+  "sellCityLabel": "Stadt",
+  "sellCategoryLabel": "Kategorie",
+  "sellConditionLabel": "Zustand",
+  "sellDescriptionLabel": "Beschreibung",
+  "sellPhotosTitle": "Fotos",
+  "sellPhotosBody": "Füge 1 bis 10 Fotos hinzu. Bilder werden vor dem Upload komprimiert.",
+  "sellPickPhotos": "Fotos auswählen",
+  "sellTakePhoto": "Foto aufnehmen",
+  "sellPhotoLimit": "Maximal 10 Fotos",
+  "sellPhotoFailed": "Das Foto konnte nicht verarbeitet werden.",
+  "sellReviewTitle": "Prüfen und senden",
+  "sellSubmit": "Zur Prüfung einreichen",
+  "sellValidationRequired": "Dieses Feld ist erforderlich.",
+  "sellValidationPrice": "Gib einen gültigen Preis größer als 0 ein.",
+  "sellValidationDescription": "Die Beschreibung muss mindestens 10 Zeichen haben.",
+  "sellValidationPhotos": "Füge mindestens ein Foto hinzu.",
+  "sellConfirmationTitle": "Angebot wird geprüft",
+  "sellConfirmationBody": "Dein Angebot wurde eingereicht und ist noch nicht öffentlich. Wir benachrichtigen dich nach der Prüfung.",
+  "sellViewMyListings": "Meine Angebote anzeigen",
+  "sellCreateAnother": "Weiteres Angebot erstellen",
+  "sellTemplateImported": "Vorlage übernommen. Prüfe alle Angaben vor dem Senden.",
+  "myListingsTitle": "Meine Angebote",
+  "myListingsEmptyTitle": "Noch keine Angebote",
+  "myListingsEmptyBody": "Deine eingereichten Angebote und ihr Prüfstatus erscheinen hier.",
+  "listingStatusPending": "Wird geprüft",
+  "listingStatusActive": "Veröffentlicht",
+  "listingStatusRejected": "Abgelehnt",
+  "listingStatusDraft": "Entwurf",
+  "listingStatusSold": "Verkauft",
+  "listingStatusBlocked": "Gesperrt",
+  "listingModerationReason": "Grund",
+  "accountMyListings": "Meine Angebote",
+  "accountModeration": "Moderation",
+  "moderationTitle": "Angebote prüfen",
+  "moderationPending": "Offen",
+  "moderationApprovedToday": "Heute freigegeben",
+  "moderationRejectedToday": "Heute abgelehnt",
+  "moderationEmptyTitle": "Keine offenen Angebote",
+  "moderationEmptyBody": "Neue Einreichungen erscheinen automatisch hier.",
+  "moderationApprove": "Freigeben",
+  "moderationReject": "Ablehnen",
+  "moderationReasonLabel": "Grund (optional)",
+  "moderationReasonHint": "Kurze Rückmeldung an den Verkäufer",
+  "moderationApproveSuccess": "Das Angebot ist jetzt öffentlich.",
+  "moderationRejectSuccess": "Das Angebot wurde abgelehnt.",
+  "moderationForbiddenTitle": "Nur für Administratoren",
+  "moderationForbiddenBody": "Du hast keinen Zugriff auf die Moderationswarteschlange.",
+  "moderationSubmittedLabel": "Eingereicht",
+  "moderationSellerLabel": "Verkäufer",
+  "moderationCategoryLabel": "Kategorie",
+  "moderationDecisionFailed": "Die Entscheidung konnte nicht gespeichert werden.",
+  "@sellCatalogTitle": {
+    "description": "Title of the catalog-first Sell step."
+  },
+  "@sellCatalogBody": {
+    "description": "Explains catalog templates and free-form entry."
+  },
+  "@sellCatalogSearchHint": {
+    "description": "Hint for catalog template search."
+  },
+  "@sellCatalogUseTemplate": {
+    "description": "Action to apply a catalog template."
+  },
+  "@sellFreeForm": {
+    "description": "Action to begin a listing without a template."
+  },
+  "@sellNoTemplatesTitle": {
+    "description": "Empty-state title when catalog search has no match."
+  },
+  "@sellNoTemplatesBody": {
+    "description": "Empty-state body offering free-form listing entry."
+  },
+  "@sellDetailsTitle": {
+    "description": "Title of the listing details step."
+  },
+  "@sellSellerKindLabel": {
+    "description": "Label for private or business seller kind."
+  },
+  "@sellSellerPrivate": {
+    "description": "Private seller option."
+  },
+  "@sellSellerBusiness": {
+    "description": "Business seller option."
+  },
+  "@sellSellerNameLabel": {
+    "description": "Label for the seller display name."
+  },
+  "@sellListingTitleLabel": {
+    "description": "Label for the listing title."
+  },
+  "@sellPriceLabel": {
+    "description": "Label for listing price in euros."
+  },
+  "@sellCityLabel": {
+    "description": "Label for the German listing city."
+  },
+  "@sellCategoryLabel": {
+    "description": "Label for listing category."
+  },
+  "@sellConditionLabel": {
+    "description": "Label for listing condition."
+  },
+  "@sellDescriptionLabel": {
+    "description": "Label for listing description."
+  },
+  "@sellPhotosTitle": {
+    "description": "Title of the listing photo step."
+  },
+  "@sellPhotosBody": {
+    "description": "Explains listing photo count and compression."
+  },
+  "@sellPickPhotos": {
+    "description": "Action to choose listing photos from the library."
+  },
+  "@sellTakePhoto": {
+    "description": "Action to capture a listing photo."
+  },
+  "@sellPhotoLimit": {
+    "description": "Maximum listing photo count message."
+  },
+  "@sellPhotoFailed": {
+    "description": "Error when a listing photo cannot be processed."
+  },
+  "@sellReviewTitle": {
+    "description": "Title of the listing review step."
+  },
+  "@sellSubmit": {
+    "description": "Action that submits a listing for moderation."
+  },
+  "@sellValidationRequired": {
+    "description": "Required listing field validation error."
+  },
+  "@sellValidationPrice": {
+    "description": "Invalid listing price validation error."
+  },
+  "@sellValidationDescription": {
+    "description": "Invalid listing description validation error."
+  },
+  "@sellValidationPhotos": {
+    "description": "Missing listing photo validation error."
+  },
+  "@sellConfirmationTitle": {
+    "description": "Title after a listing enters pending review."
+  },
+  "@sellConfirmationBody": {
+    "description": "Explains that a submitted listing is not public yet."
+  },
+  "@sellViewMyListings": {
+    "description": "Action to open the current user's listings."
+  },
+  "@sellCreateAnother": {
+    "description": "Action to reset and create another listing."
+  },
+  "@sellTemplateImported": {
+    "description": "Confirmation that a catalog template was applied."
+  },
+  "@myListingsTitle": {
+    "description": "Title of the authenticated user's listing status screen."
+  },
+  "@myListingsEmptyTitle": {
+    "description": "Empty-state title for My Listings."
+  },
+  "@myListingsEmptyBody": {
+    "description": "Empty-state body for My Listings."
+  },
+  "@listingStatusPending": {
+    "description": "Public label for pending_review listing status."
+  },
+  "@listingStatusActive": {
+    "description": "Public label for active listing status."
+  },
+  "@listingStatusRejected": {
+    "description": "Public label for rejected listing status."
+  },
+  "@listingStatusDraft": {
+    "description": "Public label for draft listing status."
+  },
+  "@listingStatusSold": {
+    "description": "Public label for sold listing status."
+  },
+  "@listingStatusBlocked": {
+    "description": "Public label for blocked listing status."
+  },
+  "@listingModerationReason": {
+    "description": "Label for a listing moderation reason."
+  },
+  "@accountMyListings": {
+    "description": "Account menu action for My Listings."
+  },
+  "@accountModeration": {
+    "description": "Account menu action for admin moderation."
+  },
+  "@moderationTitle": {
+    "description": "Title of the admin listing moderation queue."
+  },
+  "@moderationPending": {
+    "description": "Label for pending moderation count."
+  },
+  "@moderationApprovedToday": {
+    "description": "Label for listings approved today count."
+  },
+  "@moderationRejectedToday": {
+    "description": "Label for listings rejected today count."
+  },
+  "@moderationEmptyTitle": {
+    "description": "Empty-state title for the moderation queue."
+  },
+  "@moderationEmptyBody": {
+    "description": "Empty-state body for the moderation queue."
+  },
+  "@moderationApprove": {
+    "description": "Admin action to approve a listing."
+  },
+  "@moderationReject": {
+    "description": "Admin action to reject a listing."
+  },
+  "@moderationReasonLabel": {
+    "description": "Label for optional listing rejection feedback."
+  },
+  "@moderationReasonHint": {
+    "description": "Hint for optional listing rejection feedback."
+  },
+  "@moderationApproveSuccess": {
+    "description": "Confirmation after an admin approves a listing."
+  },
+  "@moderationRejectSuccess": {
+    "description": "Confirmation after an admin rejects a listing."
+  },
+  "@moderationForbiddenTitle": {
+    "description": "Title when a non-admin opens moderation."
+  },
+  "@moderationForbiddenBody": {
+    "description": "Body when a non-admin opens moderation."
+  },
+  "@moderationSubmittedLabel": {
+    "description": "Label for listing submission date in moderation."
+  },
+  "@moderationSellerLabel": {
+    "description": "Label for seller identity in moderation."
+  },
+  "@moderationCategoryLabel": {
+    "description": "Label for category in moderation."
+  },
+  "@moderationDecisionFailed": {
+    "description": "Error when an admin decision cannot be saved."
+  },
+  "profileNotFoundTitle": "Profil nicht gefunden",
+  "@profileNotFoundTitle": {
+    "description": "Title when a public profile does not exist."
+  },
+  "profileNotFoundBody": "Dieses Profil ist nicht verfügbar.",
+  "@profileNotFoundBody": {
+    "description": "Body when a public profile does not exist."
+  },
+  "profileFallbackName": "Zêrîn-Mitglied",
+  "@profileFallbackName": {
+    "description": "Fallback display name when a profile has none."
+  },
+  "profileListingCount": "{count, plural, =0{Keine Angebote} =1{1 Angebot} other{{count} Angebote}}",
+  "@profileListingCount": {
+    "description": "Number of active listings on a profile.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileAboutTitle": "Über mich",
+  "@profileAboutTitle": {
+    "description": "Heading for a profile bio section."
+  },
+  "profileNoBio": "Noch keine Beschreibung.",
+  "@profileNoBio": {
+    "description": "Placeholder when a profile has no bio."
+  },
+  "profileListingsTitle": "Aktive Angebote",
+  "@profileListingsTitle": {
+    "description": "Heading for a profile's active listings."
+  },
+  "profileNoListings": "Zurzeit keine aktiven Angebote.",
+  "@profileNoListings": {
+    "description": "Empty state for a profile with no active listings."
+  },
+  "profileSendMessage": "Nachricht senden",
+  "@profileSendMessage": {
+    "description": "CTA to message a profile through chat."
+  },
+  "editProfileTitle": "Profil bearbeiten",
+  "@editProfileTitle": {
+    "description": "Title of the edit profile screen."
+  },
+  "profileEditAvatar": "Profilbild ändern",
+  "@profileEditAvatar": {
+    "description": "Button to change the profile photo."
+  },
+  "profileAvatarFromGallery": "Aus Galerie wählen",
+  "@profileAvatarFromGallery": {
+    "description": "Pick avatar from the photo library."
+  },
+  "profileAvatarFromCamera": "Foto aufnehmen",
+  "@profileAvatarFromCamera": {
+    "description": "Capture avatar from the camera."
+  },
+  "profileAvatarRemove": "Profilbild entfernen",
+  "@profileAvatarRemove": {
+    "description": "Remove the current profile photo."
+  },
+  "profileAvatarError": "Das Profilbild konnte nicht gespeichert werden.",
+  "@profileAvatarError": {
+    "description": "Error when avatar upload or removal fails."
+  },
+  "profileDisplayNameLabel": "Anzeigename",
+  "@profileDisplayNameLabel": {
+    "description": "Label for the display name field."
+  },
+  "profileDisplayNameInvalid": "Bitte gib einen Namen mit 1 bis 80 Zeichen ein.",
+  "@profileDisplayNameInvalid": {
+    "description": "Validation error for the display name."
+  },
+  "profileUsernameLabel": "Benutzername",
+  "@profileUsernameLabel": {
+    "description": "Label for the username field."
+  },
+  "profileUsernameHelper": "3–30 Zeichen: Kleinbuchstaben, Ziffern und Unterstriche.",
+  "@profileUsernameHelper": {
+    "description": "Helper text describing username rules."
+  },
+  "profileUsernameTaken": "Dieser Benutzername ist bereits vergeben.",
+  "@profileUsernameTaken": {
+    "description": "Username conflict error."
+  },
+  "profileUsernameReserved": "Dieser Benutzername ist reserviert.",
+  "@profileUsernameReserved": {
+    "description": "Reserved username error."
+  },
+  "profileUsernameInvalid": "Dieser Benutzername ist ungültig.",
+  "@profileUsernameInvalid": {
+    "description": "Invalid username error."
+  },
+  "profileCityLabel": "Stadt",
+  "@profileCityLabel": {
+    "description": "Label for the profile city dropdown."
+  },
+  "profileCityRequired": "Bitte wähle eine Stadt aus.",
+  "@profileCityRequired": {
+    "description": "Error when no city is selected."
+  },
+  "profileCityInvalid": "Bitte wähle eine unterstützte deutsche Stadt.",
+  "@profileCityInvalid": {
+    "description": "Error for an unsupported city."
+  },
+  "profileBioLabel": "Über mich",
+  "@profileBioLabel": {
+    "description": "Label for the bio field."
+  },
+  "profileBioHint": "Erzähl kurz etwas über dich.",
+  "@profileBioHint": {
+    "description": "Hint for the bio field."
+  },
+  "profileBioTooLong": "Die Beschreibung darf höchstens 500 Zeichen enthalten.",
+  "@profileBioTooLong": {
+    "description": "Error when the bio exceeds the limit."
+  },
+  "profileSave": "Profil speichern",
+  "@profileSave": {
+    "description": "Save the profile."
+  },
+  "profileSaved": "Profil gespeichert.",
+  "@profileSaved": {
+    "description": "Success message after saving the profile."
+  },
+  "favoritesTitle": "Favoriten",
+  "@favoritesTitle": {
+    "description": "Title of the favorites screen."
+  },
+  "favoritesEmptyTitle": "Noch keine Favoriten",
+  "@favoritesEmptyTitle": {
+    "description": "Empty favorites title."
+  },
+  "favoritesEmptyBody": "Angebote, die du speicherst, erscheinen hier.",
+  "@favoritesEmptyBody": {
+    "description": "Empty favorites body."
+  },
+  "recentlyViewedTitle": "Zuletzt angesehen",
+  "@recentlyViewedTitle": {
+    "description": "Title of the recently viewed screen."
+  },
+  "recentlyViewedEmptyTitle": "Noch nichts angesehen",
+  "@recentlyViewedEmptyTitle": {
+    "description": "Empty recently viewed title."
+  },
+  "recentlyViewedEmptyBody": "Angebote, die du ansiehst, erscheinen hier.",
+  "@recentlyViewedEmptyBody": {
+    "description": "Empty recently viewed body."
+  },
+  "accountEditProfile": "Profil bearbeiten",
+  "@accountEditProfile": {
+    "description": "Account action to edit the profile."
+  },
+  "accountViewPublicProfile": "Öffentliches Profil",
+  "@accountViewPublicProfile": {
+    "description": "Account action to view the public profile."
+  },
+  "accountProfileIncomplete": "Profil vervollständigen",
+  "@accountProfileIncomplete": {
+    "description": "Subtitle when the signed-in user has no username yet."
+  },
+  "mapTitle": "Karte",
+  "@mapTitle": {
+    "description": "Title of the marketplace map screen."
+  },
+  "mapOpenTooltip": "Karte öffnen",
+  "@mapOpenTooltip": {
+    "description": "Tooltip for actions that open the map."
+  },
+  "mapUseMyLocation": "Meinen Standort verwenden",
+  "@mapUseMyLocation": {
+    "description": "Action to center the map on the viewer's transient location."
+  },
+  "mapRetryLocation": "Standort erneut versuchen",
+  "@mapRetryLocation": {
+    "description": "Action to retry the foreground location request."
+  },
+  "mapLocationPrivacy": "Dein Standort wird nur zum Zentrieren der Karte verwendet und nicht gespeichert.",
+  "@mapLocationPrivacy": {
+    "description": "Privacy explanation for viewer location."
+  },
+  "mapLocationDenied": "Standortzugriff abgelehnt. Wähle stattdessen eine Stadt.",
+  "@mapLocationDenied": {
+    "description": "Fallback when foreground location permission is denied."
+  },
+  "mapLocationDeniedForever": "Standortzugriff ist deaktiviert. Wähle eine Stadt oder ändere die Berechtigung in den Einstellungen.",
+  "@mapLocationDeniedForever": {
+    "description": "Fallback when location permission is permanently denied."
+  },
+  "mapLocationServiceDisabled": "Ortungsdienste sind ausgeschaltet. Wähle stattdessen eine Stadt.",
+  "@mapLocationServiceDisabled": {
+    "description": "Fallback when device location services are disabled."
+  },
+  "mapLocationUnavailable": "Dein Standort ist gerade nicht verfügbar. Wähle stattdessen eine Stadt.",
+  "@mapLocationUnavailable": {
+    "description": "Fallback when a foreground position cannot be obtained."
+  },
+  "mapChooseCity": "Stadt wählen",
+  "@mapChooseCity": {
+    "description": "Action to choose a manual map center city."
+  },
+  "mapCitySearchHint": "Stadt suchen",
+  "@mapCitySearchHint": {
+    "description": "Search hint in the manual city picker."
+  },
+  "mapCenterCurrent": "Aktueller Standort",
+  "@mapCenterCurrent": {
+    "description": "Label when the map uses the viewer's location."
+  },
+  "mapCenterCity": "Zentrum: {city}",
+  "@mapCenterCity": {
+    "description": "Label for a manually selected map center.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "mapRadiusLabel": "Umkreis",
+  "@mapRadiusLabel": {
+    "description": "Label for map radius controls."
+  },
+  "mapRadiusAll": "Alle",
+  "@mapRadiusAll": {
+    "description": "Radius option with no distance limit."
+  },
+  "mapFiltersTitle": "Kartenfilter",
+  "@mapFiltersTitle": {
+    "description": "Title of the shared map filter sheet."
+  },
+  "mapFiltersTooltip": "Angebote filtern",
+  "@mapFiltersTooltip": {
+    "description": "Tooltip for the map filter action."
+  },
+  "mapCategoryLabel": "Kategorie",
+  "@mapCategoryLabel": {
+    "description": "Category field in the map filter sheet."
+  },
+  "mapCategoryAll": "Alle Kategorien",
+  "@mapCategoryAll": {
+    "description": "Map filter option with no category restriction."
+  },
+  "mapConditionAll": "Alle Zustände",
+  "@mapConditionAll": {
+    "description": "Map filter option with no condition restriction."
+  },
+  "mapPriceMin": "Mindestpreis (€)",
+  "@mapPriceMin": {
+    "description": "Minimum price field in euros."
+  },
+  "mapPriceMax": "Höchstpreis (€)",
+  "@mapPriceMax": {
+    "description": "Maximum price field in euros."
+  },
+  "mapPriceInvalid": "Gib gültige Preise ein; der Mindestpreis darf nicht höher sein.",
+  "@mapPriceInvalid": {
+    "description": "Validation error for map price filters."
+  },
+  "mapListingsCount": "{count, plural, =0{Keine Angebote auf der Karte} =1{1 Angebot auf der Karte} other{{count} Angebote auf der Karte}}",
+  "@mapListingsCount": {
+    "description": "Visible listing count on the map.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapEmptyTitle": "Keine Angebote in diesem Umkreis",
+  "@mapEmptyTitle": {
+    "description": "Map empty-state title."
+  },
+  "mapEmptyBody": "Vergrößere den Umkreis, verschiebe das Zentrum oder passe die Filter an.",
+  "@mapEmptyBody": {
+    "description": "Map empty-state body."
+  },
+  "mapLoading": "Angebote in der Nähe werden geladen …",
+  "@mapLoading": {
+    "description": "Map marker loading message."
+  },
+  "mapPinSemantic": "{title}, {city}",
+  "@mapPinSemantic": {
+    "description": "Accessible label for one map pin.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "mapClusterSemantic": "{count, plural, =1{1 Angebot} other{{count} Angebote}}",
+  "@mapClusterSemantic": {
+    "description": "Accessible label for a marker cluster.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapApproximateLocation": "Ungefährer Standort zum Schutz privater Verkäufer",
+  "@mapApproximateLocation": {
+    "description": "Privacy label for a city-jittered listing pin."
+  },
+  "mapPreciseStoreLocation": "Genauer Standort eines verifizierten Geschäfts",
+  "@mapPreciseStoreLocation": {
+    "description": "Label for a verified opted-in business pin."
+  },
+  "mapDirections": "Route berechnen",
+  "@mapDirections": {
+    "description": "Action to open external directions for a verified store."
+  },
+  "mapDirectionsFailed": "Die Route konnte nicht geöffnet werden.",
+  "@mapDirectionsFailed": {
+    "description": "Error when external directions cannot be opened."
+  },
+  "mapOpenListing": "Angebot öffnen",
+  "@mapOpenListing": {
+    "description": "Action from a map preview to the existing listing detail."
+  },
+  "moderationLoadFailed": "Moderation konnte nicht geladen werden.",
+  "@moderationLoadFailed": {
+    "description": "Error when the moderation overview fails to load."
+  },
+  "moderationAdminRequired": "Administratorzugriff erforderlich.",
+  "@moderationAdminRequired": {
+    "description": "Shown when a non-admin user reaches the moderation screen."
+  },
+  "moderationTabOverview": "Übersicht",
+  "@moderationTabOverview": {
+    "description": "Tab label for the admin overview."
+  },
+  "moderationTabListings": "Angebote",
+  "@moderationTabListings": {
+    "description": "Tab label for the listings moderation queue."
+  },
+  "moderationTabVerification": "Verkäuferprüfung",
+  "@moderationTabVerification": {
+    "description": "Tab label for the seller verification queue."
+  },
+  "moderationTabReports": "Meldungen",
+  "@moderationTabReports": {
+    "description": "Tab label for the reports queue."
+  },
+  "moderationOverviewPendingListings": "Offene Angebote",
+  "@moderationOverviewPendingListings": {
+    "description": "Overview card title for pending listings count."
+  },
+  "moderationOverviewPendingDocuments": "Offene Verkäuferdokumente",
+  "@moderationOverviewPendingDocuments": {
+    "description": "Overview card title for pending seller documents count."
+  },
+  "moderationOverviewOpenReports": "Offene Meldungen",
+  "@moderationOverviewOpenReports": {
+    "description": "Overview card title for open reports count."
+  },
+  "moderationListingsLoadFailed": "Angebote konnten nicht geladen werden.",
+  "@moderationListingsLoadFailed": {
+    "description": "Error when the listings queue fails to load."
+  },
+  "moderationListingsEmpty": "Keine offenen Angebote.",
+  "@moderationListingsEmpty": {
+    "description": "Empty state for the listings moderation queue."
+  },
+  "moderationDocumentsLoadFailed": "Verkäuferdokumente konnten nicht geladen werden.",
+  "@moderationDocumentsLoadFailed": {
+    "description": "Error when the seller verification queue fails to load."
+  },
+  "moderationDocumentsEmpty": "Keine offenen Verkäuferdokumente.",
+  "@moderationDocumentsEmpty": {
+    "description": "Empty state for the seller verification queue."
+  },
+  "moderationOpenDocument": "Dokument öffnen",
+  "@moderationOpenDocument": {
+    "description": "Action to open a seller document."
+  },
+  "moderationDocumentKindMedicalProfessionalRegistration": "Approbation / Kammernachweis",
+  "@moderationDocumentKindMedicalProfessionalRegistration": {
+    "description": "Label for a doctor's approved professional verification document."
+  },
+  "moderationReportSeller": "Verkäufer: {shopName}",
+  "@moderationReportSeller": {
+    "description": "Seller label in a report card.",
+    "placeholders": {
+      "shopName": {
+        "type": "String"
+      }
+    }
+  },
+  "moderationReportDismiss": "Verwerfen",
+  "@moderationReportDismiss": {
+    "description": "Action to dismiss a report without action."
+  },
+  "moderationReportBlock": "Angebot sperren",
+  "@moderationReportBlock": {
+    "description": "Action to block a reported listing."
+  },
+  "moderationBlockConfirmTitle": "Dieses Angebot sperren?",
+  "@moderationBlockConfirmTitle": {
+    "description": "Title of the block-listing confirmation dialog."
+  },
+  "moderationBlockConfirmBody": "Dies sperrt {title} und löst diese Meldung.",
+  "@moderationBlockConfirmBody": {
+    "description": "Body of the block-listing confirmation dialog.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "moderationBlockConfirmAction": "Sperren",
+  "@moderationBlockConfirmAction": {
+    "description": "Confirm action in the block-listing dialog."
+  },
+  "moderationRejectionReasonTitle": "Ablehnungsgrund",
+  "@moderationRejectionReasonTitle": {
+    "description": "Title of the rejection reason dialog."
+  },
+  "moderationReportFallbackTarget": "das gemeldete Angebot",
+  "@moderationReportFallbackTarget": {
+    "description": "Fallback title when a reported listing title is unavailable."
+  },
+  "moderationDocumentSaved": "Dokumententscheidung gespeichert.",
+  "@moderationDocumentSaved": {
+    "description": "Confirmation after a document moderation decision is saved."
+  },
+  "moderationDocumentFailed": "Entscheidung fehlgeschlagen.",
+  "@moderationDocumentFailed": {
+    "description": "Error when a document moderation decision fails."
+  },
+  "moderationReportResolved": "Meldung bearbeitet.",
+  "@moderationReportResolved": {
+    "description": "Confirmation after a report is resolved."
+  },
+  "moderationReportActionFailed": "Aktion fehlgeschlagen.",
+  "@moderationReportActionFailed": {
+    "description": "Error when a report action fails."
+  },
+  "moderationReportTargetUnavailable": "Gemeldetes Ziel nicht verfügbar",
+  "@moderationReportTargetUnavailable": {
+    "description": "Fallback when a report target has no title."
+  },
+  "moderationReportsLoadFailed": "Meldungen konnten nicht geladen werden.",
+  "@moderationReportsLoadFailed": {
+    "description": "Error when the reports queue fails to load."
+  },
+  "moderationDocumentOpenFailed": "Das Dokument konnte nicht geöffnet werden.",
+  "@moderationDocumentOpenFailed": {
+    "description": "Error when a signed document URL cannot be opened."
+  },
+  "moderationReportsEmpty": "Keine offenen Meldungen.",
+  "@moderationReportsEmpty": {
+    "description": "Empty state for the reports queue."
+  },
+  "sellCompareAtPriceLabel": "Originalpreis in Euro (optional)",
+  "@sellCompareAtPriceLabel": {
+    "description": "Label for the optional compare-at price field."
+  },
+  "sellCompareAtPriceHint": "Durchgestrichener Preis neben deinem Preis",
+  "@sellCompareAtPriceHint": {
+    "description": "Hint for the optional compare-at price field."
+  },
+  "sellValidationCompareAtPrice": "Der Originalpreis muss höher als dein Preis sein.",
+  "@sellValidationCompareAtPrice": {
+    "description": "Validation error when compare-at price is not greater than price."
+  },
+  "mapOsmAttribution": "© OpenStreetMap-Mitwirkende",
+  "@mapOsmAttribution": {
+    "description": "Visible OpenStreetMap tile attribution."
+  },
+  "businessHubTitle": "Mein Unternehmen",
+  "@businessHubTitle": {
+    "description": "Title of the owner hub for directory businesses and the Account entry."
+  },
+  "businessAccountEntrySubtitle": "Restaurant, Café, Imbiss oder Arztpraxis eintragen",
+  "@businessAccountEntrySubtitle": {
+    "description": "Subtitle of the Account entry that opens the owner hub."
+  },
+  "businessStartTitle": "Unternehmen eintragen",
+  "@businessStartTitle": {
+    "description": "Title of the card that starts a directory listing."
+  },
+  "businessStartBody": "Wähle zuerst die Art deines Eintrags. Danach siehst du genau, welche Nachweise wir dafür brauchen.",
+  "@businessStartBody": {
+    "description": "Explains that the type decides the required documents."
+  },
+  "businessTypeLabel": "Art des Eintrags",
+  "@businessTypeLabel": {
+    "description": "Label of the directory type choice."
+  },
+  "businessNameLabel": "Name des Unternehmens",
+  "@businessNameLabel": {
+    "description": "Label of the business name field."
+  },
+  "businessStartAction": "Weiter zu den Nachweisen",
+  "@businessStartAction": {
+    "description": "Button that creates the business and opens the documents screen."
+  },
+  "businessPrivateSellerTitle": "Privates Verkaufskonto",
+  "@businessPrivateSellerTitle": {
+    "description": "Title shown to private sellers, who cannot join the directory."
+  },
+  "businessPrivateSellerBody": "Dein Konto verkauft als Privatperson. Einträge im Verzeichnis sind nur mit einem Geschäftskonto möglich. Bitte wende dich an den Support.",
+  "@businessPrivateSellerBody": {
+    "description": "Explains why private sellers cannot join the directory."
+  },
+  "businessStatusVerified": "Verifiziert",
+  "@businessStatusVerified": {
+    "description": "Owner hub status: documents approved and verified."
+  },
+  "businessStatusInReview": "In Prüfung",
+  "@businessStatusInReview": {
+    "description": "Owner hub status: all required documents uploaded, waiting for review."
+  },
+  "businessStatusDocumentsMissing": "Nachweise fehlen",
+  "@businessStatusDocumentsMissing": {
+    "description": "Owner hub status: at least one required document is missing or rejected."
+  },
+  "businessDocumentsTile": "Nachweise",
+  "@businessDocumentsTile": {
+    "description": "Title of the verification documents screen and hub tile."
+  },
+  "businessDocumentsProgress": "{approved} von {total} freigegeben",
+  "@businessDocumentsProgress": {
+    "description": "Number of approved required documents.",
+    "placeholders": {
+      "approved": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "businessProfileTile": "Profil",
+  "@businessProfileTile": {
+    "description": "Title of the directory profile editor and hub tile."
+  },
+  "businessProfileMissing": "Noch nicht angelegt",
+  "@businessProfileMissing": {
+    "description": "Hub subtitle when no directory profile exists yet."
+  },
+  "businessProfileDraft": "Entwurf – nicht öffentlich",
+  "@businessProfileDraft": {
+    "description": "Hub subtitle for an unpublished profile."
+  },
+  "businessProfilePublished": "Veröffentlicht",
+  "@businessProfilePublished": {
+    "description": "Hub subtitle for a published profile."
+  },
+  "businessHoursTile": "Öffnungszeiten",
+  "@businessHoursTile": {
+    "description": "Title of the opening hours editor and hub tile."
+  },
+  "businessHoursSummary": "{count} Zeitfenster",
+  "@businessHoursSummary": {
+    "description": "Number of weekly opening intervals.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "businessMenuTile": "Speisekarte",
+  "@businessMenuTile": {
+    "description": "Title of the menu editor and hub tile."
+  },
+  "businessMenuSummary": "{sections} Bereiche · {items} Gerichte",
+  "@businessMenuSummary": {
+    "description": "Menu size summary.",
+    "placeholders": {
+      "sections": {
+        "type": "int"
+      },
+      "items": {
+        "type": "int"
+      }
+    }
+  },
+  "businessNeedsProfileFirst": "Lege zuerst dein Profil an.",
+  "@businessNeedsProfileFirst": {
+    "description": "Shown on hub tiles that need an existing profile."
+  },
+  "businessPublishTitle": "Im Verzeichnis anzeigen",
+  "@businessPublishTitle": {
+    "description": "Label of the publish switch."
+  },
+  "businessPublishHintUnverified": "Veröffentlichen ist möglich, sobald deine Nachweise freigegeben sind.",
+  "@businessPublishHintUnverified": {
+    "description": "Why the publish switch is disabled before verification."
+  },
+  "businessPublishOn": "Dein Eintrag ist öffentlich sichtbar.",
+  "@businessPublishOn": {
+    "description": "Publish switch helper when published."
+  },
+  "businessPublishOff": "Dein Eintrag ist nur für dich sichtbar.",
+  "@businessPublishOff": {
+    "description": "Publish switch helper when unpublished."
+  },
+  "businessDraftNote": "Profil, Öffnungszeiten und Speisekarte kannst du schon als Entwurf vorbereiten.",
+  "@businessDraftNote": {
+    "description": "Hub note that editors work as drafts before verification."
+  },
+  "directoryTypeRestaurant": "Restaurant",
+  "@directoryTypeRestaurant": {
+    "description": "Directory type label."
+  },
+  "directoryTypeCafe": "Café",
+  "@directoryTypeCafe": {
+    "description": "Directory type label."
+  },
+  "directoryTypeFastFood": "Imbiss",
+  "@directoryTypeFastFood": {
+    "description": "Directory type label for fast food (the \"Imbiss\" chip in E3)."
+  },
+  "directoryTypeDoctor": "Arztpraxis",
+  "@directoryTypeDoctor": {
+    "description": "Directory type label."
+  },
+  "businessDocumentsIntro": "Für einen Eintrag als {type} brauchen wir diese Nachweise. Nur das Zêrîn-Team sieht deine Dokumente.",
+  "@businessDocumentsIntro": {
+    "description": "Intro of the documents screen. {type} is a directory type label.",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "businessDocumentsFormats": "Foto oder PDF, höchstens 15 MB.",
+  "@businessDocumentsFormats": {
+    "description": "Accepted document formats."
+  },
+  "businessTypeLockedHint": "Die Art kannst du jetzt nur noch im Profil ändern.",
+  "@businessTypeLockedHint": {
+    "description": "Shown when the type is fixed by an existing profile."
+  },
+  "documentKindIdentity": "Personalausweis oder Reisepass",
+  "@documentKindIdentity": {
+    "description": "Seller document kind: identity."
+  },
+  "documentKindIdentityHint": "Gut lesbar, alle Ecken sichtbar.",
+  "@documentKindIdentityHint": {
+    "description": "What a good identity upload looks like."
+  },
+  "documentKindBusinessRegistration": "Gewerbeanmeldung oder Handelsregisterauszug",
+  "@documentKindBusinessRegistration": {
+    "description": "Seller document kind: business registration."
+  },
+  "documentKindBusinessRegistrationHint": "Auf den Namen deines Unternehmens.",
+  "@documentKindBusinessRegistrationHint": {
+    "description": "What a good business registration upload looks like."
+  },
+  "documentKindMedicalHint": "Approbationsurkunde oder Nachweis der Ärztekammer.",
+  "@documentKindMedicalHint": {
+    "description": "What a good medical registration upload looks like."
+  },
+  "documentStatusMissing": "Fehlt",
+  "@documentStatusMissing": {
+    "description": "Document status: not uploaded yet."
+  },
+  "documentStatusPending": "In Prüfung",
+  "@documentStatusPending": {
+    "description": "Document status: waiting for admin review."
+  },
+  "documentStatusApproved": "Freigegeben",
+  "@documentStatusApproved": {
+    "description": "Document status: approved."
+  },
+  "documentStatusRejected": "Abgelehnt",
+  "@documentStatusRejected": {
+    "description": "Document status: rejected."
+  },
+  "documentRejectionNote": "Hinweis des Teams: {note}",
+  "@documentRejectionNote": {
+    "description": "Admin rejection note shown to the owner.",
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "documentUploadAction": "Hochladen",
+  "@documentUploadAction": {
+    "description": "Upload a missing document."
+  },
+  "documentReuploadAction": "Neu hochladen",
+  "@documentReuploadAction": {
+    "description": "Upload a replacement after rejection."
+  },
+  "documentWithdrawAction": "Zurückziehen",
+  "@documentWithdrawAction": {
+    "description": "Withdraw a pending document."
+  },
+  "documentSourceCamera": "Foto aufnehmen",
+  "@documentSourceCamera": {
+    "description": "Upload source: camera."
+  },
+  "documentSourceGallery": "Foto aus der Galerie",
+  "@documentSourceGallery": {
+    "description": "Upload source: photo library."
+  },
+  "documentSourcePdf": "PDF auswählen",
+  "@documentSourcePdf": {
+    "description": "Upload source: PDF file."
+  },
+  "documentUploaded": "Hochgeladen. Wir prüfen den Nachweis.",
+  "@documentUploaded": {
+    "description": "Snackbar after a successful upload."
+  },
+  "documentWithdrawn": "Nachweis zurückgezogen.",
+  "@documentWithdrawn": {
+    "description": "Snackbar after withdrawing a document."
+  },
+  "documentUploadedAt": "Hochgeladen am {date}",
+  "@documentUploadedAt": {
+    "description": "Upload date of a document.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "businessErrorName": "Der Name muss 2 bis 100 Zeichen lang sein.",
+  "@businessErrorName": {
+    "description": "Business name validation error."
+  },
+  "businessErrorCity": "Bitte wähle eine Stadt aus der Liste.",
+  "@businessErrorCity": {
+    "description": "City validation error."
+  },
+  "businessErrorDocumentPending": "Für diesen Nachweis wartet schon ein Dokument auf die Prüfung.",
+  "@businessErrorDocumentPending": {
+    "description": "Error when a pending document of the same kind exists."
+  },
+  "businessErrorFileTooLarge": "Die Datei ist größer als 15 MB.",
+  "@businessErrorFileTooLarge": {
+    "description": "Error for oversized uploads."
+  },
+  "businessErrorInvalid": "Bitte prüfe deine Angaben.",
+  "@businessErrorInvalid": {
+    "description": "Generic validation error from the server."
+  },
+  "businessCoverLabel": "Titelbild",
+  "@businessCoverLabel": {
+    "description": "Label of the cover image section."
+  },
+  "businessCoverAction": "Titelbild wählen",
+  "@businessCoverAction": {
+    "description": "Button that picks a cover image."
+  },
+  "businessDescriptionLabel": "Beschreibung",
+  "@businessDescriptionLabel": {
+    "description": "Label of the profile description field."
+  },
+  "businessDescriptionHelper": "20 bis 3000 Zeichen",
+  "@businessDescriptionHelper": {
+    "description": "Helper of the description field."
+  },
+  "businessPhoneLabel": "Telefon",
+  "@businessPhoneLabel": {
+    "description": "Label of the phone field."
+  },
+  "businessWebsiteLabel": "Website (optional)",
+  "@businessWebsiteLabel": {
+    "description": "Label of the website field."
+  },
+  "businessWebsiteHelper": "Beginnt mit https://",
+  "@businessWebsiteHelper": {
+    "description": "Helper of the website field."
+  },
+  "businessLanguagesLabel": "Gesprochene Sprachen",
+  "@businessLanguagesLabel": {
+    "description": "Label of the spoken languages choice."
+  },
+  "businessCuisinesLabel": "Küche",
+  "@businessCuisinesLabel": {
+    "description": "Label of the cuisines choice."
+  },
+  "businessPriceLevelLabel": "Preisniveau",
+  "@businessPriceLevelLabel": {
+    "description": "Label of the price level choice."
+  },
+  "businessDietLabel": "Ernährung",
+  "@businessDietLabel": {
+    "description": "Label of the diet options."
+  },
+  "businessHalal": "Halal",
+  "@businessHalal": {
+    "description": "Diet option: halal."
+  },
+  "businessVegetarian": "Vegetarische Gerichte",
+  "@businessVegetarian": {
+    "description": "Diet option: vegetarian dishes."
+  },
+  "businessVegan": "Vegane Gerichte",
+  "@businessVegan": {
+    "description": "Diet option: vegan dishes."
+  },
+  "businessSpecialtyLabel": "Fachrichtung",
+  "@businessSpecialtyLabel": {
+    "description": "Label of the doctor specialty choice."
+  },
+  "businessInsuranceLabel": "Versicherung",
+  "@businessInsuranceLabel": {
+    "description": "Label of the accepted insurance choice."
+  },
+  "insuranceStatutory": "Gesetzlich",
+  "@insuranceStatutory": {
+    "description": "Accepted insurance: statutory."
+  },
+  "insurancePrivate": "Privat",
+  "@insurancePrivate": {
+    "description": "Accepted insurance: private."
+  },
+  "insuranceBoth": "Gesetzlich und privat",
+  "@insuranceBoth": {
+    "description": "Accepted insurance: both."
+  },
+  "businessSaved": "Gespeichert.",
+  "@businessSaved": {
+    "description": "Snackbar after saving an owner editor."
+  },
+  "businessDescriptionInvalid": "Die Beschreibung muss 20 bis 3000 Zeichen lang sein.",
+  "@businessDescriptionInvalid": {
+    "description": "Description validation error."
+  },
+  "businessPhoneInvalid": "Bitte gib eine Telefonnummer mit 5 bis 40 Zeichen an.",
+  "@businessPhoneInvalid": {
+    "description": "Phone validation error."
+  },
+  "businessWebsiteInvalid": "Die Website muss mit https:// beginnen.",
+  "@businessWebsiteInvalid": {
+    "description": "Website validation error."
+  },
+  "businessLanguagesRequired": "Wähle mindestens eine Sprache.",
+  "@businessLanguagesRequired": {
+    "description": "Languages validation error."
+  },
+  "businessCuisinesRequired": "Wähle mindestens eine Küche.",
+  "@businessCuisinesRequired": {
+    "description": "Cuisines validation error."
+  },
+  "businessPriceRequired": "Wähle ein Preisniveau.",
+  "@businessPriceRequired": {
+    "description": "Price level validation error."
+  },
+  "businessSpecialtyRequired": "Wähle eine Fachrichtung.",
+  "@businessSpecialtyRequired": {
+    "description": "Specialty validation error."
+  },
+  "businessInsuranceRequired": "Wähle, welche Versicherung du annimmst.",
+  "@businessInsuranceRequired": {
+    "description": "Insurance validation error."
+  },
+  "cuisineKurdish": "Kurdisch",
+  "@cuisineKurdish": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineSyrian": "Syrisch",
+  "@cuisineSyrian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineTurkish": "Türkisch",
+  "@cuisineTurkish": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineArabic": "Arabisch",
+  "@cuisineArabic": {
+    "description": "Directory cuisine label."
+  },
+  "cuisinePersian": "Persisch",
+  "@cuisinePersian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineLebanese": "Libanesisch",
+  "@cuisineLebanese": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineIraqi": "Irakisch",
+  "@cuisineIraqi": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineMiddleEastern": "Orientalisch",
+  "@cuisineMiddleEastern": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineKebab": "Kebab & Döner",
+  "@cuisineKebab": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineFalafel": "Falafel",
+  "@cuisineFalafel": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineGerman": "Deutsch",
+  "@cuisineGerman": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineItalian": "Italienisch",
+  "@cuisineItalian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineMediterranean": "Mediterran",
+  "@cuisineMediterranean": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineIndian": "Indisch",
+  "@cuisineIndian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineAsian": "Asiatisch",
+  "@cuisineAsian": {
+    "description": "Directory cuisine label."
+  },
+  "cuisineInternational": "International",
+  "@cuisineInternational": {
+    "description": "Directory cuisine label."
+  },
+  "specialtyGeneralMedicine": "Allgemeinmedizin",
+  "@specialtyGeneralMedicine": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyInternalMedicine": "Innere Medizin",
+  "@specialtyInternalMedicine": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyPediatrics": "Kinderheilkunde",
+  "@specialtyPediatrics": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyGynecology": "Frauenheilkunde",
+  "@specialtyGynecology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyDermatology": "Hautheilkunde",
+  "@specialtyDermatology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOrthopedics": "Orthopädie",
+  "@specialtyOrthopedics": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyNeurology": "Neurologie",
+  "@specialtyNeurology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyPsychiatry": "Psychiatrie",
+  "@specialtyPsychiatry": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOphthalmology": "Augenheilkunde",
+  "@specialtyOphthalmology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyEnt": "HNO",
+  "@specialtyEnt": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyDentistry": "Zahnmedizin",
+  "@specialtyDentistry": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyCardiology": "Kardiologie",
+  "@specialtyCardiology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyUrology": "Urologie",
+  "@specialtyUrology": {
+    "description": "Doctor specialty label."
+  },
+  "specialtyOther": "Andere",
+  "@specialtyOther": {
+    "description": "Doctor specialty label."
+  },
+  "businessHoursClosed": "Geschlossen",
+  "@businessHoursClosed": {
+    "description": "Weekday without opening intervals."
+  },
+  "businessHoursAdd": "Zeitfenster hinzufügen",
+  "@businessHoursAdd": {
+    "description": "Adds an opening interval to a weekday."
+  },
+  "businessHoursInterval": "{opens} – {closes}",
+  "@businessHoursInterval": {
+    "description": "An opening interval.",
+    "placeholders": {
+      "opens": {
+        "type": "String"
+      },
+      "closes": {
+        "type": "String"
+      }
+    }
+  },
+  "businessHoursOvernight": "{opens} – {closes} (nächster Tag)",
+  "@businessHoursOvernight": {
+    "description": "An opening interval that ends after midnight.",
+    "placeholders": {
+      "opens": {
+        "type": "String"
+      },
+      "closes": {
+        "type": "String"
+      }
+    }
+  },
+  "businessHoursPickOpen": "Öffnet um",
+  "@businessHoursPickOpen": {
+    "description": "Time picker title for the opening time."
+  },
+  "businessHoursPickClose": "Schließt um",
+  "@businessHoursPickClose": {
+    "description": "Time picker title for the closing time."
+  },
+  "businessHoursHint": "Schließt ihr nach Mitternacht, wähle einfach die Uhrzeit am nächsten Morgen.",
+  "@businessHoursHint": {
+    "description": "Explains overnight intervals."
+  },
+  "businessHoursSameTime": "Öffnungs- und Schließzeit dürfen nicht gleich sein.",
+  "@businessHoursSameTime": {
+    "description": "Validation error for an empty interval."
+  },
+  "businessHoursTooMany": "Höchstens 6 Zeitfenster pro Tag.",
+  "@businessHoursTooMany": {
+    "description": "Validation error for too many intervals."
+  },
+  "businessHoursRemove": "Zeitfenster entfernen",
+  "@businessHoursRemove": {
+    "description": "Semantic label of the remove-interval button."
+  },
+  "weekdayMonday": "Montag",
+  "@weekdayMonday": {
+    "description": "Weekday name."
+  },
+  "weekdayTuesday": "Dienstag",
+  "@weekdayTuesday": {
+    "description": "Weekday name."
+  },
+  "weekdayWednesday": "Mittwoch",
+  "@weekdayWednesday": {
+    "description": "Weekday name."
+  },
+  "weekdayThursday": "Donnerstag",
+  "@weekdayThursday": {
+    "description": "Weekday name."
+  },
+  "weekdayFriday": "Freitag",
+  "@weekdayFriday": {
+    "description": "Weekday name."
+  },
+  "weekdaySaturday": "Samstag",
+  "@weekdaySaturday": {
+    "description": "Weekday name."
+  },
+  "weekdaySunday": "Sonntag",
+  "@weekdaySunday": {
+    "description": "Weekday name."
+  },
+  "businessMenuEmpty": "Noch keine Bereiche. Lege zum Beispiel „Vorspeisen“ oder „Getränke“ an.",
+  "@businessMenuEmpty": {
+    "description": "Empty state of the menu editor."
+  },
+  "businessMenuAddSection": "Bereich hinzufügen",
+  "@businessMenuAddSection": {
+    "description": "Adds a menu section."
+  },
+  "businessMenuSectionName": "Name des Bereichs",
+  "@businessMenuSectionName": {
+    "description": "Menu section name field."
+  },
+  "businessMenuAddItem": "Gericht hinzufügen",
+  "@businessMenuAddItem": {
+    "description": "Adds a dish to a section."
+  },
+  "businessMenuEditItem": "Gericht bearbeiten",
+  "@businessMenuEditItem": {
+    "description": "Title of the dish form."
+  },
+  "businessMenuItemName": "Name",
+  "@businessMenuItemName": {
+    "description": "Dish name field."
+  },
+  "businessMenuItemDescription": "Beschreibung (optional)",
+  "@businessMenuItemDescription": {
+    "description": "Dish description field."
+  },
+  "businessMenuItemPrice": "Preis in €",
+  "@businessMenuItemPrice": {
+    "description": "Dish price field."
+  },
+  "businessMenuItemAvailable": "Verfügbar",
+  "@businessMenuItemAvailable": {
+    "description": "Dish availability switch."
+  },
+  "businessMenuItemUnavailable": "Nicht verfügbar",
+  "@businessMenuItemUnavailable": {
+    "description": "Badge of an unavailable dish."
+  },
+  "businessMenuMoveUp": "Nach oben",
+  "@businessMenuMoveUp": {
+    "description": "Reorder action."
+  },
+  "businessMenuMoveDown": "Nach unten",
+  "@businessMenuMoveDown": {
+    "description": "Reorder action."
+  },
+  "businessMenuPriceInvalid": "Bitte gib einen gültigen Preis an.",
+  "@businessMenuPriceInvalid": {
+    "description": "Dish price validation error."
+  },
+  "businessMenuNameRequired": "Bitte gib einen Namen an.",
+  "@businessMenuNameRequired": {
+    "description": "Name validation error."
+  },
+  "businessMenuDeleteSection": "Bereich „{name}“ mit allen Gerichten löschen?",
+  "@businessMenuDeleteSection": {
+    "description": "Confirmation before deleting a menu section.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "menuFlagVegetarian": "Vegetarisch",
+  "@menuFlagVegetarian": {
+    "description": "Dish flag."
+  },
+  "menuFlagVegan": "Vegan",
+  "@menuFlagVegan": {
+    "description": "Dish flag."
   }
 }

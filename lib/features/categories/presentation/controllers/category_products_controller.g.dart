@@ -440,7 +440,7 @@ class _CategoryProductsFilterProviderElement
       (origin as CategoryProductsFilterProvider).categoryId;
 }
 
-String _$categoryProductsHash() => r'6cb9fb330ede24c9c32540291e627ffa35c1d78f';
+String _$categoryProductsHash() => r'b80548ef45faf25dd9a23cf1091b421f2f1b49cc';
 
 abstract class _$CategoryProducts
     extends BuildlessAutoDisposeAsyncNotifier<List<HomeProduct>> {

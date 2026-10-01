@@ -1,0 +1,81 @@
+BEGIN
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+DO
+INSERT 0 5
+INSERT 0 4
+INSERT 0 6
+INSERT 0 2
+UPDATE 3
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+UPDATE 1
+UPDATE 1
+RESET
+DO
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+UPDATE 1
+RESET
+DO
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+                                                                                                                                                                                                                                                                             owner_upsert_directory_profile                                                                                                                                                                                                                                                                              
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"type": "cafe", "phone": "030 800002", "website": null, "cuisines": ["international"], "has_halal": false, "insurance": null, "languages": ["german"], "seller_id": "e8200000-0000-0000-0000-000000000002", "specialty": null, "created_at": "2026-09-27T21:53:33.101115+00:00", "updated_at": "2026-09-27T21:53:33.101115+00:00", "description": "The doctor fixture now claims to be a cafe for this test.", "price_level": 1, "is_published": false, "rating_count": 0, "rating_average": 0, "cover_image_path": null, "has_vegan_options": false, "has_vegetarian_options": false}
+(1 row)
+
+RESET
+DO
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+                                                                                                                                                                                                                                                                            owner_upsert_directory_profile                                                                                                                                                                                                                                                                             
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"type": "fast_food", "phone": "030 800003", "website": null, "cuisines": ["kurdish"], "has_halal": false, "insurance": null, "languages": ["german"], "seller_id": "e8200000-0000-0000-0000-000000000003", "specialty": null, "created_at": "2026-09-27T21:53:33.101115+00:00", "updated_at": "2026-09-27T21:53:33.101115+00:00", "description": "A restaurant fixture for the precise-location gaps test.", "price_level": 2, "is_published": false, "rating_count": 0, "rating_average": 0, "cover_image_path": null, "has_vegan_options": false, "has_vegetarian_options": false}
+(1 row)
+
+RESET
+DO
+SET
+ act_as 
+--------
+ 
+(1 row)
+
+                                                                                                                                                                                                                                                                           owner_upsert_directory_profile                                                                                                                                                                                                                                                                           
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"type": "doctor", "phone": "030 800003", "website": null, "cuisines": [], "has_halal": false, "insurance": "both", "languages": ["german"], "seller_id": "e8200000-0000-0000-0000-000000000003", "specialty": "other", "created_at": "2026-09-27T21:53:33.101115+00:00", "updated_at": "2026-09-27T21:53:33.101115+00:00", "description": "A restaurant fixture that becomes a doctor for this test.", "price_level": null, "is_published": false, "rating_count": 0, "rating_average": 0, "cover_image_path": null, "has_vegan_options": false, "has_vegetarian_options": false}
+(1 row)
+
+RESET
+DO
+ROLLBACK

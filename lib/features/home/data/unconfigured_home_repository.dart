@@ -46,6 +46,23 @@ class UnconfiguredHomeRepository implements HomeRepository {
   );
 
   @override
+  Future<List<HomeProduct>> fetchFavoriteProducts() =>
+      Future<List<HomeProduct>>.error(
+        const AppException(AppFailureCode.backendNotConfigured),
+      );
+
+  @override
+  Future<List<HomeProduct>> fetchRecentlyViewedProducts() =>
+      Future<List<HomeProduct>>.error(
+        const AppException(AppFailureCode.backendNotConfigured),
+      );
+
+  @override
+  Future<void> recordProductView(String productId) => Future<void>.error(
+    const AppException(AppFailureCode.backendNotConfigured),
+  );
+
+  @override
   Future<void> setFavorite({
     required String productId,
     required bool favorite,

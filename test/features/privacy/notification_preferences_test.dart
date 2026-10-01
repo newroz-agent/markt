@@ -80,8 +80,10 @@ void main() {
       // Defaults are mostly true, so the on-path above would pass even if a
       // field were hard-coded. Flipping each one off closes that gap.
       for (final channel in NotificationChannel.values) {
-        final off = const NotificationPreferences()
-            .withChannel(channel, enabled: false);
+        final off = const NotificationPreferences().withChannel(
+          channel,
+          enabled: false,
+        );
 
         final restored = NotificationPreferences.fromJson(off.toJson());
 
