@@ -58,19 +58,24 @@ class SellSubmissionController extends _$SellSubmissionController {
   Future<MyListing?> submit(SellListingDraft draft) async {
     if (state.isLoading) return null;
     state = const AsyncLoading();
+    final refreshLazyPrivateIdentity =
+        draft.identity.isPerson && draft.identity.sellerId == null;
     try {
       final listing = await ref
           .read(sellRepositoryProvider)
           .submitListing(draft);
       state = AsyncData(listing);
-      if (draft.identity.isPerson && draft.identity.sellerId == null) {
-        ref.read(identityCatalogRevisionProvider.notifier).bump();
-      }
       ref.invalidate(myListingsProvider);
       return listing;
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
       return null;
+    } finally {
+      // Preparation commits before photo upload/submission. Even on failure it
+      // may have lazily created the private seller, so always refresh catalog.
+      if (refreshLazyPrivateIdentity) {
+        ref.read(identityCatalogRevisionProvider.notifier).bump();
+      }
     }
   }
 

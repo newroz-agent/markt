@@ -156,6 +156,7 @@ Widget _app(
   _FakeSellRepository repository, {
   IdentityCatalog? catalog,
   String? activeSelection,
+  Locale locale = const Locale('de'),
 }) {
   final identities = catalog ?? IdentityCatalog(<MarketplaceIdentity>[_person]);
   return ProviderScope(
@@ -173,7 +174,7 @@ Widget _app(
       activeCategoriesProvider.overrideWith((ref) async => const [_category]),
     ],
     child: MaterialApp(
-      locale: const Locale('de'),
+      locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: AppTheme.light,
@@ -229,6 +230,27 @@ void main() {
       expect(find.byKey(const ValueKey('sell-catalog-step')), findsOneWidget);
     },
   );
+
+  testWidgets('Arabic Sell identity choice is right-to-left', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      _app(
+        _FakeSellRepository(),
+        catalog: IdentityCatalog(<MarketplaceIdentity>[_person, _business]),
+        activeSelection: _business.selectionKey,
+        locale: const Locale('ar'),
+      ),
+    );
+    await _settle(tester);
+
+    final context = tester.element(find.byType(SellFoundationScreen));
+    expect(Directionality.of(context), TextDirection.rtl);
+    expect(find.text('اختر ملف البيع'), findsOneWidget);
+    expect(find.text('كفرد'), findsOneWidget);
+    expect(find.text('كنشاط تجاري'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('switching a confirmed identity resets the entire draft', (
     tester,

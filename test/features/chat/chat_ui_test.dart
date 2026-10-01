@@ -191,6 +191,7 @@ Future<GoRouter> _pump(
   _ChatRepository repository, {
   Widget home = const ChatConversationScreen(chatId: 'real-chat-id'),
   _AuthRepository? auth,
+  Locale locale = const Locale('en'),
 }) async {
   final authRepository = auth ?? _AuthRepository();
   SharedPreferences.setMockInitialValues({});
@@ -230,7 +231,7 @@ Future<GoRouter> _pump(
       ],
       child: MaterialApp.router(
         routerConfig: router,
-        locale: const Locale('en'),
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: AppTheme.light,
@@ -533,6 +534,29 @@ void main() {
     expect(find.text('2'), findsOneWidget);
     expect(find.text('3'), findsOneWidget);
     expect(find.text('4'), findsOneWidget);
+  });
+
+  testWidgets('Arabic inbox identity labels are right-to-left', (tester) async {
+    final repository = _ChatRepository()
+      ..inbox = <ChatConversation>[
+        _conversation(
+          viewerRole: ChatViewerRole.seller,
+          viewerIdentityType: ChatIdentityType.business,
+          viewerIdentityName: 'Owner Business',
+        ),
+      ];
+    await _pump(
+      tester,
+      repository,
+      home: const ChatInboxScreen(),
+      auth: _AuthRepository(_seller),
+      locale: const Locale('ar'),
+    );
+
+    final context = tester.element(find.byType(ChatInboxScreen));
+    expect(Directionality.of(context), TextDirection.rtl);
+    expect(find.text('بصفتك Owner Business'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('conversation header reuses the exact inbox identity label', (

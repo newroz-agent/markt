@@ -202,7 +202,7 @@ final myListingsProvider = AutoDisposeFutureProvider<List<MyListing>>.internal(
 // ignore: unused_element
 typedef MyListingsRef = AutoDisposeFutureProviderRef<List<MyListing>>;
 String _$sellSubmissionControllerHash() =>
-    r'ba8f74ab3b7091cae4c097b7f8e0e20fec1a99e6';
+    r'e65e15f3c6c15c6cb174c834494372cb62cbf437';
 
 /// See also [SellSubmissionController].
 @ProviderFor(SellSubmissionController)

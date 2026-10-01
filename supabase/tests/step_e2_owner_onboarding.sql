@@ -51,19 +51,19 @@ do $$ begin
   assert public.directory_required_document_kinds(null)
     = array['identity','business_registration']::public.seller_document_kind[],
     'a marketplace business without directory type proves identity + business registration';
-  assert not has_function_privilege('anon','public.get_my_directory_onboarding()','execute');
-  assert not has_function_privilege('anon','public.owner_start_directory(public.directory_business_type,text,text)','execute');
+  assert not has_function_privilege('anon','public.get_my_directory_onboarding(uuid)','execute');
+  assert not has_function_privilege('anon','public.owner_start_directory(uuid,public.directory_business_type,text,text)','execute');
 end $$;
 
 set local role authenticated;
 
 -- A user without a seller starts a doctor entry: pending business seller, doctor documents.
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000001');
-select pg_temp.expect_error($$select public.owner_start_directory('doctor','X','Berlin')$$,'22023');
-select pg_temp.expect_error($$select public.owner_start_directory('doctor','Praxis Dr. Test','Atlantis')$$,'22023');
-select pg_temp.expect_error($$select public.owner_start_directory(null,'Praxis Dr. Test','Berlin')$$,'22023');
+select pg_temp.expect_error($$select public.owner_start_directory(null::uuid,'doctor','X','Berlin')$$,'22023');
+select pg_temp.expect_error($$select public.owner_start_directory(null::uuid,'doctor','Praxis Dr. Test','Atlantis')$$,'22023');
+select pg_temp.expect_error($$select public.owner_start_directory(null::uuid,null,'Praxis Dr. Test','Berlin')$$,'22023');
 do $$
-declare onboarding jsonb := public.owner_start_directory('doctor',' Praxis Dr. Test ','Berlin');
+declare onboarding jsonb := public.owner_start_directory(null::uuid,'doctor',' Praxis Dr. Test ','Berlin');
 begin
   assert onboarding->'seller'->>'kind'='business' and onboarding->'seller'->>'status'='pending'
     and onboarding->'seller'->>'directory_type'='doctor' and onboarding->'seller'->>'shop_name'='Praxis Dr. Test',
@@ -89,7 +89,9 @@ select pg_temp.expect_error(format(
      values(%L,'medical_professional_registration',%L,'image/jpeg')$f$,
   current_setting('e2.doctor_seller'),current_setting('e2.doctor_seller')||'/medical_professional_registration/dup.jpg'),'23505');
 do $$
-declare onboarding jsonb := public.get_my_directory_onboarding();
+declare onboarding jsonb := public.get_my_directory_onboarding(
+  current_setting('e2.doctor_seller')::uuid
+);
 begin
   assert jsonb_array_length(onboarding->'documents')=2, format('owner sees both documents: %s',onboarding);
   assert not exists(select 1 from jsonb_array_elements(onboarding->'documents') d where d->>'status'<>'pending'),
@@ -105,7 +107,9 @@ select pg_temp.act_as('e2100000-0000-0000-0000-000000000001');
 do $$
 declare doc jsonb;
 begin
-  select d into doc from jsonb_array_elements(public.get_my_directory_onboarding()->'documents') d
+  select d into doc from jsonb_array_elements(public.get_my_directory_onboarding(
+    current_setting('e2.doctor_seller')::uuid
+  )->'documents') d
   where d->>'kind'='medical_professional_registration';
   assert doc->>'status'='rejected' and doc->>'admin_note'='Bitte die Approbationsurkunde vollständig scannen.',
     format('rejection note reaches the owner: %s',doc);
@@ -126,7 +130,9 @@ select public.moderate_seller_document(id,'approve') from public.seller_document
 where seller_id=current_setting('e2.doctor_seller')::uuid and kind='identity' and status='pending';
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000001');
 do $$
-declare onboarding jsonb := public.get_my_directory_onboarding();
+declare onboarding jsonb := public.get_my_directory_onboarding(
+  current_setting('e2.doctor_seller')::uuid
+);
 begin
   assert onboarding->'seller'->>'status'='approved', format('approved by documents: %s',onboarding);
   assert exists(select 1 from public.seller_status_history history
@@ -140,23 +146,29 @@ end $$;
 
 -- A doctor draft completes verification; the profile type then owns the directory type.
 select public.owner_upsert_directory_profile(
+  p_seller_id=>current_setting('e2.doctor_seller')::uuid,
   p_type=>'doctor',p_description=>'Allgemeinmedizinische Praxis mit kurdisch- und arabischsprachigem Team.',
   p_phone=>'030 1234567',p_website=>null,p_cover_image_path=>null,
   p_languages=>array['german','kurdish']::public.directory_spoken_language[],
   p_specialty=>'general_medicine',p_insurance=>'both');
 do $$
-declare onboarding jsonb := public.get_my_directory_onboarding();
+declare onboarding jsonb := public.get_my_directory_onboarding(
+  current_setting('e2.doctor_seller')::uuid
+);
 begin
   assert (onboarding->>'is_verified')::boolean, format('doctor draft + approved proof verifies: %s',onboarding);
   assert onboarding->'profile'->>'type'='doctor' and not (onboarding->'profile'->>'is_published')::boolean;
 end $$;
-select pg_temp.expect_error($$select public.owner_set_directory_type('restaurant')$$,'22023');
-select pg_temp.expect_error($$select public.owner_start_directory('restaurant','Zweites Geschäft','Berlin')$$,'22023');
+select pg_temp.expect_error(format(
+  $$select public.owner_set_directory_type(%L,'restaurant')$$,
+  current_setting('e2.doctor_seller')
+),'22023');
+select pg_temp.expect_error($$select public.owner_start_directory(null::uuid,'restaurant','Zweites Geschäft','Berlin')$$,'22023');
 
 -- A restaurant owner stays pending until BOTH required documents are approved.
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000002');
 do $$
-declare onboarding jsonb := public.owner_start_directory('restaurant','Restaurant Zagros','Berlin');
+declare onboarding jsonb := public.owner_start_directory(null::uuid,'restaurant','Restaurant Zagros','Berlin');
 begin
   assert onboarding->'required_document_kinds'='["identity","business_registration"]'::jsonb;
   perform set_config('e2.restaurant_seller',onboarding->'seller'->>'id',true);
@@ -211,29 +223,70 @@ do $$ begin
     and to_status='approved'), 'no approval history for them';
 end $$;
 
--- An existing business seller sets its type without any status change; private sellers
--- are refused by both RPCs (the private -> business upgrade is not implemented).
+-- An existing business seller sets its type without any status change.
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000006');
 do $$ begin
-  assert public.owner_set_directory_type('cafe')->'seller'->>'directory_type'='cafe';
+  assert public.owner_set_directory_type(
+    'e2200000-0000-0000-0000-000000000006','cafe'
+  )->'seller'->>'directory_type'='cafe';
   assert (select status='rejected' from public.sellers where id='e2200000-0000-0000-0000-000000000006'),
     'setting a type never changes status';
 end $$;
-select pg_temp.act_as('e2100000-0000-0000-0000-000000000003');
-select pg_temp.expect_error($$select public.owner_start_directory('cafe','E2 Private','Berlin')$$,'42501');
-select pg_temp.expect_error($$select public.owner_set_directory_type('cafe')$$,'42501');
 
--- Owners only ever see their own onboarding data.
-do $$ begin
-  assert not exists(select 1 from jsonb_array_elements(public.get_my_directory_onboarding()->'documents') d
-    where d->>'storage_path' not like 'e2200000-0000-0000-0000-000000000003/%');
+-- A private seller can add one separate business through the explicit source ID.
+-- The original private row and its documents remain attached to that private identity.
+select pg_temp.act_as('e2100000-0000-0000-0000-000000000003');
+do $$
+declare onboarding jsonb; business_id uuid;
+begin
+  onboarding := public.owner_start_directory(
+    'e2200000-0000-0000-0000-000000000003','cafe','E2 Private Business','Berlin'
+  );
+  business_id := (onboarding->'seller'->>'id')::uuid;
+  perform set_config('e2.private_business',business_id::text,true);
+  assert onboarding->'seller'->>'kind'='business'
+    and onboarding->'seller'->>'directory_type'='cafe';
+  assert (select kind='private' and status='pending' from public.sellers
+    where id='e2200000-0000-0000-0000-000000000003'),
+    'starting a business never converts the private seller';
+  assert (select count(*)=2 from public.sellers where user_id=auth.uid()),
+    'private and business identities coexist';
 end $$;
+select pg_temp.expect_error(
+  $$select public.owner_set_directory_type(
+    'e2200000-0000-0000-0000-000000000003','restaurant')$$,
+  '42501'
+);
+select pg_temp.expect_error(
+  $$select public.owner_start_directory(
+    'e2200000-0000-0000-0000-000000000003','restaurant','Second Business','Berlin')$$,
+  '22023'
+);
+do $$
+declare onboarding jsonb := public.get_my_directory_onboarding(
+  current_setting('e2.private_business')::uuid
+);
+begin
+  assert onboarding->'seller'->>'id'=current_setting('e2.private_business');
+  assert onboarding->'documents'='[]'::jsonb,
+    'explicit business onboarding never leaks the private seller documents';
+end $$;
+
+-- An explicit unknown business UUID fails closed instead of revealing whether the
+-- account has another seller.
 select pg_temp.act_as('e2100000-0000-0000-0000-000000000005');
-select pg_temp.expect_error($$select public.owner_set_directory_type('cafe')$$,'P0002');
+select pg_temp.expect_error(
+  $$select public.owner_set_directory_type(
+    'ffffffff-ffff-4fff-8fff-ffffffffffff','cafe')$$,
+  '42501'
+);
 reset role;
 
 set local role anon;
-select pg_temp.expect_error($$select public.get_my_directory_onboarding()$$,'42501');
+select pg_temp.expect_error(format(
+  $$select public.get_my_directory_onboarding(%L)$$,
+  current_setting('e2.private_business')
+),'42501');
 reset role;
 
 rollback;

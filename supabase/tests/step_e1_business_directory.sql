@@ -191,7 +191,10 @@ end $$;
 
 select set_config('request.jwt.claims','{"sub":"e1000000-0000-0000-0000-000000000002","role":"authenticated"}',true);
 select pg_temp.expect_error(
- $$select public.owner_replace_directory_menu('[{"name":"Forbidden","items":[]}]')$$,
+ $$select public.owner_replace_directory_menu(
+   'e2000000-0000-0000-0000-000000000002',
+   '[{"name":"Forbidden","items":[]}]'
+ )$$,
  '23514'
 );
 

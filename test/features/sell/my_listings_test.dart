@@ -48,43 +48,40 @@ MyListing _listing({
   imageUrls: const <String>[],
 );
 
+final _items = <MyListing>[
+  _listing(
+    identity: _privateIdentity,
+    id: 'pending-id',
+    title: 'Noch in Prüfung',
+    status: ListingStatus.pendingReview,
+  ),
+  _listing(
+    identity: _businessIdentity,
+    id: 'rejected-id',
+    title: 'Abgelehntes Angebot',
+    status: ListingStatus.rejected,
+    reason: 'Foto zeigt den Artikel nicht klar.',
+  ),
+];
+
+Widget _app(Locale locale) => ProviderScope(
+  overrides: <Override>[myListingsProvider.overrideWith((ref) async => _items)],
+  child: MaterialApp(
+    locale: locale,
+    supportedLocales: AppLocalizations.supportedLocales,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    theme: AppTheme.light,
+    home: const MyListingsScreen(),
+  ),
+);
+
 void main() {
-  testWidgets('owner sees pending and rejected states including reason', (
+  testWidgets('owner sees identity sections and moderation states', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1000, 1200));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: <Override>[
-          myListingsProvider.overrideWith(
-            (ref) async => <MyListing>[
-              _listing(
-                identity: _privateIdentity,
-                id: 'pending-id',
-                title: 'Noch in Prüfung',
-                status: ListingStatus.pendingReview,
-              ),
-              _listing(
-                identity: _businessIdentity,
-                id: 'rejected-id',
-                title: 'Abgelehntes Angebot',
-                status: ListingStatus.rejected,
-                reason: 'Foto zeigt den Artikel nicht klar.',
-              ),
-            ],
-          ),
-        ],
-        child: MaterialApp(
-          locale: const Locale('de'),
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          theme: AppTheme.light,
-          home: const MyListingsScreen(),
-        ),
-      ),
-    );
+    await tester.pumpWidget(_app(const Locale('de')));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
 
@@ -100,5 +97,22 @@ void main() {
       find.textContaining('Foto zeigt den Artikel nicht klar.'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('Arabic My Listings identity sections are right-to-left', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(_app(const Locale('ar')));
+    await tester.pumpAndSettle();
+
+    final context = tester.element(find.byType(MyListingsScreen));
+    expect(Directionality.of(context), TextDirection.rtl);
+    expect(find.text('خاص'), findsOneWidget);
+    expect(find.text('نشاط تجاري'), findsOneWidget);
+    expect(find.text('Alice Privat'), findsOneWidget);
+    expect(find.text('Alice Geschäft'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

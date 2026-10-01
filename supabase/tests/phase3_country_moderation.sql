@@ -71,16 +71,22 @@ end $$;
 set local request.jwt.claims = '{"sub":"d1000000-0000-0000-0000-000000000002","role":"authenticated"}';
 do $$
 declare
+  onboarding jsonb;
   prepared jsonb;
   seller_id uuid;
   submitted_product_id uuid;
   image_path text;
   submitted jsonb;
 begin
-  prepared := public.prepare_listing_submission(
-    'business', 'New Country Seller', 'Berlin'
+  onboarding := public.owner_start_directory(
+    null::uuid, 'restaurant', 'New Country Seller', 'Berlin'
   );
-  seller_id := (prepared ->> 'seller_id')::uuid;
+  seller_id := (onboarding -> 'seller' ->> 'id')::uuid;
+  prepared := public.prepare_listing_submission(
+    seller_id, 'business', 'New Country Seller', 'Berlin'
+  );
+  assert prepared ->> 'seller_id' = seller_id::text,
+    'Explicit preparation stays bound to the new German business';
   submitted_product_id := (prepared ->> 'product_id')::uuid;
   image_path := seller_id || '/' || submitted_product_id || '/country-test.webp';
 

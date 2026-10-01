@@ -162,7 +162,10 @@ values('e1510000-0000-0000-0000-000000000001','fast_food','A fast food owner fix
   '030 400000',array['german']::public.directory_spoken_language[],array['kebab']::public.directory_cuisine[],1,true);
 set local role authenticated;
 select set_config('request.jwt.claims','{"sub":"e1500000-0000-0000-0000-000000000003","role":"authenticated"}',true);
-select public.owner_replace_directory_menu('[{"name":"Döner","items":[{"name":"Döner Kebab","price_cents":750}]}]');
+select public.owner_replace_directory_menu(
+  'e1510000-0000-0000-0000-000000000001',
+  '[{"name":"Döner","items":[{"name":"Döner Kebab","price_cents":750}]}]'
+);
 select set_config('request.jwt.claims','{"sub":"e1500000-0000-0000-0000-000000000002","role":"authenticated"}',true);
 select public.upsert_directory_review('e1510000-0000-0000-0000-000000000001',4::smallint,'Fast food review');
 do $$
@@ -277,7 +280,10 @@ insert into public.business_directory_hours(seller_id,weekday,opens_at,closes_at
 values('e1510000-0000-0000-0000-000000000002',1,'08:00','18:00');
 set local role authenticated;
 select set_config('request.jwt.claims','{"sub":"e1500000-0000-0000-0000-000000000004","role":"authenticated"}',true);
-select public.owner_replace_directory_menu('[{"name":"Kaffee","items":[{"name":"Mokka","price_cents":300}]}]');
+select public.owner_replace_directory_menu(
+  'e1510000-0000-0000-0000-000000000002',
+  '[{"name":"Kaffee","items":[{"name":"Mokka","price_cents":300}]}]'
+);
 select set_config('request.jwt.claims',
   '{"sub":"e1500000-0000-0000-0000-000000000001","role":"authenticated","app_metadata":{"role":"admin"}}',true);
 select public.admin_set_directory_outreach_status(

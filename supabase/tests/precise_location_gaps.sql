@@ -98,6 +98,7 @@ select pg_temp.expect_error($$update public.sellers set precise_location_opt_in=
 set local role authenticated;
 select pg_temp.act_as('e8100000-0000-0000-0000-000000000002');
 select public.owner_upsert_directory_profile(
+  p_seller_id=>'e8200000-0000-0000-0000-000000000002',
   p_type=>'cafe',p_description=>'The doctor fixture now claims to be a cafe for this test.',
   p_phone=>'030 800002',p_website=>null,p_cover_image_path=>null,
   p_languages=>array['german']::public.directory_spoken_language[],
@@ -114,6 +115,7 @@ end $$;
 set local role authenticated;
 select pg_temp.act_as('e8100000-0000-0000-0000-000000000003');
 select public.owner_upsert_directory_profile(
+  p_seller_id=>'e8200000-0000-0000-0000-000000000003',
   p_type=>'fast_food',p_description=>'A restaurant fixture for the precise-location gaps test.',
   p_phone=>'030 800003',p_website=>null,p_cover_image_path=>null,
   p_languages=>array['german']::public.directory_spoken_language[],
@@ -129,6 +131,7 @@ end $$;
 set local role authenticated;
 select pg_temp.act_as('e8100000-0000-0000-0000-000000000003');
 select public.owner_upsert_directory_profile(
+  p_seller_id=>'e8200000-0000-0000-0000-000000000003',
   p_type=>'doctor',p_description=>'A restaurant fixture that becomes a doctor for this test.',
   p_phone=>'030 800003',p_website=>null,p_cover_image_path=>null,
   p_languages=>array['german']::public.directory_spoken_language[],

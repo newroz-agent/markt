@@ -1,111 +1,137 @@
 # Zêrîn — Agent Handoff
-### Paste this into the new agent. Also save it as docs/HANDOFF.md so future agents can read it.
 
-You are taking over an in-progress project from a previous agent. Before doing anything,
-read this whole file, then `docs/STATUS.md` (the single source of truth for what is
-built and verified), then the plans in `docs/plans/`. Do not trust this file over the
-live repository and database: verify.
+Read this file, then `docs/STATUS.md` (the detailed source of truth), then the relevant
+plan before doing work. Verify the live repository and database; this handoff is a guide,
+not a substitute for inspection.
 
----
+## 1. Project and current branch
 
-## 1. Project
 - **Zêrîn**: a premium classifieds marketplace and local business directory for Germany,
-  Kurdish-community focused. Flutter + Riverpod (codegen) + go_router (typed routes) +
-  Supabase (Postgres, Auth, Storage, Realtime).
-- Repo: `/Users/lawand/flutterapp`. Work happens on branch `step-e1-5-osm-import`
-  (main is still at 79dd523 and unchanged). Check `git log` for the latest commits.
-- Local Supabase: `postgresql://postgres:postgres@127.0.0.1:54322/postgres`,
-  API `http://127.0.0.1:54321`.
-- iOS simulator: iPhone 17 Pro, iOS 26.1, UDID `CFF133B6-F73A-4335-A497-5244B15D1C39`,
-  bundle id `de.zerin.zerinMarketplace`. Run with `--dart-define-from-file=dart_defines.json`.
+  focused on Kurdish communities. Flutter + Riverpod codegen + typed go_router + Supabase.
+- Repo: `/Users/lawand/flutterapp`.
+- Current feature branch: `step-e1-5-osm-import`. It now contains completed Steps E and F.
+  Check `git log` for the latest pushed commit; main has not yet received this branch.
+- Local Supabase database: `postgresql://postgres:postgres@127.0.0.1:54322/postgres`;
+  API: `http://127.0.0.1:54321`.
+- iOS evidence device: iPhone 17 Pro simulator, iOS 26.1, UDID
+  `CFF133B6-F73A-4335-A497-5244B15D1C39`, bundle id
+  `de.zerin.zerinMarketplace`. Local runs use the uncommitted `dart_defines.json`.
 
 ## 2. Standing rules (non-negotiable)
-**Environment**
-- Docker Desktop only (`docker context` = `desktop-linux`). Never start Colima, never
-  switch Docker contexts. If Docker is unreachable, stop and ask.
-- Never run `supabase db reset`. Never touch the remote project (no `db push`, no
-  `migration repair`) unless explicitly told.
 
-**Data safety**
-- Audit first: read the live schema before writing any migration or code.
-- Any command that writes data (imports, backfills, deletions, harness runs that write,
-  seeds) runs as a dry-run first, then waits for explicit approval. Approvals are per
-  run; anything beyond the approved runs needs a new approval.
+### Environment
 
-**Migrations and SQL tests**
-- New files in `supabase/migrations/`, applied via
-  `psql ... -v ON_ERROR_STOP=1 -f <file>`, and listed in the migration-ledger caveat in
-  STATUS.md (these direct-psql migrations are NOT in `schema_migrations`; the ledger
-  needs `supabase migration repair` before any remote push).
-- `ALTER TYPE ... ADD VALUE` always in its own migration.
-- Every migration has a transaction-scoped acceptance test in `supabase/tests/` that
-  creates its own fixture users in `auth.users`, asserts on fixture IDs (never on global
-  counts of whatever is in the DB), and ends in `ROLLBACK`.
+- Docker Desktop only (`docker context` must be `desktop-linux`). Never start Colima or
+  switch contexts. If Docker is unreachable, stop and ask.
+- Never run `supabase db reset`.
+- Never mutate the linked/remote Supabase project (`db push`, `migration repair`, etc.)
+  without explicit approval.
 
-**Flutter code**
-- No hardcoded UI strings: all five ARB files (de is the template; ku, en, ar, tr).
-  Arabic is RTL; Kurdish (Kurmancî, Latin script) is first-class.
-- `dart format`, small private widgets, no giant single-line widget trees, typed
-  exceptions, no empty catch blocks, explicit `rpc<T>` types.
-- Existing design tokens only (petrol/gold/ivory, Bricolage Grotesque + Figtree).
+### Data safety
 
-**Evidence and reporting**
-- Real iOS simulator screenshots + `results.json` under `docs/evidence/<step>/`, never
-  `/tmp`. Live harnesses must clean up everything they upload, pass or fail.
-- Stop at the end of each step with a closeout report: files with line numbers,
-  migration names, `flutter analyze --no-pub` and `flutter test --no-pub` results, SQL
-  suites run, screenshots, and an honest list of what is NOT done.
-- Never commit `dart_defines.json` or any secrets. Do not commit `.kiro/`, `.scratch/`,
-  `semantic-review/`.
+- Audit first.
+- Every data write/import/backfill/delete/write-capable harness run needs an isolated
+  dry-run, then explicit per-run approval.
+- Apply approved migrations to the effective local DB via direct `psql`; record the
+  noncanonical migration ledger in STATUS.
+- Migration acceptance tests create deterministic fixtures and end in `ROLLBACK`.
+
+### Flutter and evidence
+
+- All UI copy lives in all five ARBs: de template plus ku/en/ar/tr. Arabic is RTL;
+  Kurdish Kurmanji is LTR.
+- Use typed errors and explicit `rpc<T>` calls; run code generation and `dart format`.
+- Evidence belongs in `docs/evidence/<step>/`, never `/tmp`. Harnesses clean everything
+  they create, pass or fail.
+- Never commit `dart_defines.json`, `.kiro/`, `.scratch/`, or `semantic-review/`.
+- Do not push directly to main. Merge through a pull request.
 
 ## 3. Locked product decisions
-- Unified classifieds: private individuals and businesses list through one flow. No
-  cart, checkout or payments. Contact is in-app chat only.
-- Every listing starts `pending_review`; admins approve. No auto-approval.
-- Private listings: city-level location only, jittered 300–500 m. Only verified
-  businesses get a precise pin. Germany only. `postal_code` is never stored.
-- Admin hub: listings moderation, seller-document verification, reports.
-- Business directory (Step E): owners self-register and verify. A pending business
-  seller becomes approved automatically when its required documents are approved
-  (identity + business_registration, or identity + medical_professional_registration for
-  doctors). Ratings only for restaurants, cafés and fast food, never doctors; the
-  directory rating is separate from purchase ratings. Structured menus. OSM-imported
-  unclaimed entries (1123 in Berlin) show an unverified note and have no reviews, menu,
-  description or chat. Outreach emails are admin-only, with a suppression list; no
-  automated email sending.
-- Step F (decided, not built): one login, up to one private and one business seller
-  identity per user, with an identity switcher.
 
-## 4. Done
-Steps A–D, admin expansion, new categories and deals, compare-at price, E1 (directory
-schema), E1.5 (OSM import + outreach contacts), E2 (owner side, document upload,
-business onboarding, migration 000700), snackbar leak fix, E2 harness cleanup.
-Details and evidence: STATUS.md and `docs/evidence/`.
+- Unified classifieds for private and business sellers. No cart/checkout/payments.
+- Every listing starts `pending_review`; admins approve it.
+- Buyer/seller contact is in-app chat only.
+- Germany-only. Private listing points use stable 300–500 m city jitter; only eligible,
+  verified, opted-in businesses expose precise location.
+- Directory ratings are separate from purchase ratings. Doctors have no ratings/menu.
+- OSM imported places remain separate unclaimed records; outreach data is admin-only.
 
-## 5. In flight at handoff: verify first (read-only), report, then continue
-The previous agent was approved to do these; confirm each is actually done:
-1. Migration `000800` (suspension clears the public pin instead of raising; directory
-   type changes run the verification wipe) applied, and its test passes.
-2. The leftover Step B photo deleted (path in
-   `docs/evidence/step-e2/dryrun-stepb-leftover.txt`).
-3. Step B harness re-run once with its fixed cleanup, before/after listing and photo
-   counts equal; Step B output moved from `/tmp` to `docs/evidence/step-b/`.
-4. Known issue recorded in STATUS.md: deleting a listing leaves its photos in storage
-   forever (pre-launch fix, also for account deletion).
+### Step F identity contract (complete)
 
-For anything not done, report it and ask for approval before doing it (rule: dry-run
-first). Then run all SQL suites and `flutter test` and report the counts.
+- One login owns at most one private and one business seller (`UNIQUE(user_id, kind)`).
+- The person always exists in the switcher; the private seller row is created lazily on
+  the first private listing. Business is created only through explicit directory start.
+- Device active identity is remembered per auth UID and server-validated on every
+  session/start. It is presentation/default context only, never authorization.
+- Every seller operation passes an explicit seller UUID (or explicit null only for lazy
+  private listing creation) and the database verifies ownership.
+- Sell asks dual users to confirm person/business and binds the whole draft to it.
+- My Listings is one screen with private/business sections.
+- Inbox is unified. Buyer side is always person; seller side is the exact identity bound
+  to `chat.seller_id`. Unread remains account-wide.
+- Public person profile remains `/profile/:username`; business directory remains seller-ID
+  based. Edit Profile is person-only.
+- The temporary no-ID compatibility overloads have been removed by Step F3.
 
-## 6. Next step: Step F, Phase F1 only
-Read `docs/plans/zerin-step-f-account-switching.md` in full. Do Phase F1: a read-only
-audit of every place that assumes one seller per user (database functions, RLS,
-triggers, Flutter repositories/providers/screens), with file and line and the proposed
-change for each. Stop after the list. Change nothing until approved.
+## 4. Completed and verified
 
-## 7. Backlog after Step F (for context, do not start)
-E3 public directory (address-draft decision recorded in the E3 plan), Map v2
-(`docs/plans/zerin-map-v2.md`), claim flow for OSM entries, listing-photo deletion fix,
-reports ON DELETE SET NULL vs exactly-one-target conflict, production map tile provider,
-push notification delivery, Impressum for business identities, remote parity and
-migration-ledger repair, release readiness (Android signing, icons, legal texts,
-deep links).
+Steps A–D, admin expansion, categories/deals, compare-at price, E1/E1.5/E2, and all of
+Step F (F1 audit, F2a database, F2b identity/business client, F2c Sell/listings/chat/live
+evidence, F3 compatibility removal) are complete. See `docs/STATUS.md` and evidence under
+`docs/evidence/`.
+
+### Final Step F state
+
+- Applied local migrations include:
+  - `20260928000100_step_f2a_multi_identity.sql`
+  - `20260930000100_step_f3_drop_legacy_identity_overloads.sql`
+- F3 effective schema: 0 legacy no-ID overloads; all 7 UUID-first APIs remain.
+- F3 changed no rows. Effective retained data after the local F2c seed: 8 auth users,
+  10 sellers, 35 products, 4 chats, 7 messages; exact hashes are in
+  `docs/evidence/step-f/f3-closeout.md`.
+- F3 SQL: `step_f3.sql` plus every other non-legacy suite passed once each (14/14), all
+  through rollback.
+- Flutter: `flutter analyze --no-pub` clean; `flutter test --no-pub` 330/330.
+- Part 1a fixed a real lifecycle bug: nullable-person submission refreshed the identity
+  catalog only on success. It now bumps revision in `finally`, so a seller created by
+  prepare is discovered even when upload/submit fails; retry uses that UUID.
+- Part 1b adds Arabic RTL widget coverage to Sell identity choice, My Listings sections,
+  and inbox identity labels.
+- Real Step F iOS evidence: 4/4 screenshots and 1/1 test under
+  `docs/evidence/step-f/ios/`.
+- Local-only retained F2c accounts are seeded by
+  `supabase/snippets/step_f2c_local_seed.sql`: dual owner, buyer counterpart, and other
+  seller owner. They intentionally remain in the effective local DB like E2 fixtures.
+
+### Ledger caveat
+
+The effective local schema was advanced with direct `psql`, but
+`supabase_migrations.schema_migrations` still has 17 rows and max version
+`20260907000700`. Both `20260928000100` and `20260930000100` (plus earlier direct-psql
+migrations listed in STATUS) are absent from the ledger. Before any remote database push,
+perform a separately approved `supabase migration repair` plan; do not guess or push now.
+
+## 5. No work is currently in flight
+
+Step F is complete. Do not reopen it unless a regression is reported. Known pre-launch
+issues remain recorded in STATUS, including listing-photo deletion ordering, account
+export/deletion across every seller identity, and report-target FK/check incompatibility.
+
+## 6. Next steps — do these in order
+
+1. **Open and merge a pull request from `step-e1-5-osm-import` into `main`.** Review the
+   branch diff and CI in the PR; do not push directly to main. This is a code merge only,
+   not permission for remote Supabase mutation.
+2. **Only after the PR is merged, begin E3.** Read the E3 plan and audit the merged main
+   state before implementation. E3 is the public directory UI slice and includes the
+   address-draft decision already recorded in its plan.
+
+Do not start E3 before the pull request is merged.
+
+## 7. Later backlog (after E3, context only)
+
+Map v2 (`docs/plans/zerin-map-v2.md`), OSM claim flow, listing-photo deletion fix,
+account-level export/deletion processor across all identities, reports `ON DELETE SET NULL`
+versus exactly-one-target conflict, production map tile provider, push delivery,
+business Impressum, remote parity/ledger repair, and release readiness (signing, icons,
+legal texts, deep links).

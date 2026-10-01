@@ -49,7 +49,7 @@ declare
   submitted jsonb;
 begin
   prepared := public.prepare_listing_submission(
-    'private', 'Step B Privat', 'Berlin'
+    null::uuid, 'private', 'Step B Privat', 'Berlin'
   );
   seller_id := (prepared ->> 'seller_id')::uuid;
   product_id := (prepared ->> 'product_id')::uuid;
@@ -200,12 +200,17 @@ set local request.jwt.claims = '{"sub":"b1000000-0000-0000-0000-000000000001","r
 do $$
 declare
   prepared jsonb;
-  seller_id uuid;
+  seller_id uuid := (
+    select value::uuid from pg_temp.step_b_context where key='seller_id'
+  );
   product_id uuid;
   image_path text;
 begin
-  prepared := public.prepare_listing_submission('private', 'Ignored', 'Hamburg');
-  seller_id := (prepared ->> 'seller_id')::uuid;
+  prepared := public.prepare_listing_submission(
+    seller_id, 'private', 'Ignored', 'Hamburg'
+  );
+  assert prepared ->> 'seller_id' = seller_id::text,
+    'Explicit retry preparation remains bound to the existing private seller';
   product_id := (prepared ->> 'product_id')::uuid;
   image_path := seller_id || '/' || product_id || '/reject.webp';
   insert into storage.objects (bucket_id, name, owner, metadata)
@@ -224,13 +229,21 @@ $$;
 set local request.jwt.claims = '{"sub":"b1000000-0000-0000-0000-000000000002","role":"authenticated"}';
 do $$
 declare
+  onboarding jsonb;
   prepared jsonb;
+  business_seller_id uuid;
 begin
-  prepared := public.prepare_listing_submission(
-    'business', 'Step B Geschäft', 'München'
+  onboarding := public.owner_start_directory(
+    null::uuid, 'restaurant', 'Step B Geschäft', 'München'
   );
+  business_seller_id := (onboarding -> 'seller' ->> 'id')::uuid;
+  prepared := public.prepare_listing_submission(
+    business_seller_id, 'business', 'Step B Geschäft', 'München'
+  );
+  assert prepared ->> 'seller_id' = business_seller_id::text,
+    'Explicit preparation stays bound to the directory-created business';
   assert prepared ->> 'seller_kind' = 'business',
-    'The same preparation path supports business sellers';
+    'The explicit preparation path supports business sellers';
   assert (select status = 'pending' from public.sellers
     where id = (prepared ->> 'seller_id')::uuid),
     'Business seller also starts pending';

@@ -56,9 +56,7 @@ insert into auth.users (id, email, raw_user_meta_data, raw_app_meta_data) values
   ('f2a00000-0000-0000-0000-000000000005', 'f2a-buyer@example.invalid',
     '{"display_name":"F2a Buyer"}', '{}'),
   ('f2a00000-0000-0000-0000-000000000006', 'f2a-admin@example.invalid',
-    '{"display_name":"F2a Admin"}', '{"role":"admin"}'),
-  ('f2a00000-0000-0000-0000-000000000007', 'f2a-legacy@example.invalid',
-    '{"display_name":"F2a Legacy"}', '{}');
+    '{"display_name":"F2a Admin"}', '{"role":"admin"}');
 
 update public.profiles set
   username = case id
@@ -138,6 +136,20 @@ begin
   assert to_regprocedure(
     'public.submit_listing(uuid,uuid,uuid,text,text,public.product_condition,bigint,text,text[],jsonb)'
   ) is null, 'obsolete ten-input submit overload stays absent';
+
+  assert not exists (
+    select 1
+    from unnest(array[
+      'public.prepare_listing_submission(public.seller_kind,text,text)',
+      'public.get_my_directory_onboarding()',
+      'public.owner_set_directory_type(public.directory_business_type)',
+      'public.owner_upsert_directory_profile(public.directory_business_type,text,text,text,text,public.directory_spoken_language[],public.directory_cuisine[],smallint,boolean,boolean,boolean,public.directory_doctor_specialty,public.directory_insurance,boolean)',
+      'public.owner_replace_directory_hours(jsonb)',
+      'public.owner_replace_directory_menu(jsonb)',
+      'public.owner_start_directory(public.directory_business_type,text,text)'
+    ]::text[]) as legacy(signature)
+    where to_regprocedure(legacy.signature) is not null
+  ), 'every temporary legacy overload is absent';
 end;
 $$;
 
@@ -242,8 +254,8 @@ select pg_temp.expect_error(
   '22023'
 );
 
--- Private-first: the old no-ID start remains gated, while the explicit creator
--- verifies the exact private identity and adds one business row.
+-- Private-first: explicit directory onboarding accepts the exact private identity
+-- and creates a distinct business row without relabeling it.
 select pg_temp.act_as('f2a00000-0000-0000-0000-000000000003');
 do $$
 declare
@@ -256,10 +268,6 @@ begin
   insert into pg_temp.f2a_context values ('private_first_private', private_id::text);
 end;
 $$;
-select pg_temp.expect_error(
-  $$select public.owner_start_directory('cafe', 'Legacy Must Not Add Second', 'Berlin')$$,
-  '42501'
-);
 do $$
 declare
   onboarding jsonb;
@@ -281,25 +289,6 @@ select pg_temp.expect_error(
     'restaurant', 'Second Business', 'Berlin')$$,
   '22023'
 );
-
--- The legacy listing wrapper can create only the first identity and remains
--- deterministic thereafter, preserving the shipping client's one-row behavior.
-select pg_temp.act_as('f2a00000-0000-0000-0000-000000000007');
-do $$
-declare
-  first_result jsonb := public.prepare_listing_submission(
-    'business', 'F2a Legacy Business', 'Berlin'
-  );
-  second_result jsonb;
-begin
-  second_result := public.prepare_listing_submission(
-    'private', 'Must Be Ignored', 'Hamburg'
-  );
-  assert first_result ->> 'seller_id' = second_result ->> 'seller_id';
-  assert second_result ->> 'seller_kind' = 'business';
-  assert (select count(*) = 1 from public.sellers where user_id = auth.uid());
-end;
-$$;
 
 -- Explicit selection rejects foreign IDs and kind mismatches.
 select pg_temp.act_as('f2a00000-0000-0000-0000-000000000002');
@@ -330,8 +319,8 @@ select pg_temp.expect_error(format(
     )$sql$
 ), '23505');
 
--- Explicit directory owner APIs are seller-bound. Legacy reads deterministically
--- choose business once both identities exist.
+-- Explicit directory owner APIs are seller-bound. The getter returns only the
+-- exact business identity requested by the caller.
 set local role authenticated;
 select pg_temp.act_as('f2a00000-0000-0000-0000-000000000002');
 do $$
@@ -375,8 +364,9 @@ begin
   assert result -> 'seller' ->> 'id' = business_id::text;
   assert jsonb_array_length(result -> 'hours') = 1;
   assert jsonb_array_length(result -> 'menu') = 1;
-  assert public.get_my_directory_onboarding() -> 'seller' ->> 'id' = business_id::text,
-    'legacy getter deterministically chooses business';
+  assert public.get_my_directory_onboarding(business_id)
+      -> 'seller' ->> 'id' = business_id::text,
+    'explicit getter stays bound to the requested business';
 end;
 $$;
 
