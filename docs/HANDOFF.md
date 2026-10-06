@@ -9,8 +9,9 @@ not a substitute for inspection.
 - **Zêrîn**: a premium classifieds marketplace and local business directory for Germany,
   focused on Kurdish communities. Flutter + Riverpod codegen + typed go_router + Supabase.
 - Repo: `/Users/lawand/flutterapp`.
-- Current feature branch: `step-e1-5-osm-import`. It now contains completed Steps E and F.
-  Check `git log` for the latest pushed commit; main has not yet received this branch.
+- Completed Steps A–F (E1/E1.5/E2 and F through F3) are on `main` via PR #1's merge
+  commit `a5c9562`, which contains `549cb2d`. Current work branch:
+  `step-e3-public-directory`, created from that merged `main`.
 - Local Supabase database: `postgresql://postgres:postgres@127.0.0.1:54322/postgres`;
   API: `http://127.0.0.1:54321`.
 - iOS evidence device: iPhone 17 Pro simulator, iOS 26.1, UDID
@@ -117,16 +118,13 @@ Step F is complete. Do not reopen it unless a regression is reported. Known pre-
 issues remain recorded in STATUS, including listing-photo deletion ordering, account
 export/deletion across every seller identity, and report-target FK/check incompatibility.
 
-## 6. Next steps — do these in order
+## 6. Next step — E3
 
-1. **Open and merge a pull request from `step-e1-5-osm-import` into `main`.** Review the
-   branch diff and CI in the PR; do not push directly to main. This is a code merge only,
-   not permission for remote Supabase mutation.
-2. **Only after the PR is merged, begin E3.** Read the E3 plan and audit the merged main
-   state before implementation. E3 is the public directory UI slice and includes the
-   address-draft decision already recorded in its plan.
-
-Do not start E3 before the pull request is merged.
+PR #1 is merged. On `step-e3-public-directory`, read the E3 plan in full and audit the
+merged client and live local schema before implementation. E3 is the public directory UI
+slice and includes the address-draft and Imbiss decisions recorded in its plan. The E3.1
+audit changes no schema or client code; resolve its open product questions before build.
+The merge does not authorize remote Supabase mutation.
 
 ## 7. Later backlog (after E3, context only)
 

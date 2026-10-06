@@ -1,6 +1,7 @@
 # Zêrîn Project Status
 
-Updated: 2026-10-01 — Step F complete through F3; PR merge is next
+Updated: 2026-10-06 — Steps A–F are on `main` via PR #1 (`a5c9562`, containing
+`549cb2d`); current work branch is `step-e3-public-directory` for E3.1 audit.
 Canonical product contract: `docs/SCOPE.md`
 
 > Step D evidence note (2026-09-22). The migration
@@ -122,6 +123,8 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   seller identity and all identity-owned listings, photos, directory data, chats, and
   related records; this must be addressed together with the listing-photo deletion
   ordering issue above. Processor implementation remains out of Step F.
+- ⚠️ Integration harnesses hardcode fixture passwords. They must never run against the
+  remote project. Before launch, move fixture credentials to `dart-defines`.
 - ✅ `20260927000800_precise_location_gaps.sql` was applied once via direct `psql` and
   `supabase/tests/precise_location_gaps.sql` passed once through `ROLLBACK`: suspending
   or rejecting clears the public pin in the same write, and directory profile
@@ -223,9 +226,9 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   330/330. After effective F3 apply, `step_f3.sql` and all 13 other non-legacy SQL
   suites passed exactly once each through rollback; slowest was E1.5 at 1.20s. No test
   fixture residue remained. Evidence: `docs/evidence/step-f/f3-closeout.md`.
-- ⏭️ Next steps, in order: open and merge a pull request from
-  `step-e1-5-osm-import` into `main`; only after that merge, start E3 from the merged
-  main state. Opening the PR does not authorize any remote Supabase mutation.
+- ✅ PR #1 merged `step-e1-5-osm-import` into `main` at `a5c9562`; `549cb2d` is in
+  `main`. E3.1 audit is next on `step-e3-public-directory`. The merge does not
+  authorize any remote Supabase mutation.
 
 ## Step E1.5 — OpenStreetMap restaurant/café import (server side)
 
@@ -285,7 +288,7 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   (`acceptance-output-without-000500.txt`).
 - ✅ E3 plan: default directory = restaurants + cafés; `fast_food` only via an "Imbiss"
   chip (837 of 1123 imports); server needs a type-set filter in E3.
-- ✅ E1 closeout delivered: `docs/evidence/step-e1/closeout.md`. E2 not started.
+- ✅ E1 closeout delivered: `docs/evidence/step-e1/closeout.md`; E2 is complete above.
 - 🟡 Migration ledger: `20260927000300` and `20260927000400` join the psql-applied list below.
 
 ## Step E1 — business directory server contracts
@@ -565,15 +568,20 @@ one PASS integration test.
 - 🟡 Full-route dark/RTL/Kurdish/accessibility and dynamic-text acceptance remains open.
 - 🟡 Final launcher source PNGs remain absent.
 
+## UI polish backlog
+
+- Own profile header says “Keine Angebote” while the user has listings in review. The
+  owner view should show in-review counts or say “no active listings”; the public
+  listing count stays unchanged.
+- Verify the Account screen has enough bottom padding for its last row to scroll fully
+  above the center “Verkaufen” button.
+
 ## Worktree and Git state
 
-- Step A stabilization is based on commit `79dd523` on `main`, tracking `origin/main`;
-  the intended Step B/Step C stabilization patch remains uncommitted.
-- ✅ The final Step C closeout adds only its live acceptance harness/driver and this
-  status evidence; `git diff --check` passes.
-- ✅ Scope audit found no `/map` route, `MapRoute`, `MapScreen`, Map provider, mapping
-  or geolocation package, `lib/features/map/` directory, or Map UI. The router/package
-  diff contains Step B/C routes and Stripe removal only.
+- ✅ PR #1 merged Steps A–F (E1/E1.5/E2 and F through F3) into `main` at `a5c9562`;
+  `549cb2d` is an ancestor. `step-e3-public-directory` branches from merged `main`.
+- The original checkout still has unrelated staged and modified local files. E3 work
+  uses an isolated worktree so those files remain untouched.
 - `night-havarti` remains a clean linked worktree at old commit `8161b52`.
 - ✅ `enchanted-apricot` was re-audited and retired during Step A; nothing was merged
   and its branch was not deleted.
@@ -582,9 +590,9 @@ one PASS integration test.
 
 ## Next build order
 
-1. Verify linked remote migration parity from a network that can establish the Supabase login role; review the diff before any push.
-2. Keep Map deferred until separately started; when approved, add dedicated `/map` using server-derived private points and opt-in verified-business points, existing radius-search infrastructure, shared filters, and the product route.
-3. Route real search/results from Home and Categories.
-4. Synchronize every favorite surface.
+1. Complete the read-only E3.1 audit and settle its open product questions, then build the public directory slice in phases.
+2. Verify linked remote migration parity from a network that can establish the Supabase login role; review the diff before any push.
+3. Continue Map v2 only when separately started; the Step D `/map` slice is already on `main`.
+4. Route real search/results from Home and Categories, and synchronize every favorite surface.
 5. Add the external notification-outbox delivery worker/device registration, then continue seller-profile completion, Kurdish DB content, offline recovery, and privacy processors.
 6. Finish signing, icons, legal/operator content, deep links, README, monitoring, and release QA.
