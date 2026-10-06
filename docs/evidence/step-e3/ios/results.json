@@ -1,0 +1,109 @@
+{
+  "screenshots": [
+    {
+      "name": "step_e3_demo_home_angebote",
+      "bytes": 2590997,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_anzuege",
+      "bytes": 2085738,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_goldschmuck",
+      "bytes": 1123740,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_silberschmuck",
+      "bytes": 951268,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_eheringe",
+      "bytes": 807491,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_saiteninstrumente",
+      "bytes": 2304454,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_schlaginstrumente",
+      "bytes": 758033,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_gewuerze-importwaren",
+      "bytes": 4066863,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_category_suesswaren",
+      "bytes": 3598704,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_listing_detail",
+      "bytes": 5126074,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_map",
+      "bytes": 6118589,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_home_ku",
+      "bytes": 2942828,
+      "width": 1206,
+      "height": 2622
+    },
+    {
+      "name": "step_e3_demo_home_ar",
+      "bytes": 5039607,
+      "width": 1206,
+      "height": 2622
+    }
+  ],
+  "checks": {
+    "home_angebote": "PASS",
+    "category_anzuege": "PASS",
+    "category_goldschmuck": "PASS",
+    "category_silberschmuck": "PASS",
+    "category_eheringe": "PASS",
+    "category_saiteninstrumente": "PASS",
+    "category_schlaginstrumente": "PASS",
+    "category_gewuerze-importwaren": "PASS",
+    "category_suesswaren": "PASS",
+    "listing_detail": "PASS",
+    "map": "PASS",
+    "home_ku": "PASS",
+    "home_ar": "PASS"
+  },
+  "demo_images": {
+    "source": "hotlinked images.pexels.com URLs",
+    "precached": 20,
+    "failed": []
+  },
+  "tests": {
+    "E3.0 local demo screenshots": "PASS"
+  },
+  "runtime": {
+    "platform": "ios",
+    "version": "Version 26.1 (Build 23B86)"
+  }
+}
