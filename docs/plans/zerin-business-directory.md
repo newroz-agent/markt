@@ -113,6 +113,23 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
   one login, up to one private and one business seller per user; private listings always
   stay under the private identity, so no relabeling of existing listings is needed.
 
+## E3.0 — Local demo content before public discovery (decision 2026-10-06)
+
+- Audit existing local demo rows and images first; reuse them where they already cover
+  the requested category and seller mix. Never duplicate them.
+- Prepare a deterministic, local-only seed with 3–5 active listings in each group:
+  Anzüge; Gold/Silber/Eheringe; Musikinstrumente (including Saz, Oud, Def);
+  Gewürze & Importwaren; and Süßwaren. Use realistic German titles and prices,
+  several compare-at prices for Angebote, private and business sellers, and several
+  German cities.
+- Images come only from Unsplash or Pexels; record the source URL for every image.
+  Give every demo row one shared ID prefix and provide cleanup for rows and Storage
+  objects. Demo content and its harness must never run against the remote project.
+- Dry-run the seed on an isolated clone, then stop for per-run approval. After approval,
+  apply locally and capture iOS screenshots of Home with Angebote, every named
+  category, one listing detail, the map, and Home in Kurdish and Arabic. Keep evidence
+  under `docs/evidence/step-e3/`.
+
 ## E3 — Public discovery
 - New route `/directory` (NOT a new bottom tab), entered from a Home section with
   four chips: Restaurants, Cafés, Imbiss, Ärzte.
@@ -126,22 +143,31 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
     with a correct `total_count` — never merge two paged calls client-side.
   - Chip label: new ARB key (e.g. `directoryTypeFastFood`), de "Imbiss", in all five
     locales.
-- List cards: cover, name, type, cuisine or specialty, rating (restaurants/cafés only),
-  distance, open-now badge, spoken languages.
-- Filters: reuse the existing filter bottom-sheet pattern; rating filter hidden for
-  doctors.
-- Detail screen: header, info, opening hours with open-now, call button (`tel:` via
-  url_launcher), directions (existing Step D logic), menu (restaurant/café), reviews
-  with write/edit own review (restaurant/café only), "Nachricht senden" into existing
-  chat.
-- Near the rating, a short localized note that reviews come from registered users and
-  are not verified as actual visits (transparency about review verification).
+- Keep the type-set search extensible for future types. Shops as directory types remain
+  a pending product decision and are outside E3.
+- List cards: a large cover image, name, type, cuisine or specialty, visibly placed
+  rating (food owner profiles only), distance when available, open-now badge, and
+  spoken languages. Unclaimed OSM places use a type placeholder and have no rating.
+- Filters: reuse the existing filter bottom-sheet pattern for distance, price level,
+  cuisine, and rating. Hide rating for doctors. Hide distance without a viewer point;
+  do not imply that rating or price filters can include OSM imports.
+- Detail screen: restaurant/café/Imbiss name, rating, cuisine, hours, phone, menu,
+  and location; doctors show specialty, languages, insurance, and no rating or menu.
+  Add `tel:` via url_launcher, directions (existing Step D logic), food-owner reviews
+  with write/edit own review, and "Nachricht senden" into existing owner chat.
+- Review authors appear as first name plus last initial with a small avatar and no
+  profile link. Above reviews, a short localized line explains that only registered
+  users can review, each can leave one review per place, reports are moderated, and
+  actual visits are not verified. Review transparency under UWG belongs on the
+  pre-launch legal list.
 - Admin: for reports targeting a review, add a "remove review" action to the existing
   reports queue (today review reports can only be dismissed).
-- **Owner address and precise pin (decision 2026-09-27).** Owners set their address in
-  the business profile editor: typed address → suggested pin → owner confirms or drags
-  it. The address is stored as a **private draft** and published as the precise pin
-  **only after verification**. The Step D privacy rules are not weakened.
+- **Owner address and precise pin (decision 2026-10-06).** Owners type an address and
+  manually place a pin on a map initially centered on their selected city. The address
+  and pin are stored as a **private draft**. No geocoding provider is used in E3;
+  design the draft/publish RPCs so a server-side geocoder can be added later without
+  changing the client contract. Choose that provider together with the production tile
+  provider in Map v2. The Step D privacy rules are not weakened.
   - *Audit of the live schema (2026-09-27):*
     - The only public precise-location fields are `sellers.precise_location_opt_in`,
       `latitude`, `longitude` and `address_line`. `sellers_precise_location_shape`:
@@ -157,41 +183,45 @@ SQL tests still pass, `flutter analyze` + `flutter test` still green. Stop and r
     - Reads re-check verification: the map (`listings_within_radius`) and directory
       search/detail call `is_verified_seller()` at read time.
     - Step D principle: coordinates are server-owned, never device-geocoded.
-  - *Gaps found (fixed by `20260927000800_precise_location_gaps.sql`, pending approval):*
+  - *Gaps found and fixed by `20260927000800_precise_location_gaps.sql`, applied locally:*
     1. Since E1, verification also depends on the directory profile type (doctor vs
        other), but a type change does not run the wipe, so stale precise coordinates can
-       stay stored. They are never shown, because reads re-check. E3 adds the same wipe
-       after profile type changes.
+       stay stored. They are never shown, because reads re-check. The migration adds
+       the same wipe after profile type changes.
     2. Pre-existing from Step D: suspending an opted-in seller fails.
        `protect_seller_precise_location` raises because the status is no longer
        `approved` while opt-in is still true (reproduced locally with Atelier Lale in a
-       rolled-back transaction). This needs a decision, e.g. clear the pin on a status
-       change instead of raising.
+       rolled-back transaction). The migration clears the public pin on status change.
   - *Design:*
     1. **Draft table.** A new owner-only table `business_location_drafts`: `seller_id`
        (PK), street, house number, postal code, city (→ `german_cities`), latitude,
-       longitude, `pin_source` (`geocoded` | `city_centroid` | `owner_moved`),
+       longitude, `pin_source` (`city_centroid` | `owner_moved`; reserve `geocoded` for
+       a later server-side provider),
        `confirmed_at`. RLS: the owner reads and writes their own row, admins read, no
        anon access, and no public RPC ever reads it.
        `clear_unverified_seller_location` only updates `sellers`, so a draft survives a
        loss of verification.
-    2. **Suggested pin.** Geocoded on the server (Edge Function or RPC), never on the
-       device, with the `german_cities` centroid as fallback. The provider is still to be
-       chosen: OSM Nominatim (attribution, rate limit, caching) or a commercial service.
-       The owner always confirms or drags the pin.
+    2. **Manual pin.** Start the map at the `german_cities` centroid. The owner moves
+       the pin to the typed street-level address and explicitly confirms it. The city
+       centroid is only a starting point and is never publishable. No device geocoding
+       or external geocoding request is made in E3.
     3. **Publishing.** `owner_publish_directory_location()` copies the confirmed draft
-       into the public seller fields and sets opt-in. It can only be called while the
-       seller is verified, and the existing protect trigger still checks the write. It
+       into the public seller fields and sets opt-in. It requires verification and an
+       explicitly confirmed street-level `owner_moved` draft, never `city_centroid`.
+       The existing protect trigger still checks the write. It
        is an explicit owner action ("Standort veröffentlichen" on the hub, enabled after
        verification); nothing is published automatically, so Step D's opt-in consent
        stays explicit.
     4. **Unpublish.** Turning opt-in off clears the public fields through the existing
        trigger; the draft stays. After losing and regaining verification, the owner
        republishes with one tap.
-    5. **Distance and directions** in E3 use only the published pin.
+    5. **Distance and directions** in E3 use only the published pin. Until publication,
+       an owner business displays its city only and has no directions button. Without
+       location permission, reuse Step D: profile city, else manual city picker. Never
+       default to Germany-wide results; hide the distance filter without a point.
     6. **Tests.** The draft is invisible to anon and other users; publishing is refused
-       while unverified; a doctor ↔ other type change wipes the public pin; suspension
-       behaves as decided for gap 2.
+       while unverified or at the city centroid; a doctor ↔ other type change and
+       suspension wipe the public pin while preserving the private draft.
 - **Unclaimed OSM entries (from Step E1.5) — requirements:**
   - Data contract: `search_business_directory` items with `source = 'osm'` and
     `is_claimed = false` carry `place_id` (no `seller_id`); open them with

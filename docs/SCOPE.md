@@ -159,6 +159,9 @@ Account keeps `Impressum`, `AGB`, `Datenschutzerklärung`, and
 `Widerrufsbelehrung` reachable within two taps. DSGVO controls include consent,
 data export, account deletion, and deletion cancellation. A visible request UI
 is not considered complete until its asynchronous processor is operational.
+The pre-launch legal review includes directory review transparency under UWG: explain
+who may review, the one-review-per-place rule, moderation, and that actual visits are
+not verified.
 
 ## 12. Locked implementation rules
 

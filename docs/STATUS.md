@@ -125,6 +125,9 @@ operational implementation. Out-of-scope historical SQL is not counted as produc
   ordering issue above. Processor implementation remains out of Step F.
 - ⚠️ Integration harnesses hardcode fixture passwords. They must never run against the
   remote project. Before launch, move fixture credentials to `dart-defines`.
+- ⚠️ Deterministic demo listings, their image objects, and the local-only seed/cleanup
+  must never reach the remote project. Review transparency under UWG also needs a
+  pre-launch legal check of the public review explanation.
 - ✅ `20260927000800_precise_location_gaps.sql` was applied once via direct `psql` and
   `supabase/tests/precise_location_gaps.sql` passed once through `ROLLBACK`: suspending
   or rejecting clears the public pin in the same write, and directory profile
@@ -590,7 +593,7 @@ one PASS integration test.
 
 ## Next build order
 
-1. Complete the read-only E3.1 audit and settle its open product questions, then build the public directory slice in phases.
+1. After the E3.1 audit, dry-run the deterministic local demo-content seed on a clone and await per-run approval. Then build the public directory slice in phases.
 2. Verify linked remote migration parity from a network that can establish the Supabase login role; review the diff before any push.
 3. Continue Map v2 only when separately started; the Step D `/map` slice is already on `main`.
 4. Route real search/results from Home and Categories, and synchronize every favorite surface.
